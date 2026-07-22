@@ -5,10 +5,12 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <iterator>
 #include <map>
+#include <string>
 #include <vector>
 
 #include "db/infra/frPoint.h"
@@ -455,6 +457,117 @@ void FlexGridGraph::init(const frDesign* design,
   initEdges(
       design, xMap, yMap, zMap, routeBBox, initDR);  // add edges and edgeCost
   ap_locs_.clear();
+  dumpGridGraph();
+}
+
+// Dumps the full initialized grid-graph state for one route box to a text file.
+// No-op unless the environment variable DRT_DUMP_GG_DIR points to an existing
+// directory. One file per route box per DR iteration:
+//   <DRT_DUMP_GG_DIR>/gg_iter<iter>_x<xMin>_y<yMin>.txt
+// This is the *pre-routing* snapshot (right after the graph is built). srcs_,
+// dsts_ and prevDirs_ are routing-time state (all false here) and are omitted.
+// Note: during route_queue() the routeShapeCost*/markerCost* node fields mutate
+// as nets are routed and ripped up, so successive search() calls in a
+// multi-net worker see later states than this snapshot; add a dump inside
+// search() if you need the exact per-search graph.
+void FlexGridGraph::dumpGridGraph() const
+{
+  const char* dir = std::getenv("DRT_DUMP_GG_DIR");
+  if (dir == nullptr || dir[0] == '\0') {
+    return;
+  }
+  if (xCoords_.empty() || yCoords_.empty() || zCoords_.empty()) {
+    return;
+  }
+  const odb::Rect& rb = drWorker_->getRouteBox();
+  const int iter = drWorker_->getDRIter();
+  const std::string path = std::string(dir) + "/gg_iter" + std::to_string(iter)
+                           + "_x" + std::to_string(rb.xMin()) + "_y"
+                           + std::to_string(rb.yMin()) + ".txt";
+  std::ofstream os(path.c_str());
+  if (!os.is_open()) {
+    logger_->warn(utl::DRT, 617, "Could not open grid-graph dump file {}", path);
+    return;
+  }
+
+  frMIdx xDim, yDim, zDim;
+  getDim(xDim, yDim, zDim);
+
+  // --- header ---
+  os << "version 1\n";
+  os << "iter " << iter << "\n";
+  os << "routeBox " << rb.xMin() << " " << rb.yMin() << " " << rb.xMax() << " "
+     << rb.yMax() << "\n";
+  os << "ggDRCCost " << ggDRCCost_ << "\n";
+  os << "ggMarkerCost " << ggMarkerCost_ << "\n";
+  os << "ggFixedShapeCost " << ggFixedShapeCost_ << "\n";
+  // Global cost scalars from RouterConfiguration (used by getCosts()).
+  os << "GRIDCOST " << router_cfg_->GRIDCOST << "\n";
+  os << "BLOCKCOST " << router_cfg_->BLOCKCOST << "\n";
+  os << "GUIDECOST " << router_cfg_->GUIDECOST << "\n";
+  os << "dim " << xDim << " " << yDim << " " << zDim << "\n";
+
+  os << "xCoords";
+  for (const auto c : xCoords_) {
+    os << " " << c;
+  }
+  os << "\n";
+  os << "yCoords";
+  for (const auto c : yCoords_) {
+    os << " " << c;
+  }
+  os << "\n";
+  os << "zCoords(layerNum)";
+  for (const auto c : zCoords_) {
+    os << " " << c;
+  }
+  os << "\n";
+  os << "zHeights";
+  for (const auto h : zHeights_) {
+    os << " " << h;
+  }
+  os << "\n";
+  os << "layerDir(0=H,1=V,2=NONE)";
+  for (frMIdx z = 0; z < zDim; ++z) {
+    os << " " << static_cast<int>(getZDir(z).getValue());
+  }
+  os << "\n";
+  // Per-layer minWidth, needed for the blockCost term
+  // (BLOCKCOST * layer.getMinWidth() * 20).
+  os << "layerMinWidth";
+  for (frMIdx z = 0; z < zDim; ++z) {
+    os << " " << getTech()->getLayer(getLayerNum(z))->getMinWidth();
+  }
+  os << "\n";
+
+  // --- per-node table ---
+  // Columns (all costs are the raw stored bitfield values):
+  os << "# node x y z eE eN eU bE bN bU sVia gcE gcN gcU apE apN apU "
+        "rsPlanar rsVia mkPlanar mkVia fxVia fxPlanarH fxPlanarV "
+        "rsPlanarNDR rsViaNDR fxViaNDR fxPlanarHNDR fxPlanarVNDR guide\n";
+  for (frMIdx z = 0; z < zDim; ++z) {
+    for (frMIdx y = 0; y < yDim; ++y) {
+      for (frMIdx x = 0; x < xDim; ++x) {
+        const auto idx = getIdx(x, y, z);
+        const Node& n = nodes_[idx];
+        os << "node " << x << " " << y << " " << z << " " << n.hasEastEdge << " "
+           << n.hasNorthEdge << " " << n.hasUpEdge << " " << n.isBlockedEast
+           << " " << n.isBlockedNorth << " " << n.isBlockedUp << " "
+           << n.hasSpecialVia << " " << n.hasGridCostEast << " "
+           << n.hasGridCostNorth << " " << n.hasGridCostUp << " "
+           << n.hasApCostEast << " " << n.hasApCostNorth << " " << n.hasApCostUp
+           << " " << n.routeShapeCostPlanar << " " << n.routeShapeCostVia << " "
+           << n.markerCostPlanar << " " << n.markerCostVia << " "
+           << n.fixedShapeCostVia << " " << n.fixedShapeCostPlanarHorz << " "
+           << n.fixedShapeCostPlanarVert << " " << n.routeShapeCostPlanarNDR
+           << " " << n.routeShapeCostViaNDR << " " << n.fixedShapeCostViaNDR
+           << " " << n.fixedShapeCostPlanarHorzNDR << " "
+           << n.fixedShapeCostPlanarVertNDR << " "
+           << static_cast<int>(guides_[idx]) << "\n";
+      }
+    }
+  }
+  os.close();
 }
 
 // initialization helpers

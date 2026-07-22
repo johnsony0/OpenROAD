@@ -977,6 +977,19 @@ class FlexGridGraph
             bool initDR,
             bool followGuide);
   void print() const;
+  // Dumps the full per-node grid-graph state (edges, blocked flags, costs,
+  // guides) to a text file when the env var DRT_DUMP_GG_DIR is set. Called at
+  // the end of init(), so it fires once per route box per DR iteration.
+  void dumpGridGraph() const;
+  // Companion to dumpGridGraph() that captures the routing-time state the
+  // pre-routing snapshot omits: the source (srcs_) and destination (dsts_)
+  // node sets and the resulting traceback path for a single search() call
+  // (one pin-connection attempt). Also gated by DRT_DUMP_GG_DIR; writes one
+  // file per search into the same directory.
+  void dumpSearch(const std::vector<FlexMazeIdx>& connComps,
+                  drPin* nextPin,
+                  const std::vector<FlexMazeIdx>& path,
+                  bool success) const;
   void resetStatus();
   void resetPrevNodeDir();
   void resetSrc();
@@ -1130,6 +1143,8 @@ class FlexGridGraph
   std::vector<bool> srcs_;
   std::vector<bool> dsts_;
   std::vector<bool> guides_;
+  // Monotonic per-worker counter used to make dumpSearch() filenames unique.
+  mutable int searchDumpId_ = 0;
   frVector<frCoord> xCoords_;
   frVector<frCoord> yCoords_;
   frVector<frLayerNum> zCoords_;

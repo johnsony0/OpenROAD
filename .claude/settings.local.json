@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -oE '[0-9]+$')",
+      "Bash(awk '$1>=610 && $1<=700')",
+      "Bash([ -f \"$f\" ])"
+    ]
+  }
+}

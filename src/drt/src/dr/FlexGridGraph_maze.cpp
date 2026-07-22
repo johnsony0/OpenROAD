@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <bitset>
 #include <cmath>
+#include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <iterator>
 #include <limits>
@@ -716,6 +718,107 @@ void FlexGridGraph::traceBackPath(const FlexWavefrontGrid& currGrid,
   }
 }
 
+// Dumps the source/destination node sets and the traceback path for one
+// search() call. No-op unless DRT_DUMP_GG_DIR points to an existing directory.
+// One file per search:
+//   <DRT_DUMP_GG_DIR>/search_iter<iter>_x<xMin>_y<yMin>_s<searchId>.txt
+// Unlike dumpGridGraph() (a pre-routing snapshot), this fires during
+// route_queue() and so captures the routing-time state (srcs_, dsts_, path)
+// that the snapshot omits. srcs_/dsts_ are scanned from the live bitvectors;
+// connComps is the source component maze indices as passed to search().
+void FlexGridGraph::dumpSearch(const std::vector<FlexMazeIdx>& connComps,
+                               drPin* nextPin,
+                               const std::vector<FlexMazeIdx>& path,
+                               bool success) const
+{
+  const char* dir = std::getenv("DRT_DUMP_GG_DIR");
+  if (dir == nullptr || dir[0] == '\0') {
+    return;
+  }
+  const int id = searchDumpId_++;
+  const odb::Rect& rb = drWorker_->getRouteBox();
+  const int iter = drWorker_->getDRIter();
+  const std::string path_str = std::string(dir) + "/search_iter"
+                               + std::to_string(iter) + "_x"
+                               + std::to_string(rb.xMin()) + "_y"
+                               + std::to_string(rb.yMin()) + "_s"
+                               + std::to_string(id) + ".txt";
+  std::ofstream os(path_str.c_str());
+  if (!os.is_open()) {
+    logger_->warn(
+        utl::DRT, 618, "Could not open search dump file {}", path_str);
+    return;
+  }
+
+  frMIdx xDim, yDim, zDim;
+  getDim(xDim, yDim, zDim);
+
+  os << "version 1\n";
+  os << "iter " << iter << "\n";
+  os << "routeBox " << rb.xMin() << " " << rb.yMin() << " " << rb.xMax() << " "
+     << rb.yMax() << "\n";
+  os << "searchId " << id << "\n";
+  os << "pin " << (nextPin != nullptr ? nextPin->getName() : "null") << "\n";
+  os << "success " << (success ? 1 : 0) << "\n";
+  os << "dim " << xDim << " " << yDim << " " << zDim << "\n";
+
+  // Source component maze indices as handed to search() (the wavefront seeds).
+  os << "connComps " << connComps.size() << "\n";
+  for (const auto& mi : connComps) {
+    os << "cc " << mi.x() << " " << mi.y() << " " << mi.z() << " "
+       << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
+       << getLayerNum(mi.z()) << "\n";
+  }
+
+  // All nodes flagged as source / destination in the live bitvectors. Each row
+  // carries both maze index and DBU coords (+ layerNum) for path matching.
+  int srcCount = 0, dstCount = 0;
+  for (frMIdx z = 0; z < zDim; ++z) {
+    for (frMIdx y = 0; y < yDim; ++y) {
+      for (frMIdx x = 0; x < xDim; ++x) {
+        if (isSrc(x, y, z)) {
+          ++srcCount;
+        }
+        if (isDst(x, y, z)) {
+          ++dstCount;
+        }
+      }
+    }
+  }
+  os << "srcs " << srcCount << "\n";
+  for (frMIdx z = 0; z < zDim; ++z) {
+    for (frMIdx y = 0; y < yDim; ++y) {
+      for (frMIdx x = 0; x < xDim; ++x) {
+        if (isSrc(x, y, z)) {
+          os << "src " << x << " " << y << " " << z << " " << xCoords_[x] << " "
+             << yCoords_[y] << " " << getLayerNum(z) << "\n";
+        }
+      }
+    }
+  }
+  os << "dsts " << dstCount << "\n";
+  for (frMIdx z = 0; z < zDim; ++z) {
+    for (frMIdx y = 0; y < yDim; ++y) {
+      for (frMIdx x = 0; x < xDim; ++x) {
+        if (isDst(x, y, z)) {
+          os << "dst " << x << " " << y << " " << z << " " << xCoords_[x] << " "
+             << yCoords_[y] << " " << getLayerNum(z) << "\n";
+        }
+      }
+    }
+  }
+
+  // Traceback path (corner points, dst-first back toward src) produced by this
+  // search. Empty when no path was found or src == dst.
+  os << "path " << path.size() << "\n";
+  for (const auto& mi : path) {
+    os << "p " << mi.x() << " " << mi.y() << " " << mi.z() << " "
+       << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
+       << getLayerNum(mi.z()) << "\n";
+  }
+  os.close();
+}
+
 bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                            drPin* nextPin,
                            std::vector<FlexMazeIdx>& path,
@@ -759,6 +862,7 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   for (auto& idx : connComps) {
     if (isDst(idx.x(), idx.y(), idx.z())) {
       path.emplace_back(idx.x(), idx.y(), idx.z());
+      dumpSearch(connComps, nextPin, path, true);
       return true;
     }
     getPoint(currPt, idx.x(), idx.y());
@@ -807,12 +911,14 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     }
     if (isDst(currGrid.x(), currGrid.y(), currGrid.z())) {
       traceBackPath(currGrid, path, connComps, ccMazeIdx1, ccMazeIdx2);
+      dumpSearch(connComps, nextPin, path, true);
       return true;
     }
     // expand and update wavefront
     expandWavefront(
         currGrid, dstMazeIdx1, dstMazeIdx2, centerPt, route_with_jumpers);
   }
+  dumpSearch(connComps, nextPin, path, false);
   return false;
 }
 

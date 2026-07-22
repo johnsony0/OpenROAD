@@ -1,0 +1,3 @@
+violation type: Metal Spacing
+	srcs: net:VSS net:_188_
+	bbox = (40.3000, 41.9150) - (40.3400, 42.0850) on Layer metal2
