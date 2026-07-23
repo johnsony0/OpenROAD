@@ -4,7 +4,10 @@
 #include <algorithm>
 #include <cassert>
 #include <climits>
+#include <cstdlib>
+#include <fstream>
 #include <memory>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -45,6 +48,104 @@ void FlexRP::prep()
     prep_viaForbiddenTurnLen(ndr.get());
   }
   prep_minStepViasCheck();
+  dumpForbiddenTables();
+}
+
+// Dumps the forbidden-length LUTs consulted by the maze router to
+//   <DRT_DUMP_GG_DIR>/forbidden_tables.txt
+// No-op unless DRT_DUMP_GG_DIR points at an existing directory. Unlike the
+// grid-graph dumps this is written once per run: the tables are built here and
+// never mutated afterwards, so one snapshot covers every search() call.
+//
+// Only the tables with live readers are emitted:
+//   via2ViaForbiddenLen_  FlexGridGraph_maze.cpp getNextPathCost/getEstCost
+//   via2ViaPrlLen_        selects the ||/&& branch in the via2via check
+//   viaForbiddenTurnLen_  FlexGridGraph_maze.cpp turn check
+//   viaForbiddenThrough_  FlexDR_maze.cpp
+// viaForbiddenPlanarLen_ has no reader and line2LineForbiddenLen_ has no call
+// site, so both are skipped. Non-default-rule copies are skipped as well.
+void FlexRP::dumpForbiddenTables()
+{
+  const char* dir = std::getenv("DRT_DUMP_GG_DIR");
+  if (dir == nullptr || dir[0] == '\0') {
+    return;
+  }
+  const std::string path = std::string(dir) + "/forbidden_tables.txt";
+  std::ofstream os(path.c_str());
+  if (!os.is_open()) {
+    logger_->warn(
+        utl::DRT, 619, "Could not open forbidden-table dump file {}", path);
+    return;
+  }
+
+  const int numLayers = tech_->via2ViaForbiddenLen_.size();
+
+  os << "version 1\n";
+  os << "numLayers " << numLayers << "\n";
+  // The table index is a routing-layer counter starting at the bottom routing
+  // layer, i.e. the same index the maze passes as gridZ.
+  os << "# layer <z> <layerNum> <name>\n";
+  {
+    int z = 0;
+    for (auto lNum = tech_->getBottomLayerNum(); lNum <= tech_->getTopLayerNum();
+         lNum++) {
+      const auto layer = tech_->getLayer(lNum);
+      if (layer->getType() != dbTechLayerType::ROUTING) {
+        continue;
+      }
+      os << "layer " << z << " " << lNum << " " << layer->getName() << "\n";
+      z++;
+    }
+  }
+
+  // Entry indices come from frTechObject::getTableEntryIdx(), which shifts the
+  // negated flags together MSB first.
+  os << "# via2ViaForbiddenLen entry = prevViaUp*4 + currViaUp*2 + isDirY\n";
+  os << "# via2ViaForbiddenLen <z> <entry> <numRanges> [<lo> <hi>]...\n";
+  os << "# ranges are closed on both ends; a length is forbidden when it falls "
+        "inside one\n";
+  for (int z = 0; z < numLayers; z++) {
+    for (int entry = 0; entry < 8; entry++) {
+      const auto& ranges = tech_->via2ViaForbiddenLen_[z][entry];
+      os << "via2ViaForbiddenLen " << z << " " << entry << " " << ranges.size();
+      for (const auto& range : ranges) {
+        os << " " << range.first << " " << range.second;
+      }
+      os << "\n";
+    }
+  }
+
+  // Threshold, not a range: isVia2ViaPRL() returns len <= value.
+  os << "# via2ViaPrlLen <z> <entry> <prl>   (same entry encoding)\n";
+  for (int z = 0; z < numLayers; z++) {
+    for (int entry = 0; entry < 8; entry++) {
+      os << "via2ViaPrlLen " << z << " " << entry << " "
+         << tech_->via2ViaPrlLen_[z][entry] << "\n";
+    }
+  }
+
+  os << "# viaForbiddenTurnLen entry = viaUp*2 + isDirY\n";
+  os << "# viaForbiddenTurnLen <z> <entry> <numRanges> [<lo> <hi>]...\n";
+  for (int z = 0; z < numLayers; z++) {
+    for (int entry = 0; entry < 4; entry++) {
+      const auto& ranges = tech_->viaForbiddenTurnLen_[z][entry];
+      os << "viaForbiddenTurnLen " << z << " " << entry << " " << ranges.size();
+      for (const auto& range : ranges) {
+        os << " " << range.first << " " << range.second;
+      }
+      os << "\n";
+    }
+  }
+
+  os << "# viaForbiddenThrough <z> <entry> <0|1>   (same entry encoding as "
+        "turn)\n";
+  for (int z = 0; z < numLayers; z++) {
+    for (int entry = 0; entry < 4; entry++) {
+      os << "viaForbiddenThrough " << z << " " << entry << " "
+         << static_cast<int>(tech_->viaForbiddenThrough_[z][entry]) << "\n";
+    }
+  }
+  os.close();
 }
 
 void FlexRP::prep_minStepViasCheck()
