@@ -1,10 +1,14 @@
-version 1
+version 2
 iter 0
 routeBox 100800 100800 151200 151200
 searchId 0
 pin 
 success 1
 dim 173 232 6
+centerPt 145200 148027
+routeWithJumpers 0
+ccBoxIn 146 194 0 148 194 0
+ccBoxOut 146 194 0 148 221 2
 connComps 32
 cc 146 194 0 145200 144855 2
 cc 148 194 0 145680 144855 2

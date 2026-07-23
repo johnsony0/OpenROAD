@@ -1,10 +1,14 @@
-version 1
+version 2
 iter 0
 routeBox 0 151200 50400 201600
 searchId 1
 pin clk
 success 1
 dim 167 232 6
+centerPt 25920 155122
+routeWithJumpers 0
+ccBoxIn 159 27 1 159 27 1
+ccBoxOut 6 26 1 159 27 3
 connComps 157
 cc 159 27 1 50400 155215 4
 cc 6 26 3 1440 155030 8

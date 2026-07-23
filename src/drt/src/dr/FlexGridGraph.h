@@ -989,7 +989,13 @@ class FlexGridGraph
   void dumpSearch(const std::vector<FlexMazeIdx>& connComps,
                   drPin* nextPin,
                   const std::vector<FlexMazeIdx>& path,
-                  bool success) const;
+                  bool success,
+                  const FlexMazeIdx& ccMazeIdx1In,
+                  const FlexMazeIdx& ccMazeIdx2In,
+                  const FlexMazeIdx& ccMazeIdx1Out,
+                  const FlexMazeIdx& ccMazeIdx2Out,
+                  const odb::Point& centerPt,
+                  bool routeWithJumpers) const;
   void resetStatus();
   void resetPrevNodeDir();
   void resetSrc();

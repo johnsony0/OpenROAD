@@ -726,10 +726,18 @@ void FlexGridGraph::traceBackPath(const FlexWavefrontGrid& currGrid,
 // route_queue() and so captures the routing-time state (srcs_, dsts_, path)
 // that the snapshot omits. srcs_/dsts_ are scanned from the live bitvectors;
 // connComps is the source component maze indices as passed to search().
+// Also records the remaining search() inputs (centerPt, route_with_jumpers,
+// input cc bounding box) and outputs (cc bounding box after traceback).
 void FlexGridGraph::dumpSearch(const std::vector<FlexMazeIdx>& connComps,
                                drPin* nextPin,
                                const std::vector<FlexMazeIdx>& path,
-                               bool success) const
+                               bool success,
+                               const FlexMazeIdx& ccMazeIdx1In,
+                               const FlexMazeIdx& ccMazeIdx2In,
+                               const FlexMazeIdx& ccMazeIdx1Out,
+                               const FlexMazeIdx& ccMazeIdx2Out,
+                               const odb::Point& centerPt,
+                               bool routeWithJumpers) const
 {
   const char* dir = std::getenv("DRT_DUMP_GG_DIR");
   if (dir == nullptr || dir[0] == '\0') {
@@ -753,7 +761,7 @@ void FlexGridGraph::dumpSearch(const std::vector<FlexMazeIdx>& connComps,
   frMIdx xDim, yDim, zDim;
   getDim(xDim, yDim, zDim);
 
-  os << "version 1\n";
+  os << "version 2\n";
   os << "iter " << iter << "\n";
   os << "routeBox " << rb.xMin() << " " << rb.yMin() << " " << rb.xMax() << " "
      << rb.yMax() << "\n";
@@ -761,6 +769,19 @@ void FlexGridGraph::dumpSearch(const std::vector<FlexMazeIdx>& connComps,
   os << "pin " << (nextPin != nullptr ? nextPin->getName() : "null") << "\n";
   os << "success " << (success ? 1 : 0) << "\n";
   os << "dim " << xDim << " " << yDim << " " << zDim << "\n";
+  // Remaining search() inputs: the A* tie-break center point (DBU), the
+  // jumper-routing flag, and the connected-component bounding box (maze
+  // indices, ll then ur) as passed in. ccBoxOut is the same box after
+  // traceBackPath() grew it over the new path; it differs from ccBoxIn only
+  // on success.
+  os << "centerPt " << centerPt.x() << " " << centerPt.y() << "\n";
+  os << "routeWithJumpers " << (routeWithJumpers ? 1 : 0) << "\n";
+  os << "ccBoxIn " << ccMazeIdx1In.x() << " " << ccMazeIdx1In.y() << " "
+     << ccMazeIdx1In.z() << " " << ccMazeIdx2In.x() << " " << ccMazeIdx2In.y()
+     << " " << ccMazeIdx2In.z() << "\n";
+  os << "ccBoxOut " << ccMazeIdx1Out.x() << " " << ccMazeIdx1Out.y() << " "
+     << ccMazeIdx1Out.z() << " " << ccMazeIdx2Out.x() << " "
+     << ccMazeIdx2Out.y() << " " << ccMazeIdx2Out.z() << "\n";
 
   // Source component maze indices as handed to search() (the wavefront seeds).
   os << "connComps " << connComps.size() << "\n";
@@ -832,6 +853,11 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     dump_file_.open("expansions.dump");
   }
   curr_id_ = 1;
+  // Snapshot the input cc bounding box for dumpSearch(); traceBackPath()
+  // grows ccMazeIdx1/2 in place on success, so the values at dump time are
+  // the outputs.
+  const FlexMazeIdx ccMazeIdx1In = ccMazeIdx1;
+  const FlexMazeIdx ccMazeIdx2In = ccMazeIdx2;
   if (drWorker_->getDRIter() >= debugMazeIter) {
     std::cout << "INIT search: target pin " << nextPin->getName()
               << "\nsource points:\n";
@@ -862,7 +888,16 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   for (auto& idx : connComps) {
     if (isDst(idx.x(), idx.y(), idx.z())) {
       path.emplace_back(idx.x(), idx.y(), idx.z());
-      dumpSearch(connComps, nextPin, path, true);
+      dumpSearch(connComps,
+                 nextPin,
+                 path,
+                 true,
+                 ccMazeIdx1In,
+                 ccMazeIdx2In,
+                 ccMazeIdx1,
+                 ccMazeIdx2,
+                 centerPt,
+                 route_with_jumpers);
       return true;
     }
     getPoint(currPt, idx.x(), idx.y());
@@ -911,14 +946,32 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     }
     if (isDst(currGrid.x(), currGrid.y(), currGrid.z())) {
       traceBackPath(currGrid, path, connComps, ccMazeIdx1, ccMazeIdx2);
-      dumpSearch(connComps, nextPin, path, true);
+      dumpSearch(connComps,
+                 nextPin,
+                 path,
+                 true,
+                 ccMazeIdx1In,
+                 ccMazeIdx2In,
+                 ccMazeIdx1,
+                 ccMazeIdx2,
+                 centerPt,
+                 route_with_jumpers);
       return true;
     }
     // expand and update wavefront
     expandWavefront(
         currGrid, dstMazeIdx1, dstMazeIdx2, centerPt, route_with_jumpers);
   }
-  dumpSearch(connComps, nextPin, path, false);
+  dumpSearch(connComps,
+             nextPin,
+             path,
+             false,
+             ccMazeIdx1In,
+             ccMazeIdx2In,
+             ccMazeIdx1,
+             ccMazeIdx2,
+             centerPt,
+             route_with_jumpers);
   return false;
 }
 

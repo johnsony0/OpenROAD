@@ -1,10 +1,14 @@
-version 1
+version 2
 iter 1
 routeBox 86400 136800 136800 187200
 searchId 0
 pin clkbuf_2_1__f_clk/A
 success 1
 dim 176 233 6
+centerPt 117720 156602
+routeWithJumpers 0
+ccBoxIn 8 88 1 8 88 1
+ccBoxOut 8 86 0 89 88 1
 connComps 85
 cc 8 88 1 86400 155215 4
 cc 89 86 0 112080 154845 2
