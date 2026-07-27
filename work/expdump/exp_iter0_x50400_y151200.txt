@@ -1,0 +1,2059 @@
+version 1
+iter 0
+routeBox 50400 151200 100800 201600
+dim 175 232 6
+search 0 pin  routeWithJumpers false connComps 1
+expanding 166 27 1 pt 100800 155215 cost 50400 pathCost 0 lastDir Unknown
+  isExpandable dir D from 166 27 1 to 166 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 166 27 1 to 166 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 166 27 1 to 165 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 166 27 1 to 167 27 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir W cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir N from 166 27 1 to 166 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 166 27 1 to 166 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 165 27 1 pt 100560 155215 cost 50400 pathCost 240 lastDir W
+  isExpandable dir D from 165 27 1 to 165 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 165 27 1 to 165 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 165 27 1 to 164 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 165 27 1 to 166 27 1 hasEdge true nextIsSrc true nextPrevDir Unknown lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason nextIsSrc
+  isExpandable dir N from 165 27 1 to 165 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 165 27 1 to 165 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 164 27 1 pt 100320 155215 cost 50400 pathCost 480 lastDir W
+  isExpandable dir D from 164 27 1 to 164 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 164 27 1 to 164 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 164 27 1 to 163 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 164 27 1 to 165 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 164 27 1 to 164 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 164 27 1 to 164 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 163 27 1 pt 100080 155215 cost 50400 pathCost 720 lastDir W
+  isExpandable dir D from 163 27 1 to 163 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 163 27 1 to 163 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 163 27 1 to 162 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 163 27 1 to 164 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 163 27 1 to 163 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 163 27 1 to 163 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 162 27 1 pt 99600 155215 cost 50400 pathCost 1200 lastDir W
+  isExpandable dir D from 162 27 1 to 162 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 162 27 1 to 162 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 162 27 1 to 161 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 162 27 1 to 163 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 162 27 1 to 162 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 162 27 1 to 162 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 161 27 1 pt 99360 155215 cost 50400 pathCost 1440 lastDir W
+  isExpandable dir D from 161 27 1 to 161 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 161 27 1 to 161 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 161 27 1 to 160 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 161 27 1 to 162 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 161 27 1 to 161 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 161 27 1 to 161 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 160 27 1 pt 99120 155215 cost 50400 pathCost 1680 lastDir W
+  isExpandable dir D from 160 27 1 to 160 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 160 27 1 to 160 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 160 27 1 to 159 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 160 27 1 to 161 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 160 27 1 to 160 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 160 27 1 to 160 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 159 27 1 pt 98640 155215 cost 50400 pathCost 2160 lastDir W
+  isExpandable dir D from 159 27 1 to 159 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 159 27 1 to 159 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 159 27 1 to 158 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 159 27 1 to 160 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 159 27 1 to 159 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 159 27 1 to 159 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 158 27 1 pt 98400 155215 cost 50400 pathCost 2400 lastDir W
+  isExpandable dir D from 158 27 1 to 158 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 158 27 1 to 158 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 158 27 1 to 157 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 158 27 1 to 159 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 158 27 1 to 158 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 158 27 1 to 158 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 157 27 1 pt 98160 155215 cost 50400 pathCost 2640 lastDir W
+  isExpandable dir D from 157 27 1 to 157 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 157 27 1 to 157 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 157 27 1 to 156 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 157 27 1 to 158 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 157 27 1 to 157 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 157 27 1 to 157 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 156 27 1 pt 97680 155215 cost 50400 pathCost 3120 lastDir W
+  isExpandable dir D from 156 27 1 to 156 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 156 27 1 to 156 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 156 27 1 to 155 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 156 27 1 to 157 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 156 27 1 to 156 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 156 27 1 to 156 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 155 27 1 pt 97440 155215 cost 50400 pathCost 3360 lastDir W
+  isExpandable dir D from 155 27 1 to 155 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 155 27 1 to 155 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 155 27 1 to 154 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 155 27 1 to 156 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 155 27 1 to 155 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 155 27 1 to 155 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 154 27 1 pt 97200 155215 cost 50400 pathCost 3600 lastDir W
+  isExpandable dir D from 154 27 1 to 154 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 154 27 1 to 154 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 154 27 1 to 153 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 154 27 1 to 155 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 154 27 1 to 154 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 154 27 1 to 154 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 153 27 1 pt 96720 155215 cost 50400 pathCost 4080 lastDir W
+  isExpandable dir D from 153 27 1 to 153 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 153 27 1 to 153 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 153 27 1 to 152 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 153 27 1 to 154 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 153 27 1 to 153 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 153 27 1 to 153 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 152 27 1 pt 96480 155215 cost 50400 pathCost 4320 lastDir W
+  isExpandable dir D from 152 27 1 to 152 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 152 27 1 to 152 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 152 27 1 to 151 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 152 27 1 to 153 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 152 27 1 to 152 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 152 27 1 to 152 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 151 27 1 pt 96240 155215 cost 50400 pathCost 4560 lastDir W
+  isExpandable dir D from 151 27 1 to 151 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 151 27 1 to 151 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 151 27 1 to 150 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 151 27 1 to 152 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 151 27 1 to 151 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 151 27 1 to 151 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 150 27 1 pt 95760 155215 cost 50400 pathCost 5040 lastDir W
+  isExpandable dir D from 150 27 1 to 150 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 150 27 1 to 150 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 150 27 1 to 149 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 150 27 1 to 151 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 150 27 1 to 150 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 150 27 1 to 150 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 149 27 1 pt 95520 155215 cost 50400 pathCost 5280 lastDir W
+  isExpandable dir D from 149 27 1 to 149 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 149 27 1 to 149 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 149 27 1 to 148 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 149 27 1 to 150 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 149 27 1 to 149 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 149 27 1 to 149 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 148 27 1 pt 95280 155215 cost 50400 pathCost 5520 lastDir W
+  isExpandable dir D from 148 27 1 to 148 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 148 27 1 to 148 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 148 27 1 to 147 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 148 27 1 to 149 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 148 27 1 to 148 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 148 27 1 to 148 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 147 27 1 pt 94800 155215 cost 50400 pathCost 6000 lastDir W
+  isExpandable dir D from 147 27 1 to 147 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 147 27 1 to 147 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 147 27 1 to 146 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 147 27 1 to 148 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 147 27 1 to 147 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 147 27 1 to 147 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 146 27 1 pt 94560 155215 cost 50400 pathCost 6240 lastDir W
+  isExpandable dir D from 146 27 1 to 146 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 146 27 1 to 146 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 146 27 1 to 145 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 146 27 1 to 147 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 146 27 1 to 146 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 146 27 1 to 146 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 145 27 1 pt 94320 155215 cost 50400 pathCost 6480 lastDir W
+  isExpandable dir D from 145 27 1 to 145 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 145 27 1 to 145 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 145 27 1 to 144 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 145 27 1 to 146 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 145 27 1 to 145 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 145 27 1 to 145 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 144 27 1 pt 93840 155215 cost 50400 pathCost 6960 lastDir W
+  isExpandable dir D from 144 27 1 to 144 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 144 27 1 to 144 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 144 27 1 to 143 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 144 27 1 to 145 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 144 27 1 to 144 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 144 27 1 to 144 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 143 27 1 pt 93600 155215 cost 50400 pathCost 7200 lastDir W
+  isExpandable dir D from 143 27 1 to 143 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 143 27 1 to 143 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 143 27 1 to 142 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 143 27 1 to 144 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 143 27 1 to 143 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 143 27 1 to 143 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 142 27 1 pt 93360 155215 cost 50400 pathCost 7440 lastDir W
+  isExpandable dir D from 142 27 1 to 142 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 142 27 1 to 142 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 142 27 1 to 141 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 142 27 1 to 143 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 142 27 1 to 142 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 142 27 1 to 142 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 141 27 1 pt 92880 155215 cost 50400 pathCost 7920 lastDir W
+  isExpandable dir D from 141 27 1 to 141 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 141 27 1 to 141 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 141 27 1 to 140 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 141 27 1 to 142 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 141 27 1 to 141 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 141 27 1 to 141 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 140 27 1 pt 92640 155215 cost 50400 pathCost 8160 lastDir W
+  isExpandable dir D from 140 27 1 to 140 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 140 27 1 to 140 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 140 27 1 to 139 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 140 27 1 to 141 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 140 27 1 to 140 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 140 27 1 to 140 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 139 27 1 pt 92400 155215 cost 50400 pathCost 8400 lastDir W
+  isExpandable dir D from 139 27 1 to 139 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 139 27 1 to 139 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 139 27 1 to 138 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 139 27 1 to 140 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 139 27 1 to 139 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 139 27 1 to 139 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 138 27 1 pt 91920 155215 cost 50400 pathCost 8880 lastDir W
+  isExpandable dir D from 138 27 1 to 138 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 138 27 1 to 138 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 138 27 1 to 137 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 138 27 1 to 139 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 138 27 1 to 138 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 138 27 1 to 138 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 137 27 1 pt 91680 155215 cost 50400 pathCost 9120 lastDir W
+  isExpandable dir D from 137 27 1 to 137 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 137 27 1 to 137 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 137 27 1 to 136 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 137 27 1 to 138 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 137 27 1 to 137 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 137 27 1 to 137 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 136 27 1 pt 91440 155215 cost 50400 pathCost 9360 lastDir W
+  isExpandable dir D from 136 27 1 to 136 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 136 27 1 to 136 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 136 27 1 to 135 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 136 27 1 to 137 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 136 27 1 to 136 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 136 27 1 to 136 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 135 27 1 pt 90960 155215 cost 50400 pathCost 9840 lastDir W
+  isExpandable dir D from 135 27 1 to 135 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 135 27 1 to 135 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 135 27 1 to 134 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 135 27 1 to 136 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 135 27 1 to 135 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 135 27 1 to 135 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 134 27 1 pt 90720 155215 cost 50400 pathCost 10080 lastDir W
+  isExpandable dir D from 134 27 1 to 134 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 134 27 1 to 134 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 134 27 1 to 133 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 134 27 1 to 135 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 134 27 1 to 134 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 134 27 1 to 134 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 133 27 1 pt 90480 155215 cost 50400 pathCost 10320 lastDir W
+  isExpandable dir D from 133 27 1 to 133 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 133 27 1 to 133 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 133 27 1 to 132 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 133 27 1 to 134 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 133 27 1 to 133 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 133 27 1 to 133 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 132 27 1 pt 90000 155215 cost 50400 pathCost 10800 lastDir W
+  isExpandable dir D from 132 27 1 to 132 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 132 27 1 to 132 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 132 27 1 to 131 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 132 27 1 to 133 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 132 27 1 to 132 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 132 27 1 to 132 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 131 27 1 pt 89760 155215 cost 50400 pathCost 11040 lastDir W
+  isExpandable dir D from 131 27 1 to 131 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 131 27 1 to 131 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 131 27 1 to 130 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 131 27 1 to 132 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 131 27 1 to 131 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 131 27 1 to 131 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 130 27 1 pt 89520 155215 cost 50400 pathCost 11280 lastDir W
+  isExpandable dir D from 130 27 1 to 130 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 130 27 1 to 130 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 130 27 1 to 129 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 130 27 1 to 131 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 130 27 1 to 130 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 130 27 1 to 130 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 129 27 1 pt 89040 155215 cost 50400 pathCost 11760 lastDir W
+  isExpandable dir D from 129 27 1 to 129 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 129 27 1 to 129 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 129 27 1 to 128 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 129 27 1 to 130 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 129 27 1 to 129 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 129 27 1 to 129 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 128 27 1 pt 88800 155215 cost 50400 pathCost 12000 lastDir W
+  isExpandable dir D from 128 27 1 to 128 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 128 27 1 to 128 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 128 27 1 to 127 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 128 27 1 to 129 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 128 27 1 to 128 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 128 27 1 to 128 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 127 27 1 pt 88560 155215 cost 50400 pathCost 12240 lastDir W
+  isExpandable dir D from 127 27 1 to 127 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 127 27 1 to 127 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 127 27 1 to 126 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 127 27 1 to 128 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 127 27 1 to 127 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 127 27 1 to 127 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 126 27 1 pt 88080 155215 cost 50400 pathCost 12720 lastDir W
+  isExpandable dir D from 126 27 1 to 126 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 126 27 1 to 126 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 126 27 1 to 125 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 126 27 1 to 127 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 126 27 1 to 126 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 126 27 1 to 126 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 125 27 1 pt 87840 155215 cost 50400 pathCost 12960 lastDir W
+  isExpandable dir D from 125 27 1 to 125 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 125 27 1 to 125 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 125 27 1 to 124 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 125 27 1 to 126 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 125 27 1 to 125 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 125 27 1 to 125 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 124 27 1 pt 87600 155215 cost 50400 pathCost 13200 lastDir W
+  isExpandable dir D from 124 27 1 to 124 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 124 27 1 to 124 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 124 27 1 to 123 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 124 27 1 to 125 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 124 27 1 to 124 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 124 27 1 to 124 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 123 27 1 pt 87120 155215 cost 50400 pathCost 13680 lastDir W
+  isExpandable dir D from 123 27 1 to 123 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 123 27 1 to 123 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 123 27 1 to 122 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 123 27 1 to 124 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 123 27 1 to 123 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 123 27 1 to 123 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 122 27 1 pt 86880 155215 cost 50400 pathCost 13920 lastDir W
+  isExpandable dir D from 122 27 1 to 122 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 122 27 1 to 122 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 122 27 1 to 121 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 122 27 1 to 123 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 122 27 1 to 122 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 122 27 1 to 122 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 121 27 1 pt 86640 155215 cost 50400 pathCost 14160 lastDir W
+  isExpandable dir D from 121 27 1 to 121 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 121 27 1 to 121 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 121 27 1 to 120 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 121 27 1 to 122 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 121 27 1 to 121 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 121 27 1 to 121 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 120 27 1 pt 86160 155215 cost 50400 pathCost 14640 lastDir W
+  isExpandable dir D from 120 27 1 to 120 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 120 27 1 to 120 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 120 27 1 to 119 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 120 27 1 to 121 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 120 27 1 to 120 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 120 27 1 to 120 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 119 27 1 pt 85920 155215 cost 50400 pathCost 14880 lastDir W
+  isExpandable dir D from 119 27 1 to 119 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 119 27 1 to 119 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 119 27 1 to 118 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 119 27 1 to 120 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 119 27 1 to 119 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 119 27 1 to 119 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 118 27 1 pt 85680 155215 cost 50400 pathCost 15120 lastDir W
+  isExpandable dir D from 118 27 1 to 118 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 118 27 1 to 118 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 118 27 1 to 117 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 118 27 1 to 119 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 118 27 1 to 118 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 118 27 1 to 118 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 117 27 1 pt 85200 155215 cost 50400 pathCost 15600 lastDir W
+  isExpandable dir D from 117 27 1 to 117 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 117 27 1 to 117 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 117 27 1 to 116 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 117 27 1 to 118 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 117 27 1 to 117 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 117 27 1 to 117 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 116 27 1 pt 84960 155215 cost 50400 pathCost 15840 lastDir W
+  isExpandable dir D from 116 27 1 to 116 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 116 27 1 to 116 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 116 27 1 to 115 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 116 27 1 to 117 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 116 27 1 to 116 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 116 27 1 to 116 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 115 27 1 pt 84720 155215 cost 50400 pathCost 16080 lastDir W
+  isExpandable dir D from 115 27 1 to 115 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 115 27 1 to 115 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 115 27 1 to 114 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 115 27 1 to 116 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 115 27 1 to 115 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 115 27 1 to 115 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 114 27 1 pt 84240 155215 cost 50400 pathCost 16560 lastDir W
+  isExpandable dir D from 114 27 1 to 114 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 114 27 1 to 114 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 114 27 1 to 113 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 114 27 1 to 115 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 114 27 1 to 114 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 114 27 1 to 114 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 113 27 1 pt 84000 155215 cost 50400 pathCost 16800 lastDir W
+  isExpandable dir D from 113 27 1 to 113 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 113 27 1 to 113 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 113 27 1 to 112 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 113 27 1 to 114 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 113 27 1 to 113 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 113 27 1 to 113 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 112 27 1 pt 83760 155215 cost 50400 pathCost 17040 lastDir W
+  isExpandable dir D from 112 27 1 to 112 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 112 27 1 to 112 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 112 27 1 to 111 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 112 27 1 to 113 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 112 27 1 to 112 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 112 27 1 to 112 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 111 27 1 pt 83280 155215 cost 50400 pathCost 17520 lastDir W
+  isExpandable dir D from 111 27 1 to 111 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 111 27 1 to 111 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 111 27 1 to 110 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 111 27 1 to 112 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 111 27 1 to 111 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 111 27 1 to 111 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 110 27 1 pt 83040 155215 cost 50400 pathCost 17760 lastDir W
+  isExpandable dir D from 110 27 1 to 110 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 110 27 1 to 110 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 110 27 1 to 109 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 110 27 1 to 111 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 110 27 1 to 110 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 110 27 1 to 110 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 109 27 1 pt 82800 155215 cost 50400 pathCost 18000 lastDir W
+  isExpandable dir D from 109 27 1 to 109 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 109 27 1 to 109 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 109 27 1 to 108 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 109 27 1 to 110 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 109 27 1 to 109 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 109 27 1 to 109 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 108 27 1 pt 82320 155215 cost 50400 pathCost 18480 lastDir W
+  isExpandable dir D from 108 27 1 to 108 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 108 27 1 to 108 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 108 27 1 to 107 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 108 27 1 to 109 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 108 27 1 to 108 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 108 27 1 to 108 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 107 27 1 pt 82080 155215 cost 50400 pathCost 18720 lastDir W
+  isExpandable dir D from 107 27 1 to 107 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 107 27 1 to 107 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 107 27 1 to 106 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 107 27 1 to 108 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 107 27 1 to 107 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 107 27 1 to 107 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 106 27 1 pt 81840 155215 cost 50400 pathCost 18960 lastDir W
+  isExpandable dir D from 106 27 1 to 106 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 106 27 1 to 106 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 106 27 1 to 105 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 106 27 1 to 107 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 106 27 1 to 106 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 106 27 1 to 106 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 105 27 1 pt 81360 155215 cost 50400 pathCost 19440 lastDir W
+  isExpandable dir D from 105 27 1 to 105 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 105 27 1 to 105 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 105 27 1 to 104 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 105 27 1 to 106 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 105 27 1 to 105 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 105 27 1 to 105 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 104 27 1 pt 81120 155215 cost 50400 pathCost 19680 lastDir W
+  isExpandable dir D from 104 27 1 to 104 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 104 27 1 to 104 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 104 27 1 to 103 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 104 27 1 to 105 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 104 27 1 to 104 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 104 27 1 to 104 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 103 27 1 pt 80880 155215 cost 50400 pathCost 19920 lastDir W
+  isExpandable dir D from 103 27 1 to 103 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 103 27 1 to 103 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 103 27 1 to 102 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 103 27 1 to 104 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 103 27 1 to 103 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 103 27 1 to 103 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 102 27 1 pt 80400 155215 cost 50400 pathCost 20400 lastDir W
+  isExpandable dir D from 102 27 1 to 102 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 102 27 1 to 102 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 102 27 1 to 101 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 102 27 1 to 103 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 102 27 1 to 102 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 102 27 1 to 102 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 101 27 1 pt 80160 155215 cost 50400 pathCost 20640 lastDir W
+  isExpandable dir D from 101 27 1 to 101 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 101 27 1 to 101 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 101 27 1 to 100 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 101 27 1 to 102 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 101 27 1 to 101 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 101 27 1 to 101 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 100 27 1 pt 79920 155215 cost 50400 pathCost 20880 lastDir W
+  isExpandable dir D from 100 27 1 to 100 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 100 27 1 to 100 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 100 27 1 to 99 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 100 27 1 to 101 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 100 27 1 to 100 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 100 27 1 to 100 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 99 27 1 pt 79440 155215 cost 50400 pathCost 21360 lastDir W
+  isExpandable dir D from 99 27 1 to 99 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 99 27 1 to 99 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 99 27 1 to 98 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 99 27 1 to 100 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 99 27 1 to 99 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 99 27 1 to 99 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 98 27 1 pt 79200 155215 cost 50400 pathCost 21600 lastDir W
+  isExpandable dir D from 98 27 1 to 98 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 98 27 1 to 98 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 98 27 1 to 97 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 98 27 1 to 99 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 98 27 1 to 98 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 98 27 1 to 98 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 97 27 1 pt 78960 155215 cost 50400 pathCost 21840 lastDir W
+  isExpandable dir D from 97 27 1 to 97 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 97 27 1 to 97 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 97 27 1 to 96 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 97 27 1 to 98 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 97 27 1 to 97 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 97 27 1 to 97 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 96 27 1 pt 78480 155215 cost 50400 pathCost 22320 lastDir W
+  isExpandable dir D from 96 27 1 to 96 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 96 27 1 to 96 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 96 27 1 to 95 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 96 27 1 to 97 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 96 27 1 to 96 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 96 27 1 to 96 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 95 27 1 pt 78240 155215 cost 50400 pathCost 22560 lastDir W
+  isExpandable dir D from 95 27 1 to 95 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 95 27 1 to 95 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 95 27 1 to 94 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 95 27 1 to 96 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 95 27 1 to 95 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 95 27 1 to 95 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 94 27 1 pt 78000 155215 cost 50400 pathCost 22800 lastDir W
+  isExpandable dir D from 94 27 1 to 94 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 94 27 1 to 94 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 94 27 1 to 93 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 94 27 1 to 95 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 94 27 1 to 94 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 94 27 1 to 94 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 93 27 1 pt 77520 155215 cost 50400 pathCost 23280 lastDir W
+  isExpandable dir D from 93 27 1 to 93 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 93 27 1 to 93 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 93 27 1 to 92 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 93 27 1 to 94 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 93 27 1 to 93 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 93 27 1 to 93 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 92 27 1 pt 77280 155215 cost 50400 pathCost 23520 lastDir W
+  isExpandable dir D from 92 27 1 to 92 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 92 27 1 to 92 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 92 27 1 to 91 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 92 27 1 to 93 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 92 27 1 to 92 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 92 27 1 to 92 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 91 27 1 pt 77040 155215 cost 50400 pathCost 23760 lastDir W
+  isExpandable dir D from 91 27 1 to 91 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 91 27 1 to 91 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 91 27 1 to 90 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 91 27 1 to 92 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 91 27 1 to 91 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 91 27 1 to 91 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 90 27 1 pt 76560 155215 cost 50400 pathCost 24240 lastDir W
+  isExpandable dir D from 90 27 1 to 90 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 90 27 1 to 90 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 90 27 1 to 89 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 90 27 1 to 91 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 90 27 1 to 90 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 90 27 1 to 90 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 89 27 1 pt 76320 155215 cost 50400 pathCost 24480 lastDir W
+  isExpandable dir D from 89 27 1 to 89 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 89 27 1 to 89 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 89 27 1 to 88 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 89 27 1 to 90 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 89 27 1 to 89 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 89 27 1 to 89 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 88 27 1 pt 76080 155215 cost 50400 pathCost 24720 lastDir W
+  isExpandable dir D from 88 27 1 to 88 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 88 27 1 to 88 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 88 27 1 to 87 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 88 27 1 to 89 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 88 27 1 to 88 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 88 27 1 to 88 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 87 27 1 pt 75600 155215 cost 50400 pathCost 25200 lastDir W
+  isExpandable dir D from 87 27 1 to 87 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 87 27 1 to 87 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 87 27 1 to 86 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 87 27 1 to 88 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 87 27 1 to 87 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 87 27 1 to 87 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 86 27 1 pt 75360 155215 cost 50400 pathCost 25440 lastDir W
+  isExpandable dir D from 86 27 1 to 86 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 86 27 1 to 86 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 86 27 1 to 85 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 86 27 1 to 87 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 86 27 1 to 86 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 86 27 1 to 86 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 85 27 1 pt 75120 155215 cost 50400 pathCost 25680 lastDir W
+  isExpandable dir D from 85 27 1 to 85 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 85 27 1 to 85 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 85 27 1 to 84 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 85 27 1 to 86 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 85 27 1 to 85 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 85 27 1 to 85 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 84 27 1 pt 74640 155215 cost 50400 pathCost 26160 lastDir W
+  isExpandable dir D from 84 27 1 to 84 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 84 27 1 to 84 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 84 27 1 to 83 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 84 27 1 to 85 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 84 27 1 to 84 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 84 27 1 to 84 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 83 27 1 pt 74400 155215 cost 50400 pathCost 26400 lastDir W
+  isExpandable dir D from 83 27 1 to 83 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 83 27 1 to 83 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 83 27 1 to 82 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 83 27 1 to 84 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 83 27 1 to 83 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 83 27 1 to 83 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 82 27 1 pt 74160 155215 cost 50400 pathCost 26640 lastDir W
+  isExpandable dir D from 82 27 1 to 82 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 82 27 1 to 82 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 82 27 1 to 81 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 82 27 1 to 83 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 82 27 1 to 82 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 82 27 1 to 82 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 81 27 1 pt 73680 155215 cost 50400 pathCost 27120 lastDir W
+  isExpandable dir D from 81 27 1 to 81 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 81 27 1 to 81 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 81 27 1 to 80 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 81 27 1 to 82 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 81 27 1 to 81 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 81 27 1 to 81 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 80 27 1 pt 73440 155215 cost 50400 pathCost 27360 lastDir W
+  isExpandable dir D from 80 27 1 to 80 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 80 27 1 to 80 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 80 27 1 to 79 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 80 27 1 to 81 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 80 27 1 to 80 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 80 27 1 to 80 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 79 27 1 pt 73200 155215 cost 50400 pathCost 27600 lastDir W
+  isExpandable dir D from 79 27 1 to 79 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 79 27 1 to 79 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 79 27 1 to 78 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 79 27 1 to 80 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 79 27 1 to 79 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 79 27 1 to 79 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 78 27 1 pt 72720 155215 cost 50400 pathCost 28080 lastDir W
+  isExpandable dir D from 78 27 1 to 78 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 78 27 1 to 78 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 78 27 1 to 77 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 78 27 1 to 79 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 78 27 1 to 78 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 78 27 1 to 78 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 77 27 1 pt 72480 155215 cost 50400 pathCost 28320 lastDir W
+  isExpandable dir D from 77 27 1 to 77 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 77 27 1 to 77 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 77 27 1 to 76 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 77 27 1 to 78 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 77 27 1 to 77 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 77 27 1 to 77 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 76 27 1 pt 72240 155215 cost 50400 pathCost 28560 lastDir W
+  isExpandable dir D from 76 27 1 to 76 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 76 27 1 to 76 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 76 27 1 to 75 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 76 27 1 to 77 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 76 27 1 to 76 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 76 27 1 to 76 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 75 27 1 pt 71760 155215 cost 50400 pathCost 29040 lastDir W
+  isExpandable dir D from 75 27 1 to 75 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 75 27 1 to 75 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 75 27 1 to 74 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 75 27 1 to 76 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 75 27 1 to 75 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 75 27 1 to 75 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 74 27 1 pt 71520 155215 cost 50400 pathCost 29280 lastDir W
+  isExpandable dir D from 74 27 1 to 74 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 74 27 1 to 74 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 74 27 1 to 73 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 74 27 1 to 75 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 74 27 1 to 74 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 74 27 1 to 74 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 73 27 1 pt 71280 155215 cost 50400 pathCost 29520 lastDir W
+  isExpandable dir D from 73 27 1 to 73 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 73 27 1 to 73 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 73 27 1 to 72 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 73 27 1 to 74 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 73 27 1 to 73 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 73 27 1 to 73 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 72 27 1 pt 70800 155215 cost 50400 pathCost 30000 lastDir W
+  isExpandable dir D from 72 27 1 to 72 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 72 27 1 to 72 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 72 27 1 to 71 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 72 27 1 to 73 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 72 27 1 to 72 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 72 27 1 to 72 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 71 27 1 pt 70560 155215 cost 50400 pathCost 30240 lastDir W
+  isExpandable dir D from 71 27 1 to 71 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 71 27 1 to 71 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 71 27 1 to 70 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 71 27 1 to 72 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 71 27 1 to 71 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 71 27 1 to 71 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 70 27 1 pt 70320 155215 cost 50400 pathCost 30480 lastDir W
+  isExpandable dir D from 70 27 1 to 70 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 70 27 1 to 70 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 70 27 1 to 69 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 70 27 1 to 71 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 70 27 1 to 70 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 70 27 1 to 70 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 69 27 1 pt 69840 155215 cost 50400 pathCost 30960 lastDir W
+  isExpandable dir D from 69 27 1 to 69 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 69 27 1 to 69 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 69 27 1 to 68 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 69 27 1 to 70 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 69 27 1 to 69 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 69 27 1 to 69 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 68 27 1 pt 69600 155215 cost 50400 pathCost 31200 lastDir W
+  isExpandable dir D from 68 27 1 to 68 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 68 27 1 to 68 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 68 27 1 to 67 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 68 27 1 to 69 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 68 27 1 to 68 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 68 27 1 to 68 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 67 27 1 pt 69360 155215 cost 50400 pathCost 31440 lastDir W
+  isExpandable dir D from 67 27 1 to 67 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 67 27 1 to 67 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 67 27 1 to 66 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 67 27 1 to 68 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 67 27 1 to 67 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 67 27 1 to 67 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 66 27 1 pt 68880 155215 cost 50400 pathCost 31920 lastDir W
+  isExpandable dir D from 66 27 1 to 66 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 66 27 1 to 66 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 66 27 1 to 65 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 66 27 1 to 67 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 66 27 1 to 66 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 66 27 1 to 66 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 65 27 1 pt 68640 155215 cost 50400 pathCost 32160 lastDir W
+  isExpandable dir D from 65 27 1 to 65 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 65 27 1 to 65 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 65 27 1 to 64 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 65 27 1 to 66 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 65 27 1 to 65 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 65 27 1 to 65 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 64 27 1 pt 68400 155215 cost 50400 pathCost 32400 lastDir W
+  isExpandable dir D from 64 27 1 to 64 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 64 27 1 to 64 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 64 27 1 to 63 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 64 27 1 to 65 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 64 27 1 to 64 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 64 27 1 to 64 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 63 27 1 pt 67920 155215 cost 50400 pathCost 32880 lastDir W
+  isExpandable dir D from 63 27 1 to 63 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 63 27 1 to 63 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 63 27 1 to 62 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 63 27 1 to 64 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 63 27 1 to 63 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 63 27 1 to 63 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 62 27 1 pt 67680 155215 cost 50400 pathCost 33120 lastDir W
+  isExpandable dir D from 62 27 1 to 62 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 62 27 1 to 62 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 62 27 1 to 61 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 62 27 1 to 63 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 62 27 1 to 62 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 62 27 1 to 62 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 61 27 1 pt 67440 155215 cost 50400 pathCost 33360 lastDir W
+  isExpandable dir D from 61 27 1 to 61 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 61 27 1 to 61 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 61 27 1 to 60 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 61 27 1 to 62 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 61 27 1 to 61 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 61 27 1 to 61 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 60 27 1 pt 66960 155215 cost 50400 pathCost 33840 lastDir W
+  isExpandable dir D from 60 27 1 to 60 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 60 27 1 to 60 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 60 27 1 to 59 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 60 27 1 to 61 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 60 27 1 to 60 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 60 27 1 to 60 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 59 27 1 pt 66720 155215 cost 50400 pathCost 34080 lastDir W
+  isExpandable dir D from 59 27 1 to 59 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 59 27 1 to 59 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 59 27 1 to 58 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 59 27 1 to 60 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 59 27 1 to 59 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 59 27 1 to 59 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 58 27 1 pt 66480 155215 cost 50400 pathCost 34320 lastDir W
+  isExpandable dir D from 58 27 1 to 58 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 58 27 1 to 58 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 58 27 1 to 57 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 58 27 1 to 59 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 58 27 1 to 58 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 58 27 1 to 58 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 57 27 1 pt 66000 155215 cost 50400 pathCost 34800 lastDir W
+  isExpandable dir D from 57 27 1 to 57 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 57 27 1 to 57 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 57 27 1 to 56 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 57 27 1 to 58 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 57 27 1 to 57 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 57 27 1 to 57 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 56 27 1 pt 65760 155215 cost 50400 pathCost 35040 lastDir W
+  isExpandable dir D from 56 27 1 to 56 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 56 27 1 to 56 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 56 27 1 to 55 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 56 27 1 to 57 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 56 27 1 to 56 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 56 27 1 to 56 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 55 27 1 pt 65520 155215 cost 50400 pathCost 35280 lastDir W
+  isExpandable dir D from 55 27 1 to 55 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 55 27 1 to 55 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 55 27 1 to 54 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 55 27 1 to 56 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 55 27 1 to 55 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 55 27 1 to 55 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 54 27 1 pt 65040 155215 cost 50400 pathCost 35760 lastDir W
+  isExpandable dir D from 54 27 1 to 54 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 54 27 1 to 54 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 54 27 1 to 53 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 54 27 1 to 55 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 54 27 1 to 54 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 54 27 1 to 54 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 53 27 1 pt 64800 155215 cost 50400 pathCost 36000 lastDir W
+  isExpandable dir D from 53 27 1 to 53 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 53 27 1 to 53 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 53 27 1 to 52 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 53 27 1 to 54 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 53 27 1 to 53 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 53 27 1 to 53 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 52 27 1 pt 64560 155215 cost 50400 pathCost 36240 lastDir W
+  isExpandable dir D from 52 27 1 to 52 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 52 27 1 to 52 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 52 27 1 to 51 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 52 27 1 to 53 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 52 27 1 to 52 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 52 27 1 to 52 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 51 27 1 pt 64080 155215 cost 50400 pathCost 36720 lastDir W
+  isExpandable dir D from 51 27 1 to 51 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 51 27 1 to 51 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 51 27 1 to 50 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 51 27 1 to 52 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 51 27 1 to 51 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 51 27 1 to 51 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 50 27 1 pt 63840 155215 cost 50400 pathCost 36960 lastDir W
+  isExpandable dir D from 50 27 1 to 50 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 50 27 1 to 50 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 50 27 1 to 49 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 50 27 1 to 51 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 50 27 1 to 50 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 50 27 1 to 50 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 49 27 1 pt 63600 155215 cost 50400 pathCost 37200 lastDir W
+  isExpandable dir D from 49 27 1 to 49 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 49 27 1 to 49 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 49 27 1 to 48 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 49 27 1 to 50 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 49 27 1 to 49 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 49 27 1 to 49 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 48 27 1 pt 63120 155215 cost 50400 pathCost 37680 lastDir W
+  isExpandable dir D from 48 27 1 to 48 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 48 27 1 to 48 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 48 27 1 to 47 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 48 27 1 to 49 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 48 27 1 to 48 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 48 27 1 to 48 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 47 27 1 pt 62880 155215 cost 50400 pathCost 37920 lastDir W
+  isExpandable dir D from 47 27 1 to 47 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 47 27 1 to 47 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 47 27 1 to 46 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 47 27 1 to 48 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 47 27 1 to 47 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 47 27 1 to 47 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 46 27 1 pt 62640 155215 cost 50400 pathCost 38160 lastDir W
+  isExpandable dir D from 46 27 1 to 46 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 46 27 1 to 46 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 46 27 1 to 45 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 46 27 1 to 47 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 46 27 1 to 46 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 46 27 1 to 46 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 45 27 1 pt 62160 155215 cost 50400 pathCost 38640 lastDir W
+  isExpandable dir D from 45 27 1 to 45 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 45 27 1 to 45 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 45 27 1 to 44 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 45 27 1 to 46 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 45 27 1 to 45 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 45 27 1 to 45 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 44 27 1 pt 61920 155215 cost 50400 pathCost 38880 lastDir W
+  isExpandable dir D from 44 27 1 to 44 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 44 27 1 to 44 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 44 27 1 to 43 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 44 27 1 to 45 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 44 27 1 to 44 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 44 27 1 to 44 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 43 27 1 pt 61680 155215 cost 50400 pathCost 39120 lastDir W
+  isExpandable dir D from 43 27 1 to 43 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 43 27 1 to 43 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 43 27 1 to 42 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 43 27 1 to 44 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 43 27 1 to 43 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 43 27 1 to 43 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 42 27 1 pt 61200 155215 cost 50400 pathCost 39600 lastDir W
+  isExpandable dir D from 42 27 1 to 42 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 42 27 1 to 42 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 42 27 1 to 41 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 42 27 1 to 43 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 42 27 1 to 42 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 42 27 1 to 42 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 41 27 1 pt 60960 155215 cost 50400 pathCost 39840 lastDir W
+  isExpandable dir D from 41 27 1 to 41 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 41 27 1 to 41 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 41 27 1 to 40 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 41 27 1 to 42 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 41 27 1 to 41 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 41 27 1 to 41 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 40 27 1 pt 60720 155215 cost 50400 pathCost 40080 lastDir W
+  isExpandable dir D from 40 27 1 to 40 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 40 27 1 to 40 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 40 27 1 to 39 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 40 27 1 to 41 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 40 27 1 to 40 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 40 27 1 to 40 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 39 27 1 pt 60240 155215 cost 50400 pathCost 40560 lastDir W
+  isExpandable dir D from 39 27 1 to 39 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 39 27 1 to 39 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 39 27 1 to 38 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 39 27 1 to 40 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 39 27 1 to 39 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 39 27 1 to 39 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 38 27 1 pt 60000 155215 cost 50400 pathCost 40800 lastDir W
+  isExpandable dir D from 38 27 1 to 38 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 38 27 1 to 38 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 38 27 1 to 37 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 38 27 1 to 39 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 38 27 1 to 38 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 38 27 1 to 38 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 37 27 1 pt 59760 155215 cost 50400 pathCost 41040 lastDir W
+  isExpandable dir D from 37 27 1 to 37 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 37 27 1 to 37 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 37 27 1 to 36 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 37 27 1 to 38 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 37 27 1 to 37 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 37 27 1 to 37 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 36 27 1 pt 59280 155215 cost 50400 pathCost 41520 lastDir W
+  isExpandable dir D from 36 27 1 to 36 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 36 27 1 to 36 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 36 27 1 to 35 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 36 27 1 to 37 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 36 27 1 to 36 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 36 27 1 to 36 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 35 27 1 pt 59040 155215 cost 50400 pathCost 41760 lastDir W
+  isExpandable dir D from 35 27 1 to 35 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 35 27 1 to 35 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 35 27 1 to 34 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 35 27 1 to 36 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 35 27 1 to 35 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 35 27 1 to 35 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 34 27 1 pt 58800 155215 cost 50400 pathCost 42000 lastDir W
+  isExpandable dir D from 34 27 1 to 34 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 34 27 1 to 34 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 34 27 1 to 33 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 34 27 1 to 35 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 34 27 1 to 34 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 34 27 1 to 34 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 33 27 1 pt 58320 155215 cost 50400 pathCost 42480 lastDir W
+  isExpandable dir D from 33 27 1 to 33 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 33 27 1 to 33 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 33 27 1 to 32 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 33 27 1 to 34 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 33 27 1 to 33 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 33 27 1 to 33 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 32 27 1 pt 58080 155215 cost 50400 pathCost 42720 lastDir W
+  isExpandable dir D from 32 27 1 to 32 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 32 27 1 to 32 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 32 27 1 to 31 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 32 27 1 to 33 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 32 27 1 to 32 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 32 27 1 to 32 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 31 27 1 pt 57840 155215 cost 50400 pathCost 42960 lastDir W
+  isExpandable dir D from 31 27 1 to 31 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 31 27 1 to 31 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 31 27 1 to 30 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 31 27 1 to 32 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 31 27 1 to 31 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 31 27 1 to 31 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 30 27 1 pt 57360 155215 cost 50400 pathCost 43440 lastDir W
+  isExpandable dir D from 30 27 1 to 30 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 30 27 1 to 30 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 30 27 1 to 29 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 30 27 1 to 31 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 30 27 1 to 30 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 30 27 1 to 30 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 29 27 1 pt 57120 155215 cost 50400 pathCost 43680 lastDir W
+  isExpandable dir D from 29 27 1 to 29 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 29 27 1 to 29 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 29 27 1 to 28 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 29 27 1 to 30 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 29 27 1 to 29 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 29 27 1 to 29 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 28 27 1 pt 56880 155215 cost 50400 pathCost 43920 lastDir W
+  isExpandable dir D from 28 27 1 to 28 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 28 27 1 to 28 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 28 27 1 to 27 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 28 27 1 to 29 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 28 27 1 to 28 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 28 27 1 to 28 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 27 27 1 pt 56400 155215 cost 50400 pathCost 44400 lastDir W
+  isExpandable dir D from 27 27 1 to 27 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 27 27 1 to 27 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 27 27 1 to 26 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 27 27 1 to 28 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 27 27 1 to 27 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 27 27 1 to 27 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 26 27 1 pt 56160 155215 cost 50400 pathCost 44640 lastDir W
+  isExpandable dir D from 26 27 1 to 26 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 26 27 1 to 26 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 26 27 1 to 25 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 26 27 1 to 27 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 26 27 1 to 26 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 26 27 1 to 26 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 25 27 1 pt 55920 155215 cost 50400 pathCost 44880 lastDir W
+  isExpandable dir D from 25 27 1 to 25 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 25 27 1 to 25 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 25 27 1 to 24 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 25 27 1 to 26 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 25 27 1 to 25 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 25 27 1 to 25 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 24 27 1 pt 55440 155215 cost 50400 pathCost 45360 lastDir W
+  isExpandable dir D from 24 27 1 to 24 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 24 27 1 to 24 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 24 27 1 to 23 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 24 27 1 to 25 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 24 27 1 to 24 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 24 27 1 to 24 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 23 27 1 pt 55200 155215 cost 50400 pathCost 45600 lastDir W
+  isExpandable dir D from 23 27 1 to 23 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 23 27 1 to 23 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 23 27 1 to 22 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 23 27 1 to 24 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 23 27 1 to 23 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 23 27 1 to 23 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 22 27 1 pt 54960 155215 cost 50400 pathCost 45840 lastDir W
+  isExpandable dir D from 22 27 1 to 22 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 22 27 1 to 22 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 22 27 1 to 21 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 22 27 1 to 23 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 22 27 1 to 22 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 22 27 1 to 22 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 21 27 1 pt 54480 155215 cost 50400 pathCost 46320 lastDir W
+  isExpandable dir D from 21 27 1 to 21 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 21 27 1 to 21 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 21 27 1 to 20 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 21 27 1 to 22 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 21 27 1 to 21 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 21 27 1 to 21 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 20 27 1 pt 54240 155215 cost 50400 pathCost 46560 lastDir W
+  isExpandable dir D from 20 27 1 to 20 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 20 27 1 to 20 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 20 27 1 to 19 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 20 27 1 to 21 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 20 27 1 to 20 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 20 27 1 to 20 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 19 27 1 pt 54000 155215 cost 50400 pathCost 46800 lastDir W
+  isExpandable dir D from 19 27 1 to 19 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 19 27 1 to 19 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 19 27 1 to 18 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 19 27 1 to 20 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 19 27 1 to 19 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 19 27 1 to 19 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 18 27 1 pt 53520 155215 cost 50400 pathCost 47280 lastDir W
+  isExpandable dir D from 18 27 1 to 18 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 18 27 1 to 18 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 18 27 1 to 17 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 18 27 1 to 19 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 18 27 1 to 18 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 18 27 1 to 18 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 17 27 1 pt 53280 155215 cost 50400 pathCost 47520 lastDir W
+  isExpandable dir D from 17 27 1 to 17 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 17 27 1 to 17 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 17 27 1 to 16 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 17 27 1 to 18 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 17 27 1 to 17 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 17 27 1 to 17 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 16 27 1 pt 53040 155215 cost 50400 pathCost 47760 lastDir W
+  isExpandable dir D from 16 27 1 to 16 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 16 27 1 to 16 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 16 27 1 to 15 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 16 27 1 to 17 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 16 27 1 to 16 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 16 27 1 to 16 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 15 27 1 pt 52560 155215 cost 50400 pathCost 48240 lastDir W
+  isExpandable dir D from 15 27 1 to 15 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 15 27 1 to 15 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 15 27 1 to 14 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 15 27 1 to 16 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 15 27 1 to 15 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 15 27 1 to 15 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 14 27 1 pt 52320 155215 cost 50400 pathCost 48480 lastDir W
+  isExpandable dir D from 14 27 1 to 14 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 14 27 1 to 14 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 14 27 1 to 13 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 14 27 1 to 15 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 14 27 1 to 14 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 14 27 1 to 14 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 13 27 1 pt 52080 155215 cost 50400 pathCost 48720 lastDir W
+  isExpandable dir D from 13 27 1 to 13 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 13 27 1 to 13 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 13 27 1 to 12 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 13 27 1 to 14 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 13 27 1 to 13 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 13 27 1 to 13 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 12 27 1 pt 51600 155215 cost 50400 pathCost 49200 lastDir W
+  isExpandable dir D from 12 27 1 to 12 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 12 27 1 to 12 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 12 27 1 to 11 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 12 27 1 to 13 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 12 27 1 to 12 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 12 27 1 to 12 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 11 27 1 pt 51360 155215 cost 50400 pathCost 49440 lastDir W
+  isExpandable dir D from 11 27 1 to 11 27 0 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir S from 11 27 1 to 11 26 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir W from 11 27 1 to 10 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 11 27 1 to 12 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 11 27 1 to 11 28 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 0 reason noEdge
+  isExpandable dir U from 11 27 1 to 11 27 2 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 0 reason noEdge
+expanding 10 27 1 pt 51120 155215 cost 50400 pathCost 49680 lastDir W
+  isExpandable dir D from 10 27 1 to 10 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 10 27 1 to 10 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 10 27 1 to 9 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 10 27 1 to 11 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 10 27 1 to 10 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 10 27 1 to 10 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok
+expanding 9 27 1 pt 50640 155215 cost 50400 pathCost 50160 lastDir W
+  isExpandable dir D from 9 27 1 to 9 27 0 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir U cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir S from 9 27 1 to 9 26 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir N cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir W from 9 27 1 to 8 27 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir E cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir E from 9 27 1 to 10 27 1 hasEdge true nextIsSrc false nextPrevDir W lastDir W revDir W cameFromNext true
+  isExpandable result 0 reason alreadyExpanded
+  isExpandable dir N from 9 27 1 to 9 28 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir S cameFromNext false
+  isExpandable result 1 reason ok
+  isExpandable dir U from 9 27 1 to 9 27 2 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
+  isExpandable result 1 reason ok

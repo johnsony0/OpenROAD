@@ -1,0 +1,471 @@
+INIT search: target pin 
+source points:
+34 44 0 coords: 145200 144855
+36 44 0 coords: 145680 144855
+35 44 0 coords: 145440 144855
+33 100 0 coords: 144720 158175
+33 100 1 coords: 144720 158175
+34 100 1 coords: 145200 158175
+34 100 2 coords: 145200 158175
+34 99 2 coords: 145200 157990
+34 98 2 coords: 145200 157805
+34 97 2 coords: 145200 157435
+34 96 2 coords: 145200 157250
+34 95 2 coords: 145200 157065
+34 94 2 coords: 145200 156695
+34 93 2 coords: 145200 156510
+34 92 2 coords: 145200 156325
+34 91 2 coords: 145200 155955
+34 90 2 coords: 145200 155770
+34 89 2 coords: 145200 155585
+34 88 2 coords: 145200 155215
+34 87 2 coords: 145200 155030
+34 86 2 coords: 145200 154845
+34 85 2 coords: 145200 154475
+34 84 2 coords: 145200 154290
+34 83 2 coords: 145200 154105
+34 82 2 coords: 145200 153735
+34 81 2 coords: 145200 153550
+34 80 2 coords: 145200 153365
+34 79 2 coords: 145200 152995
+34 78 2 coords: 145200 152810
+34 77 2 coords: 145200 152625
+34 76 2 coords: 145200 152255
+34 75 2 coords: 145200 152070
+34 74 2 coords: 145200 151885
+34 73 2 coords: 145200 151700
+34 72 2 coords: 145200 151515
+34 71 2 coords: 145200 151330
+34 70 2 coords: 145200 151145
+34 69 2 coords: 145200 150775
+34 68 2 coords: 145200 150590
+34 67 2 coords: 145200 150405
+34 66 2 coords: 145200 150035
+34 65 2 coords: 145200 149850
+34 64 2 coords: 145200 149665
+34 63 2 coords: 145200 149295
+34 62 2 coords: 145200 149110
+34 61 2 coords: 145200 148925
+34 60 2 coords: 145200 148555
+34 59 2 coords: 145200 148370
+34 58 2 coords: 145200 148185
+34 57 2 coords: 145200 147815
+34 56 2 coords: 145200 147630
+34 55 2 coords: 145200 147445
+34 54 2 coords: 145200 147075
+34 53 2 coords: 145200 146890
+34 52 2 coords: 145200 146705
+34 51 2 coords: 145200 146335
+34 50 2 coords: 145200 146150
+34 49 2 coords: 145200 145965
+34 48 2 coords: 145200 145595
+34 47 2 coords: 145200 145410
+34 46 2 coords: 145200 145225
+34 45 2 coords: 145200 145040
+34 44 2 coords: 145200 144855
+34 44 1 coords: 145200 144855
+31 100 0 coords: 144240 158175
+32 100 0 coords: 144480 158175
+33 100 1 coords: 144720 158175
+34 44 0 coords: 145200 144855
+34 44 1 coords: 145200 144855
+34 44 2 coords: 145200 144855
+34 45 2 coords: 145200 145040
+34 46 2 coords: 145200 145225
+34 47 2 coords: 145200 145410
+34 48 2 coords: 145200 145595
+34 49 2 coords: 145200 145965
+34 50 2 coords: 145200 146150
+34 51 2 coords: 145200 146335
+34 52 2 coords: 145200 146705
+34 53 2 coords: 145200 146890
+34 54 2 coords: 145200 147075
+34 55 2 coords: 145200 147445
+34 56 2 coords: 145200 147630
+34 57 2 coords: 145200 147815
+34 58 2 coords: 145200 148185
+34 59 2 coords: 145200 148370
+34 60 2 coords: 145200 148555
+34 61 2 coords: 145200 148925
+34 62 2 coords: 145200 149110
+34 63 2 coords: 145200 149295
+34 64 2 coords: 145200 149665
+34 65 2 coords: 145200 149850
+34 66 2 coords: 145200 150035
+34 67 2 coords: 145200 150405
+34 68 2 coords: 145200 150590
+34 69 2 coords: 145200 150775
+34 70 2 coords: 145200 151145
+34 71 2 coords: 145200 151330
+34 72 2 coords: 145200 151515
+34 73 2 coords: 145200 151700
+34 74 2 coords: 145200 151885
+34 75 2 coords: 145200 152070
+34 76 2 coords: 145200 152255
+34 77 2 coords: 145200 152625
+34 78 2 coords: 145200 152810
+34 79 2 coords: 145200 152995
+34 80 2 coords: 145200 153365
+34 81 2 coords: 145200 153550
+34 82 2 coords: 145200 153735
+34 83 2 coords: 145200 154105
+34 84 2 coords: 145200 154290
+34 85 2 coords: 145200 154475
+34 86 2 coords: 145200 154845
+34 87 2 coords: 145200 155030
+34 88 2 coords: 145200 155215
+34 89 2 coords: 145200 155585
+34 90 2 coords: 145200 155770
+34 91 2 coords: 145200 155955
+34 92 2 coords: 145200 156325
+34 93 2 coords: 145200 156510
+34 94 2 coords: 145200 156695
+34 95 2 coords: 145200 157065
+34 96 2 coords: 145200 157250
+34 97 2 coords: 145200 157435
+34 98 2 coords: 145200 157805
+34 99 2 coords: 145200 157990
+34 100 1 coords: 145200 158175
+34 100 2 coords: 145200 158175
+[DEBUG getEstCost] Src Grid: (34, 44, 0) Src Point: (145200, 144855, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13320, minCostZ: 1480 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23200
+[DEBUG getEstCost] Src Grid: (36, 44, 0) Src Point: (145680, 144855, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8880, minCostY: 13320, minCostZ: 1480 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23680
+[DEBUG getEstCost] Src Grid: (35, 44, 0) Src Point: (145440, 144855, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8640, minCostY: 13320, minCostZ: 1480 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23440
+[DEBUG getEstCost] Src Grid: (33, 100, 0) Src Point: (144720, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 7920, minCostY: 0, minCostZ: 1480 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 9400
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 7920, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7920
+[DEBUG getEstCost] Src Grid: (34, 100, 1) Src Point: (145200, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8400
+[DEBUG getEstCost] Src Grid: (34, 100, 2) Src Point: (145200, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 0, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 10320
+[DEBUG getEstCost] Src Grid: (34, 99, 2) Src Point: (145200, 157990, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 185, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 10505
+[DEBUG getEstCost] Src Grid: (34, 98, 2) Src Point: (145200, 157805, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 370, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 10690
+[DEBUG getEstCost] Src Grid: (34, 97, 2) Src Point: (145200, 157435, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 740, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11060
+[DEBUG getEstCost] Src Grid: (34, 96, 2) Src Point: (145200, 157250, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 925, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11245
+[DEBUG getEstCost] Src Grid: (34, 95, 2) Src Point: (145200, 157065, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1110, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11430
+[DEBUG getEstCost] Src Grid: (34, 94, 2) Src Point: (145200, 156695, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1480, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11800
+[DEBUG getEstCost] Src Grid: (34, 93, 2) Src Point: (145200, 156510, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1665, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11985
+[DEBUG getEstCost] Src Grid: (34, 92, 2) Src Point: (145200, 156325, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1850, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12170
+[DEBUG getEstCost] Src Grid: (34, 91, 2) Src Point: (145200, 155955, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2220, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12540
+[DEBUG getEstCost] Src Grid: (34, 90, 2) Src Point: (145200, 155770, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2405, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12725
+[DEBUG getEstCost] Src Grid: (34, 89, 2) Src Point: (145200, 155585, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2590, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12910
+[DEBUG getEstCost] Src Grid: (34, 88, 2) Src Point: (145200, 155215, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2960, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 13280
+[DEBUG getEstCost] Src Grid: (34, 87, 2) Src Point: (145200, 155030, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3145, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 13465
+[DEBUG getEstCost] Src Grid: (34, 86, 2) Src Point: (145200, 154845, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3330, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 13650
+[DEBUG getEstCost] Src Grid: (34, 85, 2) Src Point: (145200, 154475, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3700, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14020
+[DEBUG getEstCost] Src Grid: (34, 84, 2) Src Point: (145200, 154290, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3885, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14205
+[DEBUG getEstCost] Src Grid: (34, 83, 2) Src Point: (145200, 154105, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4070, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14390
+[DEBUG getEstCost] Src Grid: (34, 82, 2) Src Point: (145200, 153735, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4440, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14760
+[DEBUG getEstCost] Src Grid: (34, 81, 2) Src Point: (145200, 153550, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4625, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14945
+[DEBUG getEstCost] Src Grid: (34, 80, 2) Src Point: (145200, 153365, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4810, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15130
+[DEBUG getEstCost] Src Grid: (34, 79, 2) Src Point: (145200, 152995, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5180, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15500
+[DEBUG getEstCost] Src Grid: (34, 78, 2) Src Point: (145200, 152810, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5365, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15685
+[DEBUG getEstCost] Src Grid: (34, 77, 2) Src Point: (145200, 152625, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5550, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15870
+[DEBUG getEstCost] Src Grid: (34, 76, 2) Src Point: (145200, 152255, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5920, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16240
+[DEBUG getEstCost] Src Grid: (34, 75, 2) Src Point: (145200, 152070, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6105, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16425
+[DEBUG getEstCost] Src Grid: (34, 74, 2) Src Point: (145200, 151885, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6290, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16610
+[DEBUG getEstCost] Src Grid: (34, 73, 2) Src Point: (145200, 151700, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6475, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16795
+[DEBUG getEstCost] Src Grid: (34, 72, 2) Src Point: (145200, 151515, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6660, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16980
+[DEBUG getEstCost] Src Grid: (34, 71, 2) Src Point: (145200, 151330, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6845, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17165
+[DEBUG getEstCost] Src Grid: (34, 70, 2) Src Point: (145200, 151145, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7030, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17350
+[DEBUG getEstCost] Src Grid: (34, 69, 2) Src Point: (145200, 150775, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7400, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17720
+[DEBUG getEstCost] Src Grid: (34, 68, 2) Src Point: (145200, 150590, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7585, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17905
+[DEBUG getEstCost] Src Grid: (34, 67, 2) Src Point: (145200, 150405, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7770, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18090
+[DEBUG getEstCost] Src Grid: (34, 66, 2) Src Point: (145200, 150035, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8140, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18460
+[DEBUG getEstCost] Src Grid: (34, 65, 2) Src Point: (145200, 149850, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8325, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18645
+[DEBUG getEstCost] Src Grid: (34, 64, 2) Src Point: (145200, 149665, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8510, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18830
+[DEBUG getEstCost] Src Grid: (34, 63, 2) Src Point: (145200, 149295, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8880, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19200
+[DEBUG getEstCost] Src Grid: (34, 62, 2) Src Point: (145200, 149110, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9065, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19385
+[DEBUG getEstCost] Src Grid: (34, 61, 2) Src Point: (145200, 148925, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9250, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19570
+[DEBUG getEstCost] Src Grid: (34, 60, 2) Src Point: (145200, 148555, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9620, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19940
+[DEBUG getEstCost] Src Grid: (34, 59, 2) Src Point: (145200, 148370, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9805, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20125
+[DEBUG getEstCost] Src Grid: (34, 58, 2) Src Point: (145200, 148185, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9990, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20310
+[DEBUG getEstCost] Src Grid: (34, 57, 2) Src Point: (145200, 147815, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 10360, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20680
+[DEBUG getEstCost] Src Grid: (34, 56, 2) Src Point: (145200, 147630, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 10545, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20865
+[DEBUG getEstCost] Src Grid: (34, 55, 2) Src Point: (145200, 147445, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 10730, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21050
+[DEBUG getEstCost] Src Grid: (34, 54, 2) Src Point: (145200, 147075, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11100, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21420
+[DEBUG getEstCost] Src Grid: (34, 53, 2) Src Point: (145200, 146890, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11285, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21605
+[DEBUG getEstCost] Src Grid: (34, 52, 2) Src Point: (145200, 146705, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11470, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21790
+[DEBUG getEstCost] Src Grid: (34, 51, 2) Src Point: (145200, 146335, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11840, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22160
+[DEBUG getEstCost] Src Grid: (34, 50, 2) Src Point: (145200, 146150, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12025, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22345
+[DEBUG getEstCost] Src Grid: (34, 49, 2) Src Point: (145200, 145965, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12210, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22530
+[DEBUG getEstCost] Src Grid: (34, 48, 2) Src Point: (145200, 145595, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12580, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22900
+[DEBUG getEstCost] Src Grid: (34, 47, 2) Src Point: (145200, 145410, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12765, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23085
+[DEBUG getEstCost] Src Grid: (34, 46, 2) Src Point: (145200, 145225, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12950, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23270
+[DEBUG getEstCost] Src Grid: (34, 45, 2) Src Point: (145200, 145040, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13135, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23455
+[DEBUG getEstCost] Src Grid: (34, 44, 2) Src Point: (145200, 144855, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13320, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23640
+[DEBUG getEstCost] Src Grid: (34, 44, 1) Src Point: (145200, 144855, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13320, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21720
+[DEBUG getEstCost] Src Grid: (31, 100, 0) Src Point: (144240, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 7440, minCostY: 0, minCostZ: 1480 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8920
+[DEBUG getEstCost] Src Grid: (32, 100, 0) Src Point: (144480, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 7680, minCostY: 0, minCostZ: 1480 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 9160
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 7920, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7920
+[DEBUG getEstCost] Src Grid: (34, 44, 0) Src Point: (145200, 144855, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13320, minCostZ: 1480 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23200
+[DEBUG getEstCost] Src Grid: (34, 44, 1) Src Point: (145200, 144855, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13320, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21720
+[DEBUG getEstCost] Src Grid: (34, 44, 2) Src Point: (145200, 144855, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13320, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23640
+[DEBUG getEstCost] Src Grid: (34, 45, 2) Src Point: (145200, 145040, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 13135, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23455
+[DEBUG getEstCost] Src Grid: (34, 46, 2) Src Point: (145200, 145225, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12950, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23270
+[DEBUG getEstCost] Src Grid: (34, 47, 2) Src Point: (145200, 145410, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12765, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 23085
+[DEBUG getEstCost] Src Grid: (34, 48, 2) Src Point: (145200, 145595, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12580, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22900
+[DEBUG getEstCost] Src Grid: (34, 49, 2) Src Point: (145200, 145965, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12210, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22530
+[DEBUG getEstCost] Src Grid: (34, 50, 2) Src Point: (145200, 146150, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 12025, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22345
+[DEBUG getEstCost] Src Grid: (34, 51, 2) Src Point: (145200, 146335, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11840, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 22160
+[DEBUG getEstCost] Src Grid: (34, 52, 2) Src Point: (145200, 146705, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11470, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21790
+[DEBUG getEstCost] Src Grid: (34, 53, 2) Src Point: (145200, 146890, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11285, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21605
+[DEBUG getEstCost] Src Grid: (34, 54, 2) Src Point: (145200, 147075, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 11100, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21420
+[DEBUG getEstCost] Src Grid: (34, 55, 2) Src Point: (145200, 147445, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 10730, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 21050
+[DEBUG getEstCost] Src Grid: (34, 56, 2) Src Point: (145200, 147630, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 10545, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20865
+[DEBUG getEstCost] Src Grid: (34, 57, 2) Src Point: (145200, 147815, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 10360, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20680
+[DEBUG getEstCost] Src Grid: (34, 58, 2) Src Point: (145200, 148185, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9990, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20310
+[DEBUG getEstCost] Src Grid: (34, 59, 2) Src Point: (145200, 148370, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9805, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 20125
+[DEBUG getEstCost] Src Grid: (34, 60, 2) Src Point: (145200, 148555, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9620, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19940
+[DEBUG getEstCost] Src Grid: (34, 61, 2) Src Point: (145200, 148925, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9250, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19570
+[DEBUG getEstCost] Src Grid: (34, 62, 2) Src Point: (145200, 149110, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 9065, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19385
+[DEBUG getEstCost] Src Grid: (34, 63, 2) Src Point: (145200, 149295, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8880, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 19200
+[DEBUG getEstCost] Src Grid: (34, 64, 2) Src Point: (145200, 149665, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8510, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18830
+[DEBUG getEstCost] Src Grid: (34, 65, 2) Src Point: (145200, 149850, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8325, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18645
+[DEBUG getEstCost] Src Grid: (34, 66, 2) Src Point: (145200, 150035, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 8140, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18460
+[DEBUG getEstCost] Src Grid: (34, 67, 2) Src Point: (145200, 150405, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7770, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 18090
+[DEBUG getEstCost] Src Grid: (34, 68, 2) Src Point: (145200, 150590, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7585, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17905
+[DEBUG getEstCost] Src Grid: (34, 69, 2) Src Point: (145200, 150775, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7400, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17720
+[DEBUG getEstCost] Src Grid: (34, 70, 2) Src Point: (145200, 151145, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 7030, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17350
+[DEBUG getEstCost] Src Grid: (34, 71, 2) Src Point: (145200, 151330, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6845, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 17165
+[DEBUG getEstCost] Src Grid: (34, 72, 2) Src Point: (145200, 151515, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6660, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16980
+[DEBUG getEstCost] Src Grid: (34, 73, 2) Src Point: (145200, 151700, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6475, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16795
+[DEBUG getEstCost] Src Grid: (34, 74, 2) Src Point: (145200, 151885, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6290, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16610
+[DEBUG getEstCost] Src Grid: (34, 75, 2) Src Point: (145200, 152070, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 6105, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16425
+[DEBUG getEstCost] Src Grid: (34, 76, 2) Src Point: (145200, 152255, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5920, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 16240
+[DEBUG getEstCost] Src Grid: (34, 77, 2) Src Point: (145200, 152625, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5550, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15870
+[DEBUG getEstCost] Src Grid: (34, 78, 2) Src Point: (145200, 152810, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5365, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15685
+[DEBUG getEstCost] Src Grid: (34, 79, 2) Src Point: (145200, 152995, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 5180, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15500
+[DEBUG getEstCost] Src Grid: (34, 80, 2) Src Point: (145200, 153365, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4810, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 15130
+[DEBUG getEstCost] Src Grid: (34, 81, 2) Src Point: (145200, 153550, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4625, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14945
+[DEBUG getEstCost] Src Grid: (34, 82, 2) Src Point: (145200, 153735, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4440, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14760
+[DEBUG getEstCost] Src Grid: (34, 83, 2) Src Point: (145200, 154105, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 4070, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14390
+[DEBUG getEstCost] Src Grid: (34, 84, 2) Src Point: (145200, 154290, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3885, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14205
+[DEBUG getEstCost] Src Grid: (34, 85, 2) Src Point: (145200, 154475, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3700, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 14020
+[DEBUG getEstCost] Src Grid: (34, 86, 2) Src Point: (145200, 154845, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3330, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 13650
+[DEBUG getEstCost] Src Grid: (34, 87, 2) Src Point: (145200, 155030, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 3145, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 13465
+[DEBUG getEstCost] Src Grid: (34, 88, 2) Src Point: (145200, 155215, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2960, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 13280
+[DEBUG getEstCost] Src Grid: (34, 89, 2) Src Point: (145200, 155585, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2590, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12910
+[DEBUG getEstCost] Src Grid: (34, 90, 2) Src Point: (145200, 155770, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2405, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12725
+[DEBUG getEstCost] Src Grid: (34, 91, 2) Src Point: (145200, 155955, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 2220, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12540
+[DEBUG getEstCost] Src Grid: (34, 92, 2) Src Point: (145200, 156325, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1850, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 12170
+[DEBUG getEstCost] Src Grid: (34, 93, 2) Src Point: (145200, 156510, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1665, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11985
+[DEBUG getEstCost] Src Grid: (34, 94, 2) Src Point: (145200, 156695, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1480, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11800
+[DEBUG getEstCost] Src Grid: (34, 95, 2) Src Point: (145200, 157065, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 1110, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11430
+[DEBUG getEstCost] Src Grid: (34, 96, 2) Src Point: (145200, 157250, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 925, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11245
+[DEBUG getEstCost] Src Grid: (34, 97, 2) Src Point: (145200, 157435, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 740, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 11060
+[DEBUG getEstCost] Src Grid: (34, 98, 2) Src Point: (145200, 157805, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 370, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 10690
+[DEBUG getEstCost] Src Grid: (34, 99, 2) Src Point: (145200, 157990, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 185, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 10505
+[DEBUG getEstCost] Src Grid: (34, 100, 1) Src Point: (145200, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8400
+[DEBUG getEstCost] Src Grid: (34, 100, 2) Src Point: (145200, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 0 | EdgeLen: 0 | minCostX: 8400, minCostY: 0, minCostZ: 1920 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 10320
+Expanding 33 100 1 coords: 144720 158175 cost 7920 g 0
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 7920, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8106
+Creating 33 99 1 coords: 144720 157990 cost 8661 g 555
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144480, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 7680, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7680
+Creating 32 100 1 coords: 144480 158175 cost 7920 g 240
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 7920, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8106
+Creating 33 101 1 coords: 144720 158360 cost 8661 g 555
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 7920, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 9841
+Creating 33 100 2 coords: 144720 158175 cost 11761 g 1920
+Expanding 32 100 1 coords: 144480 158175 cost 7920 g 240
+[DEBUG getEstCost] Src Grid: (32, 100, 1) Src Point: (144240, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 7440, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7440
+Creating 31 100 1 coords: 144240 158175 cost 7920 g 480
+Expanding 31 100 1 coords: 144240 158175 cost 7920 g 480
+[DEBUG getEstCost] Src Grid: (31, 100, 1) Src Point: (144240, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 7440, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7626
+Creating 31 99 1 coords: 144240 157990 cost 8662 g 1036
+[DEBUG getEstCost] Src Grid: (31, 100, 1) Src Point: (143760, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 6960, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6960
+Creating 30 100 1 coords: 143760 158175 cost 7920 g 960
+[DEBUG getEstCost] Src Grid: (31, 100, 1) Src Point: (144240, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 7440, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7626
+Creating 31 101 1 coords: 144240 158360 cost 8662 g 1036
+[DEBUG getEstCost] Src Grid: (31, 100, 1) Src Point: (144240, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 7440, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 9361
+Creating 31 100 2 coords: 144240 158175 cost 11762 g 2401
+Expanding 30 100 1 coords: 143760 158175 cost 7920 g 960
+[DEBUG getEstCost] Src Grid: (30, 100, 1) Src Point: (143760, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 6960, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8441
+Creating 30 100 0 coords: 143760 158175 cost 12362 g 3921
+[DEBUG getEstCost] Src Grid: (30, 100, 1) Src Point: (143760, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 6960, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7146
+Creating 30 99 1 coords: 143760 157990 cost 8662 g 1516
+[DEBUG getEstCost] Src Grid: (30, 100, 1) Src Point: (143520, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 6720, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6720
+Creating 29 100 1 coords: 143520 158175 cost 7920 g 1200
+[DEBUG getEstCost] Src Grid: (30, 100, 1) Src Point: (143760, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 6960, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7146
+Creating 30 101 1 coords: 143760 158360 cost 8662 g 1516
+[DEBUG getEstCost] Src Grid: (30, 100, 1) Src Point: (143760, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 6960, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8881
+Creating 30 100 2 coords: 143760 158175 cost 13682 g 4801
+Expanding 29 100 1 coords: 143520 158175 cost 7920 g 1200
+[DEBUG getEstCost] Src Grid: (29, 100, 1) Src Point: (143280, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 6480, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6480
+Creating 28 100 1 coords: 143280 158175 cost 7920 g 1440
+Expanding 28 100 1 coords: 143280 158175 cost 7920 g 1440
+[DEBUG getEstCost] Src Grid: (28, 100, 1) Src Point: (143280, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 6480, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7961
+Creating 28 100 0 coords: 143280 158175 cost 12362 g 4401
+[DEBUG getEstCost] Src Grid: (28, 100, 1) Src Point: (143280, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 6480, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6666
+Creating 28 99 1 coords: 143280 157990 cost 8662 g 1996
+[DEBUG getEstCost] Src Grid: (28, 100, 1) Src Point: (142800, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 6000, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6000
+Creating 27 100 1 coords: 142800 158175 cost 7920 g 1920
+[DEBUG getEstCost] Src Grid: (28, 100, 1) Src Point: (143280, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 6480, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6666
+Creating 28 101 1 coords: 143280 158360 cost 8662 g 1996
+[DEBUG getEstCost] Src Grid: (28, 100, 1) Src Point: (143280, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 6480, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8401
+Creating 28 100 2 coords: 143280 158175 cost 13682 g 5281
+Expanding 27 100 1 coords: 142800 158175 cost 7920 g 1920
+[DEBUG getEstCost] Src Grid: (27, 100, 1) Src Point: (142800, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 6000, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7481
+Creating 27 100 0 coords: 142800 158175 cost 12362 g 4881
+[DEBUG getEstCost] Src Grid: (27, 100, 1) Src Point: (142800, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 6000, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6186
+Creating 27 99 1 coords: 142800 157990 cost 8662 g 2476
+[DEBUG getEstCost] Src Grid: (27, 100, 1) Src Point: (142560, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 5760, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5760
+Creating 26 100 1 coords: 142560 158175 cost 7920 g 2160
+[DEBUG getEstCost] Src Grid: (27, 100, 1) Src Point: (142800, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 6000, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6186
+Creating 27 101 1 coords: 142800 158360 cost 8662 g 2476
+[DEBUG getEstCost] Src Grid: (27, 100, 1) Src Point: (142800, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 6000, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7921
+Creating 27 100 2 coords: 142800 158175 cost 13682 g 5761
+Expanding 26 100 1 coords: 142560 158175 cost 7920 g 2160
+[DEBUG getEstCost] Src Grid: (26, 100, 1) Src Point: (142320, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 5520, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5520
+Creating 25 100 1 coords: 142320 158175 cost 7920 g 2400
+Expanding 25 100 1 coords: 142320 158175 cost 7920 g 2400
+[DEBUG getEstCost] Src Grid: (25, 100, 1) Src Point: (142320, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 5520, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7001
+Creating 25 100 0 coords: 142320 158175 cost 12362 g 5361
+[DEBUG getEstCost] Src Grid: (25, 100, 1) Src Point: (142320, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 5520, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5706
+Creating 25 99 1 coords: 142320 157990 cost 8662 g 2956
+[DEBUG getEstCost] Src Grid: (25, 100, 1) Src Point: (141840, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 5040, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5040
+Creating 24 100 1 coords: 141840 158175 cost 7920 g 2880
+[DEBUG getEstCost] Src Grid: (25, 100, 1) Src Point: (142320, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 5520, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5706
+Creating 25 101 1 coords: 142320 158360 cost 8662 g 2956
+[DEBUG getEstCost] Src Grid: (25, 100, 1) Src Point: (142320, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 5520, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 7441
+Creating 25 100 2 coords: 142320 158175 cost 13682 g 6241
+Expanding 24 100 1 coords: 141840 158175 cost 7920 g 2880
+[DEBUG getEstCost] Src Grid: (24, 100, 1) Src Point: (141840, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 5040, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6521
+Creating 24 100 0 coords: 141840 158175 cost 12362 g 5841
+[DEBUG getEstCost] Src Grid: (24, 100, 1) Src Point: (141840, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 5040, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5226
+Creating 24 99 1 coords: 141840 157990 cost 8662 g 3436
+[DEBUG getEstCost] Src Grid: (24, 100, 1) Src Point: (141600, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 4800, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4800
+Creating 23 100 1 coords: 141600 158175 cost 7920 g 3120
+[DEBUG getEstCost] Src Grid: (24, 100, 1) Src Point: (141840, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 5040, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5226
+Creating 24 101 1 coords: 141840 158360 cost 8662 g 3436
+[DEBUG getEstCost] Src Grid: (24, 100, 1) Src Point: (141840, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 5040, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6961
+Creating 24 100 2 coords: 141840 158175 cost 13682 g 6721
+Expanding 23 100 1 coords: 141600 158175 cost 7920 g 3120
+[DEBUG getEstCost] Src Grid: (23, 100, 1) Src Point: (141360, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 4560, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4560
+Creating 22 100 1 coords: 141360 158175 cost 7920 g 3360
+Expanding 22 100 1 coords: 141360 158175 cost 7920 g 3360
+[DEBUG getEstCost] Src Grid: (22, 100, 1) Src Point: (141360, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 4560, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6041
+Creating 22 100 0 coords: 141360 158175 cost 12362 g 6321
+[DEBUG getEstCost] Src Grid: (22, 100, 1) Src Point: (141360, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 4560, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4746
+Creating 22 99 1 coords: 141360 157990 cost 8662 g 3916
+[DEBUG getEstCost] Src Grid: (22, 100, 1) Src Point: (140880, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 4080, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4080
+Creating 21 100 1 coords: 140880 158175 cost 7920 g 3840
+[DEBUG getEstCost] Src Grid: (22, 100, 1) Src Point: (141360, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 4560, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4746
+Creating 22 101 1 coords: 141360 158360 cost 8662 g 3916
+[DEBUG getEstCost] Src Grid: (22, 100, 1) Src Point: (141360, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 4560, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6481
+Creating 22 100 2 coords: 141360 158175 cost 13682 g 7201
+Expanding 21 100 1 coords: 140880 158175 cost 7920 g 3840
+[DEBUG getEstCost] Src Grid: (21, 100, 1) Src Point: (140880, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 4080, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5561
+Creating 21 100 0 coords: 140880 158175 cost 12362 g 6801
+[DEBUG getEstCost] Src Grid: (21, 100, 1) Src Point: (140880, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 4080, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4266
+Creating 21 99 1 coords: 140880 157990 cost 8662 g 4396
+[DEBUG getEstCost] Src Grid: (21, 100, 1) Src Point: (140640, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 3840, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3840
+Creating 20 100 1 coords: 140640 158175 cost 7920 g 4080
+[DEBUG getEstCost] Src Grid: (21, 100, 1) Src Point: (140880, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 4080, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4266
+Creating 21 101 1 coords: 140880 158360 cost 8662 g 4396
+[DEBUG getEstCost] Src Grid: (21, 100, 1) Src Point: (140880, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 4080, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 6001
+Creating 21 100 2 coords: 140880 158175 cost 13682 g 7681
+Expanding 20 100 1 coords: 140640 158175 cost 7920 g 4080
+[DEBUG getEstCost] Src Grid: (20, 100, 1) Src Point: (140400, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 3600, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3600
+Creating 19 100 1 coords: 140400 158175 cost 7920 g 4320
+Expanding 19 100 1 coords: 140400 158175 cost 7920 g 4320
+[DEBUG getEstCost] Src Grid: (19, 100, 1) Src Point: (140400, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 3600, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5081
+Creating 19 100 0 coords: 140400 158175 cost 12362 g 7281
+[DEBUG getEstCost] Src Grid: (19, 100, 1) Src Point: (140400, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 3600, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3786
+Creating 19 99 1 coords: 140400 157990 cost 8662 g 4876
+[DEBUG getEstCost] Src Grid: (19, 100, 1) Src Point: (139920, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 3120, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3120
+Creating 18 100 1 coords: 139920 158175 cost 7920 g 4800
+[DEBUG getEstCost] Src Grid: (19, 100, 1) Src Point: (140400, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 3600, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3786
+Creating 19 101 1 coords: 140400 158360 cost 8662 g 4876
+[DEBUG getEstCost] Src Grid: (19, 100, 1) Src Point: (140400, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 3600, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5521
+Creating 19 100 2 coords: 140400 158175 cost 13682 g 8161
+Expanding 18 100 1 coords: 139920 158175 cost 7920 g 4800
+[DEBUG getEstCost] Src Grid: (18, 100, 1) Src Point: (139920, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 3120, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4601
+Creating 18 100 0 coords: 139920 158175 cost 12362 g 7761
+[DEBUG getEstCost] Src Grid: (18, 100, 1) Src Point: (139920, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 3120, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3306
+Creating 18 99 1 coords: 139920 157990 cost 8662 g 5356
+[DEBUG getEstCost] Src Grid: (18, 100, 1) Src Point: (139680, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 2880, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2880
+Creating 17 100 1 coords: 139680 158175 cost 7920 g 5040
+[DEBUG getEstCost] Src Grid: (18, 100, 1) Src Point: (139920, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 3120, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3306
+Creating 18 101 1 coords: 139920 158360 cost 8662 g 5356
+[DEBUG getEstCost] Src Grid: (18, 100, 1) Src Point: (139920, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 3120, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 5041
+Creating 18 100 2 coords: 139920 158175 cost 13682 g 8641
+Expanding 17 100 1 coords: 139680 158175 cost 7920 g 5040
+[DEBUG getEstCost] Src Grid: (17, 100, 1) Src Point: (139440, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 2640, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2640
+Creating 16 100 1 coords: 139440 158175 cost 7920 g 5280
+Expanding 16 100 1 coords: 139440 158175 cost 7920 g 5280
+[DEBUG getEstCost] Src Grid: (16, 100, 1) Src Point: (139440, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 2640, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4121
+Creating 16 100 0 coords: 139440 158175 cost 12362 g 8241
+[DEBUG getEstCost] Src Grid: (16, 100, 1) Src Point: (139440, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 2640, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2826
+Creating 16 99 1 coords: 139440 157990 cost 8662 g 5836
+[DEBUG getEstCost] Src Grid: (16, 100, 1) Src Point: (138960, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 2160, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2160
+Creating 15 100 1 coords: 138960 158175 cost 7920 g 5760
+[DEBUG getEstCost] Src Grid: (16, 100, 1) Src Point: (139440, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 2640, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2826
+Creating 16 101 1 coords: 139440 158360 cost 8662 g 5836
+[DEBUG getEstCost] Src Grid: (16, 100, 1) Src Point: (139440, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 2640, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4561
+Creating 16 100 2 coords: 139440 158175 cost 13682 g 9121
+Expanding 33 100 1 coords: 144720 158175 cost 7920 g 0
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 7920, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8106
+Creating 33 99 1 coords: 144720 157990 cost 8661 g 555
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 7920, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 8106
+Creating 33 101 1 coords: 144720 158360 cost 8661 g 555
+[DEBUG getEstCost] Src Grid: (33, 100, 1) Src Point: (144720, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 7920, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 9841
+Creating 33 100 2 coords: 144720 158175 cost 11761 g 1920
+Expanding 15 100 1 coords: 138960 158175 cost 7920 g 5760
+[DEBUG getEstCost] Src Grid: (15, 100, 1) Src Point: (138960, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 2160, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3641
+Creating 15 100 0 coords: 138960 158175 cost 12362 g 8721
+[DEBUG getEstCost] Src Grid: (15, 100, 1) Src Point: (138960, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 2160, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2346
+Creating 15 99 1 coords: 138960 157990 cost 8662 g 6316
+[DEBUG getEstCost] Src Grid: (15, 100, 1) Src Point: (138720, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 1920, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1920
+Creating 14 100 1 coords: 138720 158175 cost 7920 g 6000
+[DEBUG getEstCost] Src Grid: (15, 100, 1) Src Point: (138960, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 2160, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2346
+Creating 15 101 1 coords: 138960 158360 cost 8662 g 6316
+[DEBUG getEstCost] Src Grid: (15, 100, 1) Src Point: (138960, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 2160, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 4081
+Creating 15 100 2 coords: 138960 158175 cost 13682 g 9601
+Expanding 14 100 1 coords: 138720 158175 cost 7920 g 6000
+[DEBUG getEstCost] Src Grid: (14, 100, 1) Src Point: (138480, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 1680, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1680
+Creating 13 100 1 coords: 138480 158175 cost 7920 g 6240
+Expanding 13 100 1 coords: 138480 158175 cost 7920 g 6240
+[DEBUG getEstCost] Src Grid: (13, 100, 1) Src Point: (138480, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 1680, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3161
+Creating 13 100 0 coords: 138480 158175 cost 12362 g 9201
+[DEBUG getEstCost] Src Grid: (13, 100, 1) Src Point: (138480, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 1680, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1866
+Creating 13 99 1 coords: 138480 157990 cost 8662 g 6796
+[DEBUG getEstCost] Src Grid: (13, 100, 1) Src Point: (138000, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 1200, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1200
+Creating 12 100 1 coords: 138000 158175 cost 7920 g 6720
+[DEBUG getEstCost] Src Grid: (13, 100, 1) Src Point: (138480, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 1680, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1866
+Creating 13 101 1 coords: 138480 158360 cost 8662 g 6796
+[DEBUG getEstCost] Src Grid: (13, 100, 1) Src Point: (138480, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 1680, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3601
+Creating 13 100 2 coords: 138480 158175 cost 13682 g 10081
+Expanding 12 100 1 coords: 138000 158175 cost 7920 g 6720
+[DEBUG getEstCost] Src Grid: (12, 100, 1) Src Point: (138000, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 1200, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2681
+Creating 12 100 0 coords: 138000 158175 cost 12362 g 9681
+[DEBUG getEstCost] Src Grid: (12, 100, 1) Src Point: (138000, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 1200, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1386
+Creating 12 99 1 coords: 138000 157990 cost 8662 g 7276
+[DEBUG getEstCost] Src Grid: (12, 100, 1) Src Point: (137760, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 960, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 960
+Creating 11 100 1 coords: 137760 158175 cost 7920 g 6960
+[DEBUG getEstCost] Src Grid: (12, 100, 1) Src Point: (138000, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 1200, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1386
+Creating 12 101 1 coords: 138000 158360 cost 8662 g 7276
+[DEBUG getEstCost] Src Grid: (12, 100, 1) Src Point: (138000, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 1200, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 3121
+Creating 12 100 2 coords: 138000 158175 cost 13682 g 10561
+Expanding 11 100 1 coords: 137760 158175 cost 7920 g 6960
+[DEBUG getEstCost] Src Grid: (11, 100, 1) Src Point: (137520, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 720, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 720
+Creating 10 100 1 coords: 137520 158175 cost 7920 g 7200
+Expanding 10 100 1 coords: 137520 158175 cost 7920 g 7200
+[DEBUG getEstCost] Src Grid: (10, 100, 1) Src Point: (137520, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 720, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2201
+Creating 10 100 0 coords: 137520 158175 cost 12362 g 10161
+[DEBUG getEstCost] Src Grid: (10, 100, 1) Src Point: (137520, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 720, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 906
+Creating 10 99 1 coords: 137520 157990 cost 8662 g 7756
+[DEBUG getEstCost] Src Grid: (10, 100, 1) Src Point: (137040, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 480 | minCostX: 240, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 240
+Creating 9 100 1 coords: 137040 158175 cost 7920 g 7680
+[DEBUG getEstCost] Src Grid: (10, 100, 1) Src Point: (137520, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 720, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 906
+Creating 10 101 1 coords: 137520 158360 cost 8662 g 7756
+[DEBUG getEstCost] Src Grid: (10, 100, 1) Src Point: (137520, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 720, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2641
+Creating 10 100 2 coords: 137520 158175 cost 13682 g 11041
+Expanding 9 100 1 coords: 137040 158175 cost 7920 g 7680
+[DEBUG getEstCost] Src Grid: (9, 100, 1) Src Point: (137040, 158175, z=1920) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 1 | EdgeLen: 1480 | minCostX: 240, minCostY: 0, minCostZ: 1480 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 1721
+Creating 9 100 0 coords: 137040 158175 cost 24202 g 22481
+[DEBUG getEstCost] Src Grid: (9, 100, 1) Src Point: (137040, 157990, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 2 | EdgeLen: 185 | minCostX: 240, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 426
+Creating 9 99 1 coords: 137040 157990 cost 8662 g 8236
+[DEBUG getEstCost] Src Grid: (9, 100, 1) Src Point: (136800, 158175, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 3 | EdgeLen: 240 | minCostX: 0, minCostY: 0, minCostZ: 0 | bendCnt: 0 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 0
+Creating 8 100 1 coords: 136800 158175 cost 7920 g 7920
+[DEBUG getEstCost] Src Grid: (9, 100, 1) Src Point: (137040, 158360, z=3400) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 5 | EdgeLen: 185 | minCostX: 240, minCostY: 185, minCostZ: 0 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 426
+Creating 9 101 1 coords: 137040 158360 cost 8662 g 8236
+[DEBUG getEstCost] Src Grid: (9, 100, 1) Src Point: (137040, 158175, z=5320) | Dst1 Grid: (8, 100, 1) Dst1 Point: (136800, 158175, z=3400) | Dst2 Grid: (8, 100, 1) Dst2 Point: (136800, 158175, z=3400) | Dir: 6 | EdgeLen: 1920 | minCostX: 240, minCostY: 0, minCostZ: 1920 | bendCnt: 1 | isForbidden: FALSE (Penalty: 0) | TOTAL EST COST: 2161
+Creating 9 100 2 coords: 137040 158175 cost 13682 g 11521
+Expanding 8 100 1 coords: 136800 158175 cost 7920 g 7920

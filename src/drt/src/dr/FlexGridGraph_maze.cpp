@@ -28,6 +28,58 @@ using odb::dbTechLayerDir;
 
 namespace drt {
 const int debugMazeIter = std::numeric_limits<int>::max();
+// Flip to true to dump every maze search without setting DRT_DUMP_EXP_DIR; the
+// files then land in expDumpDefaultDir. See openExpansionDump().
+const bool expDumpAlways = true;
+// Used when DRT_DUMP_EXP_DIR is unset. Relative to the cwd of the openroad
+// process, and it must already exist.
+const char* const expDumpDefaultDir = ".";
+
+// Companion to dumpGridGraph()/dumpSearch() recording which expansions the maze
+// search was allowed to make: the inputs and verdict of every isExpandable()
+// call. Gated by DRT_DUMP_EXP_DIR (kept separate from DRT_DUMP_GG_DIR because
+// this dump is much larger than the other two; point both at the same directory
+// to have the files sit together). DRT_DUMP_EXP_ITER=<n> restricts it to a
+// single DR iteration. Split like the grid-graph dump: one file per grid graph
+// per iteration, covering every search() the worker runs.
+void FlexGridGraph::openExpansionDump()
+{
+  if (exp_file_.is_open() || expDumpTried_) {
+    return;
+  }
+  expDumpTried_ = true;
+  if (drWorker_ == nullptr) {
+    return;
+  }
+  const char* env_dir = std::getenv("DRT_DUMP_EXP_DIR");
+  const bool have_env_dir = env_dir != nullptr && env_dir[0] != '\0';
+  if (!have_env_dir && !expDumpAlways) {
+    return;
+  }
+  const char* dir = have_env_dir ? env_dir : expDumpDefaultDir;
+  const int iter = drWorker_->getDRIter();
+  const char* iter_filter = std::getenv("DRT_DUMP_EXP_ITER");
+  if (iter_filter != nullptr && iter_filter[0] != '\0'
+      && std::atoi(iter_filter) != iter) {
+    return;
+  }
+  const odb::Rect& rb = drWorker_->getRouteBox();
+  const std::string path = std::string(dir) + "/exp_iter" + std::to_string(iter)
+                           + "_x" + std::to_string(rb.xMin()) + "_y"
+                           + std::to_string(rb.yMin()) + ".txt";
+  exp_file_.open(path.c_str());
+  if (!exp_file_.is_open()) {
+    logger_->warn(utl::DRT, 620, "Could not open expansion dump file {}", path);
+    return;
+  }
+  frMIdx xDim, yDim, zDim;
+  getDim(xDim, yDim, zDim);
+  exp_file_ << "version 1\n";
+  exp_file_ << fmt::format("iter {}\n", iter);
+  exp_file_ << fmt::format(
+      "routeBox {} {} {} {}\n", rb.xMin(), rb.yMin(), rb.xMax(), rb.yMax());
+  exp_file_ << fmt::format("dim {} {} {}\n", xDim, yDim, zDim);
+}
 
 void FlexGridGraph::printExpansion(const FlexWavefrontGrid& currGrid,
                                    const std::string& keyword)
@@ -209,6 +261,20 @@ void FlexGridGraph::expandWavefront(FlexWavefrontGrid& currGrid,
                                     const odb::Point& centerPt,
                                     bool route_with_jumpers)
 {
+  if (dumpingExpansion()) {
+    // Owner of the isExpandable lines that follow. Uses only wavefront getters
+    // and the coordinate arrays, so it is safe for any popped node.
+    exp_file_ << fmt::format(
+        "expanding {} {} {} pt {} {} cost {} pathCost {} lastDir {}\n",
+        currGrid.x(),
+        currGrid.y(),
+        currGrid.z(),
+        xCoords_[currGrid.x()],
+        yCoords_[currGrid.y()],
+        currGrid.getCost(),
+        currGrid.getPathCost(),
+        currGrid.getLastDir());
+  }
   for (const auto dir : frDirEnumAll) {
     if (isExpandable(currGrid, dir)) {
       expand(currGrid,
@@ -624,12 +690,49 @@ bool FlexGridGraph::isExpandable(const FlexWavefrontGrid& currGrid,
   frMIdx gridX = currGrid.x();
   frMIdx gridY = currGrid.y();
   frMIdx gridZ = currGrid.z();
+  const frDirEnum expandDir = dir;  // reverse() flips dir in place below
   bool hg = hasEdge(gridX, gridY, gridZ, dir);
   reverse(gridX, gridY, gridZ, dir);
+  // gridX/Y/Z are now the neighbour reached by expandDir, and dir points back
+  // from it -- the convention getLastDir() stores, which is why the last term
+  // of the condition below compares getLastDir() against the flipped dir.
+  //
+  // isSrc() and getPrevAstarNodeDir() index srcs_/prevDirs_ with no bounds
+  // check, and without an edge that neighbour can be off-grid: they are only
+  // safe behind hg, which is exactly what the short-circuiting || chain below
+  // relies on. Every use of them here is guarded the same way. When hasEdge is
+  // 0 the two fields are printed as their neutral values.
+  if (dumpingExpansion()) {
+    exp_file_ << fmt::format(
+        "  isExpandable dir {} from {} {} {} to {} {} {} hasEdge {} nextIsSrc "
+        "{} nextPrevDir {} lastDir {} revDir {} cameFromNext {}\n",
+        expandDir,
+        currGrid.x(),
+        currGrid.y(),
+        currGrid.z(),
+        gridX,
+        gridY,
+        gridZ,
+        hg,
+        hg && isSrc(gridX, gridY, gridZ),
+        hg ? getPrevAstarNodeDir({gridX, gridY, gridZ}) : frDirEnum::UNKNOWN,
+        currGrid.getLastDir(),
+        dir,
+        currGrid.getLastDir() == dir);
+  }
   if (!hg || isSrc(gridX, gridY, gridZ)
       || (getPrevAstarNodeDir({gridX, gridY, gridZ}) != frDirEnum::UNKNOWN)
       ||  // comment out for non-buffer enablement
       currGrid.getLastDir() == dir) {
+    if (dumpingExpansion()) {
+      exp_file_ << fmt::format(
+          "  isExpandable result 0 reason {}\n",
+          !hg                              ? "noEdge"
+          : isSrc(gridX, gridY, gridZ)     ? "nextIsSrc"
+          : (getPrevAstarNodeDir({gridX, gridY, gridZ}) != frDirEnum::UNKNOWN)
+              ? "alreadyExpanded"
+              : "cameFromNext");
+    }
     return false;
   }
   if (ndr_) {
@@ -644,17 +747,30 @@ bool FlexGridGraph::isExpandable(const FlexWavefrontGrid& currGrid,
       if (dir == frDirEnum::N || dir == frDirEnum::S) {
         if (xCoords_[currGrid.x()] - halfWidth < dieBox_.xMin()
             || xCoords_[currGrid.x()] + halfWidth > dieBox_.xMax()) {
+          if (dumpingExpansion()) {
+            exp_file_ << fmt::format(
+                "  isExpandable result 0 reason ndrOutOfDieX halfWidth {}\n",
+                halfWidth);
+          }
           return false;
         }
       } else if (dir == frDirEnum::E || dir == frDirEnum::W) {
         if (yCoords_[currGrid.y()] - halfWidth < dieBox_.yMin()
             || yCoords_[currGrid.y()] + halfWidth > dieBox_.yMax()) {
+          if (dumpingExpansion()) {
+            exp_file_ << fmt::format(
+                "  isExpandable result 0 reason ndrOutOfDieY halfWidth {}\n",
+                halfWidth);
+          }
           return false;
         }
       }
     }
   }
 
+  if (dumpingExpansion()) {
+    exp_file_ << "  isExpandable result 1 reason ok\n";
+  }
   return true;
 }
 
@@ -852,6 +968,18 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   if (debug_) {
     dump_file_.open("expansions.dump");
   }
+  openExpansionDump();
+  if (dumpingExpansion()) {
+    // One block per search() call in this grid graph. searchId matches the
+    // _s<id> suffix of the dumpSearch() file for the same search.
+    exp_file_ << fmt::format(
+        "search {} pin {} routeWithJumpers {} connComps {}\n",
+        expSearchId_,
+        nextPin != nullptr ? nextPin->getName() : std::string("null"),
+        route_with_jumpers,
+        connComps.size());
+  }
+  ++expSearchId_;
   curr_id_ = 1;
   // Snapshot the input cc bounding box for dumpSearch(); traceBackPath()
   // grows ccMazeIdx1/2 in place on success, so the values at dump time are

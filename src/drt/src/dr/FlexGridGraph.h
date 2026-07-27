@@ -1175,6 +1175,25 @@ class FlexGridGraph
   bool debug_{false};
   frUInt4 curr_id_{1};
 
+  // isExpandable dump: the inputs and verdict of every isExpandable() call,
+  // grouped under the node being expanded. Split like dumpGridGraph() -- one
+  // file per grid graph per DR iteration, covering every search() the worker
+  // runs -- and enabled by DRT_DUMP_EXP_DIR. Its own stream, so switching it on
+  // does not switch on the debug_/printExpansion path. mutable because
+  // isExpandable() is const.
+  mutable std::ofstream exp_file_;
+  // openExpansionDump() only attempts to open once per grid graph.
+  bool expDumpTried_{false};
+  // Counter of search() calls in this grid graph. Matches the _s<id> suffix of
+  // the dumpSearch() files, so a search block here pairs with a search dump.
+  int expSearchId_{0};
+
+  void openExpansionDump();
+  // Deliberately derived from the stream rather than a separate flag: there is
+  // nothing here to flip by hand and get out of sync with whether a file was
+  // actually opened. To dump without setting DRT_DUMP_EXP_DIR, set
+  // expDumpAlways in FlexGridGraph_maze.cpp.
+  bool dumpingExpansion() const { return exp_file_.is_open(); }
   void printExpansion(const FlexWavefrontGrid& currGrid,
                       const std::string& keyword);
   // unsafe access, no idx check
