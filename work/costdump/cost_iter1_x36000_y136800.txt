@@ -1,0 +1,1324 @@
+version 1
+iter 1
+routeBox 36000 136800 86400 187200
+dim 175 233 6
+expanding 166 88 1 pt 86400 155215 cost 50400 pathCost 0 lastDir Unknown
+coords 166 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 166 88 1 currPathCosts 0 currDir Unknown nextDir S edgeLength 185 turnCost 0 v2v 0 vtlen 0 finalNextCost 555 
+coords 166 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 166 88 1 currPathCosts 0 currDir Unknown nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 240 
+coords 166 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 166 88 1 currPathCosts 0 currDir Unknown nextDir N edgeLength 370 turnCost 0 v2v 0 vtlen 0 finalNextCost 1110 
+coords 166 88 1 dir 6 edgeLen 1920 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:3840 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 7680
+ coords 166 88 1 currPathCosts 0 currDir Unknown nextDir U edgeLength 1920 turnCost 0 v2v 0 vtlen 0 finalNextCost 7680 
+expanding 165 88 1 pt 86160 155215 cost 50400 pathCost 240 lastDir W
+coords 165 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 165 88 1 currPathCosts 240 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 3201 
+coords 165 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 165 88 1 currPathCosts 240 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 796 
+coords 165 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 165 88 1 currPathCosts 240 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 480 
+coords 165 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 165 88 1 currPathCosts 240 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 1351 
+coords 165 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 165 88 1 currPathCosts 240 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 4081 
+expanding 164 88 1 pt 85920 155215 cost 50400 pathCost 480 lastDir W
+coords 164 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 164 88 1 currPathCosts 480 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 720 
+expanding 163 88 1 pt 85680 155215 cost 50400 pathCost 720 lastDir W
+coords 163 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 163 88 1 currPathCosts 720 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 3681 
+coords 163 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 163 88 1 currPathCosts 720 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 1276 
+coords 163 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 163 88 1 currPathCosts 720 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 1200 
+coords 163 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 163 88 1 currPathCosts 720 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 1831 
+coords 163 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 163 88 1 currPathCosts 720 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 4561 
+expanding 162 88 1 pt 85200 155215 cost 50400 pathCost 1200 lastDir W
+coords 162 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 162 88 1 currPathCosts 1200 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 4161 
+coords 162 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 162 88 1 currPathCosts 1200 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 1756 
+coords 162 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 162 88 1 currPathCosts 1200 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 1440 
+coords 162 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 162 88 1 currPathCosts 1200 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 2311 
+coords 162 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 162 88 1 currPathCosts 1200 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 5041 
+expanding 161 88 1 pt 84960 155215 cost 50400 pathCost 1440 lastDir W
+coords 161 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 161 88 1 currPathCosts 1440 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 1680 
+expanding 160 88 1 pt 84720 155215 cost 50400 pathCost 1680 lastDir W
+coords 160 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 160 88 1 currPathCosts 1680 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 4641 
+coords 160 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 160 88 1 currPathCosts 1680 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 2236 
+coords 160 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 160 88 1 currPathCosts 1680 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 2160 
+coords 160 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 160 88 1 currPathCosts 1680 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 2791 
+coords 160 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 160 88 1 currPathCosts 1680 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 5521 
+expanding 159 88 1 pt 84240 155215 cost 50400 pathCost 2160 lastDir W
+coords 159 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 159 88 1 currPathCosts 2160 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 5121 
+coords 159 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 159 88 1 currPathCosts 2160 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 2716 
+coords 159 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 159 88 1 currPathCosts 2160 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 2400 
+coords 159 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 159 88 1 currPathCosts 2160 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 3271 
+coords 159 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 159 88 1 currPathCosts 2160 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 6001 
+expanding 158 88 1 pt 84000 155215 cost 50400 pathCost 2400 lastDir W
+coords 158 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 158 88 1 currPathCosts 2400 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 2640 
+expanding 157 88 1 pt 83760 155215 cost 50400 pathCost 2640 lastDir W
+coords 157 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 157 88 1 currPathCosts 2640 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 5601 
+coords 157 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 157 88 1 currPathCosts 2640 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 3196 
+coords 157 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 157 88 1 currPathCosts 2640 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 3120 
+coords 157 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 157 88 1 currPathCosts 2640 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 3751 
+coords 157 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 157 88 1 currPathCosts 2640 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 6481 
+expanding 156 88 1 pt 83280 155215 cost 50400 pathCost 3120 lastDir W
+coords 156 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 156 88 1 currPathCosts 3120 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 6081 
+coords 156 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 156 88 1 currPathCosts 3120 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 3676 
+coords 156 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 156 88 1 currPathCosts 3120 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 3360 
+coords 156 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 156 88 1 currPathCosts 3120 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 4231 
+coords 156 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 156 88 1 currPathCosts 3120 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 6961 
+expanding 155 88 1 pt 83040 155215 cost 50400 pathCost 3360 lastDir W
+coords 155 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 155 88 1 currPathCosts 3360 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 3600 
+expanding 154 88 1 pt 82800 155215 cost 50400 pathCost 3600 lastDir W
+coords 154 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 154 88 1 currPathCosts 3600 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 6561 
+coords 154 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 154 88 1 currPathCosts 3600 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 4156 
+coords 154 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 154 88 1 currPathCosts 3600 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 4080 
+coords 154 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 154 88 1 currPathCosts 3600 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 4711 
+coords 154 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 154 88 1 currPathCosts 3600 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 7441 
+expanding 153 88 1 pt 82320 155215 cost 50400 pathCost 4080 lastDir W
+coords 153 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 153 88 1 currPathCosts 4080 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 7041 
+coords 153 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 153 88 1 currPathCosts 4080 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 4636 
+coords 153 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 153 88 1 currPathCosts 4080 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 4320 
+coords 153 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 153 88 1 currPathCosts 4080 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 5191 
+coords 153 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 153 88 1 currPathCosts 4080 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 7921 
+expanding 152 88 1 pt 82080 155215 cost 50400 pathCost 4320 lastDir W
+coords 152 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 152 88 1 currPathCosts 4320 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 4560 
+expanding 151 88 1 pt 81840 155215 cost 50400 pathCost 4560 lastDir W
+coords 151 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 151 88 1 currPathCosts 4560 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 7521 
+coords 151 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 151 88 1 currPathCosts 4560 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 5116 
+coords 151 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 151 88 1 currPathCosts 4560 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 5040 
+coords 151 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 151 88 1 currPathCosts 4560 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 5671 
+coords 151 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 151 88 1 currPathCosts 4560 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 8401 
+expanding 150 88 1 pt 81360 155215 cost 50400 pathCost 5040 lastDir W
+coords 150 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 150 88 1 currPathCosts 5040 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 8001 
+coords 150 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 150 88 1 currPathCosts 5040 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 5596 
+coords 150 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 150 88 1 currPathCosts 5040 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 5280 
+coords 150 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 150 88 1 currPathCosts 5040 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 6151 
+coords 150 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 150 88 1 currPathCosts 5040 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 8881 
+expanding 149 88 1 pt 81120 155215 cost 50400 pathCost 5280 lastDir W
+coords 149 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 149 88 1 currPathCosts 5280 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 5520 
+expanding 148 88 1 pt 80880 155215 cost 50400 pathCost 5520 lastDir W
+coords 148 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 148 88 1 currPathCosts 5520 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 8481 
+coords 148 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 148 88 1 currPathCosts 5520 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 6076 
+coords 148 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 148 88 1 currPathCosts 5520 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 6000 
+coords 148 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 148 88 1 currPathCosts 5520 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 6631 
+coords 148 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 148 88 1 currPathCosts 5520 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 9361 
+expanding 147 88 1 pt 80400 155215 cost 50400 pathCost 6000 lastDir W
+coords 147 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 147 88 1 currPathCosts 6000 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 8961 
+coords 147 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 147 88 1 currPathCosts 6000 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 6556 
+coords 147 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 147 88 1 currPathCosts 6000 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 6240 
+coords 147 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 147 88 1 currPathCosts 6000 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 7111 
+coords 147 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 147 88 1 currPathCosts 6000 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 9841 
+expanding 146 88 1 pt 80160 155215 cost 50400 pathCost 6240 lastDir W
+coords 146 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 146 88 1 currPathCosts 6240 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 6480 
+expanding 145 88 1 pt 79920 155215 cost 50400 pathCost 6480 lastDir W
+coords 145 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 145 88 1 currPathCosts 6480 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 9441 
+coords 145 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 145 88 1 currPathCosts 6480 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 7036 
+coords 145 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 145 88 1 currPathCosts 6480 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 6960 
+coords 145 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 145 88 1 currPathCosts 6480 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 7591 
+coords 145 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 145 88 1 currPathCosts 6480 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 10321 
+expanding 144 88 1 pt 79440 155215 cost 50400 pathCost 6960 lastDir W
+coords 144 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 144 88 1 currPathCosts 6960 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 9921 
+coords 144 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 144 88 1 currPathCosts 6960 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 7516 
+coords 144 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 144 88 1 currPathCosts 6960 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 7200 
+coords 144 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 144 88 1 currPathCosts 6960 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 8071 
+coords 144 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 144 88 1 currPathCosts 6960 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 10801 
+expanding 143 88 1 pt 79200 155215 cost 50400 pathCost 7200 lastDir W
+coords 143 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 143 88 1 currPathCosts 7200 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 7440 
+expanding 142 88 1 pt 78960 155215 cost 50400 pathCost 7440 lastDir W
+coords 142 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 142 88 1 currPathCosts 7440 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 10401 
+coords 142 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 142 88 1 currPathCosts 7440 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 7996 
+coords 142 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 142 88 1 currPathCosts 7440 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 7920 
+coords 142 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 142 88 1 currPathCosts 7440 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 8551 
+coords 142 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 142 88 1 currPathCosts 7440 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 11281 
+expanding 141 88 1 pt 78480 155215 cost 50400 pathCost 7920 lastDir W
+coords 141 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 141 88 1 currPathCosts 7920 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 10881 
+coords 141 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 141 88 1 currPathCosts 7920 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 8476 
+coords 141 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 141 88 1 currPathCosts 7920 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 8160 
+coords 141 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 141 88 1 currPathCosts 7920 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 9031 
+coords 141 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 141 88 1 currPathCosts 7920 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 11761 
+expanding 140 88 1 pt 78240 155215 cost 50400 pathCost 8160 lastDir W
+coords 140 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 140 88 1 currPathCosts 8160 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 8400 
+expanding 139 88 1 pt 78000 155215 cost 50400 pathCost 8400 lastDir W
+coords 139 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 139 88 1 currPathCosts 8400 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 11361 
+coords 139 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 139 88 1 currPathCosts 8400 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 8956 
+coords 139 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 139 88 1 currPathCosts 8400 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 8880 
+coords 139 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 139 88 1 currPathCosts 8400 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 9511 
+coords 139 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 139 88 1 currPathCosts 8400 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 12241 
+expanding 138 88 1 pt 77520 155215 cost 50400 pathCost 8880 lastDir W
+coords 138 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 138 88 1 currPathCosts 8880 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 11841 
+coords 138 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 138 88 1 currPathCosts 8880 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 9436 
+coords 138 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 138 88 1 currPathCosts 8880 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 9120 
+coords 138 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 138 88 1 currPathCosts 8880 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 9991 
+coords 138 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 138 88 1 currPathCosts 8880 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 12721 
+expanding 137 88 1 pt 77280 155215 cost 50400 pathCost 9120 lastDir W
+coords 137 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 137 88 1 currPathCosts 9120 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 9360 
+expanding 136 88 1 pt 77040 155215 cost 50400 pathCost 9360 lastDir W
+coords 136 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 136 88 1 currPathCosts 9360 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 12321 
+coords 136 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 136 88 1 currPathCosts 9360 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 9916 
+coords 136 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 136 88 1 currPathCosts 9360 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 9840 
+coords 136 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 136 88 1 currPathCosts 9360 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 10471 
+coords 136 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 136 88 1 currPathCosts 9360 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 13201 
+expanding 135 88 1 pt 76560 155215 cost 50400 pathCost 9840 lastDir W
+coords 135 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 135 88 1 currPathCosts 9840 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 12801 
+coords 135 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 135 88 1 currPathCosts 9840 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 10396 
+coords 135 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 135 88 1 currPathCosts 9840 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 10080 
+coords 135 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 135 88 1 currPathCosts 9840 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 10951 
+coords 135 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 135 88 1 currPathCosts 9840 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 13681 
+expanding 134 88 1 pt 76320 155215 cost 50400 pathCost 10080 lastDir W
+coords 134 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 134 88 1 currPathCosts 10080 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 10320 
+expanding 133 88 1 pt 76080 155215 cost 50400 pathCost 10320 lastDir W
+coords 133 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 133 88 1 currPathCosts 10320 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 13281 
+coords 133 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 133 88 1 currPathCosts 10320 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 10876 
+coords 133 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 133 88 1 currPathCosts 10320 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 10800 
+coords 133 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 133 88 1 currPathCosts 10320 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 11431 
+coords 133 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 133 88 1 currPathCosts 10320 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 14161 
+expanding 132 88 1 pt 75600 155215 cost 50400 pathCost 10800 lastDir W
+coords 132 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 132 88 1 currPathCosts 10800 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 13761 
+coords 132 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 132 88 1 currPathCosts 10800 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 11356 
+coords 132 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 132 88 1 currPathCosts 10800 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 11040 
+coords 132 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 132 88 1 currPathCosts 10800 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 11911 
+coords 132 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 132 88 1 currPathCosts 10800 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 14641 
+expanding 131 88 1 pt 75360 155215 cost 50400 pathCost 11040 lastDir W
+coords 131 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 131 88 1 currPathCosts 11040 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 11280 
+expanding 130 88 1 pt 75120 155215 cost 50400 pathCost 11280 lastDir W
+coords 130 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 130 88 1 currPathCosts 11280 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 14241 
+coords 130 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 130 88 1 currPathCosts 11280 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 11836 
+coords 130 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 130 88 1 currPathCosts 11280 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 11760 
+coords 130 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 130 88 1 currPathCosts 11280 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 12391 
+coords 130 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 130 88 1 currPathCosts 11280 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 15121 
+expanding 129 88 1 pt 74640 155215 cost 50400 pathCost 11760 lastDir W
+coords 129 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 129 88 1 currPathCosts 11760 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 14721 
+coords 129 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 129 88 1 currPathCosts 11760 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 12316 
+coords 129 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 129 88 1 currPathCosts 11760 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 12000 
+coords 129 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 129 88 1 currPathCosts 11760 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 12871 
+coords 129 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 129 88 1 currPathCosts 11760 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 15601 
+expanding 128 88 1 pt 74400 155215 cost 50400 pathCost 12000 lastDir W
+coords 128 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 128 88 1 currPathCosts 12000 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 12240 
+expanding 127 88 1 pt 74160 155215 cost 50400 pathCost 12240 lastDir W
+coords 127 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 127 88 1 currPathCosts 12240 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 15201 
+coords 127 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 127 88 1 currPathCosts 12240 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 12796 
+coords 127 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 127 88 1 currPathCosts 12240 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 12720 
+coords 127 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 127 88 1 currPathCosts 12240 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 13351 
+coords 127 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 127 88 1 currPathCosts 12240 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 16081 
+expanding 126 88 1 pt 73680 155215 cost 50400 pathCost 12720 lastDir W
+coords 126 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 126 88 1 currPathCosts 12720 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 15681 
+coords 126 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 126 88 1 currPathCosts 12720 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 13276 
+coords 126 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 126 88 1 currPathCosts 12720 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 12960 
+coords 126 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 126 88 1 currPathCosts 12720 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 13831 
+coords 126 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 126 88 1 currPathCosts 12720 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 16561 
+expanding 125 88 1 pt 73440 155215 cost 50400 pathCost 12960 lastDir W
+coords 125 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 125 88 1 currPathCosts 12960 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 13200 
+expanding 124 88 1 pt 73200 155215 cost 50400 pathCost 13200 lastDir W
+coords 124 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 124 88 1 currPathCosts 13200 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 16161 
+coords 124 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 124 88 1 currPathCosts 13200 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 13756 
+coords 124 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 124 88 1 currPathCosts 13200 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 13680 
+coords 124 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 124 88 1 currPathCosts 13200 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 14311 
+coords 124 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 124 88 1 currPathCosts 13200 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 17041 
+expanding 123 88 1 pt 72720 155215 cost 50400 pathCost 13680 lastDir W
+coords 123 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 123 88 1 currPathCosts 13680 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 16641 
+coords 123 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 123 88 1 currPathCosts 13680 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 14236 
+coords 123 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 123 88 1 currPathCosts 13680 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 13920 
+coords 123 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 123 88 1 currPathCosts 13680 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 14791 
+coords 123 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 123 88 1 currPathCosts 13680 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 17521 
+expanding 122 88 1 pt 72480 155215 cost 50400 pathCost 13920 lastDir W
+coords 122 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 122 88 1 currPathCosts 13920 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 14160 
+expanding 121 88 1 pt 72240 155215 cost 50400 pathCost 14160 lastDir W
+coords 121 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 121 88 1 currPathCosts 14160 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 17121 
+coords 121 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 121 88 1 currPathCosts 14160 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 14716 
+coords 121 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 121 88 1 currPathCosts 14160 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 14640 
+coords 121 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 121 88 1 currPathCosts 14160 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 15271 
+coords 121 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 121 88 1 currPathCosts 14160 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 18001 
+expanding 120 88 1 pt 71760 155215 cost 50400 pathCost 14640 lastDir W
+coords 120 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 120 88 1 currPathCosts 14640 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 17601 
+coords 120 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 120 88 1 currPathCosts 14640 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 15196 
+coords 120 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 120 88 1 currPathCosts 14640 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 14880 
+coords 120 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 120 88 1 currPathCosts 14640 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 15751 
+coords 120 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 120 88 1 currPathCosts 14640 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 18481 
+expanding 119 88 1 pt 71520 155215 cost 50400 pathCost 14880 lastDir W
+coords 119 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 119 88 1 currPathCosts 14880 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 15120 
+expanding 118 88 1 pt 71280 155215 cost 50400 pathCost 15120 lastDir W
+coords 118 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 118 88 1 currPathCosts 15120 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 18081 
+coords 118 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 118 88 1 currPathCosts 15120 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 15676 
+coords 118 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 118 88 1 currPathCosts 15120 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 15600 
+coords 118 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 118 88 1 currPathCosts 15120 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 16231 
+coords 118 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 118 88 1 currPathCosts 15120 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 18961 
+expanding 117 88 1 pt 70800 155215 cost 50400 pathCost 15600 lastDir W
+coords 117 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 117 88 1 currPathCosts 15600 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 18561 
+coords 117 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 117 88 1 currPathCosts 15600 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 16156 
+coords 117 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 117 88 1 currPathCosts 15600 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 15840 
+coords 117 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 117 88 1 currPathCosts 15600 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 16711 
+coords 117 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 117 88 1 currPathCosts 15600 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 19441 
+expanding 116 88 1 pt 70560 155215 cost 50400 pathCost 15840 lastDir W
+coords 116 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 116 88 1 currPathCosts 15840 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 16080 
+expanding 115 88 1 pt 70320 155215 cost 50400 pathCost 16080 lastDir W
+coords 115 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 115 88 1 currPathCosts 16080 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 19041 
+coords 115 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 115 88 1 currPathCosts 16080 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 16636 
+coords 115 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 115 88 1 currPathCosts 16080 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 16560 
+coords 115 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 115 88 1 currPathCosts 16080 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 17191 
+coords 115 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 115 88 1 currPathCosts 16080 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 19921 
+expanding 114 88 1 pt 69840 155215 cost 50400 pathCost 16560 lastDir W
+coords 114 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 114 88 1 currPathCosts 16560 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 19521 
+coords 114 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 114 88 1 currPathCosts 16560 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 17116 
+coords 114 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 114 88 1 currPathCosts 16560 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 16800 
+coords 114 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 114 88 1 currPathCosts 16560 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 17671 
+coords 114 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 114 88 1 currPathCosts 16560 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 20401 
+expanding 113 88 1 pt 69600 155215 cost 50400 pathCost 16800 lastDir W
+coords 113 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 113 88 1 currPathCosts 16800 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 17040 
+expanding 112 88 1 pt 69360 155215 cost 50400 pathCost 17040 lastDir W
+coords 112 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 112 88 1 currPathCosts 17040 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 20001 
+coords 112 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 112 88 1 currPathCosts 17040 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 17596 
+coords 112 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 112 88 1 currPathCosts 17040 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 17520 
+coords 112 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 112 88 1 currPathCosts 17040 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 18151 
+coords 112 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 112 88 1 currPathCosts 17040 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 20881 
+expanding 111 88 1 pt 68880 155215 cost 50400 pathCost 17520 lastDir W
+coords 111 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 111 88 1 currPathCosts 17520 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 20481 
+coords 111 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 111 88 1 currPathCosts 17520 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 18076 
+coords 111 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 111 88 1 currPathCosts 17520 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 17760 
+coords 111 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 111 88 1 currPathCosts 17520 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 18631 
+coords 111 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 111 88 1 currPathCosts 17520 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 21361 
+expanding 110 88 1 pt 68640 155215 cost 50400 pathCost 17760 lastDir W
+coords 110 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 110 88 1 currPathCosts 17760 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 18000 
+expanding 109 88 1 pt 68400 155215 cost 50400 pathCost 18000 lastDir W
+coords 109 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 109 88 1 currPathCosts 18000 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 20961 
+coords 109 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 109 88 1 currPathCosts 18000 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 18556 
+coords 109 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 109 88 1 currPathCosts 18000 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 18480 
+coords 109 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 109 88 1 currPathCosts 18000 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 19111 
+coords 109 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 109 88 1 currPathCosts 18000 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 21841 
+expanding 108 88 1 pt 67920 155215 cost 50400 pathCost 18480 lastDir W
+coords 108 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 108 88 1 currPathCosts 18480 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 21441 
+coords 108 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 108 88 1 currPathCosts 18480 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 19036 
+coords 108 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 108 88 1 currPathCosts 18480 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 18720 
+coords 108 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 108 88 1 currPathCosts 18480 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 19591 
+coords 108 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 108 88 1 currPathCosts 18480 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 22321 
+expanding 107 88 1 pt 67680 155215 cost 50400 pathCost 18720 lastDir W
+coords 107 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 107 88 1 currPathCosts 18720 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 18960 
+expanding 106 88 1 pt 67440 155215 cost 50400 pathCost 18960 lastDir W
+coords 106 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 106 88 1 currPathCosts 18960 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 21921 
+coords 106 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 106 88 1 currPathCosts 18960 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 19516 
+coords 106 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 106 88 1 currPathCosts 18960 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 19440 
+coords 106 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 106 88 1 currPathCosts 18960 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 20071 
+coords 106 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 106 88 1 currPathCosts 18960 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 22801 
+expanding 105 88 1 pt 66960 155215 cost 50400 pathCost 19440 lastDir W
+coords 105 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 105 88 1 currPathCosts 19440 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 22401 
+coords 105 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 105 88 1 currPathCosts 19440 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 19996 
+coords 105 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 105 88 1 currPathCosts 19440 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 19680 
+coords 105 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 105 88 1 currPathCosts 19440 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 20551 
+coords 105 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 105 88 1 currPathCosts 19440 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 23281 
+expanding 104 88 1 pt 66720 155215 cost 50400 pathCost 19680 lastDir W
+coords 104 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 104 88 1 currPathCosts 19680 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 19920 
+expanding 103 88 1 pt 66480 155215 cost 50400 pathCost 19920 lastDir W
+coords 103 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 103 88 1 currPathCosts 19920 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 22881 
+coords 103 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 103 88 1 currPathCosts 19920 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 20476 
+coords 103 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 103 88 1 currPathCosts 19920 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 20400 
+coords 103 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 103 88 1 currPathCosts 19920 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 21031 
+coords 103 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 103 88 1 currPathCosts 19920 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 23761 
+expanding 102 88 1 pt 66000 155215 cost 50400 pathCost 20400 lastDir W
+coords 102 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 102 88 1 currPathCosts 20400 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 23361 
+coords 102 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 102 88 1 currPathCosts 20400 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 20956 
+coords 102 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 102 88 1 currPathCosts 20400 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 20640 
+coords 102 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 102 88 1 currPathCosts 20400 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 21511 
+coords 102 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 102 88 1 currPathCosts 20400 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 24241 
+expanding 101 88 1 pt 65760 155215 cost 50400 pathCost 20640 lastDir W
+coords 101 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 101 88 1 currPathCosts 20640 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 20880 
+expanding 100 88 1 pt 65520 155215 cost 50400 pathCost 20880 lastDir W
+coords 100 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 100 88 1 currPathCosts 20880 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 23841 
+coords 100 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 100 88 1 currPathCosts 20880 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 21436 
+coords 100 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 100 88 1 currPathCosts 20880 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 21360 
+coords 100 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 100 88 1 currPathCosts 20880 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 21991 
+coords 100 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 100 88 1 currPathCosts 20880 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 24721 
+expanding 99 88 1 pt 65040 155215 cost 50400 pathCost 21360 lastDir W
+coords 99 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 99 88 1 currPathCosts 21360 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 24321 
+coords 99 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 99 88 1 currPathCosts 21360 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 21916 
+coords 99 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 99 88 1 currPathCosts 21360 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 21600 
+coords 99 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 99 88 1 currPathCosts 21360 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 22471 
+coords 99 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 99 88 1 currPathCosts 21360 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 25201 
+expanding 98 88 1 pt 64800 155215 cost 50400 pathCost 21600 lastDir W
+coords 98 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 98 88 1 currPathCosts 21600 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 21840 
+expanding 97 88 1 pt 64560 155215 cost 50400 pathCost 21840 lastDir W
+coords 97 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 97 88 1 currPathCosts 21840 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 24801 
+coords 97 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 97 88 1 currPathCosts 21840 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 22396 
+coords 97 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 97 88 1 currPathCosts 21840 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 22320 
+coords 97 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 97 88 1 currPathCosts 21840 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 22951 
+coords 97 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 97 88 1 currPathCosts 21840 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 25681 
+expanding 96 88 1 pt 64080 155215 cost 50400 pathCost 22320 lastDir W
+coords 96 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 96 88 1 currPathCosts 22320 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 25281 
+coords 96 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 96 88 1 currPathCosts 22320 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 22876 
+coords 96 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 96 88 1 currPathCosts 22320 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 22560 
+coords 96 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 96 88 1 currPathCosts 22320 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 23431 
+coords 96 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 96 88 1 currPathCosts 22320 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 26161 
+expanding 95 88 1 pt 63840 155215 cost 50400 pathCost 22560 lastDir W
+coords 95 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 95 88 1 currPathCosts 22560 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 22800 
+expanding 94 88 1 pt 63600 155215 cost 50400 pathCost 22800 lastDir W
+coords 94 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 94 88 1 currPathCosts 22800 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 25761 
+coords 94 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 94 88 1 currPathCosts 22800 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 23356 
+coords 94 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 94 88 1 currPathCosts 22800 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 23280 
+coords 94 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 94 88 1 currPathCosts 22800 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 23911 
+coords 94 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 94 88 1 currPathCosts 22800 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 26641 
+expanding 93 88 1 pt 63120 155215 cost 50400 pathCost 23280 lastDir W
+coords 93 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 93 88 1 currPathCosts 23280 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 26241 
+coords 93 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 93 88 1 currPathCosts 23280 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 23836 
+coords 93 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 93 88 1 currPathCosts 23280 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 23520 
+coords 93 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 93 88 1 currPathCosts 23280 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 24391 
+coords 93 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 93 88 1 currPathCosts 23280 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 27121 
+expanding 92 88 1 pt 62880 155215 cost 50400 pathCost 23520 lastDir W
+coords 92 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 92 88 1 currPathCosts 23520 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 23760 
+expanding 91 88 1 pt 62640 155215 cost 50400 pathCost 23760 lastDir W
+coords 91 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 91 88 1 currPathCosts 23760 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 26721 
+coords 91 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 91 88 1 currPathCosts 23760 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 24316 
+coords 91 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 91 88 1 currPathCosts 23760 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 24240 
+coords 91 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 91 88 1 currPathCosts 23760 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 24871 
+coords 91 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 91 88 1 currPathCosts 23760 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 27601 
+expanding 90 88 1 pt 62160 155215 cost 50400 pathCost 24240 lastDir W
+coords 90 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 90 88 1 currPathCosts 24240 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 27201 
+coords 90 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 90 88 1 currPathCosts 24240 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 24796 
+coords 90 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 90 88 1 currPathCosts 24240 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 24480 
+coords 90 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 90 88 1 currPathCosts 24240 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 25351 
+coords 90 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 90 88 1 currPathCosts 24240 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 28081 
+expanding 89 88 1 pt 61920 155215 cost 50400 pathCost 24480 lastDir W
+coords 89 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 89 88 1 currPathCosts 24480 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 24720 
+expanding 88 88 1 pt 61680 155215 cost 50400 pathCost 24720 lastDir W
+coords 88 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 88 88 1 currPathCosts 24720 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 27681 
+coords 88 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 88 88 1 currPathCosts 24720 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 25276 
+coords 88 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 88 88 1 currPathCosts 24720 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 25200 
+coords 88 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 88 88 1 currPathCosts 24720 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 25831 
+coords 88 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 88 88 1 currPathCosts 24720 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 28561 
+expanding 87 88 1 pt 61200 155215 cost 50400 pathCost 25200 lastDir W
+coords 87 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 87 88 1 currPathCosts 25200 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 28161 
+coords 87 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 87 88 1 currPathCosts 25200 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 25756 
+coords 87 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 87 88 1 currPathCosts 25200 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 25440 
+coords 87 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 87 88 1 currPathCosts 25200 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 26311 
+coords 87 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 87 88 1 currPathCosts 25200 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 29041 
+expanding 86 88 1 pt 60960 155215 cost 50400 pathCost 25440 lastDir W
+coords 86 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 86 88 1 currPathCosts 25440 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 25680 
+expanding 85 88 1 pt 60720 155215 cost 50400 pathCost 25680 lastDir W
+coords 85 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 85 88 1 currPathCosts 25680 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 28641 
+coords 85 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 85 88 1 currPathCosts 25680 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 26236 
+coords 85 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 85 88 1 currPathCosts 25680 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 26160 
+coords 85 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 85 88 1 currPathCosts 25680 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 26791 
+coords 85 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 85 88 1 currPathCosts 25680 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 29521 
+expanding 84 88 1 pt 60240 155215 cost 50400 pathCost 26160 lastDir W
+coords 84 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 84 88 1 currPathCosts 26160 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 29121 
+coords 84 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 84 88 1 currPathCosts 26160 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 26716 
+coords 84 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 84 88 1 currPathCosts 26160 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 26400 
+coords 84 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 84 88 1 currPathCosts 26160 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 27271 
+coords 84 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 84 88 1 currPathCosts 26160 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 30001 
+expanding 83 88 1 pt 60000 155215 cost 50400 pathCost 26400 lastDir W
+coords 83 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 83 88 1 currPathCosts 26400 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 26640 
+expanding 82 88 1 pt 59760 155215 cost 50400 pathCost 26640 lastDir W
+coords 82 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 82 88 1 currPathCosts 26640 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 29601 
+coords 82 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 82 88 1 currPathCosts 26640 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 27196 
+coords 82 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 82 88 1 currPathCosts 26640 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 27120 
+coords 82 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 82 88 1 currPathCosts 26640 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 27751 
+coords 82 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 82 88 1 currPathCosts 26640 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 30481 
+expanding 81 88 1 pt 59280 155215 cost 50400 pathCost 27120 lastDir W
+coords 81 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 81 88 1 currPathCosts 27120 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 30081 
+coords 81 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 81 88 1 currPathCosts 27120 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 27676 
+coords 81 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 81 88 1 currPathCosts 27120 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 27360 
+coords 81 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 81 88 1 currPathCosts 27120 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 28231 
+coords 81 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 81 88 1 currPathCosts 27120 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 30961 
+expanding 80 88 1 pt 59040 155215 cost 50400 pathCost 27360 lastDir W
+coords 80 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 80 88 1 currPathCosts 27360 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 27600 
+expanding 79 88 1 pt 58800 155215 cost 50400 pathCost 27600 lastDir W
+coords 79 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 79 88 1 currPathCosts 27600 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 30561 
+coords 79 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 79 88 1 currPathCosts 27600 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 28156 
+coords 79 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 79 88 1 currPathCosts 27600 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 28080 
+coords 79 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 79 88 1 currPathCosts 27600 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 28711 
+coords 79 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 79 88 1 currPathCosts 27600 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 31441 
+expanding 78 88 1 pt 58320 155215 cost 50400 pathCost 28080 lastDir W
+coords 78 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 78 88 1 currPathCosts 28080 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 31041 
+coords 78 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 78 88 1 currPathCosts 28080 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 28636 
+coords 78 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 78 88 1 currPathCosts 28080 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 28320 
+coords 78 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 78 88 1 currPathCosts 28080 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 29191 
+coords 78 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 78 88 1 currPathCosts 28080 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 31921 
+expanding 77 88 1 pt 58080 155215 cost 50400 pathCost 28320 lastDir W
+coords 77 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 77 88 1 currPathCosts 28320 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 28560 
+expanding 76 88 1 pt 57840 155215 cost 50400 pathCost 28560 lastDir W
+coords 76 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 76 88 1 currPathCosts 28560 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 31521 
+coords 76 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 76 88 1 currPathCosts 28560 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 29116 
+coords 76 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 76 88 1 currPathCosts 28560 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 29040 
+coords 76 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 76 88 1 currPathCosts 28560 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 29671 
+coords 76 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 76 88 1 currPathCosts 28560 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 32401 
+expanding 75 88 1 pt 57360 155215 cost 50400 pathCost 29040 lastDir W
+coords 75 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 75 88 1 currPathCosts 29040 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 32001 
+coords 75 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 75 88 1 currPathCosts 29040 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 29596 
+coords 75 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 75 88 1 currPathCosts 29040 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 29280 
+coords 75 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 75 88 1 currPathCosts 29040 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 30151 
+coords 75 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 75 88 1 currPathCosts 29040 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 32881 
+expanding 74 88 1 pt 57120 155215 cost 50400 pathCost 29280 lastDir W
+coords 74 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 74 88 1 currPathCosts 29280 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 29520 
+expanding 73 88 1 pt 56880 155215 cost 50400 pathCost 29520 lastDir W
+coords 73 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 73 88 1 currPathCosts 29520 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 32481 
+coords 73 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 73 88 1 currPathCosts 29520 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 30076 
+coords 73 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 73 88 1 currPathCosts 29520 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 30000 
+coords 73 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 73 88 1 currPathCosts 29520 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 30631 
+coords 73 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 73 88 1 currPathCosts 29520 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 33361 
+expanding 72 88 1 pt 56400 155215 cost 50400 pathCost 30000 lastDir W
+coords 72 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 72 88 1 currPathCosts 30000 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 32961 
+coords 72 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 72 88 1 currPathCosts 30000 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 30556 
+coords 72 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 72 88 1 currPathCosts 30000 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 30240 
+coords 72 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 72 88 1 currPathCosts 30000 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 31111 
+coords 72 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 72 88 1 currPathCosts 30000 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 33841 
+expanding 71 88 1 pt 56160 155215 cost 50400 pathCost 30240 lastDir W
+coords 71 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 71 88 1 currPathCosts 30240 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 30480 
+expanding 70 88 1 pt 55920 155215 cost 50400 pathCost 30480 lastDir W
+coords 70 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 70 88 1 currPathCosts 30480 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 33441 
+coords 70 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 70 88 1 currPathCosts 30480 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 31036 
+coords 70 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 70 88 1 currPathCosts 30480 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 30960 
+coords 70 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 70 88 1 currPathCosts 30480 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 31591 
+coords 70 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 70 88 1 currPathCosts 30480 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 34321 
+expanding 69 88 1 pt 55440 155215 cost 50400 pathCost 30960 lastDir W
+coords 69 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 69 88 1 currPathCosts 30960 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 33921 
+coords 69 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 69 88 1 currPathCosts 30960 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 31516 
+coords 69 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 69 88 1 currPathCosts 30960 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 31200 
+coords 69 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 69 88 1 currPathCosts 30960 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 32071 
+coords 69 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 69 88 1 currPathCosts 30960 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 34801 
+expanding 68 88 1 pt 55200 155215 cost 50400 pathCost 31200 lastDir W
+coords 68 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 68 88 1 currPathCosts 31200 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 31440 
+expanding 67 88 1 pt 54960 155215 cost 50400 pathCost 31440 lastDir W
+coords 67 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 67 88 1 currPathCosts 31440 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 34401 
+coords 67 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 67 88 1 currPathCosts 31440 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 31996 
+coords 67 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 67 88 1 currPathCosts 31440 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 31920 
+coords 67 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 67 88 1 currPathCosts 31440 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 32551 
+coords 67 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 67 88 1 currPathCosts 31440 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 35281 
+expanding 66 88 1 pt 54480 155215 cost 50400 pathCost 31920 lastDir W
+coords 66 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 66 88 1 currPathCosts 31920 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 34881 
+coords 66 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 66 88 1 currPathCosts 31920 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 32476 
+coords 66 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 66 88 1 currPathCosts 31920 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 32160 
+coords 66 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 66 88 1 currPathCosts 31920 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 33031 
+coords 66 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 66 88 1 currPathCosts 31920 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 35761 
+expanding 65 88 1 pt 54240 155215 cost 50400 pathCost 32160 lastDir W
+coords 65 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 65 88 1 currPathCosts 32160 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 32400 
+expanding 64 88 1 pt 54000 155215 cost 50400 pathCost 32400 lastDir W
+coords 64 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 64 88 1 currPathCosts 32400 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 35361 
+coords 64 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 64 88 1 currPathCosts 32400 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 32956 
+coords 64 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 64 88 1 currPathCosts 32400 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 32880 
+coords 64 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 64 88 1 currPathCosts 32400 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 33511 
+coords 64 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 64 88 1 currPathCosts 32400 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 36241 
+expanding 63 88 1 pt 53520 155215 cost 50400 pathCost 32880 lastDir W
+coords 63 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 63 88 1 currPathCosts 32880 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 35841 
+coords 63 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 63 88 1 currPathCosts 32880 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 33436 
+coords 63 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 63 88 1 currPathCosts 32880 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 33120 
+coords 63 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 63 88 1 currPathCosts 32880 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 33991 
+coords 63 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 63 88 1 currPathCosts 32880 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 36721 
+expanding 62 88 1 pt 53280 155215 cost 50400 pathCost 33120 lastDir W
+coords 62 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 62 88 1 currPathCosts 33120 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 33360 
+expanding 61 88 1 pt 53040 155215 cost 50400 pathCost 33360 lastDir W
+coords 61 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 61 88 1 currPathCosts 33360 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 36321 
+coords 61 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 61 88 1 currPathCosts 33360 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 33916 
+coords 61 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 61 88 1 currPathCosts 33360 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 33840 
+coords 61 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 61 88 1 currPathCosts 33360 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 34471 
+coords 61 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 61 88 1 currPathCosts 33360 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 37201 
+expanding 60 88 1 pt 52560 155215 cost 50400 pathCost 33840 lastDir W
+coords 60 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 60 88 1 currPathCosts 33840 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 36801 
+coords 60 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 60 88 1 currPathCosts 33840 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 34396 
+coords 60 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 60 88 1 currPathCosts 33840 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 34080 
+coords 60 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 60 88 1 currPathCosts 33840 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 34951 
+coords 60 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 60 88 1 currPathCosts 33840 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 37681 
+expanding 59 88 1 pt 52320 155215 cost 50400 pathCost 34080 lastDir W
+coords 59 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 59 88 1 currPathCosts 34080 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 34320 
+expanding 58 88 1 pt 52080 155215 cost 50400 pathCost 34320 lastDir W
+coords 58 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 58 88 1 currPathCosts 34320 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 37281 
+coords 58 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 58 88 1 currPathCosts 34320 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 34876 
+coords 58 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 58 88 1 currPathCosts 34320 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 34800 
+coords 58 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 58 88 1 currPathCosts 34320 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 35431 
+coords 58 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 58 88 1 currPathCosts 34320 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 38161 
+expanding 57 88 1 pt 51600 155215 cost 50400 pathCost 34800 lastDir W
+coords 57 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 57 88 1 currPathCosts 34800 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 37761 
+coords 57 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 57 88 1 currPathCosts 34800 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 35356 
+coords 57 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 57 88 1 currPathCosts 34800 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 35040 
+coords 57 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 57 88 1 currPathCosts 34800 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 35911 
+coords 57 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 57 88 1 currPathCosts 34800 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 38641 
+expanding 56 88 1 pt 51360 155215 cost 50400 pathCost 35040 lastDir W
+coords 56 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 56 88 1 currPathCosts 35040 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 35280 
+expanding 55 88 1 pt 51120 155215 cost 50400 pathCost 35280 lastDir W
+coords 55 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 55 88 1 currPathCosts 35280 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 38241 
+coords 55 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 55 88 1 currPathCosts 35280 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 35836 
+coords 55 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 55 88 1 currPathCosts 35280 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 35760 
+coords 55 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 55 88 1 currPathCosts 35280 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 36391 
+coords 55 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 55 88 1 currPathCosts 35280 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 39121 
+expanding 54 88 1 pt 50640 155215 cost 50400 pathCost 35760 lastDir W
+coords 54 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 54 88 1 currPathCosts 35760 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 38721 
+coords 54 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 54 88 1 currPathCosts 35760 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 36316 
+coords 54 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 54 88 1 currPathCosts 35760 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 36000 
+coords 54 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 54 88 1 currPathCosts 35760 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 36871 
+coords 54 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 54 88 1 currPathCosts 35760 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 39601 
+expanding 53 88 1 pt 50400 155215 cost 50400 pathCost 36000 lastDir W
+coords 53 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 53 88 1 currPathCosts 36000 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 36240 
+expanding 52 88 1 pt 50160 155215 cost 50400 pathCost 36240 lastDir W
+coords 52 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 52 88 1 currPathCosts 36240 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 39201 
+coords 52 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 52 88 1 currPathCosts 36240 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 36796 
+coords 52 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 52 88 1 currPathCosts 36240 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 36720 
+coords 52 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 52 88 1 currPathCosts 36240 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 37351 
+coords 52 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 52 88 1 currPathCosts 36240 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 40081 
+expanding 51 88 1 pt 49680 155215 cost 50400 pathCost 36720 lastDir W
+coords 51 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 51 88 1 currPathCosts 36720 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 39681 
+coords 51 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 51 88 1 currPathCosts 36720 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 37276 
+coords 51 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 51 88 1 currPathCosts 36720 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 36960 
+coords 51 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 51 88 1 currPathCosts 36720 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 37831 
+coords 51 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 51 88 1 currPathCosts 36720 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 40561 
+expanding 50 88 1 pt 49440 155215 cost 50400 pathCost 36960 lastDir W
+coords 50 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 50 88 1 currPathCosts 36960 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 37200 
+expanding 49 88 1 pt 49200 155215 cost 50400 pathCost 37200 lastDir W
+coords 49 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 49 88 1 currPathCosts 37200 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 40161 
+coords 49 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 49 88 1 currPathCosts 37200 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 37756 
+coords 49 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 49 88 1 currPathCosts 37200 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 37680 
+coords 49 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 49 88 1 currPathCosts 37200 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 38311 
+coords 49 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 49 88 1 currPathCosts 37200 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 41041 
+expanding 48 88 1 pt 48720 155215 cost 50400 pathCost 37680 lastDir W
+coords 48 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 48 88 1 currPathCosts 37680 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 40641 
+coords 48 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 48 88 1 currPathCosts 37680 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 38236 
+coords 48 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 48 88 1 currPathCosts 37680 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 37920 
+coords 48 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 48 88 1 currPathCosts 37680 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 38791 
+coords 48 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 48 88 1 currPathCosts 37680 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 41521 
+expanding 47 88 1 pt 48480 155215 cost 50400 pathCost 37920 lastDir W
+coords 47 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 47 88 1 currPathCosts 37920 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 38160 
+expanding 46 88 1 pt 48240 155215 cost 50400 pathCost 38160 lastDir W
+coords 46 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 46 88 1 currPathCosts 38160 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 41121 
+coords 46 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 46 88 1 currPathCosts 38160 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 38716 
+coords 46 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 46 88 1 currPathCosts 38160 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 38640 
+coords 46 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 46 88 1 currPathCosts 38160 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 39271 
+coords 46 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 46 88 1 currPathCosts 38160 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 42001 
+expanding 45 88 1 pt 47760 155215 cost 50400 pathCost 38640 lastDir W
+coords 45 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 45 88 1 currPathCosts 38640 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 41601 
+coords 45 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 45 88 1 currPathCosts 38640 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 39196 
+coords 45 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 45 88 1 currPathCosts 38640 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 38880 
+coords 45 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 45 88 1 currPathCosts 38640 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 39751 
+coords 45 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 45 88 1 currPathCosts 38640 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 42481 
+expanding 44 88 1 pt 47520 155215 cost 50400 pathCost 38880 lastDir W
+coords 44 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 44 88 1 currPathCosts 38880 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 39120 
+expanding 43 88 1 pt 47280 155215 cost 50400 pathCost 39120 lastDir W
+coords 43 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 43 88 1 currPathCosts 39120 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 42081 
+coords 43 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 43 88 1 currPathCosts 39120 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 39676 
+coords 43 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 43 88 1 currPathCosts 39120 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 39600 
+coords 43 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 43 88 1 currPathCosts 39120 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 40231 
+coords 43 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 43 88 1 currPathCosts 39120 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 42961 
+expanding 42 88 1 pt 46800 155215 cost 50400 pathCost 39600 lastDir W
+coords 42 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 42 88 1 currPathCosts 39600 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 42561 
+coords 42 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 42 88 1 currPathCosts 39600 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 40156 
+coords 42 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 42 88 1 currPathCosts 39600 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 39840 
+coords 42 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 42 88 1 currPathCosts 39600 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 40711 
+coords 42 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 42 88 1 currPathCosts 39600 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 43441 
+expanding 41 88 1 pt 46560 155215 cost 50400 pathCost 39840 lastDir W
+coords 41 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 41 88 1 currPathCosts 39840 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 40080 
+expanding 40 88 1 pt 46320 155215 cost 50400 pathCost 40080 lastDir W
+coords 40 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 40 88 1 currPathCosts 40080 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 43041 
+coords 40 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 40 88 1 currPathCosts 40080 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 40636 
+coords 40 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 40 88 1 currPathCosts 40080 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 40560 
+coords 40 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 40 88 1 currPathCosts 40080 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 41191 
+coords 40 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 40 88 1 currPathCosts 40080 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 43921 
+expanding 39 88 1 pt 45840 155215 cost 50400 pathCost 40560 lastDir W
+coords 39 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 39 88 1 currPathCosts 40560 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 43521 
+coords 39 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 39 88 1 currPathCosts 40560 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 41116 
+coords 39 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 39 88 1 currPathCosts 40560 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 40800 
+coords 39 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 39 88 1 currPathCosts 40560 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 41671 
+coords 39 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 39 88 1 currPathCosts 40560 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 44401 
+expanding 38 88 1 pt 45600 155215 cost 50400 pathCost 40800 lastDir W
+coords 38 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 38 88 1 currPathCosts 40800 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 41040 
+expanding 37 88 1 pt 45360 155215 cost 50400 pathCost 41040 lastDir W
+coords 37 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 37 88 1 currPathCosts 41040 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 44001 
+coords 37 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 37 88 1 currPathCosts 41040 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 41596 
+coords 37 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 37 88 1 currPathCosts 41040 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 41520 
+coords 37 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 37 88 1 currPathCosts 41040 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 42151 
+coords 37 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 37 88 1 currPathCosts 41040 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 44881 
+expanding 36 88 1 pt 44880 155215 cost 50400 pathCost 41520 lastDir W
+coords 36 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 36 88 1 currPathCosts 41520 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 44481 
+coords 36 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 36 88 1 currPathCosts 41520 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 42076 
+coords 36 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 36 88 1 currPathCosts 41520 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 41760 
+coords 36 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 36 88 1 currPathCosts 41520 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 42631 
+coords 36 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 36 88 1 currPathCosts 41520 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 45361 
+expanding 35 88 1 pt 44640 155215 cost 50400 pathCost 41760 lastDir W
+coords 35 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 35 88 1 currPathCosts 41760 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 42000 
+expanding 34 88 1 pt 44400 155215 cost 50400 pathCost 42000 lastDir W
+coords 34 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 34 88 1 currPathCosts 42000 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 44961 
+coords 34 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 34 88 1 currPathCosts 42000 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 42556 
+coords 34 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 34 88 1 currPathCosts 42000 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 42480 
+coords 34 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 34 88 1 currPathCosts 42000 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 43111 
+coords 34 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 34 88 1 currPathCosts 42000 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 45841 
+expanding 33 88 1 pt 43920 155215 cost 50400 pathCost 42480 lastDir W
+coords 33 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 33 88 1 currPathCosts 42480 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 45441 
+coords 33 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 33 88 1 currPathCosts 42480 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 43036 
+coords 33 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 33 88 1 currPathCosts 42480 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 42720 
+coords 33 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 33 88 1 currPathCosts 42480 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 43591 
+coords 33 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 33 88 1 currPathCosts 42480 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 46321 
+expanding 32 88 1 pt 43680 155215 cost 50400 pathCost 42720 lastDir W
+coords 32 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 32 88 1 currPathCosts 42720 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 42960 
+expanding 31 88 1 pt 43440 155215 cost 50400 pathCost 42960 lastDir W
+coords 31 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 31 88 1 currPathCosts 42960 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 45921 
+coords 31 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 31 88 1 currPathCosts 42960 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 43516 
+coords 31 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 31 88 1 currPathCosts 42960 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 43440 
+coords 31 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 31 88 1 currPathCosts 42960 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 44071 
+coords 31 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 31 88 1 currPathCosts 42960 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 46801 
+expanding 30 88 1 pt 42960 155215 cost 50400 pathCost 43440 lastDir W
+coords 30 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 30 88 1 currPathCosts 43440 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 46401 
+coords 30 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 30 88 1 currPathCosts 43440 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 43996 
+coords 30 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 30 88 1 currPathCosts 43440 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 43680 
+coords 30 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 30 88 1 currPathCosts 43440 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 44551 
+coords 30 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 30 88 1 currPathCosts 43440 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 47281 
+expanding 29 88 1 pt 42720 155215 cost 50400 pathCost 43680 lastDir W
+coords 29 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 29 88 1 currPathCosts 43680 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 43920 
+expanding 28 88 1 pt 42480 155215 cost 50400 pathCost 43920 lastDir W
+coords 28 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 28 88 1 currPathCosts 43920 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 46881 
+coords 28 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 28 88 1 currPathCosts 43920 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 44476 
+coords 28 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 28 88 1 currPathCosts 43920 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 44400 
+coords 28 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 28 88 1 currPathCosts 43920 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 45031 
+coords 28 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 28 88 1 currPathCosts 43920 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 47761 
+expanding 27 88 1 pt 42000 155215 cost 50400 pathCost 44400 lastDir W
+coords 27 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 27 88 1 currPathCosts 44400 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 47361 
+coords 27 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 27 88 1 currPathCosts 44400 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 44956 
+coords 27 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 27 88 1 currPathCosts 44400 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 44640 
+coords 27 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 27 88 1 currPathCosts 44400 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 45511 
+coords 27 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 27 88 1 currPathCosts 44400 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 48241 
+expanding 26 88 1 pt 41760 155215 cost 50400 pathCost 44640 lastDir W
+coords 26 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 26 88 1 currPathCosts 44640 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 44880 
+expanding 25 88 1 pt 41520 155215 cost 50400 pathCost 44880 lastDir W
+coords 25 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 25 88 1 currPathCosts 44880 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 47841 
+coords 25 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 25 88 1 currPathCosts 44880 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 45436 
+coords 25 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 25 88 1 currPathCosts 44880 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 45360 
+coords 25 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 25 88 1 currPathCosts 44880 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 45991 
+coords 25 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 25 88 1 currPathCosts 44880 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 48721 
+expanding 24 88 1 pt 41040 155215 cost 50400 pathCost 45360 lastDir W
+coords 24 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 24 88 1 currPathCosts 45360 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 48321 
+coords 24 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 24 88 1 currPathCosts 45360 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 45916 
+coords 24 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 24 88 1 currPathCosts 45360 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 45600 
+coords 24 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 24 88 1 currPathCosts 45360 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 46471 
+coords 24 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 24 88 1 currPathCosts 45360 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 49201 
+expanding 23 88 1 pt 40800 155215 cost 50400 pathCost 45600 lastDir W
+coords 23 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 23 88 1 currPathCosts 45600 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 45840 
+expanding 22 88 1 pt 40560 155215 cost 50400 pathCost 45840 lastDir W
+coords 22 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 22 88 1 currPathCosts 45840 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 48801 
+coords 22 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 22 88 1 currPathCosts 45840 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 46396 
+coords 22 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 22 88 1 currPathCosts 45840 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 46320 
+coords 22 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 22 88 1 currPathCosts 45840 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 46951 
+coords 22 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 22 88 1 currPathCosts 45840 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 49681 
+expanding 21 88 1 pt 40080 155215 cost 50400 pathCost 46320 lastDir W
+coords 21 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 21 88 1 currPathCosts 46320 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 49281 
+coords 21 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 21 88 1 currPathCosts 46320 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 46876 
+coords 21 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 21 88 1 currPathCosts 46320 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 46560 
+coords 21 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 21 88 1 currPathCosts 46320 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 47431 
+coords 21 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 21 88 1 currPathCosts 46320 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 50161 
+expanding 20 88 1 pt 39840 155215 cost 50400 pathCost 46560 lastDir W
+coords 20 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 20 88 1 currPathCosts 46560 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 46800 
+expanding 19 88 1 pt 39600 155215 cost 50400 pathCost 46800 lastDir W
+coords 19 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 19 88 1 currPathCosts 46800 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 49761 
+coords 19 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 19 88 1 currPathCosts 46800 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 47356 
+coords 19 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 19 88 1 currPathCosts 46800 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 47280 
+coords 19 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 19 88 1 currPathCosts 46800 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 47911 
+coords 19 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 19 88 1 currPathCosts 46800 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 50641 
+expanding 18 88 1 pt 39120 155215 cost 50400 pathCost 47280 lastDir W
+coords 18 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 18 88 1 currPathCosts 47280 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 50241 
+coords 18 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 18 88 1 currPathCosts 47280 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 47836 
+coords 18 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 18 88 1 currPathCosts 47280 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 47520 
+coords 18 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 18 88 1 currPathCosts 47280 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 48391 
+coords 18 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 18 88 1 currPathCosts 47280 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 51121 
+expanding 17 88 1 pt 38880 155215 cost 50400 pathCost 47520 lastDir W
+coords 17 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 17 88 1 currPathCosts 47520 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 47760 
+expanding 16 88 1 pt 38640 155215 cost 50400 pathCost 47760 lastDir W
+coords 16 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 16 88 1 currPathCosts 47760 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 50721 
+coords 16 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 16 88 1 currPathCosts 47760 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 48316 
+coords 16 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 16 88 1 currPathCosts 47760 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 48240 
+coords 16 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 16 88 1 currPathCosts 47760 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 48871 
+coords 16 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 16 88 1 currPathCosts 47760 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 51601 
+expanding 15 88 1 pt 38160 155215 cost 50400 pathCost 48240 lastDir W
+coords 15 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 15 88 1 currPathCosts 48240 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 51201 
+coords 15 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 15 88 1 currPathCosts 48240 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 48796 
+coords 15 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 15 88 1 currPathCosts 48240 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 48480 
+coords 15 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 15 88 1 currPathCosts 48240 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 49351 
+coords 15 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 15 88 1 currPathCosts 48240 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 52081 
+expanding 14 88 1 pt 37920 155215 cost 50400 pathCost 48480 lastDir W
+coords 14 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 14 88 1 currPathCosts 48480 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 48720 
+expanding 13 88 1 pt 37680 155215 cost 50400 pathCost 48720 lastDir W
+coords 13 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 13 88 1 currPathCosts 48720 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 51681 
+coords 13 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 13 88 1 currPathCosts 48720 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 49276 
+coords 13 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 13 88 1 currPathCosts 48720 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 49200 
+coords 13 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 13 88 1 currPathCosts 48720 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 49831 
+coords 13 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 13 88 1 currPathCosts 48720 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 52561 
+expanding 12 88 1 pt 37200 155215 cost 50400 pathCost 49200 lastDir W
+coords 12 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 12 88 1 currPathCosts 49200 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 52161 
+coords 12 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 12 88 1 currPathCosts 49200 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 49756 
+coords 12 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 12 88 1 currPathCosts 49200 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 49440 
+coords 12 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 12 88 1 currPathCosts 49200 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 50311 
+coords 12 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 12 88 1 currPathCosts 49200 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 53041 
+expanding 11 88 1 pt 36960 155215 cost 50400 pathCost 49440 lastDir W
+coords 11 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 11 88 1 currPathCosts 49440 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 49680 
+expanding 10 88 1 pt 36720 155215 cost 50400 pathCost 49680 lastDir W
+coords 10 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 10 88 1 currPathCosts 49680 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 52641 
+coords 10 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 10 88 1 currPathCosts 49680 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 50236 
+coords 10 88 1 dir 3 edgeLen 480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:480 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 480
+ coords 10 88 1 currPathCosts 49680 currDir W nextDir W edgeLength 480 turnCost 0 v2v 0 vtlen 0 finalNextCost 50160 
+coords 10 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 10 88 1 currPathCosts 49680 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 50791 
+coords 10 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 10 88 1 currPathCosts 49680 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 53521 
+expanding 9 88 1 pt 36240 155215 cost 50400 pathCost 50160 lastDir W
+coords 9 88 1 dir 1 edgeLen 1480 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1480 grid:0 drc:0 marker:0 shape:0 block:0 guide:1480] totalBaseCost 2960
+ coords 9 88 1 currPathCosts 50160 currDir W nextDir D edgeLength 1480 turnCost 1 v2v 0 vtlen 0 finalNextCost 53121 
+coords 9 88 1 dir 2 edgeLen 185 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:185 grid:370 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 555
+ coords 9 88 1 currPathCosts 50160 currDir W nextDir S edgeLength 185 turnCost 1 v2v 0 vtlen 0 finalNextCost 50716 
+coords 9 88 1 dir 3 edgeLen 240 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:240 grid:0 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 240
+ coords 9 88 1 currPathCosts 50160 currDir W nextDir W edgeLength 240 turnCost 0 v2v 0 vtlen 0 finalNextCost 50400 
+coords 9 88 1 dir 5 edgeLen 370 flags[grid:1 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:0] costs[wire:370 grid:740 drc:0 marker:0 shape:0 block:0 guide:0] totalBaseCost 1110
+ coords 9 88 1 currPathCosts 50160 currDir W nextDir N edgeLength 370 turnCost 1 v2v 0 vtlen 0 finalNextCost 51271 
+coords 9 88 1 dir 6 edgeLen 1920 flags[grid:0 ap:0 drc:0 marker:0 shape:0 block:0 out_guide:1] costs[wire:1920 grid:0 drc:0 marker:0 shape:0 block:0 guide:1920] totalBaseCost 3840
+ coords 9 88 1 currPathCosts 50160 currDir W nextDir U edgeLength 1920 turnCost 1 v2v 0 vtlen 0 finalNextCost 54001 

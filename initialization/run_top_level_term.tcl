@@ -3,6 +3,7 @@
 # "$OR" -version
 # export DRT_DUMP_GG_DIR="work/ggdump"
 # export DRT_DUMP_EXP_DIR="work/expdump"
+# export DRT_DUMP_COST_DIR="work/costdump"
 # "$OR" -no_init -exit initialization/run_top_level_term.tcl
 
 read_lef "test/sky130hs/sky130hs.tlef"

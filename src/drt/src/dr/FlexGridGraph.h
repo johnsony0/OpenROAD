@@ -1194,6 +1194,13 @@ class FlexGridGraph
   // actually opened. To dump without setting DRT_DUMP_EXP_DIR, set
   // expDumpAlways in FlexGridGraph_maze.cpp.
   bool dumpingExpansion() const { return exp_file_.is_open(); }
+
+
+  mutable std::ofstream cost_file_;
+  bool costDumpTried_{false};
+  int costSearchId_{0};
+  void openCostDump();
+
   void printExpansion(const FlexWavefrontGrid& currGrid,
                       const std::string& keyword);
   // unsafe access, no idx check

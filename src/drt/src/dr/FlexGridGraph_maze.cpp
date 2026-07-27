@@ -30,7 +30,7 @@ namespace drt {
 const int debugMazeIter = std::numeric_limits<int>::max();
 // Flip to true to dump every maze search without setting DRT_DUMP_EXP_DIR; the
 // files then land in expDumpDefaultDir. See openExpansionDump().
-const bool expDumpAlways = true;
+const bool expDumpAlways = false;
 // Used when DRT_DUMP_EXP_DIR is unset. Relative to the cwd of the openroad
 // process, and it must already exist.
 const char* const expDumpDefaultDir = ".";
@@ -79,6 +79,45 @@ void FlexGridGraph::openExpansionDump()
   exp_file_ << fmt::format(
       "routeBox {} {} {} {}\n", rb.xMin(), rb.yMin(), rb.xMax(), rb.yMax());
   exp_file_ << fmt::format("dim {} {} {}\n", xDim, yDim, zDim);
+}
+
+void FlexGridGraph::openCostDump()
+{
+  if (cost_file_.is_open() || costDumpTried_) {
+    return;
+  }
+  costDumpTried_ = true;
+  if (drWorker_ == nullptr) {
+    return;
+  }
+  const char* env_dir = std::getenv("DRT_DUMP_COST_DIR");
+  const bool have_env_dir = env_dir != nullptr && env_dir[0] != '\0';
+  if (!have_env_dir && !expDumpAlways) {
+    return;
+  }
+  const char* dir = have_env_dir ? env_dir : expDumpDefaultDir;
+  const int iter = drWorker_->getDRIter();
+  const char* iter_filter = std::getenv("DRT_DUMP_EXP_ITER");
+  if (iter_filter != nullptr && iter_filter[0] != '\0'
+      && std::atoi(iter_filter) != iter) {
+    return;
+  }
+  const odb::Rect& rb = drWorker_->getRouteBox();
+  const std::string path = std::string(dir) + "/cost_iter" + std::to_string(iter)
+                           + "_x" + std::to_string(rb.xMin()) + "_y"
+                           + std::to_string(rb.yMin()) + ".txt";
+  cost_file_.open(path.c_str());
+  if (!cost_file_.is_open()) {
+    logger_->warn(utl::DRT, 621, "Could not open cost dump file {}", path);
+    return;
+  }
+  frMIdx xDim, yDim, zDim;
+  getDim(xDim, yDim, zDim);
+  cost_file_ << "version 1\n";
+  cost_file_ << fmt::format("iter {}\n", iter);
+  cost_file_ << fmt::format(
+      "routeBox {} {} {} {}\n", rb.xMin(), rb.yMin(), rb.xMax(), rb.yMax());
+  cost_file_ << fmt::format("dim {} {} {}\n", xDim, yDim, zDim);
 }
 
 void FlexGridGraph::printExpansion(const FlexWavefrontGrid& currGrid,
@@ -275,6 +314,18 @@ void FlexGridGraph::expandWavefront(FlexWavefrontGrid& currGrid,
         currGrid.getPathCost(),
         currGrid.getLastDir());
   }
+  if (cost_file_.is_open()) {
+    cost_file_ << fmt::format(
+      "expanding {} {} {} pt {} {} cost {} pathCost {} lastDir {}\n",
+      currGrid.x(),
+      currGrid.y(),
+      currGrid.z(),
+      xCoords_[currGrid.x()],
+      yCoords_[currGrid.y()],
+      currGrid.getCost(),
+      currGrid.getPathCost(),
+      currGrid.getLastDir());
+  }
   for (const auto dir : frDirEnumAll) {
     if (isExpandable(currGrid, dir)) {
       expand(currGrid,
@@ -448,6 +499,12 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
   frMIdx gridY = currGrid.y();
   frMIdx gridZ = currGrid.z();
   frCost nextPathCost = currGrid.getPathCost();
+
+  frCost initialCost = currGrid.getPathCost();
+  frCost turnCost = 0;
+  frCost isForbiddenVia2ViaCost = 0;
+  frCost isForbiddenViaTLenCost = 0;
+
   frCoord edgeLength = getEdgeLength(gridX, gridY, gridZ, dir);
   // bending cost
   auto currDir = currGrid.getLastDir();
@@ -457,6 +514,7 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
   if (currDir != dir && currDir != frDirEnum::UNKNOWN) {
     // original
     ++nextPathCost;
+    ++turnCost;
   }
 
   // via2viaForbiddenLen enablement
@@ -533,8 +591,10 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
         }
         if (drWorker_->getDRIter() >= 3) {
           nextPathCost += 2 * ggMarkerCost_ * edgeLength;
+          isForbiddenVia2ViaCost += 2 * ggMarkerCost_ * edgeLength;
         } else {
           nextPathCost += 2 * ggDRCCost_ * edgeLength;
+          isForbiddenVia2ViaCost += 2 * ggDRCCost_ * edgeLength;
         }
       }
     }
@@ -587,12 +647,15 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
         }
         if (drWorker_->getDRIter() >= 3) {
           nextPathCost += 2 * ggDRCCost_ * edgeLength;
+          isForbiddenViaTLenCost += 2 * ggDRCCost_ * edgeLength;
         } else {
           nextPathCost += 2 * ggMarkerCost_ * edgeLength;
+          isForbiddenViaTLenCost += 2 * ggMarkerCost_ * edgeLength;
         }
       }
     }
   }
+
   nextPathCost += getCosts(gridX,
                            gridY,
                            gridZ,
@@ -600,6 +663,22 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
                            layer,
                            useNDRCosts(currGrid),
                            route_with_jumpers);
+
+  if (cost_file_.is_open()) {
+    cost_file_ << fmt::format(" coords {} {} {} currPathCosts {} currDir {} nextDir {} edgeLength {} turnCost {} v2v {} vtlen {} finalNextCost {} \n",
+                              gridX,
+                              gridY,
+                              gridZ,
+                              initialCost,              
+                              currDir,           
+                              dir,               
+                              edgeLength,      
+                              turnCost,                    
+                              isForbiddenVia2ViaCost,        
+                              isForbiddenViaTLenCost, 
+                              nextPathCost          
+                              );           
+  }
 
   return nextPathCost;
 }
@@ -621,8 +700,49 @@ frCost FlexGridGraph::getCosts(frMIdx gridX,
   bool guideCost = hasGuide(gridX, gridY, gridZ, dir);
   frCoord edgeLength = getEdgeLength(gridX, gridY, gridZ, dir);
 
-  // increase cost when a net has jumper
+  // Cost components
+  frCost c_wire   = edgeLength;
+  frCost c_grid   = (gridCost || apCost) ? (router_cfg_->GRIDCOST * edgeLength) : 0;
+  frCost c_drc    = drcCost ? (ggDRCCost_ * edgeLength) : 0;
+  frCost c_marker = markerCost ? (ggMarkerCost_ * edgeLength) : 0;
+  frCost c_shape  = shapeCost ? (ggFixedShapeCost_ * edgeLength) : 0;
+  
+  frCoord minWidth = layer ? layer->getMinWidth() : 0;
+  frCost c_block  = blockCost ? (router_cfg_->BLOCKCOST * minWidth * 20) : 0;
+
+  // Increase cost when a net has jumper
   frUInt4 jumper_cost = route_with_jumpers ? 10 : 1;
+  frCost c_guide  = !guideCost ? ((router_cfg_->GUIDECOST * jumper_cost) * edgeLength) : 0;
+
+  frCost totalBaseCost = c_wire + c_grid + c_drc + c_marker + c_shape + c_block + c_guide;
+
+  if (cost_file_.is_open()) {
+    cost_file_ << fmt::format(
+        "coords {} {} {} dir {} edgeLen {} "
+        "flags[grid:{} ap:{} drc:{} marker:{} shape:{} block:{} out_guide:{}] "
+        "costs[wire:{} grid:{} drc:{} marker:{} shape:{} block:{} guide:{}] "
+        "totalBaseCost {}\n",
+        gridX,
+        gridY,
+        gridZ,
+        static_cast<int>(dir),
+        edgeLength,
+        gridCost ? 1 : 0,
+        apCost ? 1 : 0,
+        drcCost ? 1 : 0,
+        markerCost ? 1 : 0,
+        shapeCost ? 1 : 0,
+        blockCost ? 1 : 0,
+        !guideCost ? 1 : 0,
+        c_wire,
+        c_grid,
+        c_drc,
+        c_marker,
+        c_shape,
+        c_block,
+        c_guide,
+        totalBaseCost);
+  }
 
   // temporarily disable guideCost
   return getEdgeLength(gridX, gridY, gridZ, dir)
@@ -693,15 +813,7 @@ bool FlexGridGraph::isExpandable(const FlexWavefrontGrid& currGrid,
   const frDirEnum expandDir = dir;  // reverse() flips dir in place below
   bool hg = hasEdge(gridX, gridY, gridZ, dir);
   reverse(gridX, gridY, gridZ, dir);
-  // gridX/Y/Z are now the neighbour reached by expandDir, and dir points back
-  // from it -- the convention getLastDir() stores, which is why the last term
-  // of the condition below compares getLastDir() against the flipped dir.
-  //
-  // isSrc() and getPrevAstarNodeDir() index srcs_/prevDirs_ with no bounds
-  // check, and without an edge that neighbour can be off-grid: they are only
-  // safe behind hg, which is exactly what the short-circuiting || chain below
-  // relies on. Every use of them here is guarded the same way. When hasEdge is
-  // 0 the two fields are printed as their neutral values.
+
   if (dumpingExpansion()) {
     exp_file_ << fmt::format(
         "  isExpandable dir {} from {} {} {} to {} {} {} hasEdge {} nextIsSrc "
@@ -720,6 +832,7 @@ bool FlexGridGraph::isExpandable(const FlexWavefrontGrid& currGrid,
         dir,
         currGrid.getLastDir() == dir);
   }
+  
   if (!hg || isSrc(gridX, gridY, gridZ)
       || (getPrevAstarNodeDir({gridX, gridY, gridZ}) != frDirEnum::UNKNOWN)
       ||  // comment out for non-buffer enablement
@@ -969,6 +1082,7 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     dump_file_.open("expansions.dump");
   }
   openExpansionDump();
+  openCostDump();
   if (dumpingExpansion()) {
     // One block per search() call in this grid graph. searchId matches the
     // _s<id> suffix of the dumpSearch() file for the same search.
