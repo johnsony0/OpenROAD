@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <bitset>
 #include <cmath>
+#include <cstdint>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -957,7 +958,173 @@ void FlexGridGraph::traceBackPath(const FlexWavefrontGrid& currGrid,
 // connComps is the source component maze indices as passed to search().
 // Also records the remaining search() inputs (centerPt, route_with_jumpers,
 // input cc bounding box) and outputs (cc bounding box after traceback).
-void FlexGridGraph::dumpSearch(const std::vector<FlexMazeIdx>& connComps,
+// Binary snapshot of the mutable per-node state on entry to one search().
+// No-op unless DRT_DUMP_GG_DIR points to an existing directory. One file per
+// search() call:
+//   <DRT_DUMP_GG_DIR>/ggs_iter<iter>_x<xMin>_y<yMin>_s<searchId>.bin
+//
+// This is the counterpart to dumpGridGraph()'s text snapshot, taken at the one
+// moment that matters for replaying the A*: after mazeNetInit() stamped the
+// current net's guides and after every prior rip-up/route moved the cost
+// counters, but before the first expansion. Nothing in search() writes nodes_,
+// guides_, srcs_ or dsts_ (traceBackPath is const and expandWavefront only
+// touches prevDirs_ and the wavefront), so this snapshot holds for the whole
+// call. The static half of the graph -- coords, layer dirs, cost scalars --
+// never changes after init() and is not repeated here; take it from the
+// gg_iter<iter>_x<..>_y<..>.txt of the same route box.
+//
+// Everything is little-endian and byte-packed with no implicit padding. Fields
+// are written out explicitly rather than memcpy'd from Node, so the format
+// does not depend on the compiler's bitfield allocation.
+//
+//   off  size  field
+//     0     8  magic "DRTGGS01"
+//     8     4  int32  xDim
+//    12     4  int32  yDim
+//    16     4  int32  zDim
+//    20     4  int32  costBits    -- C++ Node cost field width (8, or 16 under
+//                                    DEBUG_DRT_UNDERFLOW); cost bytes below
+//                                    saturate at 255
+//    24     4  int32  nodeStride  -- bytes per node record (14)
+//    28     4  int32  searchId
+//    32     N*14  node records
+//     +    ceil(N/8)  guides_ bitmap
+//     +    ceil(N/8)  srcs_   bitmap
+//     +    ceil(N/8)  dsts_   bitmap
+//
+// N = xDim*yDim*zDim. Node records and bitmaps are both in canonical
+// z-major, x-fastest order:
+//
+//     addr = (z * yDim + y) * xDim + x
+//
+// matching dumpGridGraph()'s line order. This deliberately does NOT match
+// getIdx(), which swaps to y-fastest on HORIZONTAL layers as a cache-locality
+// trick; a uniform stride keeps address generation to one multiply-add.
+// Bitmap bit for addr a is byte a/8, bit a%8 (LSB first).
+//
+// Node record, 14 bytes -- the meaningful bytes of Node in declaration order:
+//     byte 0  bit0 hasEastEdge   bit1 hasNorthEdge   bit2 hasUpEdge
+//             bit3 isBlockedEast bit4 isBlockedNorth bit5 isBlockedUp
+//     byte 1  bit0 hasSpecialVia bit1 overrideShapeCostVia
+//             bit2 hasGridCostEast bit3 hasGridCostNorth bit4 hasGridCostUp
+//             bit5 hasApCostEast   bit6 hasApCostNorth   bit7 hasApCostUp
+//     byte 2  routeShapeCostPlanar        byte  8  fixedShapeCostPlanarVert
+//     byte 3  routeShapeCostVia           byte  9  routeShapeCostPlanarNDR
+//     byte 4  markerCostPlanar            byte 10  routeShapeCostViaNDR
+//     byte 5  markerCostVia               byte 11  fixedShapeCostViaNDR
+//     byte 6  fixedShapeCostVia           byte 12  fixedShapeCostPlanarHorzNDR
+//     byte 7  fixedShapeCostPlanarHorz    byte 13  fixedShapeCostPlanarVertNDR
+void FlexGridGraph::dumpSearchGraph(const int searchId) const
+{
+  const char* dir = std::getenv("DRT_DUMP_GG_DIR");
+  if (dir == nullptr || dir[0] == '\0') {
+    return;
+  }
+  if (xCoords_.empty() || yCoords_.empty() || zCoords_.empty()) {
+    return;
+  }
+  const odb::Rect& rb = drWorker_->getRouteBox();
+  const int iter = drWorker_->getDRIter();
+  const std::string path = std::string(dir) + "/ggs_iter" + std::to_string(iter)
+                           + "_x" + std::to_string(rb.xMin()) + "_y"
+                           + std::to_string(rb.yMin()) + "_s"
+                           + std::to_string(searchId) + ".bin";
+  std::ofstream os(path.c_str(), std::ios::binary);
+  if (!os.is_open()) {
+    logger_->warn(
+        utl::DRT, 621, "Could not open search graph dump file {}", path);
+    return;
+  }
+
+  frMIdx xDim, yDim, zDim;
+  getDim(xDim, yDim, zDim);
+  constexpr int kNodeStride = 14;
+
+  auto put32 = [&os](const int32_t v) {
+    unsigned char b[4];
+    const auto u = static_cast<uint32_t>(v);
+    b[0] = u & 0xff;
+    b[1] = (u >> 8) & 0xff;
+    b[2] = (u >> 16) & 0xff;
+    b[3] = (u >> 24) & 0xff;
+    os.write(reinterpret_cast<const char*>(b), 4);
+  };
+  // Cost counters are 8 bits in a normal build and 16 under
+  // DEBUG_DRT_UNDERFLOW; saturate so the record width stays fixed. Consumers
+  // only ever test these for nonzero (getCosts() assigns each to a bool), so
+  // saturation cannot change a replayed cost.
+  auto costByte = [](const frUInt4 v) -> unsigned char {
+    return static_cast<unsigned char>(std::min<frUInt4>(v, 255));
+  };
+
+  os.write("DRTGGS01", 8);
+  put32(xDim);
+  put32(yDim);
+  put32(zDim);
+  put32(cost_bits);
+  put32(kNodeStride);
+  put32(searchId);
+
+  // --- node records, canonical order ---
+  std::vector<unsigned char> buf;
+  buf.reserve(static_cast<size_t>(xDim) * kNodeStride);
+  for (frMIdx z = 0; z < zDim; ++z) {
+    for (frMIdx y = 0; y < yDim; ++y) {
+      buf.clear();
+      for (frMIdx x = 0; x < xDim; ++x) {
+        const Node& n = nodes_[getIdx(x, y, z)];
+        buf.push_back(static_cast<unsigned char>(
+            (n.hasEastEdge << 0) | (n.hasNorthEdge << 1) | (n.hasUpEdge << 2)
+            | (n.isBlockedEast << 3) | (n.isBlockedNorth << 4)
+            | (n.isBlockedUp << 5)));
+        buf.push_back(static_cast<unsigned char>(
+            (n.hasSpecialVia << 0) | (n.overrideShapeCostVia << 1)
+            | (n.hasGridCostEast << 2) | (n.hasGridCostNorth << 3)
+            | (n.hasGridCostUp << 4) | (n.hasApCostEast << 5)
+            | (n.hasApCostNorth << 6) | (n.hasApCostUp << 7)));
+        buf.push_back(costByte(n.routeShapeCostPlanar));
+        buf.push_back(costByte(n.routeShapeCostVia));
+        buf.push_back(costByte(n.markerCostPlanar));
+        buf.push_back(costByte(n.markerCostVia));
+        buf.push_back(costByte(n.fixedShapeCostVia));
+        buf.push_back(costByte(n.fixedShapeCostPlanarHorz));
+        buf.push_back(costByte(n.fixedShapeCostPlanarVert));
+        buf.push_back(costByte(n.routeShapeCostPlanarNDR));
+        buf.push_back(costByte(n.routeShapeCostViaNDR));
+        buf.push_back(costByte(n.fixedShapeCostViaNDR));
+        buf.push_back(costByte(n.fixedShapeCostPlanarHorzNDR));
+        buf.push_back(costByte(n.fixedShapeCostPlanarVertNDR));
+      }
+      os.write(reinterpret_cast<const char*>(buf.data()), buf.size());
+    }
+  }
+
+  // --- guides_ / srcs_ / dsts_ bitmaps, same canonical order ---
+  // Indexed through getIdx() like the node records: these vectors use the C++
+  // layout, the file uses the uniform one.
+  const size_t numNodes = static_cast<size_t>(xDim) * yDim * zDim;
+  auto writeBitmap = [&](const std::vector<bool>& bits) {
+    std::vector<unsigned char> bm((numNodes + 7) / 8, 0);
+    size_t addr = 0;
+    for (frMIdx z = 0; z < zDim; ++z) {
+      for (frMIdx y = 0; y < yDim; ++y) {
+        for (frMIdx x = 0; x < xDim; ++x, ++addr) {
+          if (bits[getIdx(x, y, z)]) {
+            bm[addr >> 3] |= 1u << (addr & 7);
+          }
+        }
+      }
+    }
+    os.write(reinterpret_cast<const char*>(bm.data()), bm.size());
+  };
+  writeBitmap(guides_);
+  writeBitmap(srcs_);
+  writeBitmap(dsts_);
+  os.close();
+}
+
+void FlexGridGraph::dumpSearch(const int searchId,
+                               const std::vector<FlexMazeIdx>& connComps,
                                drPin* nextPin,
                                const std::vector<FlexMazeIdx>& path,
                                bool success,
@@ -972,14 +1139,13 @@ void FlexGridGraph::dumpSearch(const std::vector<FlexMazeIdx>& connComps,
   if (dir == nullptr || dir[0] == '\0') {
     return;
   }
-  const int id = searchDumpId_++;
   const odb::Rect& rb = drWorker_->getRouteBox();
   const int iter = drWorker_->getDRIter();
   const std::string path_str = std::string(dir) + "/search_iter"
                                + std::to_string(iter) + "_x"
                                + std::to_string(rb.xMin()) + "_y"
                                + std::to_string(rb.yMin()) + "_s"
-                               + std::to_string(id) + ".txt";
+                               + std::to_string(searchId) + ".txt";
   std::ofstream os(path_str.c_str());
   if (!os.is_open()) {
     logger_->warn(
@@ -990,11 +1156,14 @@ void FlexGridGraph::dumpSearch(const std::vector<FlexMazeIdx>& connComps,
   frMIdx xDim, yDim, zDim;
   getDim(xDim, yDim, zDim);
 
-  os << "version 2\n";
+  // v3: connComps rows are now the seeds handed to search(). Through v2 the
+  // success-path dump printed the vector after traceBackPath() had appended
+  // the traced path to it.
+  os << "version 3\n";
   os << "iter " << iter << "\n";
   os << "routeBox " << rb.xMin() << " " << rb.yMin() << " " << rb.xMax() << " "
      << rb.yMax() << "\n";
-  os << "searchId " << id << "\n";
+  os << "searchId " << searchId << "\n";
   os << "pin " << (nextPin != nullptr ? nextPin->getName() : "null") << "\n";
   os << "success " << (success ? 1 : 0) << "\n";
   os << "dim " << xDim << " " << yDim << " " << zDim << "\n";
@@ -1083,23 +1252,26 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   }
   openExpansionDump();
   openCostDump();
+  const int searchId = expSearchId_++;
   if (dumpingExpansion()) {
     // One block per search() call in this grid graph. searchId matches the
     // _s<id> suffix of the dumpSearch() file for the same search.
     exp_file_ << fmt::format(
         "search {} pin {} routeWithJumpers {} connComps {}\n",
-        expSearchId_,
+        searchId,
         nextPin != nullptr ? nextPin->getName() : std::string("null"),
         route_with_jumpers,
         connComps.size());
   }
-  ++expSearchId_;
   curr_id_ = 1;
-  // Snapshot the input cc bounding box for dumpSearch(); traceBackPath()
-  // grows ccMazeIdx1/2 in place on success, so the values at dump time are
-  // the outputs.
+  // Snapshot the inputs that search() mutates in place, so dumpSearch()
+  // records what the search was given rather than what it produced.
+  // traceBackPath() grows ccMazeIdx1/2 and appends the traced path to
+  // connComps (it is bound to the `root` parameter), so by the success-path
+  // dump both hold outputs.
   const FlexMazeIdx ccMazeIdx1In = ccMazeIdx1;
   const FlexMazeIdx ccMazeIdx2In = ccMazeIdx2;
+  const std::vector<FlexMazeIdx> connCompsIn = connComps;
   if (drWorker_->getDRIter() >= debugMazeIter) {
     std::cout << "INIT search: target pin " << nextPin->getName()
               << "\nsource points:\n";
@@ -1124,13 +1296,20 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                     std::max(dstMazeIdx2.z(), mi.z()));
   }
 
+  // Node-state snapshot of the A* input. Taken here rather than at the dump
+  // sites below because it must precede the first expansion; nothing in the
+  // rest of search() writes nodes_/guides_/srcs_/dsts_, so one snapshot per
+  // call is enough.
+  dumpSearchGraph(searchId);
+
   wavefront_.cleanup();
   // init wavefront
   odb::Point currPt;
   for (auto& idx : connComps) {
     if (isDst(idx.x(), idx.y(), idx.z())) {
       path.emplace_back(idx.x(), idx.y(), idx.z());
-      dumpSearch(connComps,
+      dumpSearch(searchId,
+                 connCompsIn,
                  nextPin,
                  path,
                  true,
@@ -1188,7 +1367,8 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     }
     if (isDst(currGrid.x(), currGrid.y(), currGrid.z())) {
       traceBackPath(currGrid, path, connComps, ccMazeIdx1, ccMazeIdx2);
-      dumpSearch(connComps,
+      dumpSearch(searchId,
+                 connCompsIn,
                  nextPin,
                  path,
                  true,
@@ -1204,7 +1384,8 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     expandWavefront(
         currGrid, dstMazeIdx1, dstMazeIdx2, centerPt, route_with_jumpers);
   }
-  dumpSearch(connComps,
+  dumpSearch(searchId,
+             connCompsIn,
              nextPin,
              path,
              false,

@@ -69,3 +69,5 @@ projectview.bazelproject
 tmp/
 
 .playwright-mcp
+
+top_gcd

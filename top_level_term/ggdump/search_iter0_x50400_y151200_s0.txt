@@ -1,0 +1,20 @@
+version 3
+iter 0
+routeBox 50400 151200 100800 201600
+searchId 0
+pin 
+success 1
+dim 175 232 6
+centerPt 75600 155215
+routeWithJumpers 0
+ccBoxIn 166 27 1 166 27 1
+ccBoxOut 8 27 1 166 27 1
+connComps 1
+cc 166 27 1 100800 155215 4
+srcs 1
+src 166 27 1 100800 155215 4
+dsts 1
+dst 8 27 1 50400 155215 4
+path 2
+p 8 27 1 50400 155215 4
+p 166 27 1 100800 155215 4

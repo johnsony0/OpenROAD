@@ -981,12 +981,22 @@ class FlexGridGraph
   // guides) to a text file when the env var DRT_DUMP_GG_DIR is set. Called at
   // the end of init(), so it fires once per route box per DR iteration.
   void dumpGridGraph() const;
+  // Binary snapshot of the full mutable node state as it stands on entry to
+  // one search() call, i.e. the exact input the A* sees. Unlike
+  // dumpGridGraph() this fires after mazeNetInit() has stamped the current
+  // net's guides and after every prior rip-up/route has moved the cost
+  // counters, so it is the version an accelerator must be validated against.
+  // Gated by DRT_DUMP_GG_DIR; writes <dir>/ggs_iter<n>_x<..>_y<..>_s<id>.bin
+  // alongside the search_*.txt of the same searchId. Format is documented at
+  // the definition in FlexGridGraph_maze.cpp.
+  void dumpSearchGraph(int searchId) const;
   // Companion to dumpGridGraph() that captures the routing-time state the
   // pre-routing snapshot omits: the source (srcs_) and destination (dsts_)
   // node sets and the resulting traceback path for a single search() call
   // (one pin-connection attempt). Also gated by DRT_DUMP_GG_DIR; writes one
   // file per search into the same directory.
-  void dumpSearch(const std::vector<FlexMazeIdx>& connComps,
+  void dumpSearch(int searchId,
+                  const std::vector<FlexMazeIdx>& connComps,
                   drPin* nextPin,
                   const std::vector<FlexMazeIdx>& path,
                   bool success,
@@ -1149,8 +1159,6 @@ class FlexGridGraph
   std::vector<bool> srcs_;
   std::vector<bool> dsts_;
   std::vector<bool> guides_;
-  // Monotonic per-worker counter used to make dumpSearch() filenames unique.
-  mutable int searchDumpId_ = 0;
   frVector<frCoord> xCoords_;
   frVector<frCoord> yCoords_;
   frVector<frLayerNum> zCoords_;
@@ -1184,8 +1192,9 @@ class FlexGridGraph
   mutable std::ofstream exp_file_;
   // openExpansionDump() only attempts to open once per grid graph.
   bool expDumpTried_{false};
-  // Counter of search() calls in this grid graph. Matches the _s<id> suffix of
-  // the dumpSearch() files, so a search block here pairs with a search dump.
+  // Counter of search() calls in this grid graph. Supplies the _s<id> suffix
+  // of the dumpSearch()/dumpSearchGraph() files, so a search block here pairs
+  // with a search dump and its node snapshot.
   int expSearchId_{0};
 
   void openExpansionDump();
