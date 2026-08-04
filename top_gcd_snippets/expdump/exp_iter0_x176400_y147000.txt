@@ -24138,6 +24138,8 @@ expanding 12 10 2 pt 176510 147140 cost 13153 pathCost 13043 lastDir W
   isExpandable result 0 reason noEdge
   isExpandable dir U from 12 10 2 to 12 10 3 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir W revDir D cameFromNext false
   isExpandable result 0 reason noEdge
+
+  
 search 4 pin req_msg[22] routeWithJumpers false connComps 1
 expanding 11 21 2 pt 176400 149660 cost 24910 pathCost 0 lastDir Unknown
   isExpandable dir D from 11 21 2 to 11 21 1 hasEdge false nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir U cameFromNext false
@@ -24152,7 +24154,6 @@ expanding 11 21 2 pt 176400 149660 cost 24910 pathCost 0 lastDir Unknown
   isExpandable result 1 reason ok
   isExpandable dir U from 11 21 2 to 11 21 3 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir Unknown revDir D cameFromNext false
   isExpandable result 1 reason ok
-  
 expanding 12 21 2 pt 176510 149660 cost 24911 pathCost 110 lastDir E
   isExpandable dir D from 12 21 2 to 12 21 1 hasEdge true nextIsSrc false nextPrevDir Unknown lastDir E revDir U cameFromNext false
   isExpandable result 1 reason ok
