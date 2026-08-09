@@ -1,0 +1,92 @@
+// via2via_forbidden_len.mem -- 80 words x 48 bits (12 hex digits per line)
+// via2ViaForbiddenLen, addr = z*8 + prevViaUp*4 + currViaUp*2 + isDirY
+//
+//   [47:36]  lo0  12b  inclusive lower bound
+//   [35:24]  hi0  12b  inclusive upper bound
+//   [23:12]  lo1  12b  inclusive lower bound
+//   [11:0]   hi1  12b  inclusive upper bound
+//
+//   forbidden when lo <= len <= hi in ANY of the 2 slots
+//   unused slot = lo 0xfff, hi 0x000 -- unsatisfiable, so no valid bit is needed
+//
+// load with $readmemh
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+00012cfff000
+0001a4fff000
+00019afff000
+00012cfff000
+08c118fff000
+fff000fff000
+08c118fff000
+fff000fff000
+0001a4fff000
+000140fff000
+000140fff000
+0001a4fff000
+fff000fff000
+08c118fff000
+fff000fff000
+08c118fff000
+000230fff000
+000230fff000
+0001a4fff000
+000140fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+000258fff000
+000258fff000
+000258fff000
+000258fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+000258fff000
+000258fff000
+000258fff000
+000258fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+000258320640
+000258320640
+000258fff000
+000258fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+000690fff000
+000690fff000
+000690fff000
+000690fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+000c80fff000
+000c80fff000
+000690fff000
+000690fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+000d20fff000
+000d20fff000
+000d20fff000
+000d20fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000
+fff000fff000

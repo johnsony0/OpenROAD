@@ -3,7 +3,25 @@
     "allow": [
       "Bash(grep -oE '[0-9]+$')",
       "Bash(awk '$1>=610 && $1<=700')",
-      "Bash([ -f \"$f\" ])"
+      "Bash([ -f \"$f\" ])",
+      "Bash(python initialization/gg_bin_to_csv.py top_gcd_snippets/ggdump/ggs_iter0_x176400_y147000_s2.bin --gg top_gcd_snippets/ggdump/gg_iter0_x176400_y147000.txt --out top_gcd_snippets/ggdump/ggs_iter0_s2_full.csv)",
+      "Bash(python initialization/gg_bin_to_csv.py top_gcd_snippets/ggdump/ggs_iter0_x176400_y147000_s2.bin --gg top_gcd_snippets/ggdump/gg_iter0_x176400_y147000.txt --interesting --out top_gcd_snippets/ggdump/ggs_iter0_s2_interesting.csv)",
+      "Bash(python initialization/gg_to_mem.py --gg top_gcd_snippets/ggdump/gg_iter0_x176400_y147000.txt --snapshot top_gcd_snippets/ggdump/ggs_iter0_x176400_y147000_s2.bin --forbidden top_gcd_snippets/ggdump/forbidden_tables.txt --outdir initialization/mem)",
+      "Bash(awk '$1==\"via2ViaForbiddenLen\"||$1==\"viaForbiddenTurnLen\"{print $1, $4}' top_gcd_snippets/ggdump/forbidden_tables.txt)",
+      "Bash(awk '\\($1==\"via2ViaForbiddenLen\"||$1==\"viaForbiddenTurnLen\"\\) && $4>1' top_gcd_snippets/ggdump/forbidden_tables.txt)",
+      "Bash(python -)",
+      "Bash(python initialization/gg_to_mem.py --gg top_gcd_snippets/ggdump/gg_iter0_x176400_y147000.txt --forbidden top_gcd_snippets/ggdump/forbidden_tables.txt --outdir C:/Users/JOHNSO~1/AppData/Local/Temp/claude/C---School-NYU-realise-labs-OpenROAD/f8fda0bc-be20-447b-a5d5-1f9552a3ef07/scratchpad/memcheck)",
+      "Bash(chmod +x initialization/scan_costdump.sh)",
+      "Bash(bash initialization/scan_costdump.sh top_gcd_snippets/costdump --limit 3 --values)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(bash initialization/scan_costdump.sh top_gcd_snippets/costdump/cost_iter0_x176400_y147000.txt --only --check 'base:costs.drc > 0' --check 'base:flags.marker != 0' --check 'next:currDir == Unknown' --check 'next:tLen != 0' --limit 2)",
+      "Bash(bash initialization/scan_costdump.sh --help)",
+      "Bash(bash initialization/scan_costdump.sh --limit 0)",
+      "Bash(bash initialization/scan_costdump.sh nope/)",
+      "Bash(bash initialization/scan_costdump.sh --only --check 'next:v2v ~ 0')",
+      "Bash(bash initialization/scan_costdump.sh --only --check 'est:forbidden != 0')",
+      "Bash(awk --version)",
+      "Bash(bash initialization/scan_costdump.sh top_gcd_snippets/costdump --limit 2 --values)"
     ]
   }
 }

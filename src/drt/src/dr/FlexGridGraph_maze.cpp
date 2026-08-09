@@ -114,11 +114,33 @@ void FlexGridGraph::openCostDump()
   }
   frMIdx xDim, yDim, zDim;
   getDim(xDim, yDim, zDim);
-  cost_file_ << "version 1\n";
+  // version 3 moves the coords onto the "est" record only -- they now name the
+  // neighbour being expanded to, and the "base"/"next" records (the old
+  // "coords"/" coords") dropped their copy of the expanded-from node. version 3
+  // also adds the via2via/turn-len inputs to "next". version 2 added the "est"
+  // record; a version 1 file has the other three.
+  cost_file_ << "version 3\n";
   cost_file_ << fmt::format("iter {}\n", iter);
   cost_file_ << fmt::format(
       "routeBox {} {} {} {}\n", rb.xMin(), rb.yMin(), rb.xMax(), rb.yMax());
   cost_file_ << fmt::format("dim {} {} {}\n", xDim, yDim, zDim);
+  // Record types. One "expanding" line per popped node, then per direction the
+  // A* expands in, one "est"/"base"/" next" trio -- in that order, since
+  // expand() calls getEstCost() before getNextPathCost(), which calls
+  // getCosts(). The trio is keyed by dir: "est" coords name the neighbour being
+  // expanded TO, "base"/" next" describe that same edge and carry no coords
+  // (the node expanded FROM is the preceding "expanding" line). So f = g + h
+  // for one edge is finalNextCost + finalEstCost of one trio.
+  cost_file_ << "# expanding <x> <y> <z> pt <xdbu> <ydbu> cost <f> pathCost <g> "
+                "lastDir <dir>\n";
+  cost_file_ << "# est coords <nx> <ny> <nz> dir <dir> manX <dx> manY <dy> manZ "
+                "<dz> bendCnt <turns> forbidden <penalty> finalEstCost <h>\n";
+  cost_file_ << "# base dir <dir> edgeLen <len> flags[...] costs[...] "
+                "totalBaseCost <c>\n";
+  cost_file_ << "#  next currPathCosts <g0> currDir <dir> nextDir <dir> "
+                "edgeLength <len> turnCost <t> v2v <c> vtlen <c> finalNextCost "
+                "<g> vlenX <len> vlenY <len> currViaUp <0|1> prevViaUp <0|1> "
+                "tLen <len> tLenViaUp <0|1>\n";
 }
 
 void FlexGridGraph::printExpansion(const FlexWavefrontGrid& currGrid,
@@ -424,7 +446,32 @@ frCost FlexGridGraph::getEstCost(const FlexMazeIdx& src,
       forbiddenPenalty = 2 * ggDRCCost_ * edgeLength;
     }
   }
-  return (minCostX + minCostY + minCostZ + bendCnt + forbiddenPenalty);
+
+  const frCost estCost
+      = minCostX + minCostY + minCostZ + bendCnt + forbiddenPenalty;
+
+  if (cost_file_.is_open()) {
+    // gridX/gridY/gridZ, not src: these were advanced by getNextGrid(), so they
+    // name the neighbour this estimate is for -- which is what the estimate is
+    // computed from. This is the only line of the trio that carries coords; the
+    // "base"/"next" lines that follow it are for the same edge, keyed by dir,
+    // and the node expanded from is on the preceding "expanding" line.
+    cost_file_ << fmt::format(
+        "est coords {} {} {} dir {} manX {} manY {} manZ {} bendCnt {} "
+        "forbidden {} finalEstCost {}\n",
+        gridX,
+        gridY,
+        gridZ,
+        dir,
+        minCostX,
+        minCostY,
+        minCostZ,
+        bendCnt,
+        forbiddenPenalty,
+        estCost);
+  }
+
+  return estCost;
 }
 
 frDirEnum FlexGridGraph::getLastDir(
@@ -512,6 +559,13 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
   auto lNum = getLayerNum(currGrid.z());
   auto layer = getTech()->getLayer(lNum);
 
+  // Hoisted out of the via2via block below so the cost dump can print them; the
+  // block reads them but never writes them. Only meaningful when dir is U/D.
+  frCoord currVLengthX = 0;
+  frCoord currVLengthY = 0;
+  currGrid.getVLength(currVLengthX, currVLengthY);
+  const bool isCurrViaUp = (dir == frDirEnum::U);
+
   if (currDir != dir && currDir != frDirEnum::UNKNOWN) {
     // original
     ++nextPathCost;
@@ -520,10 +574,6 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
 
   // via2viaForbiddenLen enablement
   if (dir == frDirEnum::U || dir == frDirEnum::D) {
-    frCoord currVLengthX = 0;
-    frCoord currVLengthY = 0;
-    currGrid.getVLength(currVLengthX, currVLengthY);
-    bool isCurrViaUp = (dir == frDirEnum::U);
     bool isForbiddenVia2Via = false;
     // check only y
     if (currVLengthX == 0 && currVLengthY > 0) {
@@ -666,19 +716,29 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
                            route_with_jumpers);
 
   if (cost_file_.is_open()) {
-    cost_file_ << fmt::format(" coords {} {} {} currPathCosts {} currDir {} nextDir {} edgeLength {} turnCost {} v2v {} vtlen {} finalNextCost {} \n",
-                              gridX,
-                              gridY,
-                              gridZ,
-                              initialCost,              
-                              currDir,           
-                              dir,               
-                              edgeLength,      
-                              turnCost,                    
-                              isForbiddenVia2ViaCost,        
-                              isForbiddenViaTLenCost, 
-                              nextPathCost          
-                              );           
+    // No coords: gridX/gridY/gridZ are the node being expanded from, already on
+    // the "expanding" line; the neighbour is on the "est" line of this trio.
+    // vlenX/vlenY/currViaUp/prevViaUp are the via2via inputs, tLen/tLenViaUp
+    // the via-turn-len inputs -- both only meaningful for the branch that ran,
+    // and tLen stays at frCoord max when no turn-len check was made.
+    cost_file_ << fmt::format(
+        " next currPathCosts {} currDir {} nextDir {} edgeLength {} turnCost {} "
+        "v2v {} vtlen {} finalNextCost {} vlenX {} vlenY {} currViaUp {} "
+        "prevViaUp {} tLen {} tLenViaUp {}\n",
+        initialCost,
+        currDir,
+        dir,
+        edgeLength,
+        turnCost,
+        isForbiddenVia2ViaCost,
+        isForbiddenViaTLenCost,
+        nextPathCost,
+        currVLengthX,
+        currVLengthY,
+        isCurrViaUp ? 1 : 0,
+        currGrid.isPrevViaUp() ? 1 : 0,
+        tLength,
+        isTLengthViaUp ? 1 : 0);
   }
 
   return nextPathCost;
@@ -718,15 +778,14 @@ frCost FlexGridGraph::getCosts(frMIdx gridX,
   frCost totalBaseCost = c_wire + c_grid + c_drc + c_marker + c_shape + c_block + c_guide;
 
   if (cost_file_.is_open()) {
+    // No coords: gridX/gridY/gridZ are the node being expanded from, already on
+    // the "expanding" line; the neighbour is on the "est" line of this trio.
     cost_file_ << fmt::format(
-        "coords {} {} {} dir {} edgeLen {} "
+        "base dir {} edgeLen {} "
         "flags[grid:{} ap:{} drc:{} marker:{} shape:{} block:{} out_guide:{}] "
         "costs[wire:{} grid:{} drc:{} marker:{} shape:{} block:{} guide:{}] "
         "totalBaseCost {}\n",
-        gridX,
-        gridY,
-        gridZ,
-        static_cast<int>(dir),
+        dir,
         edgeLength,
         gridCost ? 1 : 0,
         apCost ? 1 : 0,

@@ -1,0 +1,16 @@
+// gg_zcoords.mem -- 10 words x 20 bits (5 hex digits per line)
+// zHeights (accumulated z coordinate) in DBU, indexed by z
+//
+//   [19:0]  zHeights[z]  20b  signed, range 1120..48880 (needs 17b)
+//
+// load with $readmemh
+00460
+00a50
+00eb0
+01770
+02030
+028f0
+041f0
+05af0
+08cf0
+0bef0

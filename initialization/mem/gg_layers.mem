@@ -1,0 +1,21 @@
+// gg_layers.mem -- 10 words x 16 bits (4 hex digits per line)
+// per-layer direction and minWidth, indexed by z
+//
+//   [15:14]  pad        2b  zero
+//   [13:12]  dir        2b  odb::dbTechLayerDir: 0=NONE, 1=HORIZONTAL, 2=VERTICAL
+//   [11:0]   minWidth  12b  DBU, range 140..1600 (needs 11b)
+//
+//   the dump's 'layerDir(0=H,1=V,2=NONE)' header is mislabelled;
+//   the values are the raw odb enum, so 1 = HORIZONTAL, 2 = VERTICAL
+//
+// load with $readmemh
+108c
+208c
+108c
+2118
+1118
+2118
+1320
+2320
+1640
+2640
