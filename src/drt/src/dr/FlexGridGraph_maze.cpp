@@ -36,6 +36,24 @@ const bool expDumpAlways = false;
 // process, and it must already exist.
 const char* const expDumpDefaultDir = ".";
 
+static bool dumpIterAllowed(const int iter)
+{
+  const char* only_iter = std::getenv("DRT_DUMP_ITER");
+  if (only_iter == nullptr || only_iter[0] == '\0') {
+    only_iter = std::getenv("DRT_DUMP_EXP_ITER");
+  }
+  if (only_iter != nullptr && only_iter[0] != '\0'
+      && std::atoi(only_iter) != iter) {
+    return false;
+  }
+  const char* min_iter = std::getenv("DRT_DUMP_MIN_ITER");
+  if (min_iter != nullptr && min_iter[0] != '\0'
+      && iter < std::atoi(min_iter)) {
+    return false;
+  }
+  return true;
+}
+
 // Companion to dumpGridGraph()/dumpSearch() recording which expansions the maze
 // search was allowed to make: the inputs and verdict of every isExpandable()
 // call. Gated by DRT_DUMP_EXP_DIR (kept separate from DRT_DUMP_GG_DIR because
@@ -59,12 +77,23 @@ void FlexGridGraph::openExpansionDump()
   }
   const char* dir = have_env_dir ? env_dir : expDumpDefaultDir;
   const int iter = drWorker_->getDRIter();
+  if (!dumpIterAllowed(iter)) {
+    return;
+  }
   const char* iter_filter = std::getenv("DRT_DUMP_EXP_ITER");
   if (iter_filter != nullptr && iter_filter[0] != '\0'
       && std::atoi(iter_filter) != iter) {
     return;
   }
   const odb::Rect& rb = drWorker_->getRouteBox();
+  /*const char* env_x_str = std::getenv("DR_DUMP_X");
+  if (env_x_str != nullptr && env_x_str[0] != '\0' && std::atoi(env_x_str) != rb.xMin()) {
+    return;
+  }
+  const char* env_y_str = std::getenv("DR_DUMP_Y");
+  if (env_y_str != nullptr && env_y_str[0] != '\0' && std::atoi(env_y_str) != rb.yMin()) {
+    return;
+  }*/
   const std::string path = std::string(dir) + "/exp_iter" + std::to_string(iter)
                            + "_x" + std::to_string(rb.xMin()) + "_y"
                            + std::to_string(rb.yMin()) + ".txt";
@@ -98,12 +127,28 @@ void FlexGridGraph::openCostDump()
   }
   const char* dir = have_env_dir ? env_dir : expDumpDefaultDir;
   const int iter = drWorker_->getDRIter();
+  if (!dumpIterAllowed(iter)) {
+    return;
+  }
   const char* iter_filter = std::getenv("DRT_DUMP_EXP_ITER");
   if (iter_filter != nullptr && iter_filter[0] != '\0'
       && std::atoi(iter_filter) != iter) {
     return;
   }
   const odb::Rect& rb = drWorker_->getRouteBox();
+  /*const char* env_x_str = std::getenv("DR_DUMP_X");
+  const char* env_y_str = std::getenv("DR_DUMP_Y");
+  logger_->info(utl::DRT, 999, "DEBUG: DR_DUMP_X env = {}, routeBox xMin = {}", 
+                env_x_str ? env_x_str : "NULL", rb.xMin());
+  logger_->info(utl::DRT, 999, "DEBUG: DR_DUMP_Y env = {}, routeBox yMin = {}", 
+                env_y_str ? env_y_str : "NULL", rb.yMin());
+  if (env_x_str != nullptr && env_x_str[0] != '\0' && std::atoi(env_x_str) != rb.xMin()) {
+    return;
+  }
+  if (env_y_str != nullptr && env_y_str[0] != '\0' && std::atoi(env_y_str) != rb.yMin()) {
+    return;
+  }*/
+
   const std::string path = std::string(dir) + "/cost_iter" + std::to_string(iter)
                            + "_x" + std::to_string(rb.xMin()) + "_y"
                            + std::to_string(rb.yMin()) + ".txt";
@@ -114,29 +159,17 @@ void FlexGridGraph::openCostDump()
   }
   frMIdx xDim, yDim, zDim;
   getDim(xDim, yDim, zDim);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   // version 3 moves the coords onto the "est" record only -- they now name the
   // neighbour being expanded to, and the "base"/"next" records (the old
   // "coords"/" coords") dropped their copy of the expanded-from node. version 3
   // also adds the via2via/turn-len inputs to "next". version 2 added the "est"
   // record; a version 1 file has the other three.
   cost_file_ << "version 3\n";
-=======
-  // version 2 adds the "est" record; a version 1 file has the other three.
-  cost_file_ << "version 2\n";
->>>>>>> Stashed changes
-=======
-  // version 2 adds the "est" record; a version 1 file has the other three.
-  cost_file_ << "version 2\n";
->>>>>>> Stashed changes
   cost_file_ << fmt::format("iter {}\n", iter);
   cost_file_ << fmt::format(
       "routeBox {} {} {} {}\n", rb.xMin(), rb.yMin(), rb.xMax(), rb.yMax());
   cost_file_ << fmt::format("dim {} {} {}\n", xDim, yDim, zDim);
   // Record types. One "expanding" line per popped node, then per direction the
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   // A* expands in, one "est"/"base"/" next" trio -- in that order, since
   // expand() calls getEstCost() before getNextPathCost(), which calls
   // getCosts(). The trio is keyed by dir: "est" coords name the neighbour being
@@ -153,26 +186,6 @@ void FlexGridGraph::openCostDump()
                 "edgeLength <len> turnCost <t> v2v <c> vtlen <c> finalNextCost "
                 "<g> vlenX <len> vlenY <len> currViaUp <0|1> prevViaUp <0|1> "
                 "tLen <len> tLenViaUp <0|1>\n";
-=======
-=======
->>>>>>> Stashed changes
-  // A* expands in, one "est"/"coords"/" coords" trio -- in that order, since
-  // expand() calls getEstCost() before getNextPathCost(), which calls
-  // getCosts(). All four key on the node being expanded FROM, so f = g + h for
-  // one edge is finalNextCost + finalEstCost of the trio sharing coords + dir.
-  cost_file_ << "# expanding <x> <y> <z> pt <xdbu> <ydbu> cost <f> pathCost <g> "
-                "lastDir <dir>\n";
-  cost_file_ << "# est <x> <y> <z> dir <dir> manX <dx> manY <dy> manZ <dz> "
-                "bendCnt <turns> forbidden <penalty> finalEstCost <h>\n";
-  cost_file_ << "# coords <x> <y> <z> dir <dir> edgeLen <len> flags[...] "
-                "costs[...] totalBaseCost <c>\n";
-  cost_file_ << "#  coords <x> <y> <z> currPathCosts <g0> currDir <dir> nextDir "
-                "<dir> edgeLength <len> turnCost <t> v2v <c> vtlen <c> "
-                "finalNextCost <g>\n";
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 void FlexGridGraph::printExpansion(const FlexWavefrontGrid& currGrid,
@@ -483,8 +496,6 @@ frCost FlexGridGraph::getEstCost(const FlexMazeIdx& src,
       = minCostX + minCostY + minCostZ + bendCnt + forbiddenPenalty;
 
   if (cost_file_.is_open()) {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     // gridX/gridY/gridZ, not src: these were advanced by getNextGrid(), so they
     // name the neighbour this estimate is for -- which is what the estimate is
     // computed from. This is the only line of the trio that carries coords; the
@@ -496,23 +507,6 @@ frCost FlexGridGraph::getEstCost(const FlexMazeIdx& src,
         gridX,
         gridY,
         gridZ,
-=======
-=======
->>>>>>> Stashed changes
-    // src, not the gridX/gridY/gridZ above: those were advanced by
-    // getNextGrid(), so they name the neighbour. Keying the line to src + dir
-    // makes it line up with the getCosts()/getNextPathCost() lines of the same
-    // expand() call, which both print the node being expanded from.
-    cost_file_ << fmt::format(
-        "est coords {} {} {} dir {} manX {} manY {} manZ {} bendCnt {} "
-        "forbidden {} finalEstCost {}\n",
-        src.x(),
-        src.y(),
-        src.z(),
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         dir,
         minCostX,
         minCostY,
@@ -1135,6 +1129,17 @@ void FlexGridGraph::dumpSearchGraph(const int searchId) const
   }
   const odb::Rect& rb = drWorker_->getRouteBox();
   const int iter = drWorker_->getDRIter();
+  if (!dumpIterAllowed(iter)) {
+    return;
+  }
+  /*const char* env_x_str = std::getenv("DR_DUMP_X");
+  if (env_x_str != nullptr && env_x_str[0] != '\0' && std::atoi(env_x_str) != rb.xMin()) {
+    return;
+  }
+  const char* env_y_str = std::getenv("DR_DUMP_Y");
+  if (env_y_str != nullptr && env_y_str[0] != '\0' && std::atoi(env_y_str) != rb.yMin()) {
+    return;
+  }*/
   const std::string path = std::string(dir) + "/ggs_iter" + std::to_string(iter)
                            + "_x" + std::to_string(rb.xMin()) + "_y"
                            + std::to_string(rb.yMin()) + "_s"
@@ -1251,6 +1256,17 @@ void FlexGridGraph::dumpSearch(const int searchId,
   }
   const odb::Rect& rb = drWorker_->getRouteBox();
   const int iter = drWorker_->getDRIter();
+  if (!dumpIterAllowed(iter)) {
+    return;
+  }
+  /*const char* env_x_str = std::getenv("DR_DUMP_X");
+  if (env_x_str != nullptr && env_x_str[0] != '\0' && std::atoi(env_x_str) != rb.xMin()) {
+    return;
+  }
+  const char* env_y_str = std::getenv("DR_DUMP_Y");
+  if (env_y_str != nullptr && env_y_str[0] != '\0' && std::atoi(env_y_str) != rb.yMin()) {
+    return;
+  }*/
   const std::string path_str = std::string(dir) + "/search_iter"
                                + std::to_string(iter) + "_x"
                                + std::to_string(rb.xMin()) + "_y"

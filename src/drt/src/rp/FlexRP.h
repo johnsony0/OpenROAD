@@ -34,8 +34,8 @@ class FlexRP
 
   // Dumps the forbidden-length lookup tables built by prep() to a text file
   // when the env var DRT_DUMP_GG_DIR is set. These tables are global and
-  // immutable after prep(), so a single file per run accompanies the per-route-
-  // box grid-graph dumps written by FlexGridGraph::dumpGridGraph().
+  // immutable after prep(), so a single file per run accompanies the per-search
+  // grid-graph dumps written by FlexGridGraph::dumpSearchGraph().
   void dumpForbiddenTables();
 
   // functions

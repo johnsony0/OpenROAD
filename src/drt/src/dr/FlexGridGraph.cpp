@@ -457,7 +457,7 @@ void FlexGridGraph::init(const frDesign* design,
   initEdges(
       design, xMap, yMap, zMap, routeBBox, initDR);  // add edges and edgeCost
   ap_locs_.clear();
-  dumpGridGraph();
+  // dumpGridGraph();
 }
 
 // Dumps the full initialized grid-graph state for one route box to a text file.
