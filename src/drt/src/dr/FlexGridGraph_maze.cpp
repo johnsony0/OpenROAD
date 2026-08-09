@@ -114,17 +114,29 @@ void FlexGridGraph::openCostDump()
   }
   frMIdx xDim, yDim, zDim;
   getDim(xDim, yDim, zDim);
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   // version 3 moves the coords onto the "est" record only -- they now name the
   // neighbour being expanded to, and the "base"/"next" records (the old
   // "coords"/" coords") dropped their copy of the expanded-from node. version 3
   // also adds the via2via/turn-len inputs to "next". version 2 added the "est"
   // record; a version 1 file has the other three.
   cost_file_ << "version 3\n";
+=======
+  // version 2 adds the "est" record; a version 1 file has the other three.
+  cost_file_ << "version 2\n";
+>>>>>>> Stashed changes
+=======
+  // version 2 adds the "est" record; a version 1 file has the other three.
+  cost_file_ << "version 2\n";
+>>>>>>> Stashed changes
   cost_file_ << fmt::format("iter {}\n", iter);
   cost_file_ << fmt::format(
       "routeBox {} {} {} {}\n", rb.xMin(), rb.yMin(), rb.xMax(), rb.yMax());
   cost_file_ << fmt::format("dim {} {} {}\n", xDim, yDim, zDim);
   // Record types. One "expanding" line per popped node, then per direction the
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   // A* expands in, one "est"/"base"/" next" trio -- in that order, since
   // expand() calls getEstCost() before getNextPathCost(), which calls
   // getCosts(). The trio is keyed by dir: "est" coords name the neighbour being
@@ -141,6 +153,26 @@ void FlexGridGraph::openCostDump()
                 "edgeLength <len> turnCost <t> v2v <c> vtlen <c> finalNextCost "
                 "<g> vlenX <len> vlenY <len> currViaUp <0|1> prevViaUp <0|1> "
                 "tLen <len> tLenViaUp <0|1>\n";
+=======
+=======
+>>>>>>> Stashed changes
+  // A* expands in, one "est"/"coords"/" coords" trio -- in that order, since
+  // expand() calls getEstCost() before getNextPathCost(), which calls
+  // getCosts(). All four key on the node being expanded FROM, so f = g + h for
+  // one edge is finalNextCost + finalEstCost of the trio sharing coords + dir.
+  cost_file_ << "# expanding <x> <y> <z> pt <xdbu> <ydbu> cost <f> pathCost <g> "
+                "lastDir <dir>\n";
+  cost_file_ << "# est <x> <y> <z> dir <dir> manX <dx> manY <dy> manZ <dz> "
+                "bendCnt <turns> forbidden <penalty> finalEstCost <h>\n";
+  cost_file_ << "# coords <x> <y> <z> dir <dir> edgeLen <len> flags[...] "
+                "costs[...] totalBaseCost <c>\n";
+  cost_file_ << "#  coords <x> <y> <z> currPathCosts <g0> currDir <dir> nextDir "
+                "<dir> edgeLength <len> turnCost <t> v2v <c> vtlen <c> "
+                "finalNextCost <g>\n";
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 }
 
 void FlexGridGraph::printExpansion(const FlexWavefrontGrid& currGrid,
@@ -451,6 +483,8 @@ frCost FlexGridGraph::getEstCost(const FlexMazeIdx& src,
       = minCostX + minCostY + minCostZ + bendCnt + forbiddenPenalty;
 
   if (cost_file_.is_open()) {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // gridX/gridY/gridZ, not src: these were advanced by getNextGrid(), so they
     // name the neighbour this estimate is for -- which is what the estimate is
     // computed from. This is the only line of the trio that carries coords; the
@@ -462,6 +496,23 @@ frCost FlexGridGraph::getEstCost(const FlexMazeIdx& src,
         gridX,
         gridY,
         gridZ,
+=======
+=======
+>>>>>>> Stashed changes
+    // src, not the gridX/gridY/gridZ above: those were advanced by
+    // getNextGrid(), so they name the neighbour. Keying the line to src + dir
+    // makes it line up with the getCosts()/getNextPathCost() lines of the same
+    // expand() call, which both print the node being expanded from.
+    cost_file_ << fmt::format(
+        "est coords {} {} {} dir {} manX {} manY {} manZ {} bendCnt {} "
+        "forbidden {} finalEstCost {}\n",
+        src.x(),
+        src.y(),
+        src.z(),
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
         dir,
         minCostX,
         minCostY,
