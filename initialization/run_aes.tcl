@@ -6,8 +6,8 @@
 # export DRT_DUMP_COST_DIR="top_aes/costdump"
 # export DR_DUMP_X="520800"
 # export DR_DUMP_Y="814800"
-# export DRT_DUMP_MIN_ITER=3   # skip iter 0 entirely, start dumping at iter 1
-# export DRT_DUMP_ITER=3      # dump only this one iteration
+# export DRT_DUMP_MIN_ITER=100   # skip iter 0 entirely, start dumping at iter 1
+# export DRT_DUMP_ITER=100      # dump only this one iteration
 # "$OR" -no_init -exit initialization/run_aes.tcl
 
 read_lef "test/Nangate45/Nangate45_tech.lef"

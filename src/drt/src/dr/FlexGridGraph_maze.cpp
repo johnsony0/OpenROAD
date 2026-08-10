@@ -485,6 +485,7 @@ frCost FlexGridGraph::getEstCost(const FlexMazeIdx& src,
     }
   }
   if (isForbidden) {
+    logger_->info(utl::DRT, 622, "DEBUG: Forbidden edge found at iter {}, x: {}, y: {}, z: {}", drWorker_->getDRIter(), gridX, gridY, gridZ);
     if (drWorker_->getDRIter() >= 3) {
       forbiddenPenalty = 2 * ggMarkerCost_ * edgeLength;
     } else {
