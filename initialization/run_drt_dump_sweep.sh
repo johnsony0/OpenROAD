@@ -97,8 +97,8 @@ run_drt_only() {
       cell_lef="$root_dir/test/Nangate45/Nangate45_stdcell.lef"
       ;;
     asap7)
-      tech_lef="$root_dir/test/asap7/asap7_tech.lef"
-      cell_lef="$root_dir/test/asap7/asap7_stdcell.lef"
+      tech_lef="$root_dir/test/asap7/asap7_tech_1x_201209.lef"
+      cell_lef="$root_dir/test/asap7/asap7sc7p5t_28_R_1x_220121a.lef"
       ;;
     sky130)
       tech_lef="$root_dir/test/sky130hd/sky130hd.tlef"
@@ -116,6 +116,10 @@ run_drt_only() {
   if [[ "$label" == "gg_dump" ]]; then
     data_dir="$dump_dir"
   fi
+  local timing_dir=""
+  if [[ "$label" == ggdump_thread* ]]; then
+    timing_dir="$dump_dir"
+  fi
 
   echo "[$platform/$design] $label"
   echo "  Dumps   -> $dump_dir"
@@ -126,6 +130,7 @@ run_drt_only() {
     DRT_DUMP_GG_DIR="$dump_dir" \
     DRT_DUMP_GG_DATA_DIR="$data_dir" \
     DRT_DUMP_GG_SUMMARY_DIR= \
+    DRT_DUMP_GG_TIMING_DIR="$timing_dir" \
     DRT_DUMP_EXP_DIR= \
     DRT_DUMP_COST_DIR= \
     DRT_DUMP_MIN_ITER="$iter_filter" \
@@ -181,5 +186,8 @@ while read -r platform design flow; do
 
   run_sweep "$platform" "$design"
 done <<'EOF'
-sky130 gcd gcd_sky130hd.tcl
+asap7 gcd gcd_asap7.tcl
+asap7 aes aes_asap7.tcl
+sky130 ibex ibex_sky130hd.tcl
+sky130 jpeg jpeg_sky130hd.tcl
 EOF

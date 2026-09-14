@@ -737,7 +737,7 @@ void FlexDR::processWorkersBatch(
               .count();
   }
   const auto batchEndTime = std::chrono::steady_clock::now();
-  const char* dumpDir = std::getenv("DRT_DUMP_GG_SUMMARY_DIR");
+  const char* dumpDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
   if (dumpDir != nullptr && dumpDir[0] != '\0') {
     const double runtimeMs
         = std::chrono::duration<double, std::milli>(batchEndTime
