@@ -435,6 +435,24 @@ void FlexGridGraph::initEdges(const frDesign* design,
   }
 }
 
+static bool dumpIterAllowed(const int iter)
+{
+  const char* only_iter = std::getenv("DRT_DUMP_ITER");
+  if (only_iter == nullptr || only_iter[0] == '\0') {
+    only_iter = std::getenv("DRT_DUMP_EXP_ITER");
+  }
+  if (only_iter != nullptr && only_iter[0] != '\0'
+      && std::atoi(only_iter) != iter) {
+    return false;
+  }
+  const char* min_iter = std::getenv("DRT_DUMP_MIN_ITER");
+  if (min_iter != nullptr && min_iter[0] != '\0'
+      && iter < std::atoi(min_iter)) {
+    return false;
+  }
+  return true;
+}
+
 // initialization: update grid graph topology, does not assign edge cost
 void FlexGridGraph::init(const frDesign* design,
                          const odb::Rect& routeBBox,
@@ -457,7 +475,11 @@ void FlexGridGraph::init(const frDesign* design,
   initEdges(
       design, xMap, yMap, zMap, routeBBox, initDR);  // add edges and edgeCost
   ap_locs_.clear();
-  // dumpGridGraph();
+  const int iter = drWorker_->getDRIter();
+  if (!dumpIterAllowed(iter)) {
+    return;
+  }
+  dumpGridGraph();
 }
 
 // Dumps the full initialized grid-graph state for one route box to a text file.
@@ -472,7 +494,7 @@ void FlexGridGraph::init(const frDesign* design,
 // search() if you need the exact per-search graph.
 void FlexGridGraph::dumpGridGraph() const
 {
-  const char* dir = std::getenv("DRT_DUMP_GG_DIR");
+  const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
   if (dir == nullptr || dir[0] == '\0') {
     return;
   }

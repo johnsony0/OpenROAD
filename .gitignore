@@ -72,3 +72,10 @@ tmp/
 
 top_gcd
 top_aes
+top_gcd_nonpref
+top_gcd_1thread
+
+a_star_dumps
+gcd
+top_gcd_snippets
+top_level_term

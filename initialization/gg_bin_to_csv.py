@@ -12,6 +12,11 @@ the magnitudes and the five NDR fields.
         --gg  work/ggdump/gg_iter1_x136800_y136800.txt \
         --out work/ggdump/ggs_iter1_x136800_y136800_s1.csv
 
+         python3 initialization/gg_bin_to_csv.py \
+        top_gcd/ggdump/ggs_iter1_x50400_y50400_s3.bin \
+        --gg  top_gcd/ggdump/gg_iter1_x50400_y50400.txt \
+        --out work/ggs_iter1_x50400_y50400_s3.csv
+
 --gg is optional and only adds the xdbu/ydbu/layer columns, which the binary
 does not carry; without it those are left empty.
 

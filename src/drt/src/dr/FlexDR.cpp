@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <atomic>
 #include <chrono>
+#include <cstdlib>
 #include <cmath>
 #include <cstdint>
 #include <cstdio>
@@ -711,18 +712,76 @@ void FlexDR::processWorkersBatch(
 {
   const int num_markers = getDesign()->getTopBlock()->getNumMarkers();
   ThreadException exception;
+  std::vector<double> workerRuntimeMs(workers_batch.size(), 0.0);
+  int actualThreads = 0;
+  const auto batchStartTime = std::chrono::steady_clock::now();
 #pragma omp parallel for schedule(dynamic)
   for (int i = 0; i < (int) workers_batch.size(); i++) {  // NOLINT
+#pragma omp critical
+    { actualThreads = omp_get_num_threads(); }
+    const auto workerStartTime = std::chrono::steady_clock::now();
     try {
       workers_batch[i]->main(getDesign());
 #pragma omp critical
-      {
-        if (router_cfg_->VERBOSE > 0) {
-          printIterationProgress(logger_, iter_prog, num_markers);
-        }
+    {
+      if (router_cfg_->VERBOSE > 0) {
+        printIterationProgress(logger_, iter_prog, num_markers);
       }
+    }
     } catch (...) {
       exception.capture();
+    }
+    workerRuntimeMs[i]
+        = std::chrono::duration<double, std::milli>(
+              std::chrono::steady_clock::now() - workerStartTime)
+              .count();
+  }
+  const auto batchEndTime = std::chrono::steady_clock::now();
+  const char* dumpDir = std::getenv("DRT_DUMP_GG_SUMMARY_DIR");
+  if (dumpDir != nullptr && dumpDir[0] != '\0') {
+    const double runtimeMs
+        = std::chrono::duration<double, std::milli>(batchEndTime
+                                                     - batchStartTime)
+              .count();
+    logger_->info(DRT, 620, "searchBatchRuntimeMs {}", runtimeMs);
+
+    double totalAstarRuntimeMs = 0.0;
+    double maxAstarRuntimeMs = 0.0;
+    double totalWorkerRuntimeMs = 0.0;
+    double maxWorkerRuntimeMs = 0.0;
+    int totalSearchCount = 0;
+    for (int i = 0; i < (int) workers_batch.size(); i++) {
+      const double workerAstarRuntimeMs
+          = workers_batch[i]->getAstarRuntimeMs();
+      totalAstarRuntimeMs += workerAstarRuntimeMs;
+      maxAstarRuntimeMs = std::max(maxAstarRuntimeMs, workerAstarRuntimeMs);
+      totalWorkerRuntimeMs += workerRuntimeMs[i];
+      maxWorkerRuntimeMs = std::max(maxWorkerRuntimeMs, workerRuntimeMs[i]);
+      totalSearchCount += workers_batch[i]->getAstarSearchCount();
+    }
+    const std::string summaryPath
+      = std::string(dumpDir) + "/astar_batch_iter"
+          + std::to_string(iter_) + "_b" + std::to_string(astarBatchId_++)
+          + ".txt";
+    std::ofstream summary(summaryPath);
+    if (summary.is_open() && actualThreads > 0) {
+      summary << "iter " << iter_ << "\n";
+      summary << "drBoxCount " << workers_batch.size() << "\n";
+      summary << "actualThreads " << actualThreads << "\n";
+      summary << "searchCount " << totalSearchCount << "\n";
+      summary << "totalAstarRuntimeMs " << totalAstarRuntimeMs << "\n";
+      summary << "maxAstarRuntimeMs " << maxAstarRuntimeMs << "\n";
+      summary << "idealParallelAstarRuntimeMs "
+              << totalAstarRuntimeMs / actualThreads << "\n";
+      summary << "astarMakespanLowerBoundMs " << maxAstarRuntimeMs << "\n";
+      summary << "totalWorkerRuntimeMs " << totalWorkerRuntimeMs << "\n";
+      summary << "maxWorkerRuntimeMs " << maxWorkerRuntimeMs << "\n";
+      summary << "idealParallelWorkerRuntimeMs "
+              << totalWorkerRuntimeMs / actualThreads << "\n";
+      summary << "workerMakespanLowerBoundMs " << maxWorkerRuntimeMs << "\n";
+      summary << "measuredBatchWallRuntimeMs " << runtimeMs << "\n";
+      summary << "astarParallelEfficiency "
+              << totalAstarRuntimeMs / (runtimeMs * actualThreads) << "\n";
     }
   }
   exception.rethrow();
@@ -1966,6 +2025,7 @@ int FlexDR::main()
   frTime t;
   bool incremental = false;
   bool hasFixed = false;
+  int lastIteration = -1;
   for (const auto& net : getDesign()->getTopBlock()->getNets()) {
     incremental |= net->hasInitialRouting();
     hasFixed |= net->isFixed();
@@ -1995,6 +2055,7 @@ int FlexDR::main()
       }
     }
     searchRepair(args);
+    lastIteration = iter_;
     if (getDesign()->getTopBlock()->getNumMarkers() == 0) {
       break;
     }
@@ -2014,6 +2075,15 @@ int FlexDR::main()
 
   end(/* done */ true);
   reporter->end(true);
+
+  const char* finalIterFile = std::getenv("DRT_FINAL_ITER_FILE");
+  if (finalIterFile != nullptr && finalIterFile[0] != '\0'
+      && lastIteration >= 0) {
+    std::ofstream output(finalIterFile);
+    if (output.is_open()) {
+      output << lastIteration << '\n';
+    }
+  }
 
   if (!router_cfg_->GUIDE_REPORT_FILE.empty()) {
     reportGuideCoverage();

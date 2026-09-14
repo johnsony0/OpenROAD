@@ -64,6 +64,14 @@ void FlexRP::prep()
 //   viaForbiddenThrough_  FlexDR_maze.cpp
 // viaForbiddenPlanarLen_ has no reader and line2LineForbiddenLen_ has no call
 // site, so both are skipped. Non-default-rule copies are skipped as well.
+//
+// Alongside the tables this writes the run-constant scalars that gate the
+// getEstCost() boundary-pin forbidden check (FlexGridGraph_maze.cpp:456-494),
+// which the tables alone are not enough to reproduce: USENONPREFTRACKS,
+// the per-layer isUnidirectional() flag, BOTTOM_ROUTING_LAYER and
+// getTopLayerNum(). All four are fixed before routing starts -- see the
+// version 2 comments below -- so they belong here rather than in the
+// per-worker grid-graph dump.
 void FlexRP::dumpForbiddenTables()
 {
   const char* dir = std::getenv("DRT_DUMP_GG_DIR");
@@ -80,11 +88,31 @@ void FlexRP::dumpForbiddenTables()
 
   const int numLayers = tech_->via2ViaForbiddenLen_.size();
 
-  os << "version 1\n";
+  os << "version 2\n";
   os << "numLayers " << numLayers << "\n";
+
+  // Scalars read by the getEstCost() boundary-pin check. Both are decided
+  // before any routing happens -- USENONPREFTRACKS is a global.h default that
+  // TritonRoute::main()/pinAccess() only ever clears for one process node, and
+  // BOTTOM_ROUTING_LAYER comes from the tcl args -- so a single snapshot here
+  // is valid for every search() call in the run.
+  os << "useNonPrefTracks " << (router_cfg_->USENONPREFTRACKS ? 1 : 0) << "\n";
+  os << "bottomRoutingLayer " << router_cfg_->BOTTOM_ROUTING_LAYER << "\n";
+  // getTopLayerNum() is layers_.size() - 1: the top layer of the whole tech,
+  // counting cut and masterslice layers. It is NOT TOP_ROUTING_LAYER, and the
+  // getEstCost() `layerNum + 2 > topLayerNum` guard means the former. Emitted
+  // as its own line so a consumer never has to guess which one it is.
+  os << "topLayerNum " << tech_->getTopLayerNum() << "\n";
+
   // The table index is a routing-layer counter starting at the bottom routing
   // layer, i.e. the same index the maze passes as gridZ.
-  os << "# layer <z> <layerNum> <name>\n";
+  //
+  // unidirectional is frLayer::isUnidirectional(), which is
+  // numMasks > 1 || lef58RectOnly || unidirectional_ -- not derivable from the
+  // preferred direction in the grid-graph dump's layerDir line, hence a column
+  // of its own. getEstCost() takes the forbidden branch when
+  // !useNonPrefTracks || unidirectional[z].
+  os << "# layer <z> <layerNum> <name> <unidirectional>\n";
   {
     int z = 0;
     for (auto lNum = tech_->getBottomLayerNum(); lNum <= tech_->getTopLayerNum();
@@ -93,7 +121,8 @@ void FlexRP::dumpForbiddenTables()
       if (layer->getType() != dbTechLayerType::ROUTING) {
         continue;
       }
-      os << "layer " << z << " " << lNum << " " << layer->getName() << "\n";
+      os << "layer " << z << " " << lNum << " " << layer->getName() << " "
+         << (layer->isUnidirectional() ? 1 : 0) << "\n";
       z++;
     }
   }

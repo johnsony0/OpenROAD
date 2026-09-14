@@ -160,6 +160,7 @@ class FlexDR
   std::unique_ptr<AbstractDRGraphics> graphics_{nullptr};
   std::string debugNetName_;
   int numWorkUnits_;
+  int astarBatchId_{0};
 
   // distributed
   dst::Distributed* dist_;
@@ -420,6 +421,8 @@ class FlexDRWorker
   }
   void setViaData(FlexDRViaData* viaData) { via_data_ = viaData; }
   void setWorkerId(const int id) { worker_id_ = id; }
+  double getAstarRuntimeMs() const { return astarRuntimeMs_; }
+  int getAstarSearchCount() const { return astarSearchCount_; }
   // getters
   frTechObject* getTech() const { return design_->getTech(); }
   void getRouteBox(odb::Rect& boxIn) const { boxIn = routeBox_; }
@@ -570,6 +573,8 @@ class FlexDRWorker
   std::vector<std::unique_ptr<drNet>> nets_;
   frOrderedIdMap<frNet*, std::vector<drNet*>> owner2nets_;
   FlexGridGraph gridGraph_;
+  double astarRuntimeMs_{0.0};
+  int astarSearchCount_{0};
   std::vector<frMarker> markers_;
   std::vector<frMarker> bestMarkers_;
   FlexDRWorkerRegionQuery rq_;

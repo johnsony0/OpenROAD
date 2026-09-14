@@ -5,6 +5,8 @@
 #include <cassert>
 #include <cmath>
 #include <cstdint>
+#include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <iterator>
 #include <limits>
@@ -1759,7 +1761,27 @@ void FlexDRWorker::route_queue()
   }
 
   // route
+  astarRuntimeMs_ = 0.0;
+  astarSearchCount_ = 0;
   route_queue_main(rerouteQueue);
+  const char* dumpDir = std::getenv("DRT_DUMP_GG_SUMMARY_DIR");
+  if (dumpDir != nullptr && dumpDir[0] != '\0' && astarSearchCount_ > 0) {
+    const odb::Rect& routeBox = getRouteBox();
+    const std::string summaryPath
+        = std::string(dumpDir) + "/gridgraph_iter"
+          + std::to_string(getDRIter()) + "_x" + std::to_string(routeBox.xMin())
+          + "_y" + std::to_string(routeBox.yMin()) + ".txt";
+    std::ofstream summary(summaryPath);
+    if (summary.is_open()) {
+      summary << "routeBox " << routeBox.xMin() << " " << routeBox.yMin()
+              << " " << routeBox.xMax() << " " << routeBox.yMax() << "\n";
+      summary << "iter " << getDRIter() << "\n";
+      summary << "searchCount " << astarSearchCount_ << "\n";
+      summary << "totalAstarRuntimeMs " << astarRuntimeMs_ << "\n";
+      summary << "averageAstarRuntimeMs "
+              << astarRuntimeMs_ / astarSearchCount_ << "\n";
+    }
+  }
   // end
   gcWorker_->resetTargetNet();
   gcWorker_->setEnableSurgicalFix(true);
@@ -3255,6 +3277,7 @@ bool FlexDRWorker::routeNet(drNet* net, std::vector<FlexMazeIdx>& paths)
   std::vector<FlexMazeIdx> path;  // astar must return with >= 1 idx
   bool isFirstConn = true;
   bool searchSuccess = true;
+  double astarRuntimeMs = 0.0;
   while (!unConnPins.empty()) {
     mazePinInit();
     auto nextPin = routeNet_getNextDst(
@@ -3267,7 +3290,10 @@ bool FlexDRWorker::routeNet(drNet* net, std::vector<FlexMazeIdx>& paths)
                           ccMazeIdx2,
                           centerPt,
                           mazeIdx2TaperBox,
-                          route_with_jumpers)) {
+                          route_with_jumpers,
+                          astarRuntimeMs)) {
+      astarRuntimeMs_ += astarRuntimeMs;
+      astarSearchCount_++;
       routeNet_postAstarUpdate(
           path, connComps, unConnPins, mazeIdx2unConnPins, isFirstConn);
       routeNet_postAstarWritePath(
@@ -3278,6 +3304,8 @@ bool FlexDRWorker::routeNet(drNet* net, std::vector<FlexMazeIdx>& paths)
       // Add current pin path point to drNet paths
       paths.insert(paths.end(), path.begin(), path.end());
     } else {
+      astarRuntimeMs_ += astarRuntimeMs;
+      astarSearchCount_++;
       searchSuccess = false;
       logger_->report("Failed to find a path between pin " + nextPin->getName()
                       + " and source aps:");

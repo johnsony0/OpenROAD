@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <bitset>
+#include <chrono>
 #include <cmath>
 #include <cstdint>
 #include <cstdlib>
@@ -313,6 +314,7 @@ void FlexGridGraph::expand(FlexWavefrontGrid& currGrid,
                                       nextPathCost,
                                       nextPathCost + nextEstCost,
                                       currGrid.getBackTraceBuffer());
+
   if (dir == frDirEnum::U || dir == frDirEnum::D) {
     nextWavefrontGrid.resetLength();
     if (dir == frDirEnum::U) {
@@ -331,11 +333,27 @@ void FlexGridGraph::expand(FlexWavefrontGrid& currGrid,
   auto tailDir = nextWavefrontGrid.shiftAddBuffer(dir);
   // non-buffer enablement is faster for ripup all
   // commit grid prev direction if needed
+
   auto tailIdx = getTailIdx(nextIdx, nextWavefrontGrid);
-  if (tailDir != frDirEnum::UNKNOWN) {
-    if (getPrevAstarNodeDir(tailIdx) == frDirEnum::UNKNOWN
-        || getPrevAstarNodeDir(tailIdx) == tailDir) {
-      setPrevAstarNodeDir(tailIdx.x(), tailIdx.y(), tailIdx.z(), tailDir);
+
+  if (dumpingExpansion()) {
+      // One block per search() call in this grid graph. searchId matches the
+      // _s<id> suffix of the dumpSearch() file for the same search.
+      exp_file_ << fmt::format(
+          "testing nextWavefrontGrid {} {} {} tailIdx {} tailDir {} prevA*nodedir(tailidx) {}\n",
+          currGrid.x(),
+          currGrid.y(),
+          currGrid.z(),
+          tailIdx,
+          tailDir,
+          getPrevAstarNodeDir(tailIdx)
+        );
+    }
+
+  if (tailDir != frDirEnum::UNKNOWN) { //parent_dir <= 5 or dout.in_closed_list
+    if (getPrevAstarNodeDir(tailIdx) == frDirEnum::UNKNOWN //grandparent_dir > 5
+        || getPrevAstarNodeDir(tailIdx) == tailDir) { //dout.dir == parent_dir
+      setPrevAstarNodeDir(tailIdx.x(), tailIdx.y(), tailIdx.z(), tailDir); //write the parent direction
       if (debug_) {
         nextWavefrontGrid.setId(curr_id_++);
         nextWavefrontGrid.setParentId(currGrid.getId());
@@ -1121,7 +1139,7 @@ void FlexGridGraph::traceBackPath(const FlexWavefrontGrid& currGrid,
 //     byte 7  fixedShapeCostPlanarHorz    byte 13  fixedShapeCostPlanarVertNDR
 void FlexGridGraph::dumpSearchGraph(const int searchId) const
 {
-  const char* dir = std::getenv("DRT_DUMP_GG_DIR");
+  const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
   if (dir == nullptr || dir[0] == '\0') {
     return;
   }
@@ -1248,10 +1266,17 @@ void FlexGridGraph::dumpSearch(const int searchId,
                                const FlexMazeIdx& ccMazeIdx2In,
                                const FlexMazeIdx& ccMazeIdx1Out,
                                const FlexMazeIdx& ccMazeIdx2Out,
+                               const FlexMazeIdx& dstMazeIdx1,
+                               const FlexMazeIdx& dstMazeIdx2,
                                const odb::Point& centerPt,
-                               bool routeWithJumpers) const
+                               bool routeWithJumpers,
+                               const FlexWavefrontGrid* goalGrid,
+                               const int totalNodesExplored,
+                               const int expandedNodes,
+                               const int discardedNodes,
+                               double runtimeMs) const
 {
-  const char* dir = std::getenv("DRT_DUMP_GG_DIR");
+  const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
   if (dir == nullptr || dir[0] == '\0') {
     return;
   }
@@ -1283,15 +1308,26 @@ void FlexGridGraph::dumpSearch(const int searchId,
   frMIdx xDim, yDim, zDim;
   getDim(xDim, yDim, zDim);
 
+  // v7: adds the expandedNodes and discardedNodes rows.
+  // v6: adds the exploredNodes row.
+  // v5: adds the finalCost row.
+  // v4: the third DBU coordinate on the dstBox/cc/src/dst/p rows is now the
+  // zHeight, so all three are in the same units. Through v3 it was the
+  // frLayerNum; that is still recoverable from the maze index on the same row
+  // through the zCoords(layerNum) array of the companion gg_iter*.txt dump.
   // v3: connComps rows are now the seeds handed to search(). Through v2 the
   // success-path dump printed the vector after traceBackPath() had appended
   // the traced path to it.
-  os << "version 3\n";
+  os << "version 7\n";
   os << "iter " << iter << "\n";
   os << "routeBox " << rb.xMin() << " " << rb.yMin() << " " << rb.xMax() << " "
      << rb.yMax() << "\n";
   os << "searchId " << searchId << "\n";
   os << "pin " << (nextPin != nullptr ? nextPin->getName() : "null") << "\n";
+  os << "runtimeMs " << runtimeMs << "\n";
+  os << "exploredNodes " << totalNodesExplored << "\n";
+  os << "expandedNodes " << expandedNodes << "\n";
+  os << "discardedNodes " << discardedNodes << "\n";
   os << "success " << (success ? 1 : 0) << "\n";
   os << "dim " << xDim << " " << yDim << " " << zDim << "\n";
   // Remaining search() inputs: the A* tie-break center point (DBU), the
@@ -1307,17 +1343,42 @@ void FlexGridGraph::dumpSearch(const int searchId,
   os << "ccBoxOut " << ccMazeIdx1Out.x() << " " << ccMazeIdx1Out.y() << " "
      << ccMazeIdx1Out.z() << " " << ccMazeIdx2Out.x() << " "
      << ccMazeIdx2Out.y() << " " << ccMazeIdx2Out.z() << "\n";
+  os << "dstBox " << dstMazeIdx1.x() << " " << dstMazeIdx1.y() << " "
+     << dstMazeIdx1.z() << " " << xCoords_[dstMazeIdx1.x()] << " "
+     << yCoords_[dstMazeIdx1.y()] << " " << getZHeight(dstMazeIdx1.z()) << " "
+     << dstMazeIdx2.x() << " " << dstMazeIdx2.y() << " "
+     << dstMazeIdx2.z() << " " << xCoords_[dstMazeIdx2.x()] << " "
+     << yCoords_[dstMazeIdx2.y()] << " " << getZHeight(dstMazeIdx2.z()) << "\n";
+
+  // Cost of the routed path: g is the accumulated true cost from the source
+  // component to the destination node the search stopped on -- the total the
+  // A* paid, since every edge it traversed was charged into pathCost by
+  // getNextPathCost(). f is that same node's priority, g + getEstCost(); it is
+  // not necessarily g, because dstMazeIdx1/2 bounds the *next pin's* access
+  // patterns and the node popped may belong to another pin still on dsts_.
+  // Both are 0 when a seed in connComps was already on a dst, since search()
+  // returns from that without expanding anything, and -1 when the search
+  // failed.  Spelled out rather than a ternary because frCost is unsigned,
+  // which would turn the -1 into 4294967295.
+  if (goalGrid != nullptr) {
+    os << "finalCost " << goalGrid->getPathCost() << " " << goalGrid->getCost()
+       << "\n";
+  } else if (success) {
+    os << "finalCost 0 0\n";
+  } else {
+    os << "finalCost -1 -1\n";
+  }
 
   // Source component maze indices as handed to search() (the wavefront seeds).
   os << "connComps " << connComps.size() << "\n";
   for (const auto& mi : connComps) {
     os << "cc " << mi.x() << " " << mi.y() << " " << mi.z() << " "
        << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
-       << getLayerNum(mi.z()) << "\n";
+       << getZHeight(mi.z()) << "\n";
   }
 
   // All nodes flagged as source / destination in the live bitvectors. Each row
-  // carries both maze index and DBU coords (+ layerNum) for path matching.
+  // carries both the maze index and all three DBU coords for path matching.
   int srcCount = 0, dstCount = 0;
   for (frMIdx z = 0; z < zDim; ++z) {
     for (frMIdx y = 0; y < yDim; ++y) {
@@ -1337,7 +1398,7 @@ void FlexGridGraph::dumpSearch(const int searchId,
       for (frMIdx x = 0; x < xDim; ++x) {
         if (isSrc(x, y, z)) {
           os << "src " << x << " " << y << " " << z << " " << xCoords_[x] << " "
-             << yCoords_[y] << " " << getLayerNum(z) << "\n";
+             << yCoords_[y] << " " << getZHeight(z) << "\n";
         }
       }
     }
@@ -1348,7 +1409,7 @@ void FlexGridGraph::dumpSearch(const int searchId,
       for (frMIdx x = 0; x < xDim; ++x) {
         if (isDst(x, y, z)) {
           os << "dst " << x << " " << y << " " << z << " " << xCoords_[x] << " "
-             << yCoords_[y] << " " << getLayerNum(z) << "\n";
+             << yCoords_[y] << " " << getZHeight(z) << "\n";
         }
       }
     }
@@ -1360,7 +1421,7 @@ void FlexGridGraph::dumpSearch(const int searchId,
   for (const auto& mi : path) {
     os << "p " << mi.x() << " " << mi.y() << " " << mi.z() << " "
        << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
-       << getLayerNum(mi.z()) << "\n";
+       << getZHeight(mi.z()) << "\n";
   }
   os.close();
 }
@@ -1372,7 +1433,8 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                            FlexMazeIdx& ccMazeIdx2,
                            const odb::Point& centerPt,
                            std::map<FlexMazeIdx, frBox3D*>& mazeIdx2TaperBox,
-                           bool route_with_jumpers)
+                           bool route_with_jumpers,
+                           double& runtimeMs)
 {
   if (debug_) {
     dump_file_.open("expansions.dump");
@@ -1432,6 +1494,18 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   wavefront_.cleanup();
   // init wavefront
   odb::Point currPt;
+
+  const auto startTime = std::chrono::steady_clock::now();
+  int totalNodesExplored = 0;
+  int expandedNodes = 0;
+  int discardedNodes = 0;
+  auto getRuntimeMs = [&startTime, &runtimeMs]() {
+    const auto endTime = std::chrono::steady_clock::now();
+    runtimeMs
+        = std::chrono::duration<double, std::milli>(endTime - startTime).count();
+    return runtimeMs;
+  };
+
   for (auto& idx : connComps) {
     if (isDst(idx.x(), idx.y(), idx.z())) {
       path.emplace_back(idx.x(), idx.y(), idx.z());
@@ -1444,8 +1518,15 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                  ccMazeIdx2In,
                  ccMazeIdx1,
                  ccMazeIdx2,
+                 dstMazeIdx1,
+                 dstMazeIdx2,
                  centerPt,
-                 route_with_jumpers);
+                 route_with_jumpers,
+                 nullptr,
+                 totalNodesExplored,
+                 expandedNodes,
+                 discardedNodes,
+                  getRuntimeMs());
       return true;
     }
     getPoint(currPt, idx.x(), idx.y());
@@ -1479,10 +1560,24 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
       printExpansion(currGrid, "Popping");
     }
     wavefront_.pop();
+    ++totalNodesExplored;
+    if (dumpingExpansion()) {
+      // One block per search() call in this grid graph. searchId matches the
+      // _s<id> suffix of the dumpSearch() file for the same search.
+      exp_file_ << fmt::format(
+          "testing {} {} {} prev A* node dir {}\n",
+          currGrid.x(),
+          currGrid.y(),
+          currGrid.z(),
+          getPrevAstarNodeDir({currGrid.x(), currGrid.y(), currGrid.z()})
+        );
+    }
     if (getPrevAstarNodeDir({currGrid.x(), currGrid.y(), currGrid.z()})
         != frDirEnum::UNKNOWN) {
+      ++discardedNodes;
       continue;
     }
+    ++expandedNodes;
     if (graphics_) {
       graphics_->searchNode(this, currGrid);
     }
@@ -1503,8 +1598,15 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                  ccMazeIdx2In,
                  ccMazeIdx1,
                  ccMazeIdx2,
+                 dstMazeIdx1,
+                 dstMazeIdx2,
                  centerPt,
-                 route_with_jumpers);
+                 route_with_jumpers,
+                 &currGrid,
+                 totalNodesExplored,
+                 expandedNodes,
+                 discardedNodes,
+                 getRuntimeMs());
       return true;
     }
     // expand and update wavefront
@@ -1520,8 +1622,15 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
              ccMazeIdx2In,
              ccMazeIdx1,
              ccMazeIdx2,
+             dstMazeIdx1,
+             dstMazeIdx2,
              centerPt,
-             route_with_jumpers);
+             route_with_jumpers,
+             nullptr,
+             totalNodesExplored,
+             expandedNodes,
+             discardedNodes,
+             getRuntimeMs());
   return false;
 }
 

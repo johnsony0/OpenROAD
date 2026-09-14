@@ -1,0 +1,99 @@
+// via2via_prl_len.mem -- 80 words x 12 bits (3 hex digits per line)
+// via2ViaPrlLen, addr = z*8 + prevViaUp*4 + currViaUp*2 + isDirY
+//
+//   [11:0]  prl  12b  unsigned DBU, range 0..1600 (needs 11b)
+//
+//   a threshold, not a range: isVia2ViaPRL() is len <= prl
+//   same address as via2via_forbidden_len.mem -- one generator
+//   feeds both
+//
+//   read only when the via2via check has both currVLengthX and
+//   currVLengthY nonzero, where it picks OR (either axis passes
+//   the PRL test) or AND (neither does) over the two
+//   isVia2ViaForbiddenLen results; a single-axis move never
+//   consults it
+//
+//   no NDR variant exists -- isVia2ViaPRL() always reads the tech
+//   table, even for a net with a non-default rule
+//
+// load with $readmemh
+000
+000
+000
+000
+000
+000
+118
+08c
+08c
+118
+08c
+118
+08c
+118
+08c
+118
+118
+08c
+118
+08c
+118
+08c
+118
+08c
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+118
+320
+320
+320
+320
+320
+320
+320
+320
+320
+320
+320
+320
+320
+320
+320
+320
+640
+640
+640
+640
+640
+640
+640
+640
+640
+640
+000
+000
+000
+000
+000
+000

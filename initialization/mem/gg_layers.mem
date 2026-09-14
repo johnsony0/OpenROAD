@@ -1,12 +1,22 @@
 // gg_layers.mem -- 10 words x 16 bits (4 hex digits per line)
-// per-layer direction and minWidth, indexed by z
+// per-layer unidir, direction and minWidth, indexed by z
 //
-//   [15:14]  pad        2b  zero
+//   [15]     pad        1b  zero
+//   [14]     unidir     1b  frLayer::isUnidirectional(), from forbidden_tables.txt
 //   [13:12]  dir        2b  odb::dbTechLayerDir: 0=NONE, 1=HORIZONTAL, 2=VERTICAL
 //   [11:0]   minWidth  12b  DBU, range 140..1600 (needs 11b)
 //
 //   the dump's 'layerDir(0=H,1=V,2=NONE)' header is mislabelled;
 //   the values are the raw odb enum, so 1 = HORIZONTAL, 2 = VERTICAL
+//
+//   per-z dir      H V H V H V H V H V
+//   per-z minWidth 140 140 140 280 280 280 800 800 1600 1600
+//   per-z unidir   0 0 0 0 0 0 0 0 0 0
+//
+//   unidir is not a function of dir -- it is numMasks > 1 ||
+//   lef58RectOnly || unidirectional_, so a HORIZONTAL layer may be
+//   either.  getEstCost takes its forbidden branch when
+//   !GG_USE_NONPREF_TRACKS || unidir[z].
 //
 // load with $readmemh
 108c

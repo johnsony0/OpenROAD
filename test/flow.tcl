@@ -7,7 +7,11 @@ read_verilog $synth_verilog
 link_design $top_module
 read_sdc $sdc_file
 
-set_thread_count [cpu_count]
+if { [info exists ::env(DRT_THREADS)] && $::env(DRT_THREADS) != "" } {
+  set_thread_count $::env(DRT_THREADS)
+} else {
+  set_thread_count [cpu_count]
+}
 # Temporarily disable sta's threading due to random failures
 sta::set_thread_count 1
 
@@ -188,6 +192,15 @@ repair_antennas -iterations 5
 check_antennas
 utl::clear_metrics_stage
 utl::metric "GRT::ANT::errors" [ant::antenna_violation_count]
+
+if { [info exists ::env(DRT_PREPARE_DIR)] && $::env(DRT_PREPARE_DIR) != "" } {
+  set prepare_dir $::env(DRT_PREPARE_DIR)
+  file mkdir $prepare_dir
+  set prepare_def [file join $prepare_dir "${design}_${platform}_preroute.def"]
+  set prepare_guide [file join $prepare_dir "${design}_${platform}_route_guide"]
+  write_def $prepare_def
+  file copy -force $route_guide $prepare_guide
+}
 
 ################################################################
 # Detailed routing

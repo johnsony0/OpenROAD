@@ -24,7 +24,15 @@ and is what an accelerator must be validated against:
     python3 initialization/gg_to_mem.py \
         --gg        work/ggdump/gg_iter1_x136800_y136800.txt \
         --snapshot  work/ggdump/ggs_iter1_x136800_y136800_s0.bin \
+        --search    work/ggdump/search_iter1_x136800_y136800_s0.txt \
         --forbidden work/ggdump/forbidden_tables.txt
+
+--search is the text dump of the same search() call.  It is what supplies the
+goal box; see THE GOAL BOX below.
+
+python3 initialization/gg_to_mem.py --gg top_gcd/ggdump/gg_iter1_x50400_y50400.txt --snapshot  top_gcd/ggdump/ggs_iter1_x50400_y50400_s3.bin --forbidden top_gcd/ggdump/forbidden_tables.txt
+
+python3 initialization/gg_to_mem.py --gg top_gcd/ggdump/gg_iter1_x50400_y50400.txt --snapshot top_gcd/ggdump/ggs_iter1_x50400_y50400_s3.bin --forbidden top_gcd/ggdump/forbidden_tables.txt
 
 --gg is still required with --snapshot: the binary carries only the mutable
 per-node state, while the coordinate arrays, layer directions and cost scalars
@@ -35,33 +43,48 @@ that you picked the same box at the same iteration.
 Word widths are sized to the data, not to a machine word: each is the narrowest
 field layout that holds the values, rounded up to a multiple of 4 so one hex
 digit is one nibble and $readmemh stays exact.  Every .mem opens with a comment
-block giving its bit-by-bit breakdown, and gg_params.vh exports the same widths
-and offsets as localparams so the RTL slices never go out of sync with the file.
+block giving its bit-by-bit breakdown -- that header is the only description of
+the word, so the RTL slices are written against it.
 
 Outputs (all $readmemh-ready: bare hex, one word per line, no prefixes):
 
-    gg_nodes.mem                167*232*6 x 28b   main grid-graph memory
+    gg_nodes.mem                167*232*6 x 32b   main grid-graph memory
     gg_xcoords.mem              167       x 20b   signed DBU, indexed by x
     gg_ycoords.mem              232       x 20b   signed DBU, indexed by y
     gg_zcoords.mem              6         x 20b   zHeights, DBU, indexed by z
-    gg_layers.mem               6         x 16b   {dir, minWidth}, indexed by z
+    gg_layers.mem               6         x 16b   {unidir, dir, minWidth}, by z
     via2via_forbidden_len.mem   6*8       x 48b   N x {lo, hi}
+    via2via_prl_len.mem         6*8       x 12b   PRL threshold, same addressing
     via_forbidden_turn_len.mem  6*4       x 48b   N x {lo, hi}
-    gg_params.vh                widths, offsets, bit indices, scalar constants
+    params.sv                   grid dims, goal box and the cost scalars
+
+Two more come out of --search, as plain text rather than memory images -- they
+describe one search() call, not the grid it ran on:
+
+    src_dst_pins.txt            its src and dst node sets, maze idx + DBU
+    path_cost.txt               the cost it paid, then the path it took
 
 
-NODE WORD -- 28 bits:
+NODE WORD -- 32 bits:
 
+    [31:28]  scratchpad         4b   spare, zero here -- free for the RTL
     [27:25]  prevAstarNodeDir   3b   A* scratch, frDirEnum, 0 = UNKNOWN
     [24]     closed             1b   A* scratch
     [23: 0]  node state        24b   loaded from the dump
 
-The top four bits are working storage for the search, not dump data: both are 0
+Bits 24..27 are working storage for the search, not dump data: both fields are 0
 in every word this script emits, because on entry to search() nothing is closed
 and every prevAstarNodeDir is UNKNOWN.  They are carved out of the node word so
 the RTL can read state and write back its A* bookkeeping in one memory rather
 than maintaining a second array in parallel -- which is what the C++ does, in
 the separate prevDirs_ bit vector.
+
+Bits 28..31 are the same idea taken one step further: a nibble of uncommitted
+per-node storage for whatever else the RTL wants to keep alongside a node (a
+visited/queued marker, a small tag, a bucket index).  Nothing in this script or
+in the C++ assigns them any meaning, so they ship zeroed.  Widen or narrow the
+field with --node-bits; the gg_nodes.mem header follows whatever width you
+pick, and 28 (--node-bits 28) removes it entirely.
 
 The word carries no x/y/z.  Under the canonical address mapping below the
 address is a bijection onto (x, y, z), so any reader has the indices in hand
@@ -106,12 +129,67 @@ This is the dump's own line order.  It deliberately does NOT match C++
 FlexGridGraph::getIdx(), which swaps to y-fastest on HORIZONTAL layers as a
 cache-locality trick.  Nothing outside the C++ walker depends on that layout,
 and a uniform stride keeps RTL address generation to one multiply-add.
+
+
+THE GOAL BOX in params.sv is getEstCost's dstMazeIdx1/dstMazeIdx2, the box its
+Manhattan heuristic is measured to, written out in DBU as
+{LOWER,UPPER}_GOAL_{X,Y,Z}.  Three sources, in falling order of precedence:
+
+    --goal-box x1 y1 z1 x2 y2 z2   maze indices given by hand
+    --search   search_iter*.txt    the dstBox row, i.e. what search() used
+    --snapshot                     bounding box of the dst bits
+
+--search is the one to use: dumpSearch() records dstMazeIdx1/dstMazeIdx2 as
+passed, so no reconstruction is involved.  Match its _s<id> to the snapshot's.
+
+The --snapshot fallback is a reconstruction, exact only while one unconnected
+pin is left: routeNet_setDst flags every access pattern of every unconnected
+pin and routeNet_setSrc clears them pin by pin, so with several still pending
+dsts_ is their union and its box comes out larger than the one search() used.
+A --gg-only run has no dst bits at all and stops.
+
+Only the maze indices are read off the dstBox row.  Its DBU columns say the
+same thing through the coordinate arrays, and taking those from --gg instead
+keeps every coordinate in the run consistent with the .mem images -- and works
+on a version 3 search dump, whose third DBU column is the frLayerNum rather
+than the zHeight.
+
+
+THE getEstCost FORBIDDEN CHECK needs four values beyond the range tables, all
+of them run-constant and all read from --forbidden (version 2 or newer):
+
+    useNonPrefTracks     USE_NONPREF_TRACKS       scalar
+    isUnidirectional[z]  gg_layers.mem unidir bit per z
+    BOTTOM_ROUTING_LAYER BOTTOM_ROUTING_LAYER     scalar
+    getTopLayerNum()     TOP_ROUTING_LAYER        scalar
+
+The C++ (FlexGridGraph_maze.cpp getEstCost) enters the check only when
+`!useNonPrefTracks || isUnidirectional[z]`, then bounds each neighbouring-layer
+table lookup with `layerNum - 2 < BOTTOM_ROUTING_LAYER` /
+`layerNum + 2 > getTopLayerNum()`, where a bound that is out of range makes its
+half of the `&&` vacuously true.  The C++ compares absolute frLayerNum;
+params.sv gives both bounds as z instead, since getEstCost hardcodes
+`layerNum = (z + 1) * 2` and `layerNum -+ 2` is then just `z -+ 1`.  Each
+parameter's comment carries its frLayerNum for tracing back to the LEF.
+
+The top bound is frTechObject::getTopLayerNum(), i.e. layers_.size() - 1 over
+*all* layers including cut and masterslice, mapped down to the highest routing
+layer at or below it.
+
+isUnidirectional is emitted per layer because it is not derivable from the
+preferred direction: frLayer::isUnidirectional() is
+`numMasks > 1 || lef58RectOnly || unidirectional_`, none of which the layerDir
+column records.
 """
 
 import argparse
 import os
 import struct
 import sys
+
+# params.sv wraps its parameters in a package, so the RTL imports the set by
+# name instead of `include-ing the file into every scope that needs a constant.
+PARAMS_PACKAGE = "DRT_PARAMS"
 
 # odb::dbTechLayerDir::Value.  Note the dumpGridGraph() column header says
 # "layerDir(0=H,1=V,2=NONE)" -- that label is wrong; it prints the raw odb enum.
@@ -178,15 +256,30 @@ DIR_BITS = 3
 SCRATCH_BITS = 1 + DIR_BITS  # 4
 MIN_NODE_BITS = BOOL_BITS + SCRATCH_BITS  # 28
 
+# Uncommitted per-node storage above the A* scratch, for RTL variables this
+# script knows nothing about.  One nibble by default so the node word is a round
+# 32 bits; --node-bits resizes it and --node-bits 28 removes it.
+SCRATCHPAD_BITS = 4
+DEFAULT_NODE_BITS = MIN_NODE_BITS + SCRATCHPAD_BITS  # 32
+
 # frDirEnum, from src/drt/src/frBaseTypes.h.  UNKNOWN = 0 is the reset value.
 DIR_ENUM = [("UNKNOWN", 0), ("D", 1), ("S", 2), ("W", 3),
             ("E", 4), ("N", 5), ("U", 6)]
 
-# gg_layers.mem: preferred direction (raw odb::dbTechLayerDir, 0..2) over the
-# layer's minWidth.  Named GG_LAYER_DIR_* so they cannot collide with the
-# frDirEnum GG_DIR_* above -- these are two unrelated encodings.
+# gg_layers.mem: isUnidirectional over the preferred direction (raw
+# odb::dbTechLayerDir, 0..2) over the layer's minWidth.  Named GG_LAYER_DIR_* so
+# they cannot collide with the frDirEnum GG_DIR_* above -- these are two
+# unrelated encodings.
 LAYER_DIR_BITS = 2
 LAYER_DIR_ENUM = [("NONE", 0), ("HORIZONTAL", 1), ("VERTICAL", 2)]
+# One bit above the direction field.  Separate from dir because
+# frLayer::isUnidirectional() is numMasks/rectOnly/unidirectional_, which the
+# direction does not encode -- a HORIZONTAL layer may be either.
+LAYER_UNIDIR_BITS = 1
+
+# Minimum --forbidden version carrying the getEstCost scalars and the
+# per-layer unidirectional column.
+FORBIDDEN_MIN_VERSION = 2
 
 # Column index of each name in a "node" row (token 0 is the literal "node").
 # The text dump carries neither overrideShapeCostVia nor src/dst.
@@ -265,7 +358,8 @@ def write_mem(path, words, bits, title, layout, notes=()):
 def node_layout(node_bits):
     rows = []
     if node_bits > MIN_NODE_BITS:
-        rows.append((node_bits - 1, MIN_NODE_BITS, "pad", "zero"))
+        rows.append((node_bits - 1, MIN_NODE_BITS, "scratchpad",
+                     "spare, 0 here -- RTL-owned, no meaning to this script"))
     rows += [
         (DIR_LSB + DIR_BITS - 1, DIR_LSB, "prevAstarNodeDir",
          "frDirEnum, 0 = UNKNOWN (A* scratch, 0 here)"),
@@ -438,14 +532,29 @@ def parse_snapshot(path, ignore_ndr):
 
 
 def parse_forbidden(path):
-    """Return (numLayers, via2via, turn) with each table {(z, entry): [(lo, hi)]}.
+    """Return (numLayers, via2via, turn, prl, scalars).
 
-    An entry may hold several disjoint ranges -- e.g. metal6 prev-up/curr-up is
-    [0, 600] and [800, 1600], with 601..799 legal between them -- so the list is
-    kept as-is and pack_forbidden() gives every entry the same number of slots.
+    via2via and turn are {(z, entry): [(lo, hi)]}.  An entry may hold several
+    disjoint ranges -- e.g. metal6 prev-up/curr-up is [0, 600] and [800, 1600],
+    with 601..799 legal between them -- so the list is kept as-is and
+    pack_forbidden() gives every entry the same number of slots.
+
+    prl is {(z, entry): threshold}, a single frCoord per entry rather than a
+    range: frTechObject::isVia2ViaPRL() is `len <= via2ViaPrlLen_[z][entry]`.
+    It shares via2ViaForbiddenLen's entry encoding, so one address serves both.
+
+    scalars carries the run-constant getEstCost inputs -- useNonPrefTracks,
+    bottomRoutingLayer, topLayerNum -- plus the per-z lists layerNums and
+    unidirectional read off the "layer" lines.  These arrived in dump version 2;
+    a version 1 file is rejected rather than defaulted, because guessing
+    useNonPrefTracks would silently bake a wrong forbidden branch into the RTL
+    images instead of failing where it can be seen.
     """
-    via2via, turn = {}, {}
+    via2via, turn, prl = {}, {}, {}
     num_layers = None
+    version = None
+    scalars = {"layerNums": {}, "unidirectional": {}}
+    SCALAR_LINES = ("useNonPrefTracks", "bottomRoutingLayer", "topLayerNum")
 
     with open(path) as f:
         for line in f:
@@ -455,8 +564,28 @@ def parse_forbidden(path):
             if not tok:
                 continue
 
+            if tok[0] == "version":
+                version = int(tok[1])
+                continue
             if tok[0] == "numLayers":
                 num_layers = int(tok[1])
+                continue
+            if tok[0] in SCALAR_LINES:
+                scalars[tok[0]] = int(tok[1])
+                continue
+            if tok[0] == "layer":
+                # version 1: layer <z> <layerNum> <name>
+                # version 2: layer <z> <layerNum> <name> <unidirectional>
+                z = int(tok[1])
+                scalars["layerNums"][z] = int(tok[2])
+                if len(tok) > 4:
+                    scalars["unidirectional"][z] = int(tok[4])
+                continue
+            if tok[0] == "via2ViaPrlLen":
+                z, entry, value = int(tok[1]), int(tok[2]), int(tok[3])
+                if not 0 <= entry < 8:
+                    die("via2ViaPrlLen entry {} out of range 0..7".format(entry))
+                prl[(z, entry)] = value
                 continue
             if tok[0] not in ("via2ViaForbiddenLen", "viaForbiddenTurnLen"):
                 continue
@@ -475,7 +604,25 @@ def parse_forbidden(path):
 
     if num_layers is None:
         die("no 'numLayers' line found in " + path)
-    return num_layers, via2via, turn
+    if version is None:
+        die("no 'version' line found in " + path)
+    if version < FORBIDDEN_MIN_VERSION:
+        die("{} is a version {} dump, but the getEstCost forbidden check needs "
+            "version {}+ for useNonPrefTracks / bottomRoutingLayer / "
+            "topLayerNum and the per-layer unidirectional column.  Re-run the "
+            "router with DRT_DUMP_GG_DIR set to regenerate it -- these are not "
+            "defaulted, because a wrong useNonPrefTracks silently flips the "
+            "forbidden branch.".format(path, version, FORBIDDEN_MIN_VERSION))
+    for name in SCALAR_LINES:
+        if name not in scalars:
+            die("no '{}' line found in {} (version {} dump)".format(
+                name, path, version))
+    for z in range(num_layers):
+        for field in ("layerNums", "unidirectional"):
+            if z not in scalars[field]:
+                die("{} has no {} for z={}; expected a 'layer' line per "
+                    "routing layer 0..{}".format(path, field, z, num_layers - 1))
+    return num_layers, via2via, turn, prl, scalars
 
 
 def pack_forbidden(table, num_layers, entries, name, half, n_slots):
@@ -506,110 +653,259 @@ def pack_forbidden(table, num_layers, entries, name, half, n_slots):
     return words
 
 
-def write_params(path, header, node_bits, coord_bits, forbid_half, forbid_slots,
-                 minwidth_bits, layer_bits, snap):
+def pack_prl(table, num_layers):
+    """Flatten via2ViaPrlLen to one word per (z, entry), same order as via2via.
+
+    The values are half-sums of two via-box extents (FlexRP::prep_via2viaPRL),
+    so they cannot be negative and the field is unsigned; an entry whose via
+    defs are missing keeps the caller's 0, which makes `len <= prl` false for
+    every positive len.
+    """
+    words = []
+    for z in range(num_layers):
+        for entry in range(8):
+            if (z, entry) not in table:
+                die("via2ViaPrlLen missing z={} entry={}".format(z, entry))
+            value = table[(z, entry)]
+            if value < 0:
+                die("via2ViaPrlLen z={} entry={} is negative ({}), which the "
+                    "unsigned PRL field cannot hold".format(z, entry, value))
+            words.append(value)
+    return words
+
+
+def parse_search(path):
+    """Read a dumpSearch() search_iter*.txt -> the fields params.sv needs.
+
+    Only the header and the dstBox row are of interest here; the cc/src/dst/p
+    rows repeat state the snapshot already carries.  Returns a dict with dim,
+    iter, searchId and the two dstBox corners as maze indices, so the caller
+    can check the file against --gg / --snapshot before trusting the box.
+    """
+    meta = {"srcs": [], "dsts": [], "path": []}
+    counts = {}
+    rows = {"src": "srcs", "dst": "dsts", "p": "path"}
+    with open(path) as f:
+        for line in f:
+            tok = line.split()
+            if not tok or tok[0][0] == "#":
+                continue
+            if tok[0] == "dim":
+                meta["dim"] = (int(tok[1]), int(tok[2]), int(tok[3]))
+            elif tok[0] in ("version", "iter", "searchId"):
+                meta[tok[0]] = int(tok[1])
+            elif tok[0] in ("srcs", "dsts", "path"):
+                counts[tok[0]] = int(tok[1])
+            elif tok[0] in rows:
+                # <x> <y> <z> then the same point in DBU, which is dropped for
+                # the same reason as on the dstBox row.
+                meta[rows[tok[0]]].append(tuple(int(v) for v in tok[1:4]))
+            elif tok[0] == "finalCost":
+                # g then f of the node the search stopped on; -1 -1 on failure.
+                meta["finalCost"] = (int(tok[1]), int(tok[2]))
+            elif tok[0] == "dstBox":
+                # <x1> <y1> <z1> <xdbu1> <ydbu1> <zdbu1> then the same for the
+                # upper corner.  The maze indices are what gets used -- see the
+                # GOAL BOX section of the module docstring -- but the x and y
+                # DBU columns are kept to check the file against --gg.
+                if len(tok) != 13:
+                    die("{} has a dstBox row with {} values, expected 12".format(
+                        path, len(tok) - 1))
+                meta["dstLo"] = tuple(int(v) for v in tok[1:4])
+                meta["dstLoDbu"] = tuple(int(v) for v in tok[4:6])
+                meta["dstHi"] = tuple(int(v) for v in tok[7:10])
+                meta["dstHiDbu"] = tuple(int(v) for v in tok[10:12])
+
+    for name in ("version", "dim"):
+        if name not in meta:
+            die("no '{}' line found in {}".format(name, path))
+    # Each block states its own length; a mismatch means a truncated file.
+    for name, n in counts.items():
+        if len(meta[name]) != n:
+            die("{} declares {} {} but has {} rows".format(
+                path, n, name, len(meta[name])))
+    if "dstLo" not in meta:
+        die("{} is a version {} search dump with no 'dstBox' row, so it does "
+            "not carry the goal box.  Re-run the router with a build that "
+            "dumps it, or pass --goal-box.".format(path, meta["version"]))
+    return meta
+
+
+def check_goal_box(lo, hi, dim, what):
+    for label, box in (("lower", lo), ("upper", hi)):
+        for axis, (v, n) in enumerate(zip(box, dim)):
+            if not 0 <= v < n:
+                die("{} {} corner index {} on axis {} is outside dim "
+                    "{}x{}x{}".format(what, label, v, "xyz"[axis], *dim))
+    if any(a > b for a, b in zip(lo, hi)):
+        die("{} lower corner {} is not <= upper corner {}".format(
+            what, list(lo), list(hi)))
+
+
+def dst_goal_box(nodes, dim):
+    """Maze-index bounding box over the nodes carrying the dst bit.
+
+    Returns ((x1, y1, z1), (x2, y2, z2), count), or (None, None, 0) when no
+    node is flagged -- which is every --gg-only run, since the text dump has
+    no dst column and a pre-routing snapshot has no dst set anyway.
+
+    This reconstructs getEstCost's dstMazeIdx1/dstMazeIdx2, which no dump
+    records directly.  It is exact whenever one unconnected pin is left:
+    routeNet_setDst flags every access pattern of every unconnected pin and
+    routeNet_setSrc clears a pin's flags as it is absorbed into the connected
+    component, so with a single pin remaining dsts_ holds exactly the access
+    patterns search() bounds its heuristic to.  With several pins left the box
+    is the union over all of them, which is larger than the box search() used
+    -- pass --goal-box to override it there.
+    """
+    x_dim, y_dim, _ = dim
+    plane = x_dim * y_dim
+    lo = hi = None
+    count = 0
+    for addr, word in enumerate(nodes):
+        if not (word >> DST_BIT) & 1:
+            continue
+        z, rem = divmod(addr, plane)
+        y, x = divmod(rem, x_dim)
+        if lo is None:
+            lo, hi = [x, y, z], [x, y, z]
+        else:
+            lo = [min(lo[i], v) for i, v in enumerate((x, y, z))]
+            hi = [max(hi[i], v) for i, v in enumerate((x, y, z))]
+        count += 1
+    return lo, hi, count
+
+
+def write_src_dst_pins(path, search, dim, xc, yc, zh, source):
+    """Emit the search's source and destination node sets, one row per node.
+
+    The srcs/dsts blocks of the search dump, kept in its own file so a consumer
+    that only needs the endpoints does not have to walk past the path and the
+    header to find them.  The maze indices are copied; the DBU columns are
+    re-derived from --gg, so every coordinate this run writes comes from the
+    same arrays as gg_{x,y,z}coords.mem.
+    """
+    # No header or comment lines: the file is exactly the two blocks, so a
+    # reader can take the count off line 1 and then read that many rows.
+    with open(path, "w") as f:
+        for label, pts in (("srcs", search["srcs"]), ("dsts", search["dsts"])):
+            f.write("{} {}\n".format(label, len(pts)))
+            for x, y, z in pts:
+                if any(not 0 <= v < n for v, n in zip((x, y, z), dim)):
+                    die("{} has a {} row at {} {} {}, outside dim "
+                        "{}x{}x{}".format(source, label[:-1], x, y, z, *dim))
+                f.write("{} {} {} {} {} {} {}\n".format(
+                    label[:-1], x, y, z, xc[x], yc[y], zh[z]))
+    print("  {:<30} {:>8}".format(
+        os.path.basename(path),
+        "{}+{}".format(len(search["srcs"]), len(search["dsts"]))))
+
+
+def write_path_cost(path, search, dim, source):
+    """Emit what the search routed and what it paid: cost first, then points.
+
+    Line 1 is the total cost of the path -- the pathCost of the node search()
+    stopped on, which is every edge charge the A* accumulated getting there.
+    Every line after it is one path point as a maze index.
+
+    The points are in the search dump's own order, dst-first back toward src,
+    and they are corner points only: traceBackPath() records a node only where
+    the direction changes, so consecutive rows differ on a single axis and the
+    nodes between them are implied by the run.
+    """
+    if "finalCost" not in search:
+        die("{} has no 'finalCost' row, so the path's cost is not in it.  "
+            "Re-run the router with a build that dumps it.".format(source))
+    cost = search["finalCost"][0]
+    if cost < 0:
+        print("  note: {} is a failed search (finalCost -1); writing the cost "
+              "through as -1 with no path".format(source))
+    with open(path, "w") as f:
+        f.write("{}\n".format(cost))
+        for x, y, z in search["path"]:
+            if any(not 0 <= v < n for v, n in zip((x, y, z), dim)):
+                die("{} has a path point at {} {} {}, outside dim "
+                    "{}x{}x{}".format(source, x, y, z, *dim))
+            f.write("{} {} {}\n".format(x, y, z))
+    print("  {:<30} {:>8}".format(
+        os.path.basename(path), "{} pts".format(len(search["path"]))))
+
+
+def write_params(path, header, fb, goal_lo, goal_hi, goal_note):
+    """Emit the scalar constants the RTL needs, as plain `parameter` lines.
+
+    Only the run constants live here; every width, bit offset and table layout
+    is documented in the header of the .mem file it describes.
+    """
     x_dim, y_dim, z_dim = header["dim"]
-    dirs = header["layerDir(0=H,1=V,2=NONE)"]
+    xc, yc, zh = header["xCoords"], header["yCoords"], header["zHeights"]
     layer_nums = header["zCoords(layerNum)"]
-    min_widths = header["layerMinWidth"]
+    if "iter" not in header:
+        die("no 'iter' line in the grid-graph dump, so ITER cannot be set")
+
+    def to_z(layer_num, what):
+        """frLayerNum -> z.  getTopLayerNum() counts cut and masterslice layers
+        too, so it need not be a routing layer's own number; fall back to the
+        highest routing layer at or below it."""
+        if layer_num in layer_nums:
+            return layer_nums.index(layer_num)
+        below = [z for z, ln in enumerate(layer_nums) if ln <= layer_num]
+        if not below:
+            die("{} is frLayerNum {}, which is below every routing layer "
+                "{}".format(what, layer_num, layer_nums))
+        return below[-1]
+
+    bottom_z = to_z(fb["bottomRoutingLayer"], "bottomRoutingLayer")
+    top_z = to_z(fb["topLayerNum"], "topLayerNum")
+
+    def goal(box):
+        return xc[box[0]], yc[box[1]], zh[box[2]]
 
     with open(path, "w") as f:
         f.write("// Generated by initialization/gg_to_mem.py -- do not edit.\n")
-        f.write("// Widths and offsets for the .mem images, plus the scalar\n")
-        f.write("// grid-graph constants (which are not worth a memory).\n//\n")
         f.write("// Route box (DBU): {} {} {} {}\n".format(*header["routeBox"]))
-        if snap is None:
-            f.write("// Node state: pre-routing dumpGridGraph() snapshot --\n"
-                    "// no guides stamped, no src/dst set.\n\n")
-        else:
-            f.write("// Node state: dumpSearchGraph() snapshot of search {} --\n"
-                    "// {} guide, {} src, {} dst nodes.\n\n".format(
-                        snap["searchId"], snap["guides"], snap["srcs"],
-                        snap["dsts"]))
+        f.write("// Goal box (maze idx): {} {} {} .. {} {} {} -- {}\n".format(
+            *(list(goal_lo) + list(goal_hi) + [goal_note])))
+        f.write("// Widths, bit offsets and table layouts are not here; each\n")
+        f.write("// .mem file documents its own word in its header.\n\n")
 
-        f.write("localparam integer GG_X_DIM      = {};\n".format(x_dim))
-        f.write("localparam integer GG_Y_DIM      = {};\n".format(y_dim))
-        f.write("localparam integer GG_Z_DIM      = {};\n".format(z_dim))
-        f.write("localparam integer GG_NUM_NODES  = {};\n".format(x_dim * y_dim * z_dim))
-        f.write("localparam integer GG_ADDR_BITS  = {};\n".format(
-            max(1, (x_dim * y_dim * z_dim - 1).bit_length())))
-        f.write("// addr = (z * GG_Y_DIM + y) * GG_X_DIM + x\n\n")
+        f.write("// Coordinates for grid and cost size, "
+                "change when grid graph changes\n")
+        f.write("package {};\n".format(PARAMS_PACKAGE))
+        f.write("  parameter GRID_I = {};\n".format(x_dim))
+        f.write("  parameter GRID_J = {};\n".format(y_dim))
+        f.write("  parameter GRID_K = {};\n".format(z_dim))
+        f.write("  parameter ITER = {};\n\n".format(header["iter"]))
 
-        f.write("// ---- gg_nodes.mem ----\n")
-        f.write("// x/y/z are recoverable from the address above, so the word is\n")
-        f.write("// state [{}:0] plus the A* scratch the search writes back.\n".format(
-            BOOL_BITS - 1))
-        f.write("localparam integer GG_NODE_BITS  = {};\n".format(node_bits))
-        f.write("localparam integer GG_STATE_W    = {};\n".format(BOOL_BITS))
-        f.write("localparam integer GG_BIT_CLOSED = {};\n".format(CLOSED_BIT))
-        f.write("localparam integer GG_DIR_LSB    = {};\n".format(DIR_LSB))
-        # Not GG_DIR_W -- that is West below, and Verilog would see a redeclaration.
-        f.write("localparam integer GG_DIR_BITS   = {};\n".format(DIR_BITS))
-        f.write("// Both scratch fields are 0 in this image: on entry to search()\n")
-        f.write("// no node is closed and every prevAstarNodeDir is UNKNOWN.\n")
-        for name, val in DIR_ENUM:
-            f.write("localparam [{}:0] GG_DIR_{:<8} = {}'d{};\n".format(
-                DIR_BITS - 1, name, DIR_BITS, val))
+        # DBU, the same units getEstCost measures its Manhattan distance in.
+        for bound, box in (("LOWER", goal_lo), ("UPPER", goal_hi)):
+            gx, gy, gz = goal(box)
+            f.write("  parameter {}_GOAL_X = {};\n".format(bound, gx))
+            f.write("  parameter {}_GOAL_Y = {};\n".format(bound, gy))
+            f.write("  parameter {}_GOAL_Z = {};\n\n".format(bound, gz))
+
+        f.write("  // Constants for Tritonroute\n")
+        for name, key in (("DRC_COST", "ggDRCCost"),
+                          ("MARKER_COST", "ggMarkerCost"),
+                          ("FIXEDSHAPECOST", "ggFixedShapeCost"),
+                          ("GRID_COST", "GRIDCOST"),
+                          ("BLOCK_COST", "BLOCKCOST"),
+                          ("GUIDE_COST", "GUIDECOST")):
+            f.write("  parameter {} = {};\n".format(name, header[key]))
         f.write("\n")
 
-        names = bool_names(snap is not None)
-        keys = [n.split()[0] for n in names]
-        width = max(len(k) for k in keys)
-        for bit, key in enumerate(keys):
-            f.write("localparam integer GG_BIT_{:<{w}} = {};\n".format(key, bit, w=width))
-        f.write("\n")
-
-        f.write("// ---- gg_{x,y,z}coords.mem ----\n")
-        f.write("// Signed two's complement DBU.  One width for all three axes so\n")
-        f.write("// the getEstCost datapath needs no per-axis sign extension.\n")
-        f.write("localparam integer GG_COORD_BITS = {};\n\n".format(coord_bits))
-
-        f.write("// ---- via*_forbidden_*.mem ----\n")
-        f.write("// Each word is GG_FORBID_SLOTS {lo, hi} pairs, slot 0 in the high\n")
-        f.write("// bits; slot s occupies [GG_FORBID_PAIR*(GG_FORBID_SLOTS-s) - 1 :\n")
-        f.write("// GG_FORBID_PAIR*(GG_FORBID_SLOTS-1-s)].  An entry needs more than\n")
-        f.write("// one slot when its forbidden lengths are disjoint.\n")
-        f.write("localparam integer GG_FORBID_SLOTS  = {};\n".format(forbid_slots))
-        f.write("localparam integer GG_FORBID_PAIR   = {};\n".format(2 * forbid_half))
-        f.write("localparam integer GG_FORBID_BITS   = {};\n".format(
-            2 * forbid_half * forbid_slots))
-        f.write("localparam integer GG_FORBID_HALF   = {};  // within a pair: "
-                "lo = [{}:{}], hi = [{}:0]\n".format(
-                    forbid_half, 2 * forbid_half - 1, forbid_half, forbid_half - 1))
-        f.write("localparam integer GG_V2V_ENTRIES   = {};\n".format(8 * z_dim))
-        f.write("localparam integer GG_TURN_ENTRIES  = {};\n".format(4 * z_dim))
-        f.write("// forbidden when lo <= len <= hi in ANY slot; unused slot is\n")
-        f.write("// lo=all-ones, hi=0, which no len can satisfy\n\n")
-
-        for name in ("ggDRCCost", "ggMarkerCost", "ggFixedShapeCost",
-                     "GRIDCOST", "BLOCKCOST", "GUIDECOST"):
-            f.write("localparam integer GG_{:<16} = {};\n".format(
-                name.replace("gg", "").upper(), header[name]))
-        f.write("\n")
-
-        f.write("// ---- gg_layers.mem ----\n")
-        f.write("// Per-layer constants, indexed by z.  A memory rather than\n")
-        f.write("// localparams so the direction and minWidth are readable at\n")
-        f.write("// runtime with the z the datapath already has, instead of a\n")
-        f.write("// {}-way case that has to be re-elaborated per design.\n".format(z_dim))
-        f.write("// Direction is the raw odb::dbTechLayerDir enum; the dump's own\n")
-        f.write("// column header mislabels it as 0=H/1=V/2=NONE -- ignore it.\n")
-        f.write("localparam integer GG_LAYER_BITS     = {};\n".format(layer_bits))
-        f.write("localparam integer GG_MINWIDTH_BITS  = {};  // [{}:0]\n".format(
-            minwidth_bits, minwidth_bits - 1))
-        f.write("localparam integer GG_LAYER_DIR_LSB  = {};\n".format(minwidth_bits))
-        f.write("localparam integer GG_LAYER_DIR_BITS = {};\n".format(LAYER_DIR_BITS))
-        for name, val in LAYER_DIR_ENUM:
-            f.write("localparam [{}:0] GG_LAYER_DIR_{:<10} = {}'d{};\n".format(
-                LAYER_DIR_BITS - 1, name, LAYER_DIR_BITS, val))
-        f.write("// per-z values, for reference -- read them from the .mem, not here:\n")
-        f.write("//   dir      {}\n".format(
-            " ".join(DIR_NAMES.get(d, "?")[:1] or "?" for d in dirs)))
-        f.write("//   minWidth {}\n\n".format(" ".join(str(w) for w in min_widths)))
-
-        f.write("// frLayerNum per z, for tracing back to the LEF; not needed at runtime\n")
-        for z in range(z_dim):
-            f.write("localparam integer GG_LAYERNUM_{}    = {};\n".format(z, layer_nums[z]))
+        # Both bounds are z here, not frLayerNum: getEstCost compares
+        # layerNum -+ 2 against them, which is the z -+ 1 neighbour under the
+        # layerNum = (z + 1) * 2 mapping it hardcodes.
+        f.write("  parameter USE_NONPREF_TRACKS = {};\n".format(
+            fb["useNonPrefTracks"]))
+        f.write("  parameter BOTTOM_ROUTING_LAYER = {}; "
+                "//layer_num of {} or layer z of {}\n".format(
+                    bottom_z, fb["bottomRoutingLayer"], bottom_z))
+        f.write("  parameter TOP_ROUTING_LAYER = {}; "
+                "//layer_num of {} or layer z of {}\n".format(
+                    top_z, fb["topLayerNum"], top_z))
+        f.write("endpackage\n")
     print("  {:<30} {:>8}".format(os.path.basename(path), "params"))
 
 
@@ -626,29 +922,43 @@ def main():
                     help="forbidden-length dump (default: %(default)s)")
     ap.add_argument("--outdir", default="initialization/mem",
                     help="output directory (default: %(default)s)")
-    ap.add_argument("--node-bits", type=int, default=nibble_align(MIN_NODE_BITS),
-                    help="node word width, min {} (default: %(default)s)".format(
-                        MIN_NODE_BITS))
+    ap.add_argument("--node-bits", type=int, default=DEFAULT_NODE_BITS,
+                    help="node word width, min {} (default: %(default)s -- the "
+                         "{}b state + A* scratch plus a {}b RTL scratchpad in "
+                         "the top bits)".format(
+                             MIN_NODE_BITS, MIN_NODE_BITS, SCRATCHPAD_BITS))
     ap.add_argument("--coord-bits", type=int, default=None,
                     help="coordinate width; default is derived from the values")
     ap.add_argument("--forbidden-bits", type=int, default=None,
                     help="width of one {lo, hi} pair; default is derived")
+    ap.add_argument("--prl-bits", type=int, default=None,
+                    help="via2ViaPrlLen word width; default is derived from "
+                         "the values")
     ap.add_argument("--minwidth-bits", type=int, default=None,
                     help="minWidth field width in gg_layers.mem; default is "
                          "derived from the values")
     ap.add_argument("--forbidden-slots", type=int, default=None,
                     help="ranges per table entry; default is the most any entry "
                          "in --forbidden needs")
+    ap.add_argument("--search", default=None,
+                    help="dumpSearch() search_iter*.txt for the same search as "
+                         "--snapshot; its dstBox row is the goal box search() "
+                         "actually used")
+    ap.add_argument("--goal-box", type=int, nargs=6, default=None,
+                    metavar=("X1", "Y1", "Z1", "X2", "Y2", "Z2"),
+                    help="goal box as two maze indices, lower then upper; "
+                         "overrides --search and the --snapshot dst bits")
     ap.add_argument("--ignore-ndr", action="store_true",
                     help="drop nonzero NDR cost fields instead of stopping")
     args = ap.parse_args()
 
-    for p in (args.gg, args.forbidden, args.snapshot):
+    for p in (args.gg, args.forbidden, args.snapshot, args.search):
         if p is not None and not os.path.isfile(p):
             die("no such file: " + p)
     for name, val in (("--node-bits", args.node_bits),
                       ("--coord-bits", args.coord_bits),
                       ("--minwidth-bits", args.minwidth_bits),
+                      ("--prl-bits", args.prl_bits),
                       ("--forbidden-bits", args.forbidden_bits)):
         if val is not None and val % 4:
             die("{} {} is not a multiple of 4, so it cannot be written as "
@@ -672,7 +982,26 @@ def main():
             print("  note: snapshot built with cost_bits={}, cost bytes "
                   "saturated at 255 (only tested for nonzero here)".format(
                       snap["costBits"]))
-    num_layers, via2via, turn = parse_forbidden(args.forbidden)
+    search = None
+    if args.search is not None:
+        search = parse_search(args.search)
+        if search["dim"] != header["dim"]:
+            die("{} dim {} does not match {} dim {} -- the two files are not "
+                "the same route box".format(
+                    args.search, search["dim"], args.gg, header["dim"]))
+        if "iter" in search and "iter" in header \
+                and search["iter"] != header["iter"]:
+            die("{} is from DR iteration {} but {} is from {} -- the same route "
+                "box is a different grid graph each iteration".format(
+                    args.search, search["iter"], args.gg, header["iter"]))
+        # The goal box belongs to one search() call, so pairing it with another
+        # call's node state would put the heuristic and the grid out of step.
+        if snap is not None and "searchId" in search \
+                and search["searchId"] != snap["searchId"]:
+            die("{} is search {} but {} is search {} -- match the _s<id> "
+                "suffixes".format(args.search, search["searchId"],
+                                  args.snapshot, snap["searchId"]))
+    num_layers, via2via, turn, prl, fb = parse_forbidden(args.forbidden)
 
     x_dim, y_dim, z_dim = header["dim"]
     xc, yc, zh = header["xCoords"], header["yCoords"], header["zHeights"]
@@ -682,6 +1011,51 @@ def main():
     if num_layers != z_dim:
         die("forbidden tables have {} layers but the grid graph has {}".format(
             num_layers, z_dim))
+    # Both files number routing layers from the bottom one, so their z ->
+    # frLayerNum maps must agree.  A mismatch means the two dumps came from
+    # different designs, which every table lookup below would silently mis-index.
+    fb_layer_nums = [fb["layerNums"][z] for z in range(z_dim)]
+    if fb_layer_nums != header["zCoords(layerNum)"]:
+        die("layer numbering disagrees: {} has {} but {} has {} -- the two "
+            "dumps are not from the same design".format(
+                args.forbidden, fb_layer_nums, args.gg,
+                header["zCoords(layerNum)"]))
+
+    # --- goal box: what getEstCost measures its heuristic to ---
+    if args.goal_box is not None:
+        goal_lo, goal_hi = tuple(args.goal_box[:3]), tuple(args.goal_box[3:])
+        check_goal_box(goal_lo, goal_hi, header["dim"], "--goal-box")
+        goal_note = "from --goal-box"
+    elif search is not None:
+        goal_lo, goal_hi = search["dstLo"], search["dstHi"]
+        where = "the dstBox row of " + os.path.basename(args.search)
+        check_goal_box(goal_lo, goal_hi, header["dim"], where)
+        # The row states each corner twice, as a maze index and in DBU. Only
+        # the index is used, so disagreement means the two files are not the
+        # same route box (or the dump predates the current dstBox print) and
+        # the index this run trusts is the one that is wrong.
+        for label, box, dbu in (("lower", goal_lo, search["dstLoDbu"]),
+                                ("upper", goal_hi, search["dstHiDbu"])):
+            want = (xc[box[0]], yc[box[1]])
+            if want != dbu:
+                die("{} disagrees with itself: its {} corner is maze index "
+                    "{} {}, which is {} {} DBU in {}, but the row says {} {}"
+                    .format(where, label, box[0], box[1], want[0], want[1],
+                            os.path.basename(args.gg), dbu[0], dbu[1]))
+        goal_note = "dstBox of search {} in {}".format(
+            search.get("searchId", "?"), os.path.basename(args.search))
+    else:
+        goal_lo, goal_hi, n_dst = dst_goal_box(nodes, header["dim"])
+        if goal_lo is None:
+            die("no node carries the dst bit, so the goal box cannot be "
+                "recovered{} -- pass --search for the dumpSearch() text file "
+                "of the same search, --snapshot for a dump taken on entry to "
+                "search(), or set it by hand with --goal-box".format(
+                    " (a --gg text dump has no dst column)"
+                    if snap is None else ""))
+        goal_note = "bounding box of the {} dst node{} in {}".format(
+            n_dst, "" if n_dst == 1 else "s",
+            os.path.basename(args.snapshot))
 
     # --- coordinate width: one signed width covering all three axes ---
     all_coords = xc + yc + zh
@@ -691,9 +1065,12 @@ def main():
         die("--coord-bits {} cannot hold the range {}..{} (needs {} signed)".format(
             coord_bits, min(all_coords), max(all_coords), need))
 
-    # --- per-layer word: {dir, minWidth}, minWidth sized from the values ---
+    # --- per-layer word: {unidir, dir, minWidth}, minWidth sized from the
+    # values.  dir comes from the grid-graph dump, unidir from the forbidden
+    # dump -- the two files describe the same layer stack, checked above.
     dirs = header["layerDir(0=H,1=V,2=NONE)"]
     min_widths = header["layerMinWidth"]
+    unidirs = [fb["unidirectional"][z] for z in range(z_dim)]
     if len(dirs) != z_dim or len(min_widths) != z_dim:
         die("layerDir/layerMinWidth have {}/{} entries, expected {}".format(
             len(dirs), len(min_widths), z_dim))
@@ -701,6 +1078,9 @@ def main():
         if not 0 <= d < (1 << LAYER_DIR_BITS):
             die("layerDir[{}] = {} does not fit the {}-bit direction field".format(
                 z, d, LAYER_DIR_BITS))
+    for z, u in enumerate(unidirs):
+        if u not in (0, 1):
+            die("unidirectional[{}] = {} is not a 0/1 flag".format(z, u))
     if min(min_widths) < 0:
         die("layerMinWidth has a negative entry: {}".format(min(min_widths)))
     mw_need = unsigned_bits(max(min_widths))
@@ -709,8 +1089,10 @@ def main():
     if minwidth_bits < mw_need:
         die("--minwidth-bits {} cannot hold the max minWidth {} (needs {})".format(
             minwidth_bits, max(min_widths), mw_need))
-    layer_bits = nibble_align(minwidth_bits + LAYER_DIR_BITS)
-    layer_words = [(d << minwidth_bits) | w for d, w in zip(dirs, min_widths)]
+    unidir_lsb = minwidth_bits + LAYER_DIR_BITS
+    layer_bits = nibble_align(unidir_lsb + LAYER_UNIDIR_BITS)
+    layer_words = [(u << unidir_lsb) | (d << minwidth_bits) | w
+                   for u, d, w in zip(unidirs, dirs, min_widths)]
 
     # --- forbidden width: lo and hi share a half-word, n_slots pairs per word ---
     all_entries = list(via2via.values()) + list(turn.values())
@@ -742,6 +1124,14 @@ def main():
                                forbid_half, forbid_slots)
     turn_words = pack_forbidden(turn, num_layers, 4, "viaForbiddenTurnLen",
                                 forbid_half, forbid_slots)
+
+    # --- PRL width: unsigned, one threshold per via2ViaForbiddenLen entry ---
+    prl_words = pack_prl(prl, num_layers)
+    prl_need = unsigned_bits(max(prl_words))
+    prl_bits = args.prl_bits if args.prl_bits is not None else nibble_align(prl_need)
+    if prl_bits < prl_need:
+        die("--prl-bits {} cannot hold the max via2ViaPrlLen {} (needs {})".format(
+            prl_bits, max(prl_words), prl_need))
 
     def coord_layout(label, values):
         return [(coord_bits - 1, 0, label, "signed, range {}..{} (needs {}b)".format(
@@ -777,6 +1167,8 @@ def main():
                                snap["dsts"]), ""]
     state_notes += ["node state bits, LSB first:", ""]
     state_notes += ["bit {:>2}  {}".format(i, n) for i, n in enumerate(names)]
+    state_notes += ["", "prevAstarNodeDir is frDirEnum: " + ", ".join(
+        "{}={}".format(v, n) for n, v in DIR_ENUM)]
     write_mem(out("gg_nodes.mem"), nodes, args.node_bits,
               "grid-graph nodes, addr = (z*{} + y)*{} + x".format(y_dim, x_dim),
               node_layout(args.node_bits), state_notes)
@@ -790,11 +1182,13 @@ def main():
               coord_layout("zHeights[z]", zh))
 
     layer_layout = []
-    if layer_bits > minwidth_bits + LAYER_DIR_BITS:
-        layer_layout.append((layer_bits - 1, minwidth_bits + LAYER_DIR_BITS,
+    if layer_bits > unidir_lsb + LAYER_UNIDIR_BITS:
+        layer_layout.append((layer_bits - 1, unidir_lsb + LAYER_UNIDIR_BITS,
                              "pad", "zero"))
     layer_layout += [
-        (minwidth_bits + LAYER_DIR_BITS - 1, minwidth_bits, "dir",
+        (unidir_lsb + LAYER_UNIDIR_BITS - 1, unidir_lsb, "unidir",
+         "frLayer::isUnidirectional(), from " + os.path.basename(args.forbidden)),
+        (unidir_lsb - 1, minwidth_bits, "dir",
          "odb::dbTechLayerDir: " + ", ".join(
              "{}={}".format(v, n) for n, v in LAYER_DIR_ENUM)),
         (minwidth_bits - 1, 0, "minWidth",
@@ -802,19 +1196,52 @@ def main():
              min(min_widths), max(min_widths), mw_need)),
     ]
     write_mem(out("gg_layers.mem"), layer_words, layer_bits,
-              "per-layer direction and minWidth, indexed by z", layer_layout,
+              "per-layer unidir, direction and minWidth, indexed by z",
+              layer_layout,
               ["the dump's 'layerDir(0=H,1=V,2=NONE)' header is mislabelled;",
-               "the values are the raw odb enum, so 1 = HORIZONTAL, 2 = VERTICAL"])
+               "the values are the raw odb enum, so 1 = HORIZONTAL, 2 = VERTICAL",
+               "",
+               "per-z dir      " + " ".join(
+                   DIR_NAMES.get(d, "?")[:1] or "?" for d in dirs),
+               "per-z minWidth " + " ".join(str(w) for w in min_widths),
+               "per-z unidir   " + " ".join(str(u) for u in unidirs),
+               "",
+               "unidir is not a function of dir -- it is numMasks > 1 ||",
+               "lef58RectOnly || unidirectional_, so a HORIZONTAL layer may be",
+               "either.  getEstCost takes its forbidden branch when",
+               "!GG_USE_NONPREF_TRACKS || unidir[z]."])
 
     write_mem(out("via2via_forbidden_len.mem"), v2v_words, forbid_bits,
               "via2ViaForbiddenLen, addr = z*8 + prevViaUp*4 + currViaUp*2 + isDirY",
               forbid_layout(), forbid_notes)
+    write_mem(out("via2via_prl_len.mem"), prl_words, prl_bits,
+              "via2ViaPrlLen, addr = z*8 + prevViaUp*4 + currViaUp*2 + isDirY",
+              [(prl_bits - 1, 0, "prl", "unsigned DBU, range {}..{} (needs {}b)"
+                .format(min(prl_words), max(prl_words), prl_need))],
+              ["a threshold, not a range: isVia2ViaPRL() is len <= prl",
+               "same address as via2via_forbidden_len.mem -- one generator",
+               "feeds both",
+               "",
+               "read only when the via2via check has both currVLengthX and",
+               "currVLengthY nonzero, where it picks OR (either axis passes",
+               "the PRL test) or AND (neither does) over the two",
+               "isVia2ViaForbiddenLen results; a single-axis move never",
+               "consults it",
+               "",
+               "no NDR variant exists -- isVia2ViaPRL() always reads the tech",
+               "table, even for a net with a non-default rule"])
+
     write_mem(out("via_forbidden_turn_len.mem"), turn_words, forbid_bits,
               "viaForbiddenTurnLen, addr = z*4 + viaUp*2 + isDirY",
               forbid_layout(), forbid_notes)
 
-    write_params(out("gg_params.vh"), header, args.node_bits, coord_bits,
-                 forbid_half, forbid_slots, minwidth_bits, layer_bits, snap)
+    if search is not None:
+        src_name = os.path.basename(args.search)
+        write_src_dst_pins(out("src_dst_pins.txt"), search, header["dim"],
+                           xc, yc, zh, src_name)
+        write_path_cost(out("path_cost.txt"), search, header["dim"], src_name)
+
+    write_params(out("params.sv"), header, fb, goal_lo, goal_hi, goal_note)
 
 
 if __name__ == "__main__":

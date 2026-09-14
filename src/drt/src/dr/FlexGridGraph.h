@@ -995,6 +995,8 @@ class FlexGridGraph
   // node sets and the resulting traceback path for a single search() call
   // (one pin-connection attempt). Also gated by DRT_DUMP_GG_DIR; writes one
   // file per search into the same directory.
+  // goalGrid is the wavefront entry popped on the destination, whose pathCost
+  // is the routed path's total cost; nullptr when the search failed.
   void dumpSearch(int searchId,
                   const std::vector<FlexMazeIdx>& connComps,
                   drPin* nextPin,
@@ -1004,8 +1006,15 @@ class FlexGridGraph
                   const FlexMazeIdx& ccMazeIdx2In,
                   const FlexMazeIdx& ccMazeIdx1Out,
                   const FlexMazeIdx& ccMazeIdx2Out,
+                  const FlexMazeIdx& dstMazeIdx1,
+                  const FlexMazeIdx& dstMazeIdx2,
                   const odb::Point& centerPt,
-                  bool routeWithJumpers) const;
+                  bool routeWithJumpers,
+                  const FlexWavefrontGrid* goalGrid,
+                  int exploredNodes,
+                  int expandedNodes,
+                  int discardedNodes,
+                  double runtimeMs) const;
   void resetStatus();
   void resetPrevNodeDir();
   void resetSrc();
@@ -1017,7 +1026,8 @@ class FlexGridGraph
               FlexMazeIdx& ccMazeIdx2,
               const odb::Point& centerPt,
               std::map<FlexMazeIdx, frBox3D*>& mazeIdx2TaperBox,
-              bool route_with_jumpers);
+              bool route_with_jumpers,
+              double& runtimeMs);
   void setCost(frUInt4 drcCostIn,
                frUInt4 markerCostIn,
                frUInt4 FixedShapeCostIn)

@@ -42,7 +42,10 @@ struct RouterConfiguration
   int BOTTOM_ROUTING_LAYER = 2;
   int TOP_ROUTING_LAYER = std::numeric_limits<int>::max();
   bool ALLOW_PIN_AS_FEEDTHROUGH = true;
+  
+  //default was true, setting to false to trigger v2v violations in heuristic
   bool USENONPREFTRACKS = true;
+  
   bool USEMINSPACING_OBS = true;
   bool ENABLE_BOUNDARY_MAR_FIX = true;
   bool ENABLE_VIA_GEN = true;
