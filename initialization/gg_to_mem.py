@@ -34,11 +34,15 @@ python3 initialization/gg_to_mem.py --gg top_gcd/ggdump/gg_iter1_x50400_y50400.t
 
 python3 initialization/gg_to_mem.py --gg top_gcd/ggdump/gg_iter1_x50400_y50400.txt --snapshot top_gcd/ggdump/ggs_iter1_x50400_y50400_s3.bin --forbidden top_gcd/ggdump/forbidden_tables.txt
 
---gg is still required with --snapshot: the binary carries only the mutable
 per-node state, while the coordinate arrays, layer directions and cost scalars
 are static after init() and are read from the text dump of the same route box.
 Match the iter/x/y of the two files -- the script checks dim but cannot check
 that you picked the same box at the same iteration.
+--gg is still required with --snapshot: the text dump holds shared static node
+fields, coordinate arrays, layer directions and cost scalars; the binary holds
+per-search costs and routing-time flags. Match the iter/x/y of the two files --
+the script checks dim but cannot check that you picked the same box at the same
+iteration.
 
 Word widths are sized to the data, not to a machine word: each is the narrowest
 field layout that holds the values, rounded up to a multiple of 4 so one hex
@@ -48,15 +52,33 @@ the word, so the RTL slices are written against it.
 
 Outputs (all $readmemh-ready: bare hex, one word per line, no prefixes):
 
-    gg_nodes.mem                167*232*6 x 32b   main grid-graph memory
-    gg_xcoords.mem              167       x 20b   signed DBU, indexed by x
-    gg_ycoords.mem              232       x 20b   signed DBU, indexed by y
-    gg_zcoords.mem              6         x 20b   zHeights, DBU, indexed by z
+    gg_nodes_even.mem           ceil(GRID_I/2)*GRID_J*GRID_K x 24b
+    gg_nodes_odd.mem            ceil(GRID_I/2)*GRID_J*GRID_K x 24b
+    gg_nodes_secondary_even.mem ceil(GRID_I/2)*GRID_J*GRID_K x 12b
+    gg_nodes_secondary_odd.mem  ceil(GRID_I/2)*GRID_J*GRID_K x 12b
+    gg_xcoords.mem              84        x 40b   two signed x DBU values
+    gg_ycoords.mem              116       x 40b   two signed y DBU values
+    gg_zcoords.mem              3         x 40b   two zHeights, DBU
     gg_layers.mem               6         x 16b   {unidir, dir, minWidth}, by z
-    via2via_forbidden_len.mem   6*8       x 48b   N x {lo, hi}
-    via2via_prl_len.mem         6*8       x 12b   PRL threshold, same addressing
+    via2via_forbidden_len.mem   6*4       x 96b   two x N x {lo, hi}
+    via2via_prl_len.mem         6*4       x 24b   two PRL thresholds
     via_forbidden_turn_len.mem  6*4       x 48b   N x {lo, hi}
-    params.sv                   grid dims, goal box and the cost scalars
+    params.sv                   grid dims, goal box, costs and every memory's
+                                depth, data width and address width
+
+Each coordinate word packs adjacent indices, even index in the upper half and
+odd index in the lower half. An unused lower half for an odd-sized array is
+zero-filled. Select the half using the coordinate index's least-significant
+bit.
+
+The V2V DRC and PRL memories pair adjacent isDirY entries: each packed word
+holds isDirY=0 in its upper half and isDirY=1 in its lower half. Their address
+is the original table address with the isDirY bit removed.
+
+The node images are checkerboard-banked. Bank 0 (even) is selected by
+x[0] ^ (z[0] when GRID_I is even, otherwise y[0]); bank 1 (odd) is the
+opposite. Each image uses bank_addr = (addr / GRID_I) * ceil(GRID_I / 2)
++ (x / 2), with unpopulated slots zero-filled.
 
 Two more come out of --search, as plain text rather than memory images -- they
 describe one search() call, not the grid it ran on:
@@ -65,26 +87,9 @@ describe one search() call, not the grid it ran on:
     path_cost.txt               the cost it paid, then the path it took
 
 
-NODE WORD -- 32 bits:
+NODE WORD -- 24 bits:
 
-    [31:28]  scratchpad         4b   spare, zero here -- free for the RTL
-    [27:25]  prevAstarNodeDir   3b   A* scratch, frDirEnum, 0 = UNKNOWN
-    [24]     closed             1b   A* scratch
-    [23: 0]  node state        24b   loaded from the dump
-
-Bits 24..27 are working storage for the search, not dump data: both fields are 0
-in every word this script emits, because on entry to search() nothing is closed
-and every prevAstarNodeDir is UNKNOWN.  They are carved out of the node word so
-the RTL can read state and write back its A* bookkeeping in one memory rather
-than maintaining a second array in parallel -- which is what the C++ does, in
-the separate prevDirs_ bit vector.
-
-Bits 28..31 are the same idea taken one step further: a nibble of uncommitted
-per-node storage for whatever else the RTL wants to keep alongside a node (a
-visited/queued marker, a small tag, a bucket index).  Nothing in this script or
-in the C++ assigns them any meaning, so they ship zeroed.  Widen or narrow the
-field with --node-bits; the gg_nodes.mem header follows whatever width you
-pick, and 28 (--node-bits 28) removes it entirely.
+    [23: 0]  node state        24b   the bool_bits payload
 
 The word carries no x/y/z.  Under the canonical address mapping below the
 address is a bijection onto (x, y, z), so any reader has the indices in hand
@@ -97,10 +102,11 @@ Boolean bits, LSB first.  Bits 0..13 mirror the C++ Node byte0/byte1 flag
 layout; 14..20 are the non-NDR cost fields reduced to a nonzero test; 21..23 are
 the separate guides_ / srcs_ / dsts_ bit vectors.
 
-Bits 7 (overrideShapeCostVia), 22 (src) and 23 (dst) only ever carry data from
---snapshot.  The text dump has no column for them, and all three are routing-
-time state that is uniformly 0 in a pre-routing dump anyway, so a --gg-only run
-zeroing them is correct rather than lossy.
+Bits 3..5 (blocked edges), 7 (overrideShapeCostVia), and 8..13 (grid/AP cost
+flags) are overlaid from --snapshot because routing can mutate them after the
+shared pre-routing dump.  The text dump has no override/src/dst columns; a
+--gg-only run keeps the pre-routing baseline values and zeros the missing
+fields.
 
 Reducing the cost counters to one bit each is lossless for the A* cost model:
 FlexGridGraph::getCosts() assigns every one of them to a `bool` and uses it only
@@ -195,9 +201,8 @@ PARAMS_PACKAGE = "DRT_PARAMS"
 # "layerDir(0=H,1=V,2=NONE)" -- that label is wrong; it prints the raw odb enum.
 DIR_NAMES = {0: "NONE", 1: "HORIZONTAL", 2: "VERTICAL"}
 
-# Boolean payload, LSB first.  This order is also the C++ Node byte0/byte1 bit
-# order, which parse_snapshot() relies on to copy both bytes in one shift
-# instead of bit by bit -- keep the two in step.
+# Boolean payload, LSB first. This order matches the C++ Node flag layout and
+# the columns in the shared grid text dump.
 FLAG_BITS = [
     "hasEastEdge",
     "hasNorthEdge",
@@ -245,22 +250,27 @@ GUIDE_BIT = len(FLAG_BITS) + len(COST_BITS)  # 21
 SRC_BIT = GUIDE_BIT + 1  # 22
 DST_BIT = GUIDE_BIT + 2  # 23
 BOOL_BITS = GUIDE_BIT + len(VECTOR_BITS)  # 24
+NODE_BITS = BOOL_BITS
 
-# Per-node A* scratch, written by the search rather than loaded from a dump.
-# Both are 0 on entry to search() -- prevAstarNodeDir is UNKNOWN and nothing is
-# closed yet -- so the .mem ships them zeroed and the RTL owns them from there.
-# In C++ these live outside Node, in the separate prevDirs_ bit vector.
-CLOSED_BIT = BOOL_BITS  # 24
-DIR_LSB = BOOL_BITS + 1  # 25
-DIR_BITS = 3
-SCRATCH_BITS = 1 + DIR_BITS  # 4
-MIN_NODE_BITS = BOOL_BITS + SCRATCH_BITS  # 28
-
-# Uncommitted per-node storage above the A* scratch, for RTL variables this
-# script knows nothing about.  One nibble by default so the node word is a round
-# 32 bits; --node-bits resizes it and --node-bits 28 removes it.
-SCRATCHPAD_BITS = 4
-DEFAULT_NODE_BITS = MIN_NODE_BITS + SCRATCHPAD_BITS  # 32
+# Secondary node word, LSB first. Each entry names the field in the secondary
+# image and the bit in the corresponding primary bank word that supplies it.
+SECONDARY_NODE_FIELDS = [
+    ("src_node", SRC_BIT),
+    ("guide", GUIDE_BIT),
+    ("fixedShapeCostPlanarVert", len(FLAG_BITS) + COST_BITS.index(
+        "fixedShapeCostPlanarVert")),
+    ("fixedShapeCostPlanarHorz", len(FLAG_BITS) + COST_BITS.index(
+        "fixedShapeCostPlanarHorz")),
+    ("fixedShapeCostVia", len(FLAG_BITS) + COST_BITS.index(
+        "fixedShapeCostVia")),
+    ("markerCostVia", len(FLAG_BITS) + COST_BITS.index("markerCostVia")),
+    ("markerCostPlanar", len(FLAG_BITS) + COST_BITS.index("markerCostPlanar")),
+    ("routeShapeCostVia", len(FLAG_BITS) + COST_BITS.index("routeShapeCostVia")),
+    ("routeShapeCostPlanar", len(FLAG_BITS) + COST_BITS.index(
+        "routeShapeCostPlanar")),
+    ("overrideShapeCostVia", FLAG_BITS.index("overrideShapeCostVia")),
+]
+SECONDARY_NODE_BITS = ((len(SECONDARY_NODE_FIELDS) + 3) // 4) * 4
 
 # frDirEnum, from src/drt/src/frBaseTypes.h.  UNKNOWN = 0 is the reset value.
 DIR_ENUM = [("UNKNOWN", 0), ("D", 1), ("S", 2), ("W", 3),
@@ -293,11 +303,23 @@ NODE_COLUMNS = (
 COL = {name: i + 1 for i, name in enumerate(NODE_COLUMNS)}
 
 # ---- dumpSearchGraph() binary format (see FlexGridGraph_maze.cpp) ----
-SNAP_MAGIC = b"DRTGGS01"
+SNAP_MAGIC_V1 = b"DRTGGS01"
+SNAP_MAGIC = b"DRTGGS02"
 SNAP_HEADER_BYTES = 32  # magic + 6 int32
-SNAP_STRIDE = 14  # bytes per node record
-# Cost counters occupy record bytes 2..13 in this order.
+# Sparse record cost mask and values use this field order.
 SNAP_COST_ORDER = COST_BITS + NDR_COLS
+SNAP_MUTABLE_FLAGS = [
+    "isBlockedEast",
+    "isBlockedNorth",
+    "isBlockedUp",
+    "hasGridCostEast",
+    "hasGridCostNorth",
+    "hasGridCostUp",
+    "hasApCostEast",
+    "hasApCostNorth",
+    "hasApCostUp",
+    "overrideShapeCostVia",
+]
 
 
 def die(msg):
@@ -350,39 +372,86 @@ def write_mem(path, words, bits, title, layout, notes=()):
             for line in notes:
                 f.write("//   {}\n".format(line) if line else "//\n")
         f.write("//\n// load with $readmemh\n")
-        for w in words:
-            f.write(hex_word(w, bits) + "\n")
+        chunk_size = 8192
+        for start in range(0, len(words), chunk_size):
+            f.write("".join(hex_word(word, bits) + "\n"
+                             for word in words[start:start + chunk_size]))
     print("  {:<30} {:>8} x {:>3}b".format(name, len(words), bits))
 
 
-def node_layout(node_bits):
-    rows = []
-    if node_bits > MIN_NODE_BITS:
-        rows.append((node_bits - 1, MIN_NODE_BITS, "scratchpad",
-                     "spare, 0 here -- RTL-owned, no meaning to this script"))
-    rows += [
-        (DIR_LSB + DIR_BITS - 1, DIR_LSB, "prevAstarNodeDir",
-         "frDirEnum, 0 = UNKNOWN (A* scratch, 0 here)"),
-        (CLOSED_BIT, CLOSED_BIT, "closed", "A* scratch, 0 here"),
-        (BOOL_BITS - 1, 0, "node state", "one bit each, see below"),
+def node_layout():
+    return [(BOOL_BITS - 1, 0, "node state", "one bit each, see below")]
+
+
+def secondary_node_layout():
+    padding = ([(SECONDARY_NODE_BITS - 1, len(SECONDARY_NODE_FIELDS),
+                 "pad", "zero")]
+               if SECONDARY_NODE_BITS > len(SECONDARY_NODE_FIELDS) else [])
+    return padding + [
+        (packed_bit, packed_bit, name,
+         "gg_nodes_even/odd.mem bit {}".format(source_bit))
+        for packed_bit, (name, source_bit)
+        in reversed(list(enumerate(SECONDARY_NODE_FIELDS)))
     ]
-    return rows
+
+
+def secondary_node_words(nodes):
+    return [
+        sum(((word >> source_bit) & 1) << packed_bit
+            for packed_bit, (_, source_bit)
+            in enumerate(SECONDARY_NODE_FIELDS))
+        for word in nodes
+    ]
+
+
+def bank_node_words(words, x_dim, y_dim, z_dim):
+    """Split canonical node words into checkerboard banks, indexed by bank_addr."""
+    bank_x_depth = (x_dim + 1) // 2
+    bank_depth = y_dim * z_dim * bank_x_depth
+    banks = [[0] * bank_depth, [0] * bank_depth]
+
+    for z in range(z_dim):
+        for y in range(y_dim):
+            row_addr = (z * y_dim + y) * x_dim
+            bank_addr = (z * y_dim + y) * bank_x_depth
+            row_bank = (z & 1) if x_dim % 2 == 0 else (y & 1)
+            for pair in range(x_dim // 2):
+                even_word = words[row_addr + 2 * pair]
+                odd_word = words[row_addr + 2 * pair + 1]
+                if row_bank:
+                    banks[0][bank_addr + pair] = odd_word
+                    banks[1][bank_addr + pair] = even_word
+                else:
+                    banks[0][bank_addr + pair] = even_word
+                    banks[1][bank_addr + pair] = odd_word
+            if x_dim % 2:
+                tail_word = words[row_addr + x_dim - 1]
+                banks[row_bank][bank_addr + x_dim // 2] = tail_word
+
+    return banks[0], banks[1]
 
 
 def bool_names(from_snapshot):
-    tail = "" if from_snapshot else " (--snapshot only, 0 here)"
-    names = [n + (tail if n in TEXT_MISSING else "") for n in FLAG_BITS]
+    names = []
+    for name in FLAG_BITS:
+        if from_snapshot and name in SNAP_MUTABLE_FLAGS:
+            suffix = " (snapshot overlay)"
+        elif not from_snapshot and name in TEXT_MISSING:
+            suffix = " (--snapshot only, 0 here)"
+        else:
+            suffix = ""
+        names.append(name + suffix)
     names += [c + " != 0" for c in COST_BITS]
-    names += ["guide", "src" + tail, "dst" + tail]
+    suffix = " (snapshot)" if from_snapshot else " (--snapshot only, 0 here)"
+    names += ["guide" + suffix, "src" + suffix, "dst" + suffix]
     return names
 
 
-def parse_gridgraph(path, ignore_ndr, want_nodes=True):
+def parse_gridgraph(path, ignore_ndr, want_nodes=True, check_ndr_fields=True):
     """Return (header dict, node words indexed by canonical address).
 
-    With want_nodes False the per-node rows are skipped and None is returned
-    in their place -- used when --snapshot supersedes them, so the 232k-line
-    table is not parsed just to be thrown away.
+    With want_nodes False the per-node rows are skipped. Snapshot conversion
+    reads these rows as the shared static baseline before applying its overlay.
     """
     header = {}
     nodes = None
@@ -448,7 +517,8 @@ def parse_gridgraph(path, ignore_ndr, want_nodes=True):
         if seen != len(nodes):
             die("expected {} nodes, found {} in {}".format(
                 len(nodes), seen, path))
-        check_ndr(dropped_ndr, ignore_ndr, path)
+        if check_ndr_fields:
+            check_ndr(dropped_ndr, ignore_ndr, path)
 
     return header, nodes
 
@@ -462,52 +532,33 @@ def check_ndr(dropped_ndr, ignore_ndr, path):
                           for k, v in sorted(dropped_ndr.items()))))
 
 
-def parse_snapshot(path, ignore_ndr):
-    """Read a dumpSearchGraph() .bin -> (node words, meta dict).
-
-    The binary carries only mutable per-node state; the caller still needs a
-    --gg text dump for the coordinate arrays and cost scalars.
-    """
-    with open(path, "rb") as f:
-        blob = f.read()
-    if len(blob) < SNAP_HEADER_BYTES or blob[:8] != SNAP_MAGIC:
-        die("{} is not a {} search snapshot".format(path, SNAP_MAGIC.decode()))
+def parse_snapshot_v1(blob, path, ignore_ndr):
+    """Read the legacy full-node search snapshot for reference comparisons."""
     x_dim, y_dim, z_dim, cost_bits, stride, search_id = struct.unpack(
         "<6i", blob[8:SNAP_HEADER_BYTES])
-
-    if stride != SNAP_STRIDE:
-        die("{} has a {}-byte node record, expected {}".format(
-            path, stride, SNAP_STRIDE))
-
+    if stride != 14:
+        die("{} has a {}-byte node record, expected 14".format(path, stride))
     n = x_dim * y_dim * z_dim
     bm_bytes = (n + 7) // 8
     node_end = SNAP_HEADER_BYTES + n * stride
-    want = node_end + 3 * bm_bytes
-    if len(blob) != want:
+    expected = node_end + 3 * bm_bytes
+    if len(blob) != expected:
         die("{} is {} bytes, expected {} for dim {}x{}x{}".format(
-            path, len(blob), want, x_dim, y_dim, z_dim))
+            path, len(blob), expected, x_dim, y_dim, z_dim))
     guides = blob[node_end:node_end + bm_bytes]
     srcs = blob[node_end + bm_bytes:node_end + 2 * bm_bytes]
     dsts = blob[node_end + 2 * bm_bytes:node_end + 3 * bm_bytes]
-
-    n_cost = len(COST_BITS)
-    ndr_base = 2 + n_cost
     words = [0] * n
     dropped_ndr = {}
     off = SNAP_HEADER_BYTES
-
-    # The record order is the canonical z-major, x-fastest address order, so a
-    # flat walk lands each record at its own address with no index arithmetic.
     for addr in range(n):
-        # Record bytes 0 and 1 are the C++ Node flag bytes, and FLAG_BITS is in
-        # that same order: byte 0 supplies bits 0..5 (bits 6,7 are the C++
-        # unused1/unused2) and byte 1 bits 6..13.
         word = (blob[off] & 0x3f) | (blob[off + 1] << 6)
-        for i in range(n_cost):
-            if blob[off + 2 + i]:
-                word |= 1 << (len(FLAG_BITS) + i)
-        for i, name in enumerate(NDR_COLS):
-            if blob[off + ndr_base + i]:
+        for field, name in enumerate(SNAP_COST_ORDER):
+            value = blob[off + 2 + field]
+            if field < len(COST_BITS):
+                if value:
+                    word |= 1 << (len(FLAG_BITS) + field)
+            elif value:
                 dropped_ndr[name] = dropped_ndr.get(name, 0) + 1
         byte, mask = addr >> 3, 1 << (addr & 7)
         if guides[byte] & mask:
@@ -518,12 +569,110 @@ def parse_snapshot(path, ignore_ndr):
             word |= 1 << DST_BIT
         words[addr] = word
         off += stride
+    check_ndr(dropped_ndr, ignore_ndr, path)
+    meta = {
+        "dim": (x_dim, y_dim, z_dim),
+        "searchId": search_id,
+        "costBits": cost_bits,
+        "costRecords": n,
+        "srcs": sum(bin(b).count("1") for b in srcs),
+        "dsts": sum(bin(b).count("1") for b in dsts),
+        "guides": sum(bin(b).count("1") for b in guides),
+    }
+    return words, meta
+
+
+def parse_snapshot(path, ignore_ndr, baseline):
+    """Overlay sparse search state from .bin on shared text node words.
+
+    Static flags come from the matching --gg dump. Mutable cost fields and
+    override/guides/srcs/dsts state are replaced by the search snapshot.
+    """
+    with open(path, "rb") as f:
+        blob = f.read()
+    if len(blob) < SNAP_HEADER_BYTES:
+        die("{} is shorter than a search snapshot header".format(path))
+    if blob[:8] == SNAP_MAGIC_V1:
+        return parse_snapshot_v1(blob, path, ignore_ndr)
+    if blob[:8] != SNAP_MAGIC:
+        die("{} is not a {} search snapshot".format(path, SNAP_MAGIC.decode()))
+    x_dim, y_dim, z_dim, cost_bits, cost_records, search_id = struct.unpack(
+        "<6i", blob[8:SNAP_HEADER_BYTES])
+    if cost_records < 0:
+        die("{} has a negative sparse cost-record count".format(path))
+
+    n = x_dim * y_dim * z_dim
+    if len(baseline) != n:
+        die("{} has {} shared node words, expected {} for dim {}x{}x{}".format(
+            path, len(baseline), n, x_dim, y_dim, z_dim))
+    bm_bytes = (n + 7) // 8
+    words = list(baseline)
+    mutable_mask = sum(1 << FLAG_BITS.index(flag)
+                       for flag in SNAP_MUTABLE_FLAGS)
+    words = [(word & ((1 << len(FLAG_BITS)) - 1) & ~mutable_mask)
+             for word in words]
+    dropped_ndr = {}
+    off = SNAP_HEADER_BYTES
+    prev_addr = -1
+    for _ in range(cost_records):
+        if off + 6 > len(blob):
+            die("{} ends inside a sparse cost record".format(path))
+        addr = struct.unpack("<I", blob[off:off + 4])[0]
+        mask = struct.unpack("<H", blob[off + 4:off + 6])[0]
+        off += 6
+        value_count = bin(mask).count("1")
+        if addr >= n or addr <= prev_addr or mask == 0 or mask >> len(SNAP_COST_ORDER):
+            die("{} has an invalid sparse cost record at address {}".format(
+                path, addr))
+        if off + value_count > len(blob):
+            die("{} ends inside sparse cost values at address {}".format(
+                path, addr))
+        word = words[addr]
+        for field, name in enumerate(SNAP_COST_ORDER):
+            if mask & (1 << field):
+                value = blob[off]
+                off += 1
+                if field < len(COST_BITS):
+                    if value:
+                        word |= 1 << (len(FLAG_BITS) + field)
+                elif value:
+                    dropped_ndr[name] = dropped_ndr.get(name, 0) + 1
+        words[addr] = word
+        prev_addr = addr
+
+    bitmap_count = len(SNAP_MUTABLE_FLAGS) + 3
+    expected = off + bitmap_count * bm_bytes
+    if len(blob) != expected:
+        die("{} is {} bytes, expected {} for dim {}x{}x{} and {} cost records"
+            .format(path, len(blob), expected, x_dim, y_dim, z_dim,
+                    cost_records))
+    mutable_bitmaps = [
+        blob[off + i * bm_bytes:off + (i + 1) * bm_bytes]
+        for i in range(len(SNAP_MUTABLE_FLAGS))
+    ]
+    off += len(SNAP_MUTABLE_FLAGS) * bm_bytes
+    guides = blob[off:off + bm_bytes]
+    srcs = blob[off + bm_bytes:off + 2 * bm_bytes]
+    dsts = blob[off + 2 * bm_bytes:off + 3 * bm_bytes]
+    for addr, word in enumerate(words):
+        byte, mask = addr >> 3, 1 << (addr & 7)
+        for flag, bitmap in zip(SNAP_MUTABLE_FLAGS, mutable_bitmaps):
+            if bitmap[byte] & mask:
+                word |= 1 << FLAG_BITS.index(flag)
+        if guides[byte] & mask:
+            word |= 1 << GUIDE_BIT
+        if srcs[byte] & mask:
+            word |= 1 << SRC_BIT
+        if dsts[byte] & mask:
+            word |= 1 << DST_BIT
+        words[addr] = word
 
     check_ndr(dropped_ndr, ignore_ndr, path)
     meta = {
         "dim": (x_dim, y_dim, z_dim),
         "searchId": search_id,
         "costBits": cost_bits,
+        "costRecords": cost_records,
         "srcs": sum(bin(b).count("1") for b in srcs),
         "dsts": sum(bin(b).count("1") for b in dsts),
         "guides": sum(bin(b).count("1") for b in guides),
@@ -654,7 +803,7 @@ def pack_forbidden(table, num_layers, entries, name, half, n_slots):
 
 
 def pack_prl(table, num_layers):
-    """Flatten via2ViaPrlLen to one word per (z, entry), same order as via2via.
+    """Flatten via2ViaPrlLen to one value per (z, entry), same order as via2via.
 
     The values are half-sums of two via-box extents (FlexRP::prep_via2viaPRL),
     so they cannot be negative and the field is unsigned; an entry whose via
@@ -672,6 +821,23 @@ def pack_prl(table, num_layers):
                     "unsigned PRL field cannot hold".format(z, entry, value))
             words.append(value)
     return words
+
+
+def pack_adjacent(words, entry_bits):
+    """Pack adjacent entries into one word, even entry in the upper half."""
+    if len(words) % 2:
+        die("cannot pair an odd number of table entries ({})".format(len(words)))
+    mask = (1 << entry_bits) - 1
+    return [((words[i] & mask) << entry_bits) | (words[i + 1] & mask)
+            for i in range(0, len(words), 2)]
+
+
+def pack_coordinate_pairs(values, entry_bits):
+    """Pack signed coordinate pairs; zero-pad the lower lane when odd-sized."""
+    padded = values + ([0] if len(values) % 2 else [])
+    mask = (1 << entry_bits) - 1
+    return [((padded[i] & mask) << entry_bits) | (padded[i + 1] & mask)
+            for i in range(0, len(padded), 2)]
 
 
 def parse_search(path):
@@ -831,11 +997,11 @@ def write_path_cost(path, search, dim, source):
         os.path.basename(path), "{} pts".format(len(search["path"]))))
 
 
-def write_params(path, header, fb, goal_lo, goal_hi, goal_note):
+def write_params(path, header, fb, goal_lo, goal_hi, goal_note, mem_specs):
     """Emit the scalar constants the RTL needs, as plain `parameter` lines.
 
-    Only the run constants live here; every width, bit offset and table layout
-    is documented in the header of the .mem file it describes.
+    The memory shape constants describe each .mem image; field bit offsets
+    and table layouts remain documented in the .mem headers.
     """
     x_dim, y_dim, z_dim = header["dim"]
     xc, yc, zh = header["xCoords"], header["yCoords"], header["zHeights"]
@@ -866,8 +1032,8 @@ def write_params(path, header, fb, goal_lo, goal_hi, goal_note):
         f.write("// Route box (DBU): {} {} {} {}\n".format(*header["routeBox"]))
         f.write("// Goal box (maze idx): {} {} {} .. {} {} {} -- {}\n".format(
             *(list(goal_lo) + list(goal_hi) + [goal_note])))
-        f.write("// Widths, bit offsets and table layouts are not here; each\n")
-        f.write("// .mem file documents its own word in its header.\n\n")
+        f.write("// Memory widths and address widths are provided below; each\n")
+        f.write("// .mem file documents its field layout in the header.\n\n")
 
         f.write("// Coordinates for grid and cost size, "
                 "change when grid graph changes\n")
@@ -876,6 +1042,30 @@ def write_params(path, header, fb, goal_lo, goal_hi, goal_note):
         f.write("  parameter GRID_J = {};\n".format(y_dim))
         f.write("  parameter GRID_K = {};\n".format(z_dim))
         f.write("  parameter ITER = {};\n\n".format(header["iter"]))
+
+        bank_x_depth = (x_dim + 1) // 2
+        bank_depth = y_dim * z_dim * bank_x_depth
+        f.write("  parameter GG_NODES_BANK_X_DEPTH = {};\n".format(
+            bank_x_depth))
+        f.write("  parameter GG_NODES_BANK_DEPTH = {};\n".format(bank_depth))
+        f.write('  parameter string GG_NODES_EVEN_FILE_NAME = '
+                '"gg_nodes_even.mem";\n')
+        f.write('  parameter string GG_NODES_ODD_FILE_NAME = '
+                '"gg_nodes_odd.mem";\n')
+        f.write('  parameter string GG_NODES_SECONDARY_EVEN_FILE_NAME = '
+                '"gg_nodes_secondary_even.mem";\n')
+        f.write('  parameter string GG_NODES_SECONDARY_ODD_FILE_NAME = '
+                '"gg_nodes_secondary_odd.mem";\n\n')
+
+        f.write("  // Memory depths and BRAM port widths\n")
+        for name, depth, data_bits in mem_specs:
+            addr_bits = unsigned_bits(depth - 1)
+            f.write("  parameter {}_MEM_DEPTH = {};\n".format(name, depth))
+            f.write("  parameter {}_MEM_DATA_WIDTH = {};\n".format(
+                name, data_bits))
+            f.write("  parameter {}_MEM_ADDR_WIDTH = {};\n".format(
+                name, addr_bits))
+        f.write("\n")
 
         # DBU, the same units getEstCost measures its Manhattan distance in.
         for bound, box in (("LOWER", goal_lo), ("UPPER", goal_hi)):
@@ -922,11 +1112,6 @@ def main():
                     help="forbidden-length dump (default: %(default)s)")
     ap.add_argument("--outdir", default="initialization/mem",
                     help="output directory (default: %(default)s)")
-    ap.add_argument("--node-bits", type=int, default=DEFAULT_NODE_BITS,
-                    help="node word width, min {} (default: %(default)s -- the "
-                         "{}b state + A* scratch plus a {}b RTL scratchpad in "
-                         "the top bits)".format(
-                             MIN_NODE_BITS, MIN_NODE_BITS, SCRATCHPAD_BITS))
     ap.add_argument("--coord-bits", type=int, default=None,
                     help="coordinate width; default is derived from the values")
     ap.add_argument("--forbidden-bits", type=int, default=None,
@@ -955,25 +1140,22 @@ def main():
     for p in (args.gg, args.forbidden, args.snapshot, args.search):
         if p is not None and not os.path.isfile(p):
             die("no such file: " + p)
-    for name, val in (("--node-bits", args.node_bits),
-                      ("--coord-bits", args.coord_bits),
+    for name, val in (("--coord-bits", args.coord_bits),
                       ("--minwidth-bits", args.minwidth_bits),
                       ("--prl-bits", args.prl_bits),
                       ("--forbidden-bits", args.forbidden_bits)):
         if val is not None and val % 4:
             die("{} {} is not a multiple of 4, so it cannot be written as "
                 "whole hex digits".format(name, val))
-    if args.node_bits < MIN_NODE_BITS:
-        die("--node-bits {} is too small: the node state is {} bits".format(
-            args.node_bits, MIN_NODE_BITS))
     if not os.path.isdir(args.outdir):
         os.makedirs(args.outdir)
 
-    header, nodes = parse_gridgraph(args.gg, args.ignore_ndr,
-                                    want_nodes=args.snapshot is None)
+    header, nodes = parse_gridgraph(
+        args.gg, args.ignore_ndr, want_nodes=True,
+        check_ndr_fields=args.snapshot is None)
     snap = None
     if args.snapshot is not None:
-        nodes, snap = parse_snapshot(args.snapshot, args.ignore_ndr)
+        nodes, snap = parse_snapshot(args.snapshot, args.ignore_ndr, nodes)
         if snap["dim"] != header["dim"]:
             die("snapshot dim {} does not match {} dim {} -- the two files are "
                 "not the same route box".format(
@@ -1097,7 +1279,8 @@ def main():
     # --- forbidden width: lo and hi share a half-word, n_slots pairs per word ---
     all_entries = list(via2via.values()) + list(turn.values())
     ranges = [r for entry in all_entries for r in entry]
-    forbid_slots = max((len(entry) for entry in all_entries), default=1) or 1
+    # forbid_slots = max((len(entry) for entry in all_entries), default=1) or 1
+    forbid_slots = 2
     if args.forbidden_slots is not None:
         if args.forbidden_slots < forbid_slots:
             die("--forbidden-slots {} is too few: an entry in {} has {} "
@@ -1120,22 +1303,40 @@ def main():
         forbid_half = nibble_align(half_need)
 
     forbid_bits = 2 * forbid_half * forbid_slots
-    v2v_words = pack_forbidden(via2via, num_layers, 8, "via2ViaForbiddenLen",
-                               forbid_half, forbid_slots)
+    v2v_entries = pack_forbidden(via2via, num_layers, 8, "via2ViaForbiddenLen",
+                                 forbid_half, forbid_slots)
+    v2v_words = pack_adjacent(v2v_entries, forbid_bits)
     turn_words = pack_forbidden(turn, num_layers, 4, "viaForbiddenTurnLen",
                                 forbid_half, forbid_slots)
 
     # --- PRL width: unsigned, one threshold per via2ViaForbiddenLen entry ---
-    prl_words = pack_prl(prl, num_layers)
-    prl_need = unsigned_bits(max(prl_words))
+    prl_entries = pack_prl(prl, num_layers)
+    prl_need = unsigned_bits(max(prl_entries))
     prl_bits = args.prl_bits if args.prl_bits is not None else nibble_align(prl_need)
     if prl_bits < prl_need:
         die("--prl-bits {} cannot hold the max via2ViaPrlLen {} (needs {})".format(
-            prl_bits, max(prl_words), prl_need))
+            prl_bits, max(prl_entries), prl_need))
+    prl_words = pack_adjacent(prl_entries, prl_bits)
 
     def coord_layout(label, values):
-        return [(coord_bits - 1, 0, label, "signed, range {}..{} (needs {}b)".format(
-            min(values), max(values), signed_bits(min(values), max(values))))]
+        rows = []
+        for lane, indices, offset in (
+                ("even", values[::2], coord_bits),
+                ("odd", values[1::2], 0)):
+            if indices:
+                note = "signed, range {}..{} (needs {}b)".format(
+                    min(indices), max(indices),
+                    signed_bits(min(indices), max(indices)))
+            else:
+                note = "zero padding; no coordinate at this index"
+            rows.append((offset + coord_bits - 1, offset,
+                         "{}[2*addr{}]".format(label, "+1" if lane == "odd" else ""),
+                         note))
+        return rows
+
+    def coord_notes(values):
+        return (["unused lower half of final word is zero padding"]
+                if len(values) % 2 else [])
 
     def forbid_layout():
         rows = []
@@ -1145,6 +1346,13 @@ def main():
                          "lo{}".format(slot), "inclusive lower bound"))
             rows.append((base + forbid_half - 1, base,
                          "hi{}".format(slot), "inclusive upper bound"))
+        return rows
+
+    def paired_layout(layout, entry_bits):
+        rows = []
+        for label, offset in (("even", entry_bits), ("odd", 0)):
+            rows.extend((hi + offset, lo + offset, label + "_" + name, note)
+                        for hi, lo, name, note in layout)
         return rows
 
     forbid_notes = [
@@ -1167,19 +1375,49 @@ def main():
                                snap["dsts"]), ""]
     state_notes += ["node state bits, LSB first:", ""]
     state_notes += ["bit {:>2}  {}".format(i, n) for i, n in enumerate(names)]
-    state_notes += ["", "prevAstarNodeDir is frDirEnum: " + ", ".join(
-        "{}={}".format(v, n) for n, v in DIR_ENUM)]
-    write_mem(out("gg_nodes.mem"), nodes, args.node_bits,
-              "grid-graph nodes, addr = (z*{} + y)*{} + x".format(y_dim, x_dim),
-              node_layout(args.node_bits), state_notes)
+    bank0_nodes, bank1_nodes = bank_node_words(
+        nodes, x_dim, y_dim, z_dim)
+    bank_notes = [
+        "bank select = x[0] ^ (z[0] when GRID_I is even, otherwise y[0])",
+        "bank address = (addr / GRID_I) * ceil(GRID_I / 2) + x / 2",
+        "unused slots in odd-sized rows are zero-filled",
+    ]
+    for bank_name, bank_words, bank_number in (
+            ("even", bank0_nodes, 0), ("odd", bank1_nodes, 1)):
+        write_mem(
+            out("gg_nodes_{}.mem".format(bank_name)), bank_words, NODE_BITS,
+            "grid-graph checkerboard bank {}, canonical addr = "
+            "(z*{} + y)*{} + x".format(bank_number, y_dim, x_dim),
+            node_layout(), state_notes + [""] + bank_notes)
 
-    write_mem(out("gg_xcoords.mem"), xc, coord_bits,
-              "xCoords in DBU, indexed by x", coord_layout("xCoords[x]", xc))
-    write_mem(out("gg_ycoords.mem"), yc, coord_bits,
-              "yCoords in DBU, indexed by y", coord_layout("yCoords[y]", yc))
-    write_mem(out("gg_zcoords.mem"), zh, coord_bits,
-              "zHeights (accumulated z coordinate) in DBU, indexed by z",
-              coord_layout("zHeights[z]", zh))
+    secondary_nodes = secondary_node_words(nodes)
+    secondary_bank0, secondary_bank1 = bank_node_words(
+        secondary_nodes, x_dim, y_dim, z_dim)
+    secondary_state_notes = [
+        "subset of the corresponding primary bank; fields are listed LSB first",
+    ] + state_notes
+    for bank_name, bank_words, bank_number in (
+            ("even", secondary_bank0, 0), ("odd", secondary_bank1, 1)):
+        write_mem(
+            out("gg_nodes_secondary_{}.mem".format(bank_name)),
+            bank_words, SECONDARY_NODE_BITS,
+            "selected node fields, checkerboard bank {}, same bank address "
+            "as gg_nodes_{}.mem".format(bank_number, bank_name),
+            secondary_node_layout(),
+            secondary_state_notes + [""] + bank_notes)
+
+    write_mem(out("gg_xcoords.mem"), pack_coordinate_pairs(xc, coord_bits),
+              2 * coord_bits,
+              "xCoords in DBU: even index in upper half, odd index in lower half",
+              coord_layout("xCoords", xc), coord_notes(xc))
+    write_mem(out("gg_ycoords.mem"), pack_coordinate_pairs(yc, coord_bits),
+              2 * coord_bits,
+              "yCoords in DBU: even index in upper half, odd index in lower half",
+              coord_layout("yCoords", yc), coord_notes(yc))
+    write_mem(out("gg_zcoords.mem"), pack_coordinate_pairs(zh, coord_bits),
+              2 * coord_bits,
+              "zHeights in DBU: even index in upper half, odd index in lower half",
+              coord_layout("zHeights", zh), coord_notes(zh))
 
     layer_layout = []
     if layer_bits > unidir_lsb + LAYER_UNIDIR_BITS:
@@ -1211,16 +1449,23 @@ def main():
                "either.  getEstCost takes its forbidden branch when",
                "!GG_USE_NONPREF_TRACKS || unidir[z]."])
 
-    write_mem(out("via2via_forbidden_len.mem"), v2v_words, forbid_bits,
-              "via2ViaForbiddenLen, addr = z*8 + prevViaUp*4 + currViaUp*2 + isDirY",
-              forbid_layout(), forbid_notes)
-    write_mem(out("via2via_prl_len.mem"), prl_words, prl_bits,
-              "via2ViaPrlLen, addr = z*8 + prevViaUp*4 + currViaUp*2 + isDirY",
-              [(prl_bits - 1, 0, "prl", "unsigned DBU, range {}..{} (needs {}b)"
-                .format(min(prl_words), max(prl_words), prl_need))],
+    write_mem(out("via2via_forbidden_len.mem"), v2v_words, 2 * forbid_bits,
+              "via2ViaForbiddenLen pairs, addr = z*4 + prevViaUp*2 + currViaUp; "
+              "even isDirY entry in upper half, odd in lower half",
+              paired_layout(forbid_layout(), forbid_bits),
+              forbid_notes + ["entry lane = isDirY; even lane is the upper half"])
+    write_mem(out("via2via_prl_len.mem"), prl_words, 2 * prl_bits,
+              "via2ViaPrlLen pairs, addr = z*4 + prevViaUp*2 + currViaUp; "
+              "even isDirY entry in upper half, odd in lower half",
+              [(2 * prl_bits - 1, prl_bits, "even_prl",
+                "isDirY=0, unsigned DBU, range {}..{} (needs {}b)".format(
+                    min(prl_entries), max(prl_entries), prl_need)),
+               (prl_bits - 1, 0, "odd_prl",
+                "isDirY=1, unsigned DBU, range {}..{} (needs {}b)".format(
+                    min(prl_entries), max(prl_entries), prl_need))],
               ["a threshold, not a range: isVia2ViaPRL() is len <= prl",
-               "same address as via2via_forbidden_len.mem -- one generator",
-               "feeds both",
+               "same packed address and lane selector as",
+               "via2via_forbidden_len.mem -- one generator feeds both",
                "",
                "read only when the via2via check has both currVLengthX and",
                "currVLengthY nonzero, where it picks OR (either axis passes",
@@ -1241,7 +1486,25 @@ def main():
                            xc, yc, zh, src_name)
         write_path_cost(out("path_cost.txt"), search, header["dim"], src_name)
 
-    write_params(out("params.sv"), header, fb, goal_lo, goal_hi, goal_note)
+    mem_specs = [
+        ("GG_NODES", len(nodes), NODE_BITS),
+        ("GG_NODES_SECONDARY", len(secondary_nodes), SECONDARY_NODE_BITS),
+        ("GG_NODES_EVEN", len(bank0_nodes), NODE_BITS),
+        ("GG_NODES_ODD", len(bank1_nodes), NODE_BITS),
+        ("GG_NODES_SECONDARY_EVEN", len(secondary_bank0),
+         SECONDARY_NODE_BITS),
+        ("GG_NODES_SECONDARY_ODD", len(secondary_bank1),
+         SECONDARY_NODE_BITS),
+        ("GG_XCOORDS", (len(xc) + 1) // 2, 2 * coord_bits),
+        ("GG_YCOORDS", (len(yc) + 1) // 2, 2 * coord_bits),
+        ("GG_ZCOORDS", (len(zh) + 1) // 2, 2 * coord_bits),
+        ("GG_LAYERS", len(layer_words), layer_bits),
+        ("VIA2VIA_FORBIDDEN_LEN", len(v2v_words), 2 * forbid_bits),
+        ("VIA2VIA_PRL_LEN", len(prl_words), 2 * prl_bits),
+        ("VIA_FORBIDDEN_TURN_LEN", len(turn_words), forbid_bits),
+    ]
+    write_params(out("params.sv"), header, fb, goal_lo, goal_hi, goal_note,
+                 mem_specs)
 
 
 if __name__ == "__main__":

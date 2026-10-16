@@ -33,6 +33,7 @@
 #include "db/obj/frBTerm.h"
 #include "db/obj/frBlockObject.h"
 #include "db/obj/frInst.h"
+#include "db/obj/frShape.h"
 #include "db/obj/frTrackPattern.h"
 #include "db/obj/frVia.h"
 #include "db/tech/frConstraint.h"
@@ -1765,7 +1766,10 @@ void FlexDRWorker::route_queue()
   astarSearchCount_ = 0;
   route_queue_main(rerouteQueue);
   const char* dumpDir = std::getenv("DRT_DUMP_GG_SUMMARY_DIR");
-  if (dumpDir != nullptr && dumpDir[0] != '\0' && astarSearchCount_ > 0) {
+  const char* timingDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
+  const bool measureBatchRuntime = timingDir != nullptr && timingDir[0] != '\0';
+  if (!measureBatchRuntime && dumpDir != nullptr && dumpDir[0] != '\0'
+      && astarSearchCount_ > 0) {
     const odb::Rect& routeBox = getRouteBox();
     const std::string summaryPath
         = std::string(dumpDir) + "/gridgraph_iter"
@@ -1958,6 +1962,7 @@ void FlexDRWorker::route_queue_main(std::queue<RouteQueueEntry>& rerouteQueue)
       // route
       mazeNetInit(net);
       std::vector<FlexMazeIdx> paths;
+      const int searchCountBefore = gridGraph_.getSearchCount();
       bool isRouted = routeNet(net, paths);
       if (!isRouted) {
         if (router_cfg_->OUT_MAZE_FILE == std::string("")) {
@@ -2015,6 +2020,20 @@ void FlexDRWorker::route_queue_main(std::queue<RouteQueueEntry>& rerouteQueue)
 
       } else {
         logger_->error(DRT, 1006, "failed to setTargetNet");
+      }
+      const int searchCountAfter = gridGraph_.getSearchCount();
+      if (searchCountAfter > searchCountBefore) {
+        uint64_t wireLengthDBU = 0;
+        for (const auto& shape : net->getFrNet()->getShapes()) {
+          if (shape->typeId() == frcPathSeg) {
+            auto pathSeg = static_cast<frPathSeg*>(shape.get());
+            auto [begin, end] = pathSeg->getPoints();
+            wireLengthDBU += odb::Point::manhattanDistance(begin, end);
+          }
+        }
+        const int dbuPerUU = getDesign()->getTopBlock()->getDBUPerUU();
+        gridGraph_.dumpFinalNetWirelength(
+            searchCountAfter - 1, wireLengthDBU, dbuPerUU);
       }
     } else {
       if (getRipupMode() == RipUpMode::VIASWAP) {

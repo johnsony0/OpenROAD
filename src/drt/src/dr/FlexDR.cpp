@@ -210,10 +210,14 @@ void FlexDRWorker::writeUpdates(const std::string& file_name)
 int FlexDRWorker::main(frDesign* design)
 {
   ProfileTask profile("DRW:main");
+  const char* timingDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
+  const bool measureBatchRuntime = timingDir != nullptr && timingDir[0] != '\0';
+  const bool collectWorkerTiming = !measureBatchRuntime;
   using std::chrono::high_resolution_clock;
-  high_resolution_clock::time_point t0 = high_resolution_clock::now();
+  const auto t0 = collectWorkerTiming ? high_resolution_clock::now()
+                                      : high_resolution_clock::time_point{};
   auto micronPerDBU = 1.0 / getTech()->getDBUPerUU();
-  if (router_cfg_->VERBOSE > 1) {
+  if (!measureBatchRuntime && router_cfg_->VERBOSE > 1) {
     logger_->report("start DR worker (BOX) ( {} {} ) ( {} {} )",
                     routeBox_.xMin() * micronPerDBU,
                     routeBox_.yMin() * micronPerDBU,
@@ -225,6 +229,7 @@ int FlexDRWorker::main(frDesign* design)
     skipRouting_ = true;
   }
   if (debugSettings_->debugDumpDR
+      && !measureBatchRuntime
       && (debugSettings_->box == odb::Rect(-1, -1, -1, -1)
           || routeBox_.intersects(debugSettings_->box))
       && !skipRouting_
@@ -274,41 +279,45 @@ int FlexDRWorker::main(frDesign* design)
   if (!skipRouting_) {
     init(design);
   }
-  high_resolution_clock::time_point t1 = high_resolution_clock::now();
+  const auto t1 = collectWorkerTiming ? high_resolution_clock::now()
+                                      : high_resolution_clock::time_point{};
   if (!skipRouting_) {
     route_queue();
   }
-  high_resolution_clock::time_point t2 = high_resolution_clock::now();
+  const auto t2 = collectWorkerTiming ? high_resolution_clock::now()
+                                      : high_resolution_clock::time_point{};
   const int num_markers = getNumMarkers();
   cleanup();
-  high_resolution_clock::time_point t3 = high_resolution_clock::now();
+  const auto t3 = collectWorkerTiming ? high_resolution_clock::now()
+                                      : high_resolution_clock::time_point{};
 
-  using std::chrono::duration;
-  using std::chrono::duration_cast;
-  duration<double> time_span0 = duration_cast<duration<double>>(t1 - t0);
-  duration<double> time_span1 = duration_cast<duration<double>>(t2 - t1);
-  duration<double> time_span2 = duration_cast<duration<double>>(t3 - t2);
-
-  if (router_cfg_->VERBOSE > 1) {
+  if (!measureBatchRuntime && router_cfg_->VERBOSE > 1) {
+    using std::chrono::duration;
+    using std::chrono::duration_cast;
+    duration<double> time_span0 = duration_cast<duration<double>>(t1 - t0);
+    duration<double> time_span1 = duration_cast<duration<double>>(t2 - t1);
+    duration<double> time_span2 = duration_cast<duration<double>>(t3 - t2);
     std::stringstream ss;
     ss << "time (INIT/ROUTE/POST) " << time_span0.count() << " "
        << time_span1.count() << " " << time_span2.count() << " " << std::endl;
     std::cout << ss.str() << std::flush;
   }
 
-  debugPrint(logger_,
-             DRT,
-             "autotuner",
-             1,
-             "worker ({:.3f} {:.3f}) ({:.3f} {:.3f}) time {} prev_#DRVs {} "
-             "curr_#DRVs {}",
-             routeBox_.xMin() * micronPerDBU,
-             routeBox_.yMin() * micronPerDBU,
-             routeBox_.xMax() * micronPerDBU,
-             routeBox_.yMax() * micronPerDBU,
-             duration_cast<duration<double>>(t3 - t0).count(),
-             getInitNumMarkers(),
-             num_markers);
+  if (!measureBatchRuntime) {
+    debugPrint(logger_,
+               DRT,
+               "autotuner",
+               1,
+               "worker ({:.3f} {:.3f}) ({:.3f} {:.3f}) time {} prev_#DRVs {} "
+               "curr_#DRVs {}",
+               routeBox_.xMin() * micronPerDBU,
+               routeBox_.yMin() * micronPerDBU,
+               routeBox_.xMax() * micronPerDBU,
+               routeBox_.yMax() * micronPerDBU,
+               std::chrono::duration<double>(t3 - t0).count(),
+               getInitNumMarkers(),
+               num_markers);
+  }
 
   return 0;
 }
@@ -712,76 +721,47 @@ void FlexDR::processWorkersBatch(
 {
   const int num_markers = getDesign()->getTopBlock()->getNumMarkers();
   ThreadException exception;
-  std::vector<double> workerRuntimeMs(workers_batch.size(), 0.0);
-  int actualThreads = 0;
-  const auto batchStartTime = std::chrono::steady_clock::now();
+  const char* dumpDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
+  const bool measureBatchRuntime = dumpDir != nullptr && dumpDir[0] != '\0';
+  const int configuredThreads = omp_get_max_threads();
+  const auto batchStartTime = measureBatchRuntime
+                                  ? std::chrono::steady_clock::now()
+                                  : std::chrono::steady_clock::time_point{};
 #pragma omp parallel for schedule(dynamic)
   for (int i = 0; i < (int) workers_batch.size(); i++) {  // NOLINT
-#pragma omp critical
-    { actualThreads = omp_get_num_threads(); }
-    const auto workerStartTime = std::chrono::steady_clock::now();
     try {
       workers_batch[i]->main(getDesign());
+      if (!measureBatchRuntime && router_cfg_->VERBOSE > 0) {
 #pragma omp critical
-    {
-      if (router_cfg_->VERBOSE > 0) {
-        printIterationProgress(logger_, iter_prog, num_markers);
+        {
+          printIterationProgress(logger_, iter_prog, num_markers);
+        }
       }
-    }
     } catch (...) {
       exception.capture();
     }
-    workerRuntimeMs[i]
-        = std::chrono::duration<double, std::milli>(
-              std::chrono::steady_clock::now() - workerStartTime)
-              .count();
   }
-  const auto batchEndTime = std::chrono::steady_clock::now();
-  const char* dumpDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
-  if (dumpDir != nullptr && dumpDir[0] != '\0') {
+  if (measureBatchRuntime) {
+    const auto batchEndTime = std::chrono::steady_clock::now();
     const double runtimeMs
         = std::chrono::duration<double, std::milli>(batchEndTime
                                                      - batchStartTime)
               .count();
-    logger_->info(DRT, 620, "searchBatchRuntimeMs {}", runtimeMs);
 
-    double totalAstarRuntimeMs = 0.0;
-    double maxAstarRuntimeMs = 0.0;
-    double totalWorkerRuntimeMs = 0.0;
-    double maxWorkerRuntimeMs = 0.0;
     int totalSearchCount = 0;
-    for (int i = 0; i < (int) workers_batch.size(); i++) {
-      const double workerAstarRuntimeMs
-          = workers_batch[i]->getAstarRuntimeMs();
-      totalAstarRuntimeMs += workerAstarRuntimeMs;
-      maxAstarRuntimeMs = std::max(maxAstarRuntimeMs, workerAstarRuntimeMs);
-      totalWorkerRuntimeMs += workerRuntimeMs[i];
-      maxWorkerRuntimeMs = std::max(maxWorkerRuntimeMs, workerRuntimeMs[i]);
-      totalSearchCount += workers_batch[i]->getAstarSearchCount();
+    for (const auto& worker : workers_batch) {
+      totalSearchCount += worker->getAstarSearchCount();
     }
     const std::string summaryPath
-      = std::string(dumpDir) + "/astar_batch_iter"
-          + std::to_string(iter_) + "_b" + std::to_string(astarBatchId_++)
-          + ".txt";
+        = std::string(dumpDir) + "/astar_batch_iter" + std::to_string(iter_)
+          + "_b" + std::to_string(astarBatchId_++) + ".txt";
     std::ofstream summary(summaryPath);
-    if (summary.is_open() && actualThreads > 0) {
+    if (summary.is_open()) {
       summary << "iter " << iter_ << "\n";
       summary << "drBoxCount " << workers_batch.size() << "\n";
-      summary << "actualThreads " << actualThreads << "\n";
+      summary << "configuredThreads " << configuredThreads << "\n";
       summary << "searchCount " << totalSearchCount << "\n";
-      summary << "totalAstarRuntimeMs " << totalAstarRuntimeMs << "\n";
-      summary << "maxAstarRuntimeMs " << maxAstarRuntimeMs << "\n";
-      summary << "idealParallelAstarRuntimeMs "
-              << totalAstarRuntimeMs / actualThreads << "\n";
-      summary << "astarMakespanLowerBoundMs " << maxAstarRuntimeMs << "\n";
-      summary << "totalWorkerRuntimeMs " << totalWorkerRuntimeMs << "\n";
-      summary << "maxWorkerRuntimeMs " << maxWorkerRuntimeMs << "\n";
-      summary << "idealParallelWorkerRuntimeMs "
-              << totalWorkerRuntimeMs / actualThreads << "\n";
-      summary << "workerMakespanLowerBoundMs " << maxWorkerRuntimeMs << "\n";
       summary << "measuredBatchWallRuntimeMs " << runtimeMs << "\n";
-      summary << "astarParallelEfficiency "
-              << totalAstarRuntimeMs / (runtimeMs * actualThreads) << "\n";
     }
   }
   exception.rethrow();

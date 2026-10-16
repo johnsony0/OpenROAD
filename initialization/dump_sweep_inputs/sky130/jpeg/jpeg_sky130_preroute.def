@@ -567,67 +567,57 @@ VIAS 4 ;
     - via4_5_1600_480_1_4_400_400 + VIARULE M3M4_PR + CUTSIZE 200 200  + LAYERS met3 via3 met4  + CUTSPACING 200 200  + ENCLOSURE 90 60 100 65  + ROWCOL 1 4  ;
     - via5_6_1600_1600_1_1_1600_1600 + VIARULE M4M5_PR + CUTSIZE 800 800  + LAYERS met4 via4 met5  + CUTSPACING 800 800  + ENCLOSURE 400 190 310 400  ;
 END VIAS
-NONDEFAULTRULES 1 ;
-    - CTS_NDR_0
-      + LAYER li1 WIDTH 170 SPACING 580
-      + LAYER met1 WIDTH 140 SPACING 400
-      + LAYER met2 WIDTH 140 SPACING 640
-      + LAYER met3 WIDTH 300 SPACING 760
-      + LAYER met4 WIDTH 300 SPACING 1240
-      + LAYER met5 WIDTH 1600 SPACING 3600
-    ;
-END NONDEFAULTRULES
 COMPONENTS 75916 ;
     - ANTENNA_1 sky130_fd_sc_hd__diode_2 + PLACED ( 1180820 1286560 ) FS ;
     - ANTENNA_10 sky130_fd_sc_hd__diode_2 + PLACED ( 916320 296480 ) FS ;
     - ANTENNA_11 sky130_fd_sc_hd__diode_2 + PLACED ( 205620 750720 ) N ;
-    - ANTENNA_12 sky130_fd_sc_hd__diode_2 + PLACED ( 305900 748000 ) FS ;
-    - ANTENNA_13 sky130_fd_sc_hd__diode_2 + PLACED ( 265880 835040 ) FS ;
-    - ANTENNA_14 sky130_fd_sc_hd__diode_2 + PLACED ( 529460 701760 ) N ;
-    - ANTENNA_15 sky130_fd_sc_hd__diode_2 + PLACED ( 538660 413440 ) N ;
-    - ANTENNA_16 sky130_fd_sc_hd__diode_2 + PLACED ( 601680 73440 ) FS ;
-    - ANTENNA_17 sky130_fd_sc_hd__diode_2 + PLACED ( 601680 84320 ) FS ;
-    - ANTENNA_18 sky130_fd_sc_hd__diode_2 + PLACED ( 592020 87040 ) N ;
-    - ANTENNA_19 sky130_fd_sc_hd__diode_2 + PLACED ( 592020 92480 ) N ;
+    - ANTENNA_12 sky130_fd_sc_hd__diode_2 + PLACED ( 265880 835040 ) FS ;
+    - ANTENNA_13 sky130_fd_sc_hd__diode_2 + PLACED ( 529460 701760 ) N ;
+    - ANTENNA_14 sky130_fd_sc_hd__diode_2 + PLACED ( 538660 413440 ) N ;
+    - ANTENNA_15 sky130_fd_sc_hd__diode_2 + PLACED ( 592020 87040 ) N ;
+    - ANTENNA_16 sky130_fd_sc_hd__diode_2 + PLACED ( 592020 92480 ) N ;
+    - ANTENNA_17 sky130_fd_sc_hd__diode_2 + PLACED ( 592020 84320 ) FS ;
+    - ANTENNA_18 sky130_fd_sc_hd__diode_2 + PLACED ( 564420 1147840 ) N ;
+    - ANTENNA_19 sky130_fd_sc_hd__diode_2 + PLACED ( 564420 1153280 ) N ;
     - ANTENNA_2 sky130_fd_sc_hd__diode_2 + PLACED ( 1191860 1419840 ) N ;
-    - ANTENNA_20 sky130_fd_sc_hd__diode_2 + PLACED ( 564420 1147840 ) N ;
-    - ANTENNA_21 sky130_fd_sc_hd__diode_2 + PLACED ( 564420 1153280 ) N ;
-    - ANTENNA_22 sky130_fd_sc_hd__diode_2 + PLACED ( 569020 1142400 ) N ;
-    - ANTENNA_23 sky130_fd_sc_hd__diode_2 + PLACED ( 569020 1147840 ) N ;
-    - ANTENNA_24 sky130_fd_sc_hd__diode_2 + PLACED ( 524400 1079840 ) FS ;
-    - ANTENNA_25 sky130_fd_sc_hd__diode_2 + PLACED ( 527160 1077120 ) N ;
-    - ANTENNA_26 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1025440 ) FS ;
-    - ANTENNA_27 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1030880 ) FS ;
-    - ANTENNA_28 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1022720 ) N ;
-    - ANTENNA_29 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1033600 ) N ;
+    - ANTENNA_20 sky130_fd_sc_hd__diode_2 + PLACED ( 569020 1142400 ) N ;
+    - ANTENNA_21 sky130_fd_sc_hd__diode_2 + PLACED ( 569020 1147840 ) N ;
+    - ANTENNA_22 sky130_fd_sc_hd__diode_2 + PLACED ( 524400 1079840 ) FS ;
+    - ANTENNA_23 sky130_fd_sc_hd__diode_2 + PLACED ( 527160 1077120 ) N ;
+    - ANTENNA_24 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1025440 ) FS ;
+    - ANTENNA_25 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1030880 ) FS ;
+    - ANTENNA_26 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1022720 ) N ;
+    - ANTENNA_27 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1033600 ) N ;
+    - ANTENNA_28 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1020000 ) FS ;
+    - ANTENNA_29 sky130_fd_sc_hd__diode_2 + PLACED ( 693220 601120 ) FS ;
     - ANTENNA_3 sky130_fd_sc_hd__diode_2 + PLACED ( 741980 965600 ) FS ;
-    - ANTENNA_30 sky130_fd_sc_hd__diode_2 + PLACED ( 346380 1020000 ) FS ;
-    - ANTENNA_31 sky130_fd_sc_hd__diode_2 + PLACED ( 514280 1321920 ) N ;
-    - ANTENNA_32 sky130_fd_sc_hd__diode_2 + PLACED ( 514740 1330080 ) FS ;
-    - ANTENNA_33 sky130_fd_sc_hd__diode_2 + PLACED ( 693220 601120 ) FS ;
-    - ANTENNA_34 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 576640 ) N ;
-    - ANTENNA_35 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 582080 ) N ;
-    - ANTENNA_36 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 573920 ) FS ;
-    - ANTENNA_37 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 584800 ) FS ;
-    - ANTENNA_38 sky130_fd_sc_hd__diode_2 + PLACED ( 745200 742560 ) FS ;
-    - ANTENNA_39 sky130_fd_sc_hd__diode_2 + PLACED ( 752560 745280 ) N ;
+    - ANTENNA_30 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 576640 ) N ;
+    - ANTENNA_31 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 582080 ) N ;
+    - ANTENNA_32 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 573920 ) FS ;
+    - ANTENNA_33 sky130_fd_sc_hd__diode_2 + PLACED ( 375820 584800 ) FS ;
+    - ANTENNA_34 sky130_fd_sc_hd__diode_2 + PLACED ( 931960 655520 ) FS ;
+    - ANTENNA_35 sky130_fd_sc_hd__diode_2 + PLACED ( 938400 655520 ) FS ;
+    - ANTENNA_36 sky130_fd_sc_hd__diode_2 + PLACED ( 745200 742560 ) FS ;
+    - ANTENNA_37 sky130_fd_sc_hd__diode_2 + PLACED ( 752560 745280 ) N ;
+    - ANTENNA_38 sky130_fd_sc_hd__diode_2 + PLACED ( 745200 739840 ) N ;
+    - ANTENNA_39 sky130_fd_sc_hd__diode_2 + PLACED ( 750720 748000 ) FS ;
     - ANTENNA_4 sky130_fd_sc_hd__diode_2 + PLACED ( 776480 946560 ) N ;
-    - ANTENNA_40 sky130_fd_sc_hd__diode_2 + PLACED ( 745200 739840 ) N ;
-    - ANTENNA_41 sky130_fd_sc_hd__diode_2 + PLACED ( 750720 748000 ) FS ;
-    - ANTENNA_42 sky130_fd_sc_hd__diode_2 + PLACED ( 750720 737120 ) FS ;
-    - ANTENNA_43 sky130_fd_sc_hd__diode_2 + PLACED ( 745200 753440 ) FS ;
-    - ANTENNA_44 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 731680 ) FS ;
-    - ANTENNA_45 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 756160 ) N ;
-    - ANTENNA_46 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 728960 ) N ;
-    - ANTENNA_47 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 758880 ) FS ;
-    - ANTENNA_48 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 726240 ) FS ;
-    - ANTENNA_49 sky130_fd_sc_hd__diode_2 + PLACED ( 1165640 875840 ) N ;
+    - ANTENNA_40 sky130_fd_sc_hd__diode_2 + PLACED ( 750720 737120 ) FS ;
+    - ANTENNA_41 sky130_fd_sc_hd__diode_2 + PLACED ( 745200 753440 ) FS ;
+    - ANTENNA_42 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 731680 ) FS ;
+    - ANTENNA_43 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 756160 ) N ;
+    - ANTENNA_44 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 728960 ) N ;
+    - ANTENNA_45 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 758880 ) FS ;
+    - ANTENNA_46 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 726240 ) FS ;
+    - ANTENNA_47 sky130_fd_sc_hd__diode_2 + PLACED ( 1165640 875840 ) N ;
+    - ANTENNA_48 sky130_fd_sc_hd__diode_2 + PLACED ( 821560 1218560 ) N ;
+    - ANTENNA_49 sky130_fd_sc_hd__diode_2 + PLACED ( 803160 1224000 ) N ;
     - ANTENNA_5 sky130_fd_sc_hd__diode_2 + PLACED ( 733700 1117920 ) FS ;
-    - ANTENNA_50 sky130_fd_sc_hd__diode_2 + PLACED ( 803160 1224000 ) N ;
-    - ANTENNA_51 sky130_fd_sc_hd__diode_2 + PLACED ( 308200 1066240 ) N ;
-    - ANTENNA_52 sky130_fd_sc_hd__diode_2 + PLACED ( 1412660 239360 ) N ;
-    - ANTENNA_53 sky130_fd_sc_hd__diode_2 + PLACED ( 720820 1115200 ) N ;
-    - ANTENNA_54 sky130_fd_sc_hd__diode_2 + PLACED ( 766360 125120 ) N ;
+    - ANTENNA_50 sky130_fd_sc_hd__diode_2 + PLACED ( 308200 1066240 ) N ;
+    - ANTENNA_51 sky130_fd_sc_hd__diode_2 + PLACED ( 1412660 239360 ) N ;
+    - ANTENNA_52 sky130_fd_sc_hd__diode_2 + PLACED ( 720820 1115200 ) N ;
+    - ANTENNA_53 sky130_fd_sc_hd__diode_2 + PLACED ( 766360 125120 ) N ;
+    - ANTENNA_54 sky130_fd_sc_hd__diode_2 + PLACED ( 996820 228480 ) N ;
     - ANTENNA_55 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 742560 ) FS ;
     - ANTENNA_56 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 748000 ) FS ;
     - ANTENNA_57 sky130_fd_sc_hd__diode_2 + PLACED ( 747960 739840 ) N ;
@@ -34152,7 +34142,7 @@ COMPONENTS 75916 ;
     - _58441_ sky130_fd_sc_hd__nor2_1 + PLACED ( 385020 435200 ) N ;
     - _58442_ sky130_fd_sc_hd__o22ai_1 + PLACED ( 375820 429760 ) N ;
     - _58443_ sky130_fd_sc_hd__nor2_1 + PLACED ( 377660 435200 ) N ;
-    - _58445_ sky130_fd_sc_hd__nor2_1 + PLACED ( 596620 84320 ) FS ;
+    - _58445_ sky130_fd_sc_hd__nor2_1 + PLACED ( 599380 84320 ) FS ;
     - _58446_ sky130_fd_sc_hd__o22ai_1 + PLACED ( 584660 250240 ) N ;
     - _58447_ sky130_fd_sc_hd__nor2_1 + PLACED ( 584660 244800 ) N ;
     - _58448_ sky130_fd_sc_hd__nor2_1 + PLACED ( 594320 122400 ) FS ;
@@ -36951,7 +36941,7 @@ COMPONENTS 75916 ;
     - _61560_ sky130_fd_sc_hd__o22a_1 + PLACED ( 509220 1324640 ) FS ;
     - _61561_ sky130_fd_sc_hd__inv_1 + PLACED ( 502320 1327360 ) N ;
     - _61562_ sky130_fd_sc_hd__o21ai_0 + PLACED ( 503240 1332800 ) N ;
-    - _61563_ sky130_fd_sc_hd__o22a_1 + PLACED ( 509680 1330080 ) FS ;
+    - _61563_ sky130_fd_sc_hd__o22a_1 + PLACED ( 511060 1330080 ) FS ;
     - _61564_ sky130_fd_sc_hd__inv_1 + PLACED ( 629740 1237600 ) FS ;
     - _61565_ sky130_fd_sc_hd__nand2_1 + PLACED ( 623760 1243040 ) FS ;
     - _61566_ sky130_fd_sc_hd__o21ai_0 + PLACED ( 626520 1251200 ) N ;
@@ -69632,7 +69622,7 @@ COMPONENTS 75916 ;
     - _94998_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 380880 405280 ) FS ;
     - _94999_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 403880 427040 ) FS ;
     - _95000_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 387320 437920 ) FS ;
-    - _95001_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 592480 73440 ) FS ;
+    - _95001_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 597540 73440 ) FS ;
     - _95002_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 593860 116960 ) FS ;
     - _95003_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 585120 103360 ) N ;
     - _95004_ sky130_fd_sc_hd__dfxtp_1 + PLACED ( 582820 87040 ) N ;
@@ -74170,7 +74160,7 @@ COMPONENTS 75916 ;
     - clkbuf_leaf_1138_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 592020 62560 ) FS ;
     - clkbuf_leaf_1139_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 581440 89760 ) FS ;
     - clkbuf_leaf_113_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 449880 696320 ) N ;
-    - clkbuf_leaf_1140_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 592020 84320 ) FS ;
+    - clkbuf_leaf_1140_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 594780 84320 ) FS ;
     - clkbuf_leaf_1141_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 620080 78880 ) FS ;
     - clkbuf_leaf_1142_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 624220 111520 ) FS ;
     - clkbuf_leaf_1143_clk sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 612720 133280 ) FS ;
@@ -75387,7 +75377,7 @@ COMPONENTS 75916 ;
     - clkload277 sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 46000 723520 ) N ;
     - clkload278 sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 276460 767040 ) N ;
     - clkload279 sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 226320 756160 ) N ;
-    - clkload28 sky130_fd_sc_hd__inv_2 + SOURCE TIMING + PLACED ( 305900 745280 ) N ;
+    - clkload28 sky130_fd_sc_hd__inv_2 + SOURCE TIMING + PLACED ( 305900 748000 ) FS ;
     - clkload280 sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 18400 772480 ) N ;
     - clkload281 sky130_fd_sc_hd__clkbuf_4 + SOURCE TIMING + PLACED ( 283820 734400 ) N ;
     - clkload282 sky130_fd_sc_hd__clkinv_1 + SOURCE TIMING + PLACED ( 313720 723520 ) N ;
@@ -254742,13 +254732,13 @@ NETS 58287 ;
     - _05316_ ( _58359_ B ) ( _58358_ Y ) + USE SIGNAL ;
     - _05317_ ( _58362_ A ) ( _58360_ Y ) + USE SIGNAL ;
     - _05318_ ( _58362_ B ) ( _58361_ Y ) + USE SIGNAL ;
-    - _05319_ ( ANTENNA_17 DIODE ) ( ANTENNA_16 DIODE ) ( _58368_ A ) ( _58363_ Y ) + USE SIGNAL ;
+    - _05319_ ( _58368_ A ) ( _58363_ Y ) + USE SIGNAL ;
     - _05323_ ( _58368_ B ) ( _58367_ Y ) + USE SIGNAL ;
     - _05324_ ( _58371_ A ) ( _58369_ Y ) + USE SIGNAL ;
     - _05325_ ( _58371_ B ) ( _58370_ Y ) + USE SIGNAL ;
     - _05326_ ( _58374_ A ) ( _58372_ Y ) + USE SIGNAL ;
     - _05327_ ( _58374_ B ) ( _58373_ Y ) + USE SIGNAL ;
-    - _05328_ ( ANTENNA_19 DIODE ) ( ANTENNA_18 DIODE ) ( _58377_ A ) ( _58375_ Y ) + USE SIGNAL ;
+    - _05328_ ( ANTENNA_17 DIODE ) ( ANTENNA_16 DIODE ) ( ANTENNA_15 DIODE ) ( _58377_ A ) ( _58375_ Y ) + USE SIGNAL ;
     - _05329_ ( _58377_ B ) ( _58376_ Y ) + USE SIGNAL ;
     - _05331_ ( _58381_ A ) ( _58379_ Y ) + USE SIGNAL ;
     - _05332_ ( _58381_ B ) ( _58380_ Y ) + USE SIGNAL ;
@@ -255354,17 +255344,17 @@ NETS 58287 ;
     - _06031_ ( _59380_ B ) ( _59379_ Y ) + USE SIGNAL ;
     - _06032_ ( _59383_ A ) ( _59381_ Y ) + USE SIGNAL ;
     - _06033_ ( _59383_ B ) ( _59382_ Y ) + USE SIGNAL ;
-    - _06034_ ( ANTENNA_21 DIODE ) ( ANTENNA_20 DIODE ) ( _59386_ A ) ( _59384_ Y ) + USE SIGNAL ;
+    - _06034_ ( ANTENNA_19 DIODE ) ( ANTENNA_18 DIODE ) ( _59386_ A ) ( _59384_ Y ) + USE SIGNAL ;
     - _06035_ ( _59386_ B ) ( _59385_ Y ) + USE SIGNAL ;
-    - _06036_ ( ANTENNA_23 DIODE ) ( ANTENNA_22 DIODE ) ( _59389_ A ) ( _59387_ Y ) + USE SIGNAL ;
+    - _06036_ ( ANTENNA_21 DIODE ) ( ANTENNA_20 DIODE ) ( _59389_ A ) ( _59387_ Y ) + USE SIGNAL ;
     - _06037_ ( _59389_ B ) ( _59388_ Y ) + USE SIGNAL ;
     - _06038_ ( _59392_ A ) ( _59390_ Y ) + USE SIGNAL ;
     - _06039_ ( _59392_ B ) ( _59391_ Y ) + USE SIGNAL ;
     - _06040_ ( _59395_ A ) ( _59393_ Y ) + USE SIGNAL ;
     - _06041_ ( _59395_ B ) ( _59394_ Y ) + USE SIGNAL ;
-    - _06042_ ( ANTENNA_24 DIODE ) ( _59400_ A ) ( _59396_ Y ) + USE SIGNAL ;
+    - _06042_ ( ANTENNA_22 DIODE ) ( _59400_ A ) ( _59396_ Y ) + USE SIGNAL ;
     - _06045_ ( _59400_ B ) ( _59399_ Y ) + USE SIGNAL ;
-    - _06046_ ( ANTENNA_25 DIODE ) ( _59403_ A ) ( _59401_ Y ) + USE SIGNAL ;
+    - _06046_ ( ANTENNA_23 DIODE ) ( _59403_ A ) ( _59401_ Y ) + USE SIGNAL ;
     - _06047_ ( _59403_ B ) ( _59402_ Y ) + USE SIGNAL ;
     - _06048_ ( _59406_ A ) ( _59404_ Y ) + USE SIGNAL ;
     - _06049_ ( _59406_ B ) ( _59405_ Y ) + USE SIGNAL ;
@@ -255536,7 +255526,7 @@ NETS 58287 ;
     - _06242_ ( _59682_ B ) ( _59681_ Y ) + USE SIGNAL ;
     - _06243_ ( wire92 A ) ( _59683_ Y ) + USE SIGNAL ;
     - _06244_ ( _59685_ B ) ( _59684_ Y ) + USE SIGNAL ;
-    - _06245_ ( ANTENNA_30 DIODE ) ( ANTENNA_29 DIODE ) ( ANTENNA_28 DIODE ) ( ANTENNA_27 DIODE ) ( ANTENNA_26 DIODE ) ( _59688_ A ) ( _59686_ Y ) + USE SIGNAL ;
+    - _06245_ ( ANTENNA_28 DIODE ) ( ANTENNA_27 DIODE ) ( ANTENNA_26 DIODE ) ( ANTENNA_25 DIODE ) ( ANTENNA_24 DIODE ) ( _59688_ A ) ( _59686_ Y ) + USE SIGNAL ;
     - _06246_ ( _59688_ B ) ( _59687_ Y ) + USE SIGNAL ;
     - _06247_ ( _59691_ A ) ( _59689_ Y ) + USE SIGNAL ;
     - _06248_ ( _59691_ B ) ( _59690_ Y ) + USE SIGNAL ;
@@ -256655,7 +256645,7 @@ NETS 58287 ;
     - _07521_ ( _64170_ A ) ( _62104_ A ) ( _61498_ A ) ( _61496_ Y ) + USE SIGNAL ;
     - _07522_ ( _64170_ B ) ( _62135_ B ) ( _61498_ B ) ( _61497_ Y ) + USE SIGNAL ;
     - _07523_ ( _61499_ C ) ( _61498_ X ) + USE SIGNAL ;
-    - _07524_ ( ANTENNA_32 DIODE ) ( ANTENNA_31 DIODE ) ( _61559_ A1 ) ( _61529_ A1 ) ( _61499_ Y ) + USE SIGNAL ;
+    - _07524_ ( _61559_ A1 ) ( _61529_ A1 ) ( _61499_ Y ) + USE SIGNAL ;
     - _07525_ ( _63372_ A ) ( _61916_ B1 ) ( _61502_ A ) ( _61500_ Y ) + USE SIGNAL ;
     - _07526_ ( _63372_ B ) ( _61898_ B1 ) ( _61502_ B ) ( _61501_ Y ) + USE SIGNAL ;
     - _07527_ ( _66472_ A ) ( _61506_ A ) ( _61502_ Y ) + USE SIGNAL ;
@@ -287596,7 +287586,7 @@ NETS 58287 ;
     - _39051_ ( _94151_ B ) ( _88823_ B ) ( _81306_ Y ) + USE SIGNAL ;
     - _39052_ ( _70572_ A1 ) ( _88823_ CIN ) ( _70571_ X ) + USE SIGNAL ;
     - _39053_ ( _88823_ COUT ) ( _70559_ A ) + USE SIGNAL ;
-    - _39054_ ( ANTENNA_37 DIODE ) ( ANTENNA_36 DIODE ) ( ANTENNA_35 DIODE ) ( ANTENNA_34 DIODE ) ( _88823_ SUM ) ( _70558_ A2 ) + USE SIGNAL ;
+    - _39054_ ( ANTENNA_33 DIODE ) ( ANTENNA_32 DIODE ) ( ANTENNA_31 DIODE ) ( ANTENNA_30 DIODE ) ( _88823_ SUM ) ( _70558_ A2 ) + USE SIGNAL ;
     - _39055_ ( _88824_ COUT ) ( _70582_ A ) + USE SIGNAL ;
     - _39056_ ( _88825_ CIN ) ( _88824_ SUM ) + USE SIGNAL ;
     - _39057_ ( _94152_ SUM ) ( _88825_ A ) + USE SIGNAL ;
@@ -287879,7 +287869,7 @@ NETS 58287 ;
     - _39333_ ( _94199_ B ) ( _88891_ B ) ( _73096_ Y ) + USE SIGNAL ;
     - _39334_ ( _88891_ CIN ) ( _67112_ A2 ) ( _67111_ X ) + USE SIGNAL ;
     - _39335_ ( _88891_ COUT ) ( _67094_ A ) + USE SIGNAL ;
-    - _39336_ ( _88891_ SUM ) ( _67093_ A2 ) + USE SIGNAL ;
+    - _39336_ ( ANTENNA_35 DIODE ) ( ANTENNA_34 DIODE ) ( _88891_ SUM ) ( _67093_ A2 ) + USE SIGNAL ;
     - _39337_ ( _88934_ CIN ) ( _88892_ COUT ) ( _76887_ A ) + USE SIGNAL ;
     - _39338_ ( _88892_ SUM ) ( _75454_ A ) + USE SIGNAL ;
     - _39339_ ( _88893_ A ) ( _57175_ X ) + USE SIGNAL ;
@@ -302181,11 +302171,11 @@ NETS 58287 ;
     - amp[8] ( PIN amp[8] ) ( _99021_ Q ) ( _71807_ A0 ) + USE SIGNAL ;
     - amp[9] ( PIN amp[9] ) ( _99022_ Q ) ( _71808_ A0 ) + USE SIGNAL ;
     - clk ( PIN clk ) ( ANTENNA_61 DIODE ) ( ANTENNA_60 DIODE ) ( ANTENNA_59 DIODE ) ( ANTENNA_58 DIODE ) ( ANTENNA_57 DIODE ) ( ANTENNA_56 DIODE )
-      ( ANTENNA_55 DIODE ) ( ANTENNA_48 DIODE ) ( ANTENNA_47 DIODE ) ( ANTENNA_46 DIODE ) ( ANTENNA_45 DIODE ) ( ANTENNA_44 DIODE ) ( ANTENNA_43 DIODE ) ( ANTENNA_42 DIODE )
-      ( ANTENNA_41 DIODE ) ( ANTENNA_40 DIODE ) ( ANTENNA_39 DIODE ) ( ANTENNA_38 DIODE ) ( clkbuf_0_clk A ) + USE CLOCK + NONDEFAULTRULE CTS_NDR_0 ;
-    - clknet_0_clk ( clkbuf_1_1_0_clk A ) ( clkbuf_1_0_0_clk A ) ( clkbuf_0_clk X ) + USE CLOCK + NONDEFAULTRULE CTS_NDR_0 ;
-    - clknet_1_0_0_clk ( clkbuf_2_1_0_clk A ) ( clkbuf_2_0_0_clk A ) ( clkbuf_1_0_0_clk X ) + USE CLOCK + NONDEFAULTRULE CTS_NDR_0 ;
-    - clknet_1_1_0_clk ( clkbuf_2_3_0_clk A ) ( clkbuf_2_2_0_clk A ) ( clkbuf_1_1_0_clk X ) + USE CLOCK + NONDEFAULTRULE CTS_NDR_0 ;
+      ( ANTENNA_55 DIODE ) ( ANTENNA_46 DIODE ) ( ANTENNA_45 DIODE ) ( ANTENNA_44 DIODE ) ( ANTENNA_43 DIODE ) ( ANTENNA_42 DIODE ) ( ANTENNA_41 DIODE ) ( ANTENNA_40 DIODE )
+      ( ANTENNA_39 DIODE ) ( ANTENNA_38 DIODE ) ( ANTENNA_37 DIODE ) ( ANTENNA_36 DIODE ) ( clkbuf_0_clk A ) + USE CLOCK ;
+    - clknet_0_clk ( clkbuf_1_1_0_clk A ) ( clkbuf_1_0_0_clk A ) ( clkbuf_0_clk X ) + USE CLOCK ;
+    - clknet_1_0_0_clk ( clkbuf_2_1_0_clk A ) ( clkbuf_2_0_0_clk A ) ( clkbuf_1_0_0_clk X ) + USE CLOCK ;
+    - clknet_1_1_0_clk ( clkbuf_2_3_0_clk A ) ( clkbuf_2_2_0_clk A ) ( clkbuf_1_1_0_clk X ) + USE CLOCK ;
     - clknet_2_0_0_clk ( clkbuf_4_3_0_clk A ) ( clkbuf_4_2_0_clk A ) ( clkbuf_4_1_0_clk A ) ( clkbuf_4_0_0_clk A ) ( clkbuf_2_0_0_clk X ) + USE CLOCK ;
     - clknet_2_1_0_clk ( clkbuf_4_7_0_clk A ) ( clkbuf_4_6_0_clk A ) ( clkbuf_4_5_0_clk A ) ( clkbuf_4_4_0_clk A ) ( clkbuf_2_1_0_clk X ) + USE CLOCK ;
     - clknet_2_2_0_clk ( clkbuf_4_11_0_clk A ) ( clkbuf_4_10_0_clk A ) ( clkbuf_4_9_0_clk A ) ( clkbuf_4_8_0_clk A ) ( clkbuf_2_2_0_clk X ) + USE CLOCK ;
@@ -302206,20 +302196,20 @@ NETS 58287 ;
       ( clkbuf_7_122__f_clk A ) ( clkbuf_7_121__f_clk A ) ( clkbuf_7_120__f_clk A ) ( clkbuf_4_15_0_clk X ) + USE CLOCK ;
     - clknet_4_1_0_clk ( clkbuf_7_15__f_clk A ) ( clkbuf_7_14__f_clk A ) ( clkbuf_7_13__f_clk A ) ( clkbuf_7_12__f_clk A ) ( clkbuf_7_11__f_clk A ) ( clkbuf_7_10__f_clk A ) ( clkbuf_7_9__f_clk A )
       ( clkbuf_7_8__f_clk A ) ( clkbuf_4_1_0_clk X ) + USE CLOCK ;
-    - clknet_4_2_0_clk ( ANTENNA_15 DIODE ) ( clkbuf_7_23__f_clk A ) ( clkbuf_7_22__f_clk A ) ( clkbuf_7_21__f_clk A ) ( clkbuf_7_20__f_clk A ) ( clkbuf_7_19__f_clk A ) ( clkbuf_7_18__f_clk A )
+    - clknet_4_2_0_clk ( ANTENNA_14 DIODE ) ( clkbuf_7_23__f_clk A ) ( clkbuf_7_22__f_clk A ) ( clkbuf_7_21__f_clk A ) ( clkbuf_7_20__f_clk A ) ( clkbuf_7_19__f_clk A ) ( clkbuf_7_18__f_clk A )
       ( clkbuf_7_17__f_clk A ) ( clkbuf_7_16__f_clk A ) ( clkbuf_4_2_0_clk X ) + USE CLOCK ;
-    - clknet_4_3_0_clk ( ANTENNA_14 DIODE ) ( clkbuf_7_31__f_clk A ) ( clkbuf_7_30__f_clk A ) ( clkbuf_7_29__f_clk A ) ( clkbuf_7_28__f_clk A ) ( clkbuf_7_27__f_clk A ) ( clkbuf_7_26__f_clk A )
+    - clknet_4_3_0_clk ( ANTENNA_13 DIODE ) ( clkbuf_7_31__f_clk A ) ( clkbuf_7_30__f_clk A ) ( clkbuf_7_29__f_clk A ) ( clkbuf_7_28__f_clk A ) ( clkbuf_7_27__f_clk A ) ( clkbuf_7_26__f_clk A )
       ( clkbuf_7_25__f_clk A ) ( clkbuf_7_24__f_clk A ) ( clkbuf_4_3_0_clk X ) + USE CLOCK ;
-    - clknet_4_4_0_clk ( ANTENNA_13 DIODE ) ( ANTENNA_12 DIODE ) ( ANTENNA_11 DIODE ) ( clkbuf_7_39__f_clk A ) ( clkbuf_7_38__f_clk A ) ( clkbuf_7_37__f_clk A ) ( clkbuf_7_36__f_clk A )
-      ( clkbuf_7_35__f_clk A ) ( clkbuf_7_34__f_clk A ) ( clkbuf_7_33__f_clk A ) ( clkbuf_7_32__f_clk A ) ( clkbuf_4_4_0_clk X ) + USE CLOCK ;
+    - clknet_4_4_0_clk ( ANTENNA_12 DIODE ) ( ANTENNA_11 DIODE ) ( clkbuf_7_39__f_clk A ) ( clkbuf_7_38__f_clk A ) ( clkbuf_7_37__f_clk A ) ( clkbuf_7_36__f_clk A ) ( clkbuf_7_35__f_clk A )
+      ( clkbuf_7_34__f_clk A ) ( clkbuf_7_33__f_clk A ) ( clkbuf_7_32__f_clk A ) ( clkbuf_4_4_0_clk X ) + USE CLOCK ;
     - clknet_4_5_0_clk ( clkbuf_7_47__f_clk A ) ( clkbuf_7_46__f_clk A ) ( clkbuf_7_45__f_clk A ) ( clkbuf_7_44__f_clk A ) ( clkbuf_7_43__f_clk A ) ( clkbuf_7_42__f_clk A ) ( clkbuf_7_41__f_clk A )
       ( clkbuf_7_40__f_clk A ) ( clkbuf_4_5_0_clk X ) + USE CLOCK ;
     - clknet_4_6_0_clk ( clkbuf_7_55__f_clk A ) ( clkbuf_7_54__f_clk A ) ( clkbuf_7_53__f_clk A ) ( clkbuf_7_52__f_clk A ) ( clkbuf_7_51__f_clk A ) ( clkbuf_7_50__f_clk A ) ( clkbuf_7_49__f_clk A )
       ( clkbuf_7_48__f_clk A ) ( clkbuf_4_6_0_clk X ) + USE CLOCK ;
     - clknet_4_7_0_clk ( clkbuf_7_63__f_clk A ) ( clkbuf_7_62__f_clk A ) ( clkbuf_7_61__f_clk A ) ( clkbuf_7_60__f_clk A ) ( clkbuf_7_59__f_clk A ) ( clkbuf_7_58__f_clk A ) ( clkbuf_7_57__f_clk A )
       ( clkbuf_7_56__f_clk A ) ( clkbuf_4_7_0_clk X ) + USE CLOCK ;
-    - clknet_4_8_0_clk ( ANTENNA_10 DIODE ) ( ANTENNA_9 DIODE ) ( ANTENNA_8 DIODE ) ( clkbuf_7_71__f_clk A ) ( clkbuf_7_70__f_clk A ) ( clkbuf_7_69__f_clk A ) ( clkbuf_7_68__f_clk A )
-      ( clkbuf_7_67__f_clk A ) ( clkbuf_7_66__f_clk A ) ( clkbuf_7_65__f_clk A ) ( clkbuf_7_64__f_clk A ) ( clkbuf_4_8_0_clk X ) + USE CLOCK ;
+    - clknet_4_8_0_clk ( ANTENNA_54 DIODE ) ( ANTENNA_10 DIODE ) ( ANTENNA_9 DIODE ) ( ANTENNA_8 DIODE ) ( clkbuf_7_71__f_clk A ) ( clkbuf_7_70__f_clk A ) ( clkbuf_7_69__f_clk A )
+      ( clkbuf_7_68__f_clk A ) ( clkbuf_7_67__f_clk A ) ( clkbuf_7_66__f_clk A ) ( clkbuf_7_65__f_clk A ) ( clkbuf_7_64__f_clk A ) ( clkbuf_4_8_0_clk X ) + USE CLOCK ;
     - clknet_4_9_0_clk ( ANTENNA_7 DIODE ) ( clkbuf_7_79__f_clk A ) ( clkbuf_7_78__f_clk A ) ( clkbuf_7_77__f_clk A ) ( clkbuf_7_76__f_clk A ) ( clkbuf_7_75__f_clk A ) ( clkbuf_7_74__f_clk A )
       ( clkbuf_7_73__f_clk A ) ( clkbuf_7_72__f_clk A ) ( clkbuf_4_9_0_clk X ) + USE CLOCK ;
     - clknet_7_0__leaf_clk ( clkload0 A ) ( clkbuf_leaf_1187_clk A ) ( clkbuf_leaf_1186_clk A ) ( clkbuf_leaf_1184_clk A ) ( clkbuf_leaf_1183_clk A ) ( clkbuf_7_0__f_clk X ) + USE CLOCK ;
@@ -302359,7 +302349,7 @@ NETS 58287 ;
       ( clkbuf_leaf_275_clk A ) ( clkbuf_leaf_262_clk A ) ( clkbuf_7_43__f_clk X ) + USE CLOCK ;
     - clknet_7_44__leaf_clk ( clkload36 A ) ( clkbuf_leaf_270_clk A ) ( clkbuf_leaf_269_clk A ) ( clkbuf_leaf_266_clk A ) ( clkbuf_leaf_265_clk A ) ( clkbuf_leaf_264_clk A ) ( clkbuf_leaf_261_clk A )
       ( clkbuf_7_44__f_clk X ) + USE CLOCK ;
-    - clknet_7_45__leaf_clk ( ANTENNA_51 DIODE ) ( clkload37 A ) ( clkbuf_leaf_273_clk A ) ( clkbuf_leaf_272_clk A ) ( clkbuf_leaf_271_clk A ) ( clkbuf_leaf_268_clk A ) ( clkbuf_leaf_267_clk A )
+    - clknet_7_45__leaf_clk ( ANTENNA_50 DIODE ) ( clkload37 A ) ( clkbuf_leaf_273_clk A ) ( clkbuf_leaf_272_clk A ) ( clkbuf_leaf_271_clk A ) ( clkbuf_leaf_268_clk A ) ( clkbuf_leaf_267_clk A )
       ( clkbuf_leaf_210_clk A ) ( clkbuf_leaf_199_clk A ) ( clkbuf_7_45__f_clk X ) + USE CLOCK ;
     - clknet_7_46__leaf_clk ( clkload38 A ) ( clkbuf_leaf_291_clk A ) ( clkbuf_leaf_290_clk A ) ( clkbuf_leaf_289_clk A ) ( clkbuf_leaf_288_clk A ) ( clkbuf_leaf_260_clk A ) ( clkbuf_7_46__f_clk X ) + USE CLOCK ;
     - clknet_7_47__leaf_clk ( clkload39 A ) ( clkbuf_leaf_304_clk A ) ( clkbuf_leaf_303_clk A ) ( clkbuf_leaf_292_clk A ) ( clkbuf_leaf_274_clk A ) ( clkbuf_7_47__f_clk X ) + USE CLOCK ;
@@ -302445,7 +302435,7 @@ NETS 58287 ;
       ( clkbuf_leaf_868_clk A ) ( clkbuf_leaf_866_clk A ) ( clkbuf_7_83__f_clk X ) + USE CLOCK ;
     - clknet_7_84__leaf_clk ( clkload71 A ) ( clkbuf_leaf_906_clk A ) ( clkbuf_leaf_905_clk A ) ( clkbuf_leaf_904_clk A ) ( clkbuf_leaf_899_clk A ) ( clkbuf_leaf_887_clk A ) ( clkbuf_leaf_886_clk A )
       ( clkbuf_leaf_885_clk A ) ( clkbuf_leaf_881_clk A ) ( clkbuf_7_84__f_clk X ) + USE CLOCK ;
-    - clknet_7_85__leaf_clk ( ANTENNA_52 DIODE ) ( clkload72 A ) ( clkbuf_leaf_903_clk A ) ( clkbuf_leaf_902_clk A ) ( clkbuf_leaf_901_clk A ) ( clkbuf_leaf_900_clk A ) ( clkbuf_leaf_898_clk A )
+    - clknet_7_85__leaf_clk ( ANTENNA_51 DIODE ) ( clkload72 A ) ( clkbuf_leaf_903_clk A ) ( clkbuf_leaf_902_clk A ) ( clkbuf_leaf_901_clk A ) ( clkbuf_leaf_900_clk A ) ( clkbuf_leaf_898_clk A )
       ( clkbuf_leaf_897_clk A ) ( clkbuf_leaf_896_clk A ) ( clkbuf_leaf_895_clk A ) ( clkbuf_leaf_894_clk A ) ( clkbuf_leaf_893_clk A ) ( clkbuf_leaf_892_clk A ) ( clkbuf_7_85__f_clk X ) + USE CLOCK ;
     - clknet_7_86__leaf_clk ( clkload73 A ) ( clkbuf_leaf_867_clk A ) ( clkbuf_leaf_864_clk A ) ( clkbuf_leaf_863_clk A ) ( clkbuf_leaf_862_clk A ) ( clkbuf_leaf_861_clk A ) ( clkbuf_leaf_860_clk A )
       ( clkbuf_7_86__f_clk X ) + USE CLOCK ;
@@ -302472,7 +302462,7 @@ NETS 58287 ;
       ( clkbuf_leaf_423_clk A ) ( clkbuf_leaf_418_clk A ) ( clkbuf_leaf_417_clk A ) ( clkbuf_leaf_416_clk A ) ( clkbuf_7_96__f_clk X ) + USE CLOCK ;
     - clknet_7_97__leaf_clk ( clkload82 A ) ( clkbuf_leaf_445_clk A ) ( clkbuf_leaf_444_clk A ) ( clkbuf_leaf_443_clk A ) ( clkbuf_leaf_441_clk A ) ( clkbuf_leaf_440_clk A ) ( clkbuf_leaf_439_clk A )
       ( clkbuf_leaf_438_clk A ) ( clkbuf_leaf_437_clk A ) ( clkbuf_leaf_436_clk A ) ( clkbuf_7_97__f_clk X ) + USE CLOCK ;
-    - clknet_7_98__leaf_clk ( ANTENNA_53 DIODE ) ( clkload83 A ) ( clkbuf_leaf_469_clk A ) ( clkbuf_leaf_468_clk A ) ( clkbuf_leaf_446_clk A ) ( clkbuf_leaf_415_clk A ) ( clkbuf_leaf_414_clk A )
+    - clknet_7_98__leaf_clk ( ANTENNA_52 DIODE ) ( clkload83 A ) ( clkbuf_leaf_469_clk A ) ( clkbuf_leaf_468_clk A ) ( clkbuf_leaf_446_clk A ) ( clkbuf_leaf_415_clk A ) ( clkbuf_leaf_414_clk A )
       ( clkbuf_leaf_366_clk A ) ( clkbuf_leaf_365_clk A ) ( clkbuf_leaf_364_clk A ) ( clkbuf_7_98__f_clk X ) + USE CLOCK ;
     - clknet_7_99__leaf_clk ( clkload84 A ) ( clkbuf_leaf_482_clk A ) ( clkbuf_leaf_481_clk A ) ( clkbuf_leaf_480_clk A ) ( clkbuf_leaf_474_clk A ) ( clkbuf_leaf_473_clk A ) ( clkbuf_leaf_472_clk A )
       ( clkbuf_leaf_471_clk A ) ( clkbuf_leaf_470_clk A ) ( clkbuf_leaf_467_clk A ) ( clkbuf_leaf_466_clk A ) ( clkbuf_7_99__f_clk X ) + USE CLOCK ;
@@ -304644,7 +304634,7 @@ NETS 58287 ;
       ( _54478_ B ) ( _54465_ B ) ( _54453_ B ) + USE SIGNAL ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.coef\[26\] ( _96601_ Q ) ( _73814_ B ) ( _73809_ B ) ( _64321_ A2 ) ( _54506_ B ) ( _54498_ B ) ( _54491_ B )
       ( _54480_ B ) ( _54471_ B ) ( _54466_ B ) + USE SIGNAL ;
-    - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.coef\[27\] ( ANTENNA_49 DIODE ) ( _97992_ Q ) ( _73815_ B ) ( _69026_ A2 ) ( _54512_ B ) ( _54507_ B ) ( _54499_ B )
+    - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.coef\[27\] ( ANTENNA_47 DIODE ) ( _97992_ Q ) ( _73815_ B ) ( _69026_ A2 ) ( _54512_ B ) ( _54507_ B ) ( _54499_ B )
       ( _54492_ B ) ( _54482_ B ) ( _54472_ B ) ( _54467_ B ) + USE SIGNAL ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.coef\[28\] ( _97897_ Q ) ( _68716_ B ) ( _54518_ B ) ( _54513_ B ) ( _54508_ B ) ( _54500_ B ) ( _54493_ B )
       ( _54483_ B ) ( _54473_ B ) ( _54468_ B ) + USE SIGNAL ;
@@ -304653,8 +304643,8 @@ NETS 58287 ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[0\] ( _96586_ Q ) ( _90310_ A ) ( _82741_ B ) ( _64275_ A2 ) ( _60204_ B1 ) + USE SIGNAL ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[10\] ( _96596_ Q ) ( _82746_ B ) ( _64306_ A ) ( _60238_ B1 ) + USE SIGNAL ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[11\] ( _96597_ Q ) ( _64311_ B ) ( _64309_ A1 ) ( _64308_ A1 ) ( _60241_ B1 ) + USE SIGNAL ;
-    - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[1\] ( _96587_ Q ) ( _90311_ A ) ( _64279_ A2 ) ( _60207_ B1 ) + USE SIGNAL ;
-    - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[2\] ( ANTENNA_50 DIODE ) ( _96588_ Q ) ( _90312_ A ) ( _82742_ B ) ( _64281_ A2 ) ( _60211_ B1 ) + USE SIGNAL ;
+    - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[1\] ( ANTENNA_48 DIODE ) ( _96587_ Q ) ( _90311_ A ) ( _64279_ A2 ) ( _60207_ B1 ) + USE SIGNAL ;
+    - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[2\] ( ANTENNA_49 DIODE ) ( _96588_ Q ) ( _90312_ A ) ( _82742_ B ) ( _64281_ A2 ) ( _60211_ B1 ) + USE SIGNAL ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[3\] ( _96589_ Q ) ( _90313_ A ) ( _64284_ A2 ) ( _60214_ B1 ) + USE SIGNAL ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[4\] ( _96590_ Q ) ( _90314_ A ) ( _82743_ B ) ( _64288_ A2 ) ( _60217_ B1 ) + USE SIGNAL ;
     - fdct_zigzag.dct_mod.dct_block_2.dct_unit_1.dout\[5\] ( _96591_ Q ) ( _90315_ A ) ( _64291_ A2 ) ( _60220_ B1 ) + USE SIGNAL ;
@@ -307792,7 +307782,7 @@ NETS 58287 ;
     - fdct_zigzag.zigzag_mod.sresult\[9\]\[9\] ( _94998_ Q ) ( _58435_ A ) ( _58395_ A2 ) + USE SIGNAL ;
     - net ( PIN amp[11] ) ( jpeg_encoder LO ) + USE SIGNAL ;
     - net1 ( _65042_ A2 ) ( wire1 X ) + USE SIGNAL ;
-    - net10 ( ANTENNA_33 DIODE ) ( _68467_ A2 ) ( wire10 X ) + USE SIGNAL ;
+    - net10 ( ANTENNA_29 DIODE ) ( _68467_ A2 ) ( wire10 X ) + USE SIGNAL ;
     - net100 ( _70799_ A ) ( _70797_ A2 ) ( _68850_ A ) ( _68848_ A2 ) ( _68845_ A ) ( _68842_ B ) ( _68840_ A )
       ( _68837_ A2 ) ( _68542_ A ) ( _68540_ A2 ) ( _68066_ B2 ) ( _68061_ B1 ) ( _68060_ B2 ) ( _66739_ A ) ( _66736_ B )
       ( _66734_ A ) ( _66731_ B ) ( _66641_ B2 ) ( _66636_ B1 ) ( _66635_ B2 ) ( _66630_ A ) ( _66627_ B ) ( _65560_ A )
@@ -309496,7 +309486,7 @@ NETS 58287 ;
     - net370 ( rebuffer368 A ) ( _89064_ A ) ( rebuffer369 X ) + USE SIGNAL ;
     - net371 ( split356 A ) ( load_slew284 A ) ( _74139_ A ) ( _72711_ A ) ( _57128_ A ) ( _54705_ A ) ( _54645_ A )
       ( _54106_ A ) ( _54097_ A ) ( _54084_ A ) ( _53875_ A ) ( rebuffer370 X ) + USE SIGNAL ;
-    - net372 ( ANTENNA_54 DIODE ) ( split362 A ) ( _80335_ A ) ( _80006_ A ) ( _79213_ A ) ( _56236_ A ) ( _56219_ A )
+    - net372 ( ANTENNA_53 DIODE ) ( split362 A ) ( _80335_ A ) ( _80006_ A ) ( _79213_ A ) ( _56236_ A ) ( _56219_ A )
       ( _56213_ A ) ( _56033_ A ) ( _55292_ A ) ( _55285_ A ) ( _54603_ A ) ( _53845_ A ) ( split371 X ) + USE SIGNAL ;
     - net373 ( _87956_ B ) ( _85420_ CIN ) ( rebuffer372 X ) + USE SIGNAL ;
     - net374 ( _88763_ CIN ) ( rebuffer373 X ) + USE SIGNAL ;

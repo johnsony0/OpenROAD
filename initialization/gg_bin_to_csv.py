@@ -17,8 +17,8 @@ the magnitudes and the five NDR fields.
         --gg  top_gcd/ggdump/gg_iter1_x50400_y50400.txt \
         --out work/ggs_iter1_x50400_y50400_s3.csv
 
---gg is optional and only adds the xdbu/ydbu/layer columns, which the binary
-does not carry; without it those are left empty.
+--gg is required: the binary stores only per-search changes, and shared static
+node fields and coordinate columns are reconstructed from the matching dump.
 
 A full grid is one row per node (243k rows / ~20 MB for a 174x233x6 box), which
 loads fine in pandas but is a lot to scroll.  For a quick look, filter:
@@ -45,15 +45,16 @@ from gg_to_mem import (  # noqa: E402  -- keeps one copy of the format constants
     NDR_COLS,
     SNAP_HEADER_BYTES,
     SNAP_MAGIC,
-    SNAP_STRIDE,
+    SNAP_COST_ORDER,
+    SNAP_MUTABLE_FLAGS,
+    parse_gridgraph,
 )
 
-# The binary packs the flags into two bytes: record byte 0 holds the first six
-# FLAG_BITS entries (its bits 6,7 are the C++ unused1/unused2), byte 1 holds the
-# remaining eight.
+# These flags mirror the C++ Node declaration order and are reconstructed from
+# the shared text dump plus the snapshot's override bitmap.
 BYTE0_FLAGS = FLAG_BITS[:6]
 BYTE1_FLAGS = FLAG_BITS[6:]
-COST_ORDER = COST_BITS + NDR_COLS  # record bytes 2..13
+COST_ORDER = COST_BITS + NDR_COLS  # sparse cost mask bit order
 VECTORS = ["guide", "src", "dst"]
 
 COLUMNS = (["addr", "x", "y", "z", "xdbu", "ydbu", "layer"]
@@ -93,22 +94,46 @@ def read_snapshot(path):
         blob = f.read()
     if len(blob) < SNAP_HEADER_BYTES or blob[:8] != SNAP_MAGIC:
         die("{} is not a {} search snapshot".format(path, SNAP_MAGIC.decode()))
-    x_dim, y_dim, z_dim, cost_bits, stride, search_id = struct.unpack(
+    x_dim, y_dim, z_dim, cost_bits, cost_records, search_id = struct.unpack(
         "<6i", blob[8:SNAP_HEADER_BYTES])
-    if stride != SNAP_STRIDE:
-        die("{} has a {}-byte node record, expected {}".format(
-            path, stride, SNAP_STRIDE))
+    if cost_records < 0:
+        die("{} has a negative sparse cost-record count".format(path))
     n = x_dim * y_dim * z_dim
     bm = (n + 7) // 8
-    node_end = SNAP_HEADER_BYTES + n * stride
-    want = node_end + 3 * bm
+    off = SNAP_HEADER_BYTES
+    sparse_costs = {}
+    prev_addr = -1
+    for _ in range(cost_records):
+        if off + 6 > len(blob):
+            die("{} ends inside a sparse cost record".format(path))
+        addr = struct.unpack("<I", blob[off:off + 4])[0]
+        mask = struct.unpack("<H", blob[off + 4:off + 6])[0]
+        off += 6
+        n_values = bin(mask).count("1")
+        if (addr >= n or addr <= prev_addr or mask == 0
+                or mask >> len(SNAP_COST_ORDER)):
+            die("{} has an invalid sparse cost record at address {}".format(
+                path, addr))
+        if off + n_values > len(blob):
+            die("{} ends inside sparse cost values at address {}".format(
+                path, addr))
+        costs = [0] * len(SNAP_COST_ORDER)
+        for field in range(len(SNAP_COST_ORDER)):
+            if mask & (1 << field):
+                costs[field] = blob[off]
+                off += 1
+        sparse_costs[addr] = costs
+        prev_addr = addr
+    bitmap_count = len(SNAP_MUTABLE_FLAGS) + 3
+    want = off + bitmap_count * bm
     if len(blob) != want:
         die("{} is {} bytes, expected {} for dim {}x{}x{}".format(
             path, len(blob), want, x_dim, y_dim, z_dim))
     meta = {"dim": (x_dim, y_dim, z_dim), "searchId": search_id,
-            "costBits": cost_bits, "stride": stride, "n": n}
-    bitmaps = [blob[node_end + i * bm:node_end + (i + 1) * bm] for i in range(3)]
-    return blob, meta, bitmaps
+            "costBits": cost_bits, "costRecords": cost_records, "n": n}
+    bitmaps = [blob[off + i * bm:off + (i + 1) * bm]
+               for i in range(bitmap_count)]
+    return meta, sparse_costs, bitmaps
 
 
 def main():
@@ -117,8 +142,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("snapshot", help="dumpSearchGraph() .bin")
     ap.add_argument("--gg", default=None,
-                    help="gg_*.txt of the same route box, for the xdbu/ydbu/"
-                         "layer columns")
+                    help="required gg_*.txt baseline from the same route box")
     ap.add_argument("--out", default=None,
                     help="output path (default: the .bin with a .csv suffix)")
     ap.add_argument("--layer", type=int, default=None,
@@ -133,22 +157,22 @@ def main():
         die("no such file: " + args.snapshot)
     out_path = args.out or os.path.splitext(args.snapshot)[0] + ".csv"
 
-    blob, meta, (guides, srcs, dsts) = read_snapshot(args.snapshot)
+    meta, sparse_costs, bitmaps = read_snapshot(args.snapshot)
+    mutable_bitmaps = bitmaps[:len(SNAP_MUTABLE_FLAGS)]
+    guides, srcs, dsts = bitmaps[len(SNAP_MUTABLE_FLAGS):]
     x_dim, y_dim, z_dim = meta["dim"]
     if args.layer is not None and not 0 <= args.layer < z_dim:
         die("--layer {} is outside 0..{}".format(args.layer, z_dim - 1))
 
-    xc = yc = layers = None
-    if args.gg:
-        if not os.path.isfile(args.gg):
-            die("no such file: " + args.gg)
-        hdr = read_gg_header(args.gg)
-        if tuple(hdr["dim"]) != meta["dim"]:
-            die("{} dim {} does not match snapshot dim {} -- not the same "
-                "route box".format(args.gg, tuple(hdr["dim"]), meta["dim"]))
-        xc, yc, layers = hdr["xCoords"], hdr["yCoords"], hdr["zCoords(layerNum)"]
+    if not args.gg or not os.path.isfile(args.gg):
+        die("--gg must name the shared grid dump for this snapshot")
+    hdr, base_nodes = parse_gridgraph(
+        args.gg, ignore_ndr=True, want_nodes=True, check_ndr_fields=False)
+    if tuple(hdr["dim"]) != meta["dim"]:
+        die("{} dim {} does not match snapshot dim {} -- not the same "
+            "route box".format(args.gg, tuple(hdr["dim"]), meta["dim"]))
+    xc, yc, layers = hdr["xCoords"], hdr["yCoords"], hdr["zCoords(layerNum)"]
 
-    n_flag0, n_cost = len(BYTE0_FLAGS), len(COST_ORDER)
     # Column index of each INTERESTING field within the row, resolved once.
     keep_idx = [COLUMNS.index(c) for c in INTERESTING]
     state_idx = keep_idx + [COLUMNS.index(c) for c in
@@ -166,16 +190,17 @@ def main():
                     continue
                 chunk = []
                 for x in range(x_dim):
-                    off = SNAP_HEADER_BYTES + addr * SNAP_STRIDE
-                    b0, b1 = blob[off], blob[off + 1]
                     byte, mask = addr >> 3, 1 << (addr & 7)
                     row = [addr, x, y, z,
-                           xc[x] if xc else "",
-                           yc[y] if yc else "",
-                           layers[z] if layers else ""]
-                    row += [(b0 >> i) & 1 for i in range(n_flag0)]
-                    row += [(b1 >> i) & 1 for i in range(len(BYTE1_FLAGS))]
-                    row += [blob[off + 2 + i] for i in range(n_cost)]
+                           xc[x], yc[y], layers[z]]
+                    row += [(base_nodes[addr] >> i) & 1
+                            for i in range(len(FLAG_BITS))]
+                    for flag, bitmap in zip(SNAP_MUTABLE_FLAGS,
+                                            mutable_bitmaps):
+                        row[7 + FLAG_BITS.index(flag)] = (
+                            1 if bitmap[byte] & mask else 0)
+                    row += sparse_costs.get(
+                        addr, [0] * len(SNAP_COST_ORDER))
                     row += [1 if guides[byte] & mask else 0,
                             1 if srcs[byte] & mask else 0,
                             1 if dsts[byte] & mask else 0]

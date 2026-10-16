@@ -2,6 +2,47 @@
 ## Copyright (c) 2019-2026, The OpenROAD Authors
 
 # Assumes flow_helpers.tcl has been read.
+# Set FLOW_MEASURE_TIMING=1 to record per-section runtimes.
+set ::flow_measure_enabled [expr {
+  [info exists ::env(FLOW_MEASURE_TIMING)]
+  && $::env(FLOW_MEASURE_TIMING) eq "1"
+}]
+
+if { $::flow_measure_enabled
+     && [info exists ::env(FLOW_TIMING_FILE)]
+     && $::env(FLOW_TIMING_FILE) != "" } {
+  set timing_file [open $::env(FLOW_TIMING_FILE) w]
+  puts $timing_file "section,elapsed_seconds"
+  close $timing_file
+}
+
+proc flow_measure_start { section } {
+  global flow_measure_enabled flow_measure_section flow_measure_started_at
+  if { $flow_measure_enabled } {
+    set flow_measure_section $section
+    set flow_measure_started_at [clock milliseconds]
+  }
+}
+
+proc flow_measure_end { } {
+  global flow_measure_enabled flow_measure_section flow_measure_started_at
+  if { !$flow_measure_enabled } {
+    return
+  }
+
+  set elapsed_seconds [format "%.3f" \
+    [expr {([clock milliseconds] - $flow_measure_started_at) / 1000.0}]]
+  if { [info exists ::env(FLOW_TIMING_FILE)]
+       && $::env(FLOW_TIMING_FILE) != "" } {
+    set timing_file [open $::env(FLOW_TIMING_FILE) a]
+    puts $timing_file "$flow_measure_section,$elapsed_seconds"
+    close $timing_file
+  } else {
+    puts "FLOW_TIMING,$flow_measure_section,$elapsed_seconds"
+  }
+}
+
+flow_measure_start "Design initialization"
 read_libraries
 read_verilog $synth_verilog
 link_design $top_module
@@ -18,7 +59,9 @@ sta::set_thread_count 1
 utl::metric "IFP::ord_version" [ord::openroad_git_describe]
 # Note that sta::network_instance_count is not valid after tapcells are added.
 utl::metric "IFP::instance_count" [sta::network_instance_count]
+flow_measure_end
 
+flow_measure_start "Floorplanning"
 initialize_floorplan -site $site \
   -die_area $die_area \
   -core_area $core_area
@@ -27,7 +70,9 @@ source $tracks_file
 
 # remove buffers inserted by synthesis
 remove_buffers
+flow_measure_end
 
+flow_measure_start "Macro placement"
 if { $pre_placed_macros_file != "" } {
   source $pre_placed_macros_file
 }
@@ -40,18 +85,24 @@ if { [have_macros] } {
   set report_dir [make_result_file ${design}_${platform}_rtlmp]
   rtl_macro_placer -report_directory $report_dir
 }
+flow_measure_end
 
 ################################################################
 # Tapcell insertion
+flow_measure_start "Tapcell insertion"
 eval tapcell $tapcell_args ;# tclint-disable command-args
+flow_measure_end
 
 ################################################################
 # Power distribution network insertion
+flow_measure_start "Power distribution network"
 source $pdn_cfg
 pdngen
+flow_measure_end
 
 ################################################################
 # Global placement
+flow_measure_start "Global placement"
 
 foreach layer_adjustment $global_routing_layer_adjustments {
   lassign $layer_adjustment layer adjustment
@@ -75,9 +126,12 @@ global_placement -routability_driven -density $global_place_density \
 # checkpoint
 set global_place_db [make_result_file ${design}_${platform}_global_place.db]
 write_db $global_place_db
+flow_measure_end
 
 ################################################################
 # Repair max slew/cap/fanout violations and normalize slews
+
+flow_measure_start "Pre-CTS timing optimization"
 source $layer_rc_file
 set_wire_rc -signal -layer $wire_rc_layer
 set_wire_rc -clock -layer $wire_rc_layer_clk
@@ -90,10 +144,14 @@ repair_design -slew_margin $slew_margin -cap_margin $cap_margin
 repair_tie_fanout -separation $tie_separation $tielo_port
 repair_tie_fanout -separation $tie_separation $tiehi_port
 
+flow_measure_end
+flow_measure_start "Pre-CTS detailed placement"
 set_placement_padding -global -left $detail_place_pad -right $detail_place_pad
 detailed_placement
+flow_measure_end
 
 # post resize timing report (ideal clocks)
+flow_measure_start "Pre-CTS timing reports"
 report_worst_slack -min -digits 3
 report_worst_slack -max -digits 3
 report_tns -digits 3
@@ -104,17 +162,20 @@ utl::metric "RSZ::repair_design_buffer_count" [rsz::repair_design_buffer_count]
 utl::metric "RSZ::max_slew_slack" [expr [sta::max_slew_check_slack_limit] * 100]
 utl::metric "RSZ::max_fanout_slack" [expr [sta::max_fanout_check_slack_limit] * 100]
 utl::metric "RSZ::max_capacitance_slack" [expr [sta::max_capacitance_check_slack_limit] * 100]
+flow_measure_end
 
 ################################################################
 # Clock Tree Synthesis
 
+flow_measure_start "Clock tree synthesis"
 # Clone clock tree inverters next to register loads
 # so cts does not try to buffer the inverted clocks.
 repair_clock_inverters
 
 clock_tree_synthesis -root_buf $cts_buffer -buf_list $cts_buffer \
   -sink_clustering_enable \
-  -sink_clustering_max_diameter $cts_cluster_diameter
+  -sink_clustering_max_diameter $cts_cluster_diameter \
+  -apply_ndr none
 
 # CTS leaves a long wire from the pad to the clock tree root.
 repair_clock_nets
@@ -125,10 +186,12 @@ detailed_placement
 # checkpoint
 set cts_db [make_result_file ${design}_${platform}_cts.db]
 write_db $cts_db
+flow_measure_end
 
 ################################################################
 # Setup/hold timing repair
 
+flow_measure_start "Setup and hold timing repair"
 set_propagated_clock [all_clocks]
 
 # Global routing is fast enough for the flow regressions.
@@ -154,10 +217,12 @@ utl::metric "RSZ::worst_slack_min" [sta::worst_slack -min]
 utl::metric "RSZ::worst_slack_max" [sta::worst_slack -max]
 utl::metric "RSZ::tns_max" [sta::total_negative_slack -max]
 utl::metric "RSZ::hold_buffer_count" [rsz::hold_buffer_count]
+flow_measure_end
 
 ################################################################
 # Detailed Placement
 
+flow_measure_start "Detailed placement"
 detailed_placement
 
 # Capture utilization before fillers make it 100%
@@ -167,6 +232,7 @@ utl::metric "DPL::design_area" [sta::format_area [rsz::design_area] 0]
 # checkpoint
 set dpl_db [make_result_file ${design}_${platform}_dpl.db]
 write_db $dpl_db
+flow_measure_end
 
 set verilog_file [make_result_file ${design}_${platform}.v]
 write_verilog $verilog_file
@@ -174,6 +240,7 @@ write_verilog $verilog_file
 ################################################################
 # Global routing
 
+flow_measure_start "Global routing"
 pin_access
 
 set route_guide [make_result_file ${design}_${platform}.route_guide]
@@ -182,29 +249,35 @@ global_route -guide_file $route_guide \
 
 set verilog_file [make_result_file ${design}_${platform}.v]
 write_verilog -remove_cells $filler_cells $verilog_file
+flow_measure_end
 
 ################################################################
 # Repair antennas post-GRT
 
+flow_measure_start "Post-GRT antenna repair"
 utl::set_metrics_stage "grt__{}"
 repair_antennas -iterations 5
 
 check_antennas
 utl::clear_metrics_stage
 utl::metric "GRT::ANT::errors" [ant::antenna_violation_count]
+flow_measure_end
 
+flow_measure_start "DRT input export"
 if { [info exists ::env(DRT_PREPARE_DIR)] && $::env(DRT_PREPARE_DIR) != "" } {
   set prepare_dir $::env(DRT_PREPARE_DIR)
   file mkdir $prepare_dir
   set prepare_def [file join $prepare_dir "${design}_${platform}_preroute.def"]
-  set prepare_guide [file join $prepare_dir "${design}_${platform}_route_guide"]
+  set prepare_guide [file join $prepare_dir "${design}_${platform}.route_guide"]
   write_def $prepare_def
   file copy -force $route_guide $prepare_guide
 }
+flow_measure_end
 
 ################################################################
 # Detailed routing
 
+flow_measure_start "Detailed routing"
 # Run pin access again after inserting diodes and moving cells
 # pin_access
 
@@ -222,10 +295,12 @@ write_db $routed_db
 
 set routed_def [make_result_file ${design}_${platform}_route.def]
 write_def $routed_def
+flow_measure_end
 
 ################################################################
 # Repair antennas post-DRT
 
+flow_measure_start "Post-DRT antenna repair"
 set repair_antennas_iters 0
 utl::set_metrics_stage "drt__repair_antennas__pre_repair__{}"
 while { [check_antennas] && $repair_antennas_iters < 5 } {
@@ -246,6 +321,7 @@ check_antennas
 
 utl::clear_metrics_stage
 utl::metric "DRT::ANT::errors" [ant::antenna_violation_count]
+flow_measure_end
 
 if { ![design_is_routed] } {
   error "Design has unrouted nets."
@@ -257,16 +333,19 @@ write_db $repair_antennas_db
 ################################################################
 # Filler placement
 
+flow_measure_start "Filler placement"
 filler_placement $filler_cells
 check_placement -verbose
 
 # checkpoint
 set fill_db [make_result_file ${design}_${platform}_fill.db]
 write_db $fill_db
+flow_measure_end
 
 ################################################################
 # Extraction
 
+flow_measure_start "Extraction"
 if { $rcx_rules_file != "" } {
   define_process_corner -ext_model_index 0 X
   extract_parasitics -ext_model_file $rcx_rules_file
@@ -279,10 +358,12 @@ if { $rcx_rules_file != "" } {
   # Use global routing based parasitics inlieu of rc extraction
   estimate_parasitics -global_routing
 }
+flow_measure_end
 
 ################################################################
 # Final Report
 
+flow_measure_start "Final reporting"
 report_checks -path_delay min_max -format full_clock_expanded \
   -fields {input_pin slew capacitance} -digits 3
 report_worst_slack -min -digits 3
@@ -310,3 +391,4 @@ utl::metric "DRT::clock_period" [get_property [lindex [all_clocks] 0] period]
 # not really useful without pad locations
 #set_pdnsim_net_voltage -net $vdd_net_name -voltage $vdd_voltage
 #analyze_power_grid -net $vdd_net_name
+flow_measure_end

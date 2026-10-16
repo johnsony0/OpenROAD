@@ -135,6 +135,8 @@ run_drt_only() {
     DRT_DUMP_COST_DIR= \
     DRT_DUMP_MIN_ITER="$iter_filter" \
     DRT_DUMP_ITER="$iter_filter" \
+    DRT_DUMP_MAX_BOXES_PER_ITER="5" \
+    DRT_DUMP_MAX_SEARCHES_PER_BOX="20" \
     DRT_FINAL_ITER_FILE="$results_dir/final_iteration" \
     DRT_THREADS="$threads" \
     DRT_TECH_LEF="$tech_lef" \
@@ -154,23 +156,25 @@ run_sweep() {
 
   # 1) Discovery run: perform DRT without graph-data dumps. DRT writes the
   #    terminal iteration once to the results directory.
-  run_drt_only "$platform" "$design" iteration-discover 1 ""
-  local final_iter
-  final_iter=$(cat "$results_root/$platform/$design/iteration-discover/final_iteration")
+  # run_drt_only "$platform" "$design" iteration-discover 1 ""
+  # local final_iter
+  # final_iter=$(cat "$results_root/$platform/$design/iteration-discover/final_iteration")
 
-  if [[ -z "$final_iter" || ! "$final_iter" =~ ^[0-9]+$ ]]; then
-    echo "[$platform/$design] ERROR: could not determine final iteration; skipping gg-dump/threads runs" >&2
-    return 1
-  fi
-  echo "[$platform/$design] final iteration detected: $final_iter"
+  # if [[ -z "$final_iter" || ! "$final_iter" =~ ^[0-9]+$ ]]; then
+  #  echo "[$platform/$design] ERROR: could not determine final iteration; skipping gg-dump/threads runs" >&2
+  #  return 1
+  # fi
+  # echo "[$platform/$design] final iteration detected: $final_iter"
+
+  target_iter=""
 
   # 2) Dump graph data only for the terminal iteration.
-  run_drt_only "$platform" "$design" gg_dump 1 "$final_iter"
+  run_drt_only "$platform" "$design" gg_dump 1 "$target_iter"
 
   # 3-5) Timing-only runs at 1/8/16 threads. Use the same final iteration
   #    while leaving DRT_DUMP_GG_DATA_DIR empty, so graph data is not dumped.
-  for threads in 1 8 16; do
-    run_drt_only "$platform" "$design" "ggdump_thread${threads}" "$threads" "$final_iter"
+  for threads in 1 8 16 32 64; do
+    run_drt_only "$platform" "$design" "ggdump_thread${threads}" "$threads" "$target_iter"
   done
 }
 
@@ -187,7 +191,4 @@ while read -r platform design flow; do
   run_sweep "$platform" "$design"
 done <<'EOF'
 asap7 gcd gcd_asap7.tcl
-asap7 aes aes_asap7.tcl
-sky130 ibex ibex_sky130hd.tcl
-sky130 jpeg jpeg_sky130hd.tcl
 EOF

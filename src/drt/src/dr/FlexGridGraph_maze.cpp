@@ -14,6 +14,8 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <atomic>
+#include <filesystem>
 
 #include "db/drObj/drPin.h"
 #include "db/tech/frLayer.h"
@@ -36,6 +38,43 @@ const bool expDumpAlways = false;
 // Used when DRT_DUMP_EXP_DIR is unset. Relative to the cwd of the openroad
 // process, and it must already exist.
 const char* const expDumpDefaultDir = ".";
+static constexpr int kMaxDumpIters = 256;
+static std::atomic<int> g_boxesClaimed[kMaxDumpIters];  // static => zero-init
+
+static int envInt(const char* name, int def)
+{
+  const char* v = std::getenv(name);
+  return (v != nullptr && v[0] != '\0') ? std::atoi(v) : def;
+}
+
+// Returns true if this routebox may dump in this iteration.
+static bool claimBoxForDump(const int iter)
+{
+  if (iter < 0 || iter >= kMaxDumpIters) {
+    return false;
+  }
+  const int maxBoxes = envInt("DRT_DUMP_MAX_BOXES_PER_ITER",
+                              std::numeric_limits<int>::max());
+  int cur = g_boxesClaimed[iter].load();
+  while (cur < maxBoxes) {
+    if (g_boxesClaimed[iter].compare_exchange_weak(cur, cur + 1)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Once per grid graph (= once per routebox per iteration).
+bool FlexGridGraph::boxDumpActive()
+{
+  if (!boxDumpDecided_) {
+    boxDumpDecided_ = true;
+    boxDumpActive_ = drWorker_ != nullptr
+                     && dumpIterAllowed(drWorker_->getDRIter())
+                     && claimBoxForDump(drWorker_->getDRIter());
+  }
+  return boxDumpActive_;
+}
 
 static bool dumpIterAllowed(const int iter)
 {
@@ -354,7 +393,7 @@ void FlexGridGraph::expand(FlexWavefrontGrid& currGrid,
     if (getPrevAstarNodeDir(tailIdx) == frDirEnum::UNKNOWN //grandparent_dir > 5
         || getPrevAstarNodeDir(tailIdx) == tailDir) { //dout.dir == parent_dir
       setPrevAstarNodeDir(tailIdx.x(), tailIdx.y(), tailIdx.z(), tailDir); //write the parent direction
-      if (debug_) {
+      if (debug_ && !runtimeMeasurement_) {
         nextWavefrontGrid.setId(curr_id_++);
         nextWavefrontGrid.setParentId(currGrid.getId());
         printExpansion(nextWavefrontGrid, "Pushing");
@@ -363,14 +402,14 @@ void FlexGridGraph::expand(FlexWavefrontGrid& currGrid,
     }
   } else {
     // add to wavefront
-    if (debug_) {
+    if (debug_ && !runtimeMeasurement_) {
       nextWavefrontGrid.setId(curr_id_++);
       nextWavefrontGrid.setParentId(currGrid.getId());
       printExpansion(nextWavefrontGrid, "Pushing");
     }
     wavefront_.push(nextWavefrontGrid);
   }
-  if (drWorker_->getDRIter() >= debugMazeIter) {
+  if (!runtimeMeasurement_ && drWorker_->getDRIter() >= debugMazeIter) {
     std::cout << "Creating " << nextWavefrontGrid.x() << " "
               << nextWavefrontGrid.y() << " " << nextWavefrontGrid.z()
               << " coords: " << xCoords_[nextWavefrontGrid.x()] << " "
@@ -503,7 +542,7 @@ frCost FlexGridGraph::getEstCost(const FlexMazeIdx& src,
     }
   }
   if (isForbidden) {
-    logger_->info(utl::DRT, 622, "DEBUG: Forbidden edge found at iter {}, x: {}, y: {}, z: {}", drWorker_->getDRIter(), gridX, gridY, gridZ);
+    //logger_->info(utl::DRT, 622, "DEBUG: Forbidden edge found at iter {}, x: {}, y: {}, z: {}", drWorker_->getDRIter(), gridX, gridY, gridZ);
     if (drWorker_->getDRIter() >= 3) {
       forbiddenPenalty = 2 * ggMarkerCost_ * edgeLength;
     } else {
@@ -701,7 +740,8 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
 
     if (isForbiddenVia2Via) {
       if (drWorker_) {
-        if (drWorker_->getDRIter() >= debugMazeIter) {
+        if (!runtimeMeasurement_
+            && drWorker_->getDRIter() >= debugMazeIter) {
           std::cout << "isForbiddenVia2Via\n";
         }
         if (drWorker_->getDRIter() >= 3) {
@@ -757,7 +797,8 @@ frCost FlexGridGraph::getNextPathCost(const FlexWavefrontGrid& currGrid,
     }
     if (isForbiddenTLen) {
       if (drWorker_) {
-        if (drWorker_->getDRIter() >= debugMazeIter) {
+        if (!runtimeMeasurement_
+            && drWorker_->getDRIter() >= debugMazeIter) {
           std::cout << "isForbiddenTLen\n";
         }
         if (drWorker_->getDRIter() >= 3) {
@@ -1092,25 +1133,32 @@ void FlexGridGraph::traceBackPath(const FlexWavefrontGrid& currGrid,
 // counters, but before the first expansion. Nothing in search() writes nodes_,
 // guides_, srcs_ or dsts_ (traceBackPath is const and expandWavefront only
 // touches prevDirs_ and the wavefront), so this snapshot holds for the whole
-// call. The static half of the graph -- coords, layer dirs, cost scalars --
-// never changes after init() and is not repeated here; take it from the
-// gg_iter<iter>_x<..>_y<..>.txt of the same route box.
+// call. Shared graph data -- static node flags and initial costs, coords,
+// layer dirs, and cost scalars -- stays in the gg_iter<iter>_x<..>_y<..>.txt
+// file. This binary stores only sparse nonzero per-search costs and
+// routing-time flags, avoiding a second copy of the shared node fields.
 //
 // Everything is little-endian and byte-packed with no implicit padding. Fields
 // are written out explicitly rather than memcpy'd from Node, so the format
 // does not depend on the compiler's bitfield allocation.
 //
 //   off  size  field
-//     0     8  magic "DRTGGS01"
+//     0     8  magic "DRTGGS02"
 //     8     4  int32  xDim
 //    12     4  int32  yDim
 //    16     4  int32  zDim
 //    20     4  int32  costBits    -- C++ Node cost field width (8, or 16 under
 //                                    DEBUG_DRT_UNDERFLOW); cost bytes below
 //                                    saturate at 255
-//    24     4  int32  nodeStride  -- bytes per node record (14)
+//    24     4  int32  costRecords -- number of sparse cost records
 //    28     4  int32  searchId
-//    32     N*14  node records
+//    32     costRecords x variable
+//                    uint32 addr, uint16 field mask, then one byte per set bit
+//     +    ceil(N/8) x 10 mutable Node flag bitmaps, in this order:
+//                    isBlockedEast, isBlockedNorth, isBlockedUp,
+//                    hasGridCostEast, hasGridCostNorth, hasGridCostUp,
+//                    hasApCostEast, hasApCostNorth, hasApCostUp,
+//                    overrideShapeCostVia
 //     +    ceil(N/8)  guides_ bitmap
 //     +    ceil(N/8)  srcs_   bitmap
 //     +    ceil(N/8)  dsts_   bitmap
@@ -1125,20 +1173,15 @@ void FlexGridGraph::traceBackPath(const FlexWavefrontGrid& currGrid,
 // trick; a uniform stride keeps address generation to one multiply-add.
 // Bitmap bit for addr a is byte a/8, bit a%8 (LSB first).
 //
-// Node record, 14 bytes -- the meaningful bytes of Node in declaration order:
-//     byte 0  bit0 hasEastEdge   bit1 hasNorthEdge   bit2 hasUpEdge
-//             bit3 isBlockedEast bit4 isBlockedNorth bit5 isBlockedUp
-//     byte 1  bit0 hasSpecialVia bit1 overrideShapeCostVia
-//             bit2 hasGridCostEast bit3 hasGridCostNorth bit4 hasGridCostUp
-//             bit5 hasApCostEast   bit6 hasApCostNorth   bit7 hasApCostUp
-//     byte 2  routeShapeCostPlanar        byte  8  fixedShapeCostPlanarVert
-//     byte 3  routeShapeCostVia           byte  9  routeShapeCostPlanarNDR
-//     byte 4  markerCostPlanar            byte 10  routeShapeCostViaNDR
-//     byte 5  markerCostVia               byte 11  fixedShapeCostViaNDR
-//     byte 6  fixedShapeCostVia           byte 12  fixedShapeCostPlanarHorzNDR
-//     byte 7  fixedShapeCostPlanarHorz    byte 13  fixedShapeCostPlanarVertNDR
+// Cost fields use this order for mask bits and packed values:
+//     routeShapeCostPlanar, routeShapeCostVia, markerCostPlanar, markerCostVia,
+//     fixedShapeCostVia, fixedShapeCostPlanarHorz, fixedShapeCostPlanarVert,
+//     routeShapeCostPlanarNDR, routeShapeCostViaNDR, fixedShapeCostViaNDR,
+//     fixedShapeCostPlanarHorzNDR, fixedShapeCostPlanarVertNDR.
+// Static flags and initial costs stay in dumpGridGraph()'s shared text file.
 void FlexGridGraph::dumpSearchGraph(const int searchId) const
 {
+  if (!dumpCurrentSearch_) return;
   const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
   if (dir == nullptr || dir[0] == '\0') {
     return;
@@ -1172,8 +1215,6 @@ void FlexGridGraph::dumpSearchGraph(const int searchId) const
 
   frMIdx xDim, yDim, zDim;
   getDim(xDim, yDim, zDim);
-  constexpr int kNodeStride = 14;
-
   auto put32 = [&os](const int32_t v) {
     unsigned char b[4];
     const auto u = static_cast<uint32_t>(v);
@@ -1191,52 +1232,114 @@ void FlexGridGraph::dumpSearchGraph(const int searchId) const
     return static_cast<unsigned char>(std::min<frUInt4>(v, 255));
   };
 
-  os.write("DRTGGS01", 8);
+  const size_t numNodes = static_cast<size_t>(xDim) * yDim * zDim;
+  int32_t costRecordCount = 0;
+  for (frMIdx z = 0; z < zDim; ++z) {
+    for (frMIdx y = 0; y < yDim; ++y) {
+      for (frMIdx x = 0; x < xDim; ++x) {
+        const Node& n = nodes_[getIdx(x, y, z)];
+        const frUInt4 costs[] = {
+            n.routeShapeCostPlanar,
+            n.routeShapeCostVia,
+            n.markerCostPlanar,
+            n.markerCostVia,
+            n.fixedShapeCostVia,
+            n.fixedShapeCostPlanarHorz,
+            n.fixedShapeCostPlanarVert,
+            n.routeShapeCostPlanarNDR,
+            n.routeShapeCostViaNDR,
+            n.fixedShapeCostViaNDR,
+            n.fixedShapeCostPlanarHorzNDR,
+            n.fixedShapeCostPlanarVertNDR};
+        if (std::any_of(costs, costs + 12,
+                        [](frUInt4 cost) { return cost != 0; })) {
+          ++costRecordCount;
+        }
+      }
+    }
+  }
+
+  os.write("DRTGGS02", 8);
   put32(xDim);
   put32(yDim);
   put32(zDim);
   put32(cost_bits);
-  put32(kNodeStride);
+  put32(costRecordCount);
   put32(searchId);
 
-  // --- node records, canonical order ---
-  std::vector<unsigned char> buf;
-  buf.reserve(static_cast<size_t>(xDim) * kNodeStride);
+  // --- sparse cost records, canonical order ---
+  size_t addr = 0;
   for (frMIdx z = 0; z < zDim; ++z) {
     for (frMIdx y = 0; y < yDim; ++y) {
-      buf.clear();
       for (frMIdx x = 0; x < xDim; ++x) {
         const Node& n = nodes_[getIdx(x, y, z)];
-        buf.push_back(static_cast<unsigned char>(
-            (n.hasEastEdge << 0) | (n.hasNorthEdge << 1) | (n.hasUpEdge << 2)
-            | (n.isBlockedEast << 3) | (n.isBlockedNorth << 4)
-            | (n.isBlockedUp << 5)));
-        buf.push_back(static_cast<unsigned char>(
-            (n.hasSpecialVia << 0) | (n.overrideShapeCostVia << 1)
-            | (n.hasGridCostEast << 2) | (n.hasGridCostNorth << 3)
-            | (n.hasGridCostUp << 4) | (n.hasApCostEast << 5)
-            | (n.hasApCostNorth << 6) | (n.hasApCostUp << 7)));
-        buf.push_back(costByte(n.routeShapeCostPlanar));
-        buf.push_back(costByte(n.routeShapeCostVia));
-        buf.push_back(costByte(n.markerCostPlanar));
-        buf.push_back(costByte(n.markerCostVia));
-        buf.push_back(costByte(n.fixedShapeCostVia));
-        buf.push_back(costByte(n.fixedShapeCostPlanarHorz));
-        buf.push_back(costByte(n.fixedShapeCostPlanarVert));
-        buf.push_back(costByte(n.routeShapeCostPlanarNDR));
-        buf.push_back(costByte(n.routeShapeCostViaNDR));
-        buf.push_back(costByte(n.fixedShapeCostViaNDR));
-        buf.push_back(costByte(n.fixedShapeCostPlanarHorzNDR));
-        buf.push_back(costByte(n.fixedShapeCostPlanarVertNDR));
+        const frUInt4 costs[] = {
+            n.routeShapeCostPlanar,
+            n.routeShapeCostVia,
+            n.markerCostPlanar,
+            n.markerCostVia,
+            n.fixedShapeCostVia,
+            n.fixedShapeCostPlanarHorz,
+            n.fixedShapeCostPlanarVert,
+            n.routeShapeCostPlanarNDR,
+            n.routeShapeCostViaNDR,
+            n.fixedShapeCostViaNDR,
+            n.fixedShapeCostPlanarHorzNDR,
+            n.fixedShapeCostPlanarVertNDR};
+        if (std::any_of(costs, costs + 12,
+                        [](frUInt4 cost) { return cost != 0; })) {
+          unsigned char addrBytes[4] = {static_cast<unsigned char>(addr),
+                                        static_cast<unsigned char>(addr >> 8),
+                                        static_cast<unsigned char>(addr >> 16),
+                                        static_cast<unsigned char>(addr >> 24)};
+          os.write(reinterpret_cast<const char*>(addrBytes), 4);
+          uint16_t mask = 0;
+          for (int field = 0; field < 12; ++field) {
+            if (costs[field] != 0) {
+              mask |= 1u << field;
+            }
+          }
+          unsigned char maskBytes[2] = {static_cast<unsigned char>(mask),
+                                        static_cast<unsigned char>(mask >> 8)};
+          os.write(reinterpret_cast<const char*>(maskBytes), 2);
+          for (frUInt4 cost : costs) {
+            if (cost != 0) {
+              const unsigned char value = costByte(cost);
+              os.write(reinterpret_cast<const char*>(&value), 1);
+            }
+          }
+        }
+        ++addr;
       }
-      os.write(reinterpret_cast<const char*>(buf.data()), buf.size());
     }
   }
 
-  // --- guides_ / srcs_ / dsts_ bitmaps, same canonical order ---
-  // Indexed through getIdx() like the node records: these vectors use the C++
-  // layout, the file uses the uniform one.
-  const size_t numNodes = static_cast<size_t>(xDim) * yDim * zDim;
+  // --- mutable Node flags and guides_ / srcs_ / dsts_ bitmaps ---
+  // Indexed through getIdx() like the nodes; the file uses canonical order.
+  auto writeNodeBitmap = [&](auto predicate) {
+    std::vector<unsigned char> bm((numNodes + 7) / 8, 0);
+    size_t addr = 0;
+    for (frMIdx z = 0; z < zDim; ++z) {
+      for (frMIdx y = 0; y < yDim; ++y) {
+        for (frMIdx x = 0; x < xDim; ++x, ++addr) {
+          if (predicate(nodes_[getIdx(x, y, z)])) {
+            bm[addr >> 3] |= 1u << (addr & 7);
+          }
+        }
+      }
+    }
+    os.write(reinterpret_cast<const char*>(bm.data()), bm.size());
+  };
+  writeNodeBitmap([](const Node& n) { return n.isBlockedEast; });
+  writeNodeBitmap([](const Node& n) { return n.isBlockedNorth; });
+  writeNodeBitmap([](const Node& n) { return n.isBlockedUp; });
+  writeNodeBitmap([](const Node& n) { return n.hasGridCostEast; });
+  writeNodeBitmap([](const Node& n) { return n.hasGridCostNorth; });
+  writeNodeBitmap([](const Node& n) { return n.hasGridCostUp; });
+  writeNodeBitmap([](const Node& n) { return n.hasApCostEast; });
+  writeNodeBitmap([](const Node& n) { return n.hasApCostNorth; });
+  writeNodeBitmap([](const Node& n) { return n.hasApCostUp; });
+  writeNodeBitmap([](const Node& n) { return n.overrideShapeCostVia; });
   auto writeBitmap = [&](const std::vector<bool>& bits) {
     std::vector<unsigned char> bm((numNodes + 7) / 8, 0);
     size_t addr = 0;
@@ -1276,6 +1379,7 @@ void FlexGridGraph::dumpSearch(const int searchId,
                                const int discardedNodes,
                                double runtimeMs) const
 {
+  if (!dumpCurrentSearch_) return;
   const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
   if (dir == nullptr || dir[0] == '\0') {
     return;
@@ -1426,6 +1530,38 @@ void FlexGridGraph::dumpSearch(const int searchId,
   os.close();
 }
 
+void FlexGridGraph::dumpFinalNetWirelength(const int searchId,
+                                           const uint64_t wireLengthDBU,
+                                           const int dbuPerUU) const
+{
+  const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
+  if (dir == nullptr || dir[0] == '\0') {
+    return;
+  }
+  const odb::Rect& rb = drWorker_->getRouteBox();
+  const int iter = drWorker_->getDRIter();
+  if (!dumpIterAllowed(iter)) {
+    return;
+  }
+  const std::string path = std::string(dir) + "/search_iter"
+                           + std::to_string(iter) + "_x"
+                           + std::to_string(rb.xMin()) + "_y"
+                           + std::to_string(rb.yMin()) + "_s"
+                           + std::to_string(searchId) + ".txt";
+  std::ofstream os(path.c_str(), std::ios::app);
+  if (!std::filesystem::exists(path)) {
+    return;
+  }
+  if (!os.is_open()) {
+    logger_->warn(
+        utl::DRT, 623, "Could not append net wirelength to search dump {}", path);
+    return;
+  }
+  os << "finalNetWirelengthDBU " << wireLengthDBU << "\n";
+  os << "finalNetWirelengthMicrons "
+     << static_cast<double>(wireLengthDBU) / dbuPerUU << "\n";
+}
+
 bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                            drPin* nextPin,
                            std::vector<FlexMazeIdx>& path,
@@ -1436,12 +1572,19 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                            bool route_with_jumpers,
                            double& runtimeMs)
 {
-  if (debug_) {
+  const char* timingDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
+  const bool measureBatchRuntime = timingDir != nullptr && timingDir[0] != '\0';
+  runtimeMeasurement_ = measureBatchRuntime;
+  if (debug_ && !runtimeMeasurement_) {
     dump_file_.open("expansions.dump");
   }
-  openExpansionDump();
-  openCostDump();
-  const int searchId = expSearchId_++;
+  if (!runtimeMeasurement_) {
+    openExpansionDump();
+    openCostDump();
+  } else {
+    runtimeMs = 0.0;
+  }
+  const int searchId = runtimeMeasurement_ ? 0 : expSearchId_++;
   if (dumpingExpansion()) {
     // One block per search() call in this grid graph. searchId matches the
     // _s<id> suffix of the dumpSearch() file for the same search.
@@ -1460,8 +1603,11 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   // dump both hold outputs.
   const FlexMazeIdx ccMazeIdx1In = ccMazeIdx1;
   const FlexMazeIdx ccMazeIdx2In = ccMazeIdx2;
-  const std::vector<FlexMazeIdx> connCompsIn = connComps;
-  if (drWorker_->getDRIter() >= debugMazeIter) {
+  std::vector<FlexMazeIdx> connCompsIn;
+  if (!runtimeMeasurement_) {
+    connCompsIn = connComps;
+  }
+  if (!runtimeMeasurement_ && drWorker_->getDRIter() >= debugMazeIter) {
     std::cout << "INIT search: target pin " << nextPin->getName()
               << "\nsource points:\n";
     for (auto& idx : connComps) {
@@ -1489,17 +1635,24 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   // sites below because it must precede the first expansion; nothing in the
   // rest of search() writes nodes_/guides_/srcs_/dsts_, so one snapshot per
   // call is enough.
-  dumpSearchGraph(searchId);
+  if (!runtimeMeasurement_) {
+    dumpSearchGraph(searchId);
+  }
 
   wavefront_.cleanup();
   // init wavefront
   odb::Point currPt;
 
-  const auto startTime = std::chrono::steady_clock::now();
+  const auto startTime = runtimeMeasurement_
+                             ? std::chrono::steady_clock::time_point{}
+                             : std::chrono::steady_clock::now();
   int totalNodesExplored = 0;
   int expandedNodes = 0;
   int discardedNodes = 0;
-  auto getRuntimeMs = [&startTime, &runtimeMs]() {
+  auto getRuntimeMs = [&startTime, &runtimeMs, this]() {
+    if (runtimeMeasurement_) {
+      return runtimeMs;
+    }
     const auto endTime = std::chrono::steady_clock::now();
     runtimeMs
         = std::chrono::duration<double, std::milli>(endTime - startTime).count();
@@ -1509,24 +1662,26 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   for (auto& idx : connComps) {
     if (isDst(idx.x(), idx.y(), idx.z())) {
       path.emplace_back(idx.x(), idx.y(), idx.z());
-      dumpSearch(searchId,
-                 connCompsIn,
-                 nextPin,
-                 path,
-                 true,
-                 ccMazeIdx1In,
-                 ccMazeIdx2In,
-                 ccMazeIdx1,
-                 ccMazeIdx2,
-                 dstMazeIdx1,
-                 dstMazeIdx2,
-                 centerPt,
-                 route_with_jumpers,
-                 nullptr,
-                 totalNodesExplored,
-                 expandedNodes,
-                 discardedNodes,
-                  getRuntimeMs());
+      if (!runtimeMeasurement_) {
+        dumpSearch(searchId,
+                   connCompsIn,
+                   nextPin,
+                   path,
+                   true,
+                   ccMazeIdx1In,
+                   ccMazeIdx2In,
+                   ccMazeIdx1,
+                   ccMazeIdx2,
+                   dstMazeIdx1,
+                   dstMazeIdx2,
+                   centerPt,
+                   route_with_jumpers,
+                   nullptr,
+                   totalNodesExplored,
+                   expandedNodes,
+                   discardedNodes,
+                   getRuntimeMs());
+      }
       return true;
     }
     getPoint(currPt, idx.x(), idx.y());
@@ -1548,7 +1703,7 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
         currGrid.setSrcTaperBox(it->second);
       }
     }
-    if (debug_) {
+    if (debug_ && !measureBatchRuntime) {
       currGrid.setId(curr_id_++);
       printExpansion(currGrid, "Pushing");
     }
@@ -1556,11 +1711,13 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   }
   while (!wavefront_.empty()) {
     auto currGrid = wavefront_.top();
-    if (debug_) {
+    if (debug_ && !measureBatchRuntime) {
       printExpansion(currGrid, "Popping");
     }
     wavefront_.pop();
-    ++totalNodesExplored;
+    if (!measureBatchRuntime) {
+      ++totalNodesExplored;
+    }
     if (dumpingExpansion()) {
       // One block per search() call in this grid graph. searchId matches the
       // _s<id> suffix of the dumpSearch() file for the same search.
@@ -1574,14 +1731,18 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     }
     if (getPrevAstarNodeDir({currGrid.x(), currGrid.y(), currGrid.z()})
         != frDirEnum::UNKNOWN) {
-      ++discardedNodes;
+      if (!runtimeMeasurement_) {
+        ++discardedNodes;
+      }
       continue;
     }
-    ++expandedNodes;
+    if (!runtimeMeasurement_) {
+      ++expandedNodes;
+    }
     if (graphics_) {
       graphics_->searchNode(this, currGrid);
     }
-    if (drWorker_->getDRIter() >= debugMazeIter) {
+    if (!runtimeMeasurement_ && drWorker_->getDRIter() >= debugMazeIter) {
       std::cout << "Expanding " << currGrid.x() << " " << currGrid.y() << " "
                 << currGrid.z() << " coords: " << xCoords_[currGrid.x()] << " "
                 << yCoords_[currGrid.y()] << " cost " << currGrid.getCost()
@@ -1589,48 +1750,52 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     }
     if (isDst(currGrid.x(), currGrid.y(), currGrid.z())) {
       traceBackPath(currGrid, path, connComps, ccMazeIdx1, ccMazeIdx2);
-      dumpSearch(searchId,
-                 connCompsIn,
-                 nextPin,
-                 path,
-                 true,
-                 ccMazeIdx1In,
-                 ccMazeIdx2In,
-                 ccMazeIdx1,
-                 ccMazeIdx2,
-                 dstMazeIdx1,
-                 dstMazeIdx2,
-                 centerPt,
-                 route_with_jumpers,
-                 &currGrid,
-                 totalNodesExplored,
-                 expandedNodes,
-                 discardedNodes,
-                 getRuntimeMs());
+      if (!runtimeMeasurement_) {
+        dumpSearch(searchId,
+                   connCompsIn,
+                   nextPin,
+                   path,
+                   true,
+                   ccMazeIdx1In,
+                   ccMazeIdx2In,
+                   ccMazeIdx1,
+                   ccMazeIdx2,
+                   dstMazeIdx1,
+                   dstMazeIdx2,
+                   centerPt,
+                   route_with_jumpers,
+                   &currGrid,
+                   totalNodesExplored,
+                   expandedNodes,
+                   discardedNodes,
+                   getRuntimeMs());
+      }
       return true;
     }
     // expand and update wavefront
     expandWavefront(
         currGrid, dstMazeIdx1, dstMazeIdx2, centerPt, route_with_jumpers);
   }
-  dumpSearch(searchId,
-             connCompsIn,
-             nextPin,
-             path,
-             false,
-             ccMazeIdx1In,
-             ccMazeIdx2In,
-             ccMazeIdx1,
-             ccMazeIdx2,
-             dstMazeIdx1,
-             dstMazeIdx2,
-             centerPt,
-             route_with_jumpers,
-             nullptr,
-             totalNodesExplored,
-             expandedNodes,
-             discardedNodes,
-             getRuntimeMs());
+  if (!runtimeMeasurement_) {
+    dumpSearch(searchId,
+               connCompsIn,
+               nextPin,
+               path,
+               false,
+               ccMazeIdx1In,
+               ccMazeIdx2In,
+               ccMazeIdx1,
+               ccMazeIdx2,
+               dstMazeIdx1,
+               dstMazeIdx2,
+               centerPt,
+               route_with_jumpers,
+               nullptr,
+               totalNodesExplored,
+               expandedNodes,
+               discardedNodes,
+               getRuntimeMs());
+  }
   return false;
 }
 

@@ -75,7 +75,20 @@ top_aes
 top_gcd_nonpref
 top_gcd_1thread
 
-a_star_dumps
+a_star_dumps*
+a_star_dumps_old
 gcd
 top_gcd_snippets
+jpeg_dumps
 top_level_term
+asap7_aes_dumps
+bazel
+jy5187
+initialization*
+!initialization/
+initialization/*
+!initialization/run_measure_sweep.sh
+!initialization/analyze_runtime.py
+!initialization/runtime_data.csv
+!initialization/runtime_summary.csv
+top_level_term*

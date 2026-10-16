@@ -58,6 +58,7 @@ class FlexGridGraph
   // getters
   frTechObject* getTech() const { return tech_; }
   FlexDRWorker* getDRWorker() const { return drWorker_; }
+  int getSearchCount() const { return expSearchId_; }
 
   // unsafe access, no check
   bool isBlocked(frMIdx x, frMIdx y, frMIdx z, frDirEnum dir) const
@@ -990,6 +991,11 @@ class FlexGridGraph
   // alongside the search_*.txt of the same searchId. Format is documented at
   // the definition in FlexGridGraph_maze.cpp.
   void dumpSearchGraph(int searchId) const;
+  bool boxDumpDecided_ = false;
+  bool boxDumpActive_ = false;
+  bool dumpCurrentSearch_ = false;
+  int  dumpedSearches_ = 0;
+  bool boxDumpActive();
   // Companion to dumpGridGraph() that captures the routing-time state the
   // pre-routing snapshot omits: the source (srcs_) and destination (dsts_)
   // node sets and the resulting traceback path for a single search() call
@@ -1015,6 +1021,9 @@ class FlexGridGraph
                   int expandedNodes,
                   int discardedNodes,
                   double runtimeMs) const;
+  void dumpFinalNetWirelength(int searchId,
+                              uint64_t wireLengthDBU,
+                              int dbuPerUU) const;
   void resetStatus();
   void resetPrevNodeDir();
   void resetSrc();
@@ -1191,6 +1200,7 @@ class FlexGridGraph
   frVector<std::set<odb::Point>> ap_locs_;
   std::ofstream dump_file_;
   bool debug_{false};
+  bool runtimeMeasurement_{false};
   frUInt4 curr_id_{1};
 
   // isExpandable dump: the inputs and verdict of every isExpandable() call,
@@ -1212,7 +1222,10 @@ class FlexGridGraph
   // nothing here to flip by hand and get out of sync with whether a file was
   // actually opened. To dump without setting DRT_DUMP_EXP_DIR, set
   // expDumpAlways in FlexGridGraph_maze.cpp.
-  bool dumpingExpansion() const { return exp_file_.is_open(); }
+  bool dumpingExpansion() const
+  {
+    return !runtimeMeasurement_ && exp_file_.is_open();
+  }
 
 
   mutable std::ofstream cost_file_;

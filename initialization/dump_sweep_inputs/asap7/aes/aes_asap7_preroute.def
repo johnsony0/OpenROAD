@@ -284,20 +284,6 @@ VIAS 5 ;
     - VIA45_1_2_58_58 + RECT M4 ( -52 -12 ) ( 52 12 ) + RECT M5 ( -60 -23 ) ( 60 23 ) + RECT V4 ( 17 -12 ) ( 41 12 ) + RECT V4 ( -41 -12 ) ( -17 12 ) ;
     - VIA45_2_2_58_58 + RECT M4 ( -52 -60 ) ( 52 60 ) + RECT M5 ( -60 -52 ) ( 60 52 ) + RECT V4 ( 17 17 ) ( 41 41 ) + RECT V4 ( -41 17 ) ( -17 41 ) + RECT V4 ( 17 -41 ) ( 41 -17 ) + RECT V4 ( -41 -41 ) ( -17 -17 ) ;
 END VIAS
-NONDEFAULTRULES 1 ;
-    - CTS_NDR_0
-      + LAYER M1 WIDTH 18 SPACING 36
-      + LAYER M2 WIDTH 18 SPACING 36
-      + LAYER M3 WIDTH 18 SPACING 36
-      + LAYER M4 WIDTH 24 SPACING 48
-      + LAYER M5 WIDTH 24 SPACING 48
-      + LAYER M6 WIDTH 32 SPACING 64
-      + LAYER M7 WIDTH 32 SPACING 64
-      + LAYER M8 WIDTH 40 SPACING 80
-      + LAYER M9 WIDTH 40 SPACING 80
-      + LAYER Pad WIDTH 40 SPACING 80
-    ;
-END NONDEFAULTRULES
 COMPONENTS 18075 ;
     - PHY_EDGE_ROW_0_Left_239 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 2160 ) N ;
     - PHY_EDGE_ROW_0_Right_0 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 66636 2160 ) FN ;
@@ -60901,8 +60887,8 @@ NETS 17810 ;
     - _15763_ ( _30822_ SN ) + USE SIGNAL ;
     - _15764_ ( _30823_ SN ) + USE SIGNAL ;
     - _15765_ ( _30824_ SN ) + USE SIGNAL ;
-    - clk ( PIN clk ) ( clkbuf_0_clk A ) + USE CLOCK + NONDEFAULTRULE CTS_NDR_0 ;
-    - clknet_0_clk ( clkbuf_2_3_0_clk A ) ( clkbuf_2_2_0_clk A ) ( clkbuf_2_1_0_clk A ) ( clkbuf_2_0_0_clk A ) ( clkbuf_0_clk Y ) + USE CLOCK + NONDEFAULTRULE CTS_NDR_0 ;
+    - clk ( PIN clk ) ( clkbuf_0_clk A ) + USE CLOCK ;
+    - clknet_0_clk ( clkbuf_2_3_0_clk A ) ( clkbuf_2_2_0_clk A ) ( clkbuf_2_1_0_clk A ) ( clkbuf_2_0_0_clk A ) ( clkbuf_0_clk Y ) + USE CLOCK ;
     - clknet_2_0_0_clk ( clkbuf_3_1__f_clk A ) ( clkbuf_3_0__f_clk A ) ( clkbuf_2_0_0_clk Y ) + USE CLOCK ;
     - clknet_2_1_0_clk ( clkbuf_3_3__f_clk A ) ( clkbuf_3_2__f_clk A ) ( clkbuf_2_1_0_clk Y ) + USE CLOCK ;
     - clknet_2_2_0_clk ( clkbuf_3_5__f_clk A ) ( clkbuf_3_4__f_clk A ) ( clkbuf_2_2_0_clk Y ) + USE CLOCK ;
