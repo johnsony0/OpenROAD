@@ -58,6 +58,7 @@ class FlexGridGraph
   // getters
   frTechObject* getTech() const { return tech_; }
   FlexDRWorker* getDRWorker() const { return drWorker_; }
+    bool beginSearchDump();
   int getSearchCount() const { return expSearchId_; }
 
   // unsafe access, no check
@@ -995,6 +996,9 @@ class FlexGridGraph
   bool boxDumpActive_ = false;
   bool dumpCurrentSearch_ = false;
   int  dumpedSearches_ = 0;
+  int lastDumpedSearchId_ = -1;
+  public:
+    int getLastDumpedSearchId() const { return lastDumpedSearchId_; }
   bool boxDumpActive();
   // Companion to dumpGridGraph() that captures the routing-time state the
   // pre-routing snapshot omits: the source (srcs_) and destination (dsts_)

@@ -476,7 +476,7 @@ void FlexGridGraph::init(const frDesign* design,
       design, xMap, yMap, zMap, routeBBox, initDR);  // add edges and edgeCost
   ap_locs_.clear();
   const int iter = drWorker_->getDRIter();
-  if (!dumpIterAllowed(iter)) {
+  if (!dumpIterAllowed(iter) || !boxDumpActive()) {
     return;
   }
   dumpGridGraph();
@@ -492,13 +492,6 @@ void FlexGridGraph::init(const frDesign* design,
 // as nets are routed and ripped up, so successive search() calls in a
 // multi-net worker see later states than this snapshot; add a dump inside
 // search() if you need the exact per-search graph.
-dumpCurrentSearch_ = false;
-if (!runtimeMeasurement_ && boxDumpActive()
-    && dumpedSearches_ < envInt("DRT_DUMP_MAX_SEARCHES_PER_BOX",
-                                std::numeric_limits<int>::max())) {
-  dumpCurrentSearch_ = true;
-  ++dumpedSearches_;
-}
 void FlexGridGraph::dumpGridGraph() const
 {
   const char* timingDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");

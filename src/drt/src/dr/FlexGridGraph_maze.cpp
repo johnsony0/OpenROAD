@@ -47,6 +47,8 @@ static int envInt(const char* name, int def)
   return (v != nullptr && v[0] != '\0') ? std::atoi(v) : def;
 }
 
+static bool dumpIterAllowed(int iter);
+
 // Returns true if this routebox may dump in this iteration.
 static bool claimBoxForDump(const int iter)
 {
@@ -74,6 +76,20 @@ bool FlexGridGraph::boxDumpActive()
                      && claimBoxForDump(drWorker_->getDRIter());
   }
   return boxDumpActive_;
+}
+
+bool FlexGridGraph::beginSearchDump()
+{
+  lastDumpedSearchId_ = expSearchId_;
+  dumpCurrentSearch_ = false;
+  if (!runtimeMeasurement_ && boxDumpActive()
+      && dumpedSearches_
+             < envInt("DRT_DUMP_MAX_SEARCHES_PER_BOX",
+                      std::numeric_limits<int>::max())) {
+    dumpCurrentSearch_ = true;
+    ++dumpedSearches_;
+  }
+  return dumpCurrentSearch_;
 }
 
 static bool dumpIterAllowed(const int iter)
@@ -1527,6 +1543,16 @@ void FlexGridGraph::dumpSearch(const int searchId,
        << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
        << getZHeight(mi.z()) << "\n";
   }
+
+  // Planar wirelength of this search's path alone (vias excluded), as opposed
+  // to finalNetWirelengthDBU, which sums every pathSeg of the net once routed.
+  uint64_t searchWireLengthDBU = 0;
+  for (size_t i = 1; i < path.size(); ++i) {
+    searchWireLengthDBU
+        += std::abs(xCoords_[path[i].x()] - xCoords_[path[i - 1].x()])
+           + std::abs(yCoords_[path[i].y()] - yCoords_[path[i - 1].y()]);
+  }
+  os << "searchWirelengthDBU " << searchWireLengthDBU << "\n";
   os.close();
 }
 
@@ -1548,18 +1574,20 @@ void FlexGridGraph::dumpFinalNetWirelength(const int searchId,
                            + std::to_string(rb.xMin()) + "_y"
                            + std::to_string(rb.yMin()) + "_s"
                            + std::to_string(searchId) + ".txt";
-  std::ofstream os(path.c_str(), std::ios::app);
   if (!std::filesystem::exists(path)) {
     return;
   }
+  std::ofstream os(path.c_str(), std::ios::app);
   if (!os.is_open()) {
     logger_->warn(
         utl::DRT, 623, "Could not append net wirelength to search dump {}", path);
     return;
   }
   os << "finalNetWirelengthDBU " << wireLengthDBU << "\n";
-  os << "finalNetWirelengthMicrons "
-     << static_cast<double>(wireLengthDBU) / dbuPerUU << "\n";
+  if (dbuPerUU > 0) {
+    os << "finalNetWirelengthMicrons "
+       << static_cast<double>(wireLengthDBU) / dbuPerUU << "\n";
+  }
 }
 
 bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
@@ -1575,6 +1603,7 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   const char* timingDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
   const bool measureBatchRuntime = timingDir != nullptr && timingDir[0] != '\0';
   runtimeMeasurement_ = measureBatchRuntime;
+  beginSearchDump();
   if (debug_ && !runtimeMeasurement_) {
     dump_file_.open("expansions.dump");
   }

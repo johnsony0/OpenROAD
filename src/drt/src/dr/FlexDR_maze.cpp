@@ -2022,18 +2022,19 @@ void FlexDRWorker::route_queue_main(std::queue<RouteQueueEntry>& rerouteQueue)
         logger_->error(DRT, 1006, "failed to setTargetNet");
       }
       const int searchCountAfter = gridGraph_.getSearchCount();
-      if (searchCountAfter > searchCountBefore) {
+      const int lastDumped = gridGraph_.getLastDumpedSearchId();
+      if (searchCountAfter > searchCountBefore
+          && lastDumped >= searchCountBefore) {
         uint64_t wireLengthDBU = 0;
-        for (const auto& shape : net->getFrNet()->getShapes()) {
-          if (shape->typeId() == frcPathSeg) {
-            auto pathSeg = static_cast<frPathSeg*>(shape.get());
+        for (const auto& connFig : net->getRouteConnFigs()) {
+          if (connFig->typeId() == drcPathSeg) {
+            auto pathSeg = static_cast<drPathSeg*>(connFig.get());
             auto [begin, end] = pathSeg->getPoints();
             wireLengthDBU += odb::Point::manhattanDistance(begin, end);
           }
         }
         const int dbuPerUU = getDesign()->getTopBlock()->getDBUPerUU();
-        gridGraph_.dumpFinalNetWirelength(
-            searchCountAfter - 1, wireLengthDBU, dbuPerUU);
+        gridGraph_.dumpFinalNetWirelength(lastDumped, wireLengthDBU, dbuPerUU);
       }
     } else {
       if (getRipupMode() == RipUpMode::VIASWAP) {

@@ -190,5 +190,10 @@ while read -r platform design flow; do
 
   run_sweep "$platform" "$design"
 done <<'EOF'
-asap7 gcd gcd_asap7.tcl
+nangate45 aes aes_nangate45.tcl
+asap7 aes aes_asap7.tcl
+sky130 gcd gcd_sky130hd.tcl
+sky130 aes aes_sky130hd.tcl
+sky130 ibex ibex_sky130hd.tcl
+sky130 jpeg jpeg_sky130hd.tcl
 EOF
