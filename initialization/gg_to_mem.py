@@ -63,8 +63,11 @@ Outputs (all $readmemh-ready: bare hex, one word per line, no prefixes):
     via2via_forbidden_len.mem   6*4       x 96b   two x N x {lo, hi}
     via2via_prl_len.mem         6*4       x 24b   two PRL thresholds
     via_forbidden_turn_len.mem  6*4       x 48b   N x {lo, hi}
-    params.sv                   grid dims, goal box, costs and every memory's
-                                depth, data width and address width
+    params.sv                   grid dims and every memory's depth, data width
+                                and address width: the build-time shape
+    search_cfg.txt              goal box, ITER, cost weights, routing-layer
+                                range, nonpref and jumper flags: the per-search
+                                settings the RTL takes at runtime on cfg_in
 
 Each coordinate word packs adjacent indices, even index in the upper half and
 odd index in the lower half. An unused lower half for an odd-sized array is
@@ -137,9 +140,9 @@ cache-locality trick.  Nothing outside the C++ walker depends on that layout,
 and a uniform stride keeps RTL address generation to one multiply-add.
 
 
-THE GOAL BOX in params.sv is getEstCost's dstMazeIdx1/dstMazeIdx2, the box its
-Manhattan heuristic is measured to, written out in DBU as
-{LOWER,UPPER}_GOAL_{X,Y,Z}.  Three sources, in falling order of precedence:
+THE GOAL BOX in search_cfg.txt is getEstCost's dstMazeIdx1/dstMazeIdx2, the box
+its Manhattan heuristic is measured to, written out in DBU as
+{lower,upper}_goal_{x,y,z}.  Three sources, in falling order of precedence:
 
     --goal-box x1 y1 z1 x2 y2 z2   maze indices given by hand
     --search   search_iter*.txt    the dstBox row, i.e. what search() used
@@ -164,19 +167,24 @@ than the zHeight.
 THE getEstCost FORBIDDEN CHECK needs four values beyond the range tables, all
 of them run-constant and all read from --forbidden (version 2 or newer):
 
-    useNonPrefTracks     USE_NONPREF_TRACKS       scalar
+    useNonPrefTracks     use_nonpref_tracks       search_cfg.txt
     isUnidirectional[z]  gg_layers.mem unidir bit per z
-    BOTTOM_ROUTING_LAYER BOTTOM_ROUTING_LAYER     scalar
-    getTopLayerNum()     TOP_ROUTING_LAYER        scalar
+    BOTTOM_ROUTING_LAYER bottom_routing_layer     search_cfg.txt
+    getTopLayerNum()     top_routing_layer        search_cfg.txt
 
 The C++ (FlexGridGraph_maze.cpp getEstCost) enters the check only when
 `!useNonPrefTracks || isUnidirectional[z]`, then bounds each neighbouring-layer
 table lookup with `layerNum - 2 < BOTTOM_ROUTING_LAYER` /
 `layerNum + 2 > getTopLayerNum()`, where a bound that is out of range makes its
 half of the `&&` vacuously true.  The C++ compares absolute frLayerNum;
-params.sv gives both bounds as z instead, since getEstCost hardcodes
-`layerNum = (z + 1) * 2` and `layerNum -+ 2` is then just `z -+ 1`.  Each
-parameter's comment carries its frLayerNum for tracing back to the LEF.
+search_cfg.txt gives both bounds as z instead, since getEstCost hardcodes
+`layerNum = (z + 1) * 2` and `layerNum -+ 2` is then just `z -+ 1`.  A comment
+line above each bound carries its frLayerNum for tracing back to the LEF.
+
+JUMPER ROUTING.  search() takes route_with_jumpers (net->hasJumpers()), which
+multiplies the out-of-guide cost by 10 in getCosts.  dumpSearch() records it as
+the routeWithJumpers row, so --search supplies jumper_route; --jumper-route
+overrides it, and without either it is 0.
 
 The top bound is frTechObject::getTopLayerNum(), i.e. layers_.size() - 1 over
 *all* layers including cut and masterslice, mapped down to the highest routing
@@ -887,7 +895,7 @@ def parse_search(path):
                 continue
             if tok[0] == "dim":
                 meta["dim"] = (int(tok[1]), int(tok[2]), int(tok[3]))
-            elif tok[0] in ("version", "iter", "searchId"):
+            elif tok[0] in ("version", "iter", "searchId", "routeWithJumpers"):
                 meta[tok[0]] = int(tok[1])
             elif tok[0] in ("srcs", "dsts", "path"):
                 counts[tok[0]] = int(tok[1])
@@ -1026,51 +1034,28 @@ def write_path_cost(path, search, dim, source):
         os.path.basename(path), "{} pts".format(len(search["path"]))))
 
 
-def write_params(path, header, fb, goal_lo, goal_hi, goal_note, mem_specs):
-    """Emit the scalar constants the RTL needs, as plain `parameter` lines.
+def write_params(path, header, mem_specs):
+    """Emit the build-time constants the RTL needs, as plain `parameter` lines.
 
-    The memory shape constants describe each .mem image; field bit offsets
-    and table layouts remain documented in the .mem headers.
+    Only the grid shape and memory shapes live here, so every search of one
+    box size shares a build.  The memory shape constants describe each .mem
+    image; field bit offsets and table layouts remain documented in the .mem
+    headers.
     """
     x_dim, y_dim, z_dim = header["dim"]
-    xc, yc, zh = header["xCoords"], header["yCoords"], header["zHeights"]
-    layer_nums = header["zCoords(layerNum)"]
-    if "iter" not in header:
-        die("no 'iter' line in the grid-graph dump, so ITER cannot be set")
-
-    def to_z(layer_num, what):
-        """frLayerNum -> z.  getTopLayerNum() counts cut and masterslice layers
-        too, so it need not be a routing layer's own number; fall back to the
-        highest routing layer at or below it."""
-        if layer_num in layer_nums:
-            return layer_nums.index(layer_num)
-        below = [z for z, ln in enumerate(layer_nums) if ln <= layer_num]
-        if not below:
-            die("{} is frLayerNum {}, which is below every routing layer "
-                "{}".format(what, layer_num, layer_nums))
-        return below[-1]
-
-    bottom_z = to_z(fb["bottomRoutingLayer"], "bottomRoutingLayer")
-    top_z = to_z(fb["topLayerNum"], "topLayerNum")
-
-    def goal(box):
-        return xc[box[0]], yc[box[1]], zh[box[2]]
-
     with open(path, "w") as f:
         f.write("// Generated by initialization/gg_to_mem.py -- do not edit.\n")
         f.write("// Route box (DBU): {} {} {} {}\n".format(*header["routeBox"]))
-        f.write("// Goal box (maze idx): {} {} {} .. {} {} {} -- {}\n".format(
-            *(list(goal_lo) + list(goal_hi) + [goal_note])))
         f.write("// Memory widths and address widths are provided below; each\n")
-        f.write("// .mem file documents its field layout in the header.\n\n")
+        f.write("// .mem file documents its field layout in the header.\n")
+        f.write("// Per-search settings are in search_cfg.txt.\n\n")
 
         f.write("// Coordinates for grid and cost size, "
                 "change when grid graph changes\n")
         f.write("package {};\n".format(PARAMS_PACKAGE))
         f.write("  parameter GRID_I = {};\n".format(x_dim))
         f.write("  parameter GRID_J = {};\n".format(y_dim))
-        f.write("  parameter GRID_K = {};\n".format(z_dim))
-        f.write("  parameter ITER = {};\n\n".format(header["iter"]))
+        f.write("  parameter GRID_K = {};\n\n".format(z_dim))
 
         bank_x_depth = (x_dim + 1) // 2
         bank_depth = y_dim * z_dim * bank_x_depth
@@ -1094,38 +1079,75 @@ def write_params(path, header, fb, goal_lo, goal_hi, goal_note, mem_specs):
                 name, data_bits))
             f.write("  parameter {}_MEM_ADDR_WIDTH = {};\n".format(
                 name, addr_bits))
-        f.write("\n")
+        f.write("endpackage\n")
+    print("  {:<30} {:>8}".format(os.path.basename(path), "params"))
+
+
+def write_search_cfg(path, header, fb, goal_lo, goal_hi, goal_note,
+                     jumper_route):
+    """Emit the per-search settings top takes on cfg_in, as "name value" lines.
+
+    The field names are search_cfg_t's (astar_pkg); src/tb/search_cfg_pkg.sv
+    reads them and requires every one exactly once.  Lines starting with '#'
+    are comments.
+    """
+    xc, yc, zh = header["xCoords"], header["yCoords"], header["zHeights"]
+    layer_nums = header["zCoords(layerNum)"]
+    if "iter" not in header:
+        die("no 'iter' line in the grid-graph dump, so iter cannot be set")
+
+    def to_z(layer_num, what):
+        """frLayerNum -> z.  getTopLayerNum() counts cut and masterslice layers
+        too, so it need not be a routing layer's own number; fall back to the
+        highest routing layer at or below it."""
+        if layer_num in layer_nums:
+            return layer_nums.index(layer_num)
+        below = [z for z, ln in enumerate(layer_nums) if ln <= layer_num]
+        if not below:
+            die("{} is frLayerNum {}, which is below every routing layer "
+                "{}".format(what, layer_num, layer_nums))
+        return below[-1]
+
+    bottom_z = to_z(fb["bottomRoutingLayer"], "bottomRoutingLayer")
+    top_z = to_z(fb["topLayerNum"], "topLayerNum")
+
+    def goal(box):
+        return xc[box[0]], yc[box[1]], zh[box[2]]
+
+    with open(path, "w") as f:
+        f.write("# Generated by initialization/gg_to_mem.py -- do not edit.\n")
+        f.write("# Route box (DBU): {} {} {} {}\n".format(*header["routeBox"]))
+        f.write("# Goal box (maze idx): {} {} {} .. {} {} {} -- {}\n".format(
+            *(list(goal_lo) + list(goal_hi) + [goal_note])))
 
         # DBU, the same units getEstCost measures its Manhattan distance in.
-        for bound, box in (("LOWER", goal_lo), ("UPPER", goal_hi)):
+        for bound, box in (("lower", goal_lo), ("upper", goal_hi)):
             gx, gy, gz = goal(box)
-            f.write("  parameter {}_GOAL_X = {};\n".format(bound, gx))
-            f.write("  parameter {}_GOAL_Y = {};\n".format(bound, gy))
-            f.write("  parameter {}_GOAL_Z = {};\n\n".format(bound, gz))
+            f.write("{}_goal_x {}\n".format(bound, gx))
+            f.write("{}_goal_y {}\n".format(bound, gy))
+            f.write("{}_goal_z {}\n".format(bound, gz))
+        f.write("iter {}\n".format(header["iter"]))
 
-        f.write("  // Constants for Tritonroute\n")
-        for name, key in (("DRC_COST", "ggDRCCost"),
-                          ("MARKER_COST", "ggMarkerCost"),
-                          ("FIXEDSHAPECOST", "ggFixedShapeCost"),
-                          ("GRID_COST", "GRIDCOST"),
-                          ("BLOCK_COST", "BLOCKCOST"),
-                          ("GUIDE_COST", "GUIDECOST")):
-            f.write("  parameter {} = {};\n".format(name, header[key]))
-        f.write("\n")
+        # Constants for TritonRoute
+        for name, key in (("drc_cost", "ggDRCCost"),
+                          ("marker_cost", "ggMarkerCost"),
+                          ("fixed_shape_cost", "ggFixedShapeCost"),
+                          ("grid_cost", "GRIDCOST"),
+                          ("block_cost", "BLOCKCOST"),
+                          ("guide_cost", "GUIDECOST")):
+            f.write("{} {}\n".format(name, header[key]))
 
         # Both bounds are z here, not frLayerNum: getEstCost compares
         # layerNum -+ 2 against them, which is the z -+ 1 neighbour under the
         # layerNum = (z + 1) * 2 mapping it hardcodes.
-        f.write("  parameter USE_NONPREF_TRACKS = {};\n".format(
-            fb["useNonPrefTracks"]))
-        f.write("  parameter BOTTOM_ROUTING_LAYER = {}; "
-                "//layer_num of {} or layer z of {}\n".format(
-                    bottom_z, fb["bottomRoutingLayer"], bottom_z))
-        f.write("  parameter TOP_ROUTING_LAYER = {}; "
-                "//layer_num of {} or layer z of {}\n".format(
-                    top_z, fb["topLayerNum"], top_z))
-        f.write("endpackage\n")
-    print("  {:<30} {:>8}".format(os.path.basename(path), "params"))
+        f.write("# bottom: layer_num {} = z {}\n".format(
+            fb["bottomRoutingLayer"], bottom_z))
+        f.write("bottom_routing_layer {}\n".format(bottom_z))
+        f.write("# top: layer_num {} = z {}\n".format(fb["topLayerNum"], top_z))
+        f.write("top_routing_layer {}\n".format(top_z))
+        f.write("use_nonpref_tracks {}\n".format(fb["useNonPrefTracks"]))
+        f.write("jumper_route {}\n".format(jumper_route))
+    print("  {:<30} {:>8}".format(os.path.basename(path), "settings"))
 
 
 def main():
@@ -1162,6 +1184,10 @@ def main():
                     metavar=("X1", "Y1", "Z1", "X2", "Y2", "Z2"),
                     help="goal box as two maze indices, lower then upper; "
                          "overrides --search and the --snapshot dst bits")
+    ap.add_argument("--jumper-route", type=int, choices=(0, 1), default=None,
+                    help="route_with_jumpers for search_cfg.txt; overrides "
+                         "the routeWithJumpers row of --search (default 0 "
+                         "without either)")
     ap.add_argument("--ignore-ndr", action="store_true",
                     help="drop nonzero NDR cost fields instead of stopping")
     ap.add_argument("--gg-cache", action="store_true",
@@ -1535,8 +1561,18 @@ def main():
         ("VIA2VIA_PRL_LEN", len(prl_words), 2 * prl_bits),
         ("VIA_FORBIDDEN_TURN_LEN", len(turn_words), forbid_bits),
     ]
-    write_params(out("params.sv"), header, fb, goal_lo, goal_hi, goal_note,
-                 mem_specs)
+    write_params(out("params.sv"), header, mem_specs)
+    if args.jumper_route is not None:
+        jumper_route = args.jumper_route
+    elif search is not None and "routeWithJumpers" in search:
+        jumper_route = search["routeWithJumpers"]
+    else:
+        if search is not None:
+            print("  note: {} has no routeWithJumpers row; jumper_route "
+                  "0".format(os.path.basename(args.search)))
+        jumper_route = 0
+    write_search_cfg(out("search_cfg.txt"), header, fb, goal_lo, goal_hi,
+                     goal_note, jumper_route)
 
 
 if __name__ == "__main__":

@@ -84,10 +84,10 @@ void FlexDRWorker::routeNet_hwTrial(drNet* net)
   trial.ggPath = trial.boxDir + "/gg.txt";
   trial.netTag
       = "n" + std::to_string(net->getId()) + "_r" + std::to_string(row.reroute);
+  // Jumper nets are supported: dumpSearch() records route_with_jumpers and the
+  // accelerator takes it at runtime (search_cfg.txt jumper_route).
   if (net->getFrNet()->getNondefaultRule() != nullptr) {
     trial.unsupported = "unsupported_ndr";
-  } else if (net->getFrNet()->hasJumpers()) {
-    trial.unsupported = "unsupported_jumper";
   }
 
   // The net was just ripped up and cleared by route_queue_main(). Route it
