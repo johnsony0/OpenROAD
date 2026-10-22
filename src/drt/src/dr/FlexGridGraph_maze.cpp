@@ -1312,10 +1312,19 @@ void FlexGridGraph::dumpSearchGraph(const int searchId) const
   if (env_y_str != nullptr && env_y_str[0] != '\0' && std::atoi(env_y_str) != rb.yMin()) {
     return;
   }*/
-  const std::string path = std::string(dir) + "/ggs_iter" + std::to_string(iter)
-                           + "_x" + std::to_string(rb.xMin()) + "_y"
-                           + std::to_string(rb.yMin()) + "_s"
-                           + std::to_string(searchId) + ".bin";
+  writeSearchGraph(std::string(dir) + "/ggs_iter" + std::to_string(iter) + "_x"
+                       + std::to_string(rb.xMin()) + "_y"
+                       + std::to_string(rb.yMin()) + "_s"
+                       + std::to_string(searchId) + ".bin",
+                   searchId);
+}
+
+void FlexGridGraph::writeSearchGraph(const std::string& path,
+                                     const int searchId) const
+{
+  if (xCoords_.empty() || yCoords_.empty() || zCoords_.empty()) {
+    return;
+  }
   std::ofstream os(path.c_str(), std::ios::binary);
   if (!os.is_open()) {
     logger_->warn(
@@ -1489,165 +1498,163 @@ void FlexGridGraph::dumpSearch(const int searchId,
                                const int discardedNodes,
                                double runtimeMs) const
 {
-  if (!dumpCurrentSearch_) return;
-  const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
-  if (dir == nullptr || dir[0] == '\0') {
-    return;
-  }
   const odb::Rect& rb = drWorker_->getRouteBox();
   const int iter = drWorker_->getDRIter();
-  if (!dumpIterAllowed(iter)) {
-    return;
+  // The sampled dump (DRT_DUMP_GG_DATA_DIR) and the A* hardware trial export
+  // (hwExportPrefix_) share this format; either, both or neither may be on.
+  std::vector<std::string> paths;
+  if (!hwExportPrefix_.empty()) {
+    paths.push_back(hwExportPrefix_ + ".txt");
   }
-  /*const char* env_x_str = std::getenv("DR_DUMP_X");
-  if (env_x_str != nullptr && env_x_str[0] != '\0' && std::atoi(env_x_str) != rb.xMin()) {
-    return;
+  const char* dir = std::getenv("DRT_DUMP_GG_DATA_DIR");
+  if (dumpCurrentSearch_ && dir != nullptr && dir[0] != '\0'
+      && dumpIterAllowed(iter)) {
+    paths.push_back(std::string(dir) + "/search_iter" + std::to_string(iter)
+                    + "_x" + std::to_string(rb.xMin()) + "_y"
+                    + std::to_string(rb.yMin()) + "_s"
+                    + std::to_string(searchId) + ".txt");
   }
-  const char* env_y_str = std::getenv("DR_DUMP_Y");
-  if (env_y_str != nullptr && env_y_str[0] != '\0' && std::atoi(env_y_str) != rb.yMin()) {
-    return;
-  }*/
-  const std::string path_str = std::string(dir) + "/search_iter"
-                               + std::to_string(iter) + "_x"
-                               + std::to_string(rb.xMin()) + "_y"
-                               + std::to_string(rb.yMin()) + "_s"
-                               + std::to_string(searchId) + ".txt";
-  std::ofstream os(path_str.c_str());
-  if (!os.is_open()) {
-    logger_->warn(
-        utl::DRT, 618, "Could not open search dump file {}", path_str);
-    return;
-  }
+  for (const std::string& path_str : paths) {
+    std::ofstream os(path_str.c_str());
+    if (!os.is_open()) {
+      logger_->warn(
+          utl::DRT, 618, "Could not open search dump file {}", path_str);
+      continue;
+    }
 
-  frMIdx xDim, yDim, zDim;
-  getDim(xDim, yDim, zDim);
+    frMIdx xDim, yDim, zDim;
+    getDim(xDim, yDim, zDim);
 
-  // v7: adds the expandedNodes and discardedNodes rows.
-  // v6: adds the exploredNodes row.
-  // v5: adds the finalCost row.
-  // v4: the third DBU coordinate on the dstBox/cc/src/dst/p rows is now the
-  // zHeight, so all three are in the same units. Through v3 it was the
-  // frLayerNum; that is still recoverable from the maze index on the same row
-  // through the zCoords(layerNum) array of the companion gg_iter*.txt dump.
-  // v3: connComps rows are now the seeds handed to search(). Through v2 the
-  // success-path dump printed the vector after traceBackPath() had appended
-  // the traced path to it.
-  os << "version 7\n";
-  os << "iter " << iter << "\n";
-  os << "routeBox " << rb.xMin() << " " << rb.yMin() << " " << rb.xMax() << " "
-     << rb.yMax() << "\n";
-  os << "searchId " << searchId << "\n";
-  os << "pin " << (nextPin != nullptr ? nextPin->getName() : "null") << "\n";
-  os << "runtimeMs " << runtimeMs << "\n";
-  os << "exploredNodes " << totalNodesExplored << "\n";
-  os << "expandedNodes " << expandedNodes << "\n";
-  os << "discardedNodes " << discardedNodes << "\n";
-  os << "success " << (success ? 1 : 0) << "\n";
-  os << "dim " << xDim << " " << yDim << " " << zDim << "\n";
-  // Remaining search() inputs: the A* tie-break center point (DBU), the
-  // jumper-routing flag, and the connected-component bounding box (maze
-  // indices, ll then ur) as passed in. ccBoxOut is the same box after
-  // traceBackPath() grew it over the new path; it differs from ccBoxIn only
-  // on success.
-  os << "centerPt " << centerPt.x() << " " << centerPt.y() << "\n";
-  os << "routeWithJumpers " << (routeWithJumpers ? 1 : 0) << "\n";
-  os << "ccBoxIn " << ccMazeIdx1In.x() << " " << ccMazeIdx1In.y() << " "
-     << ccMazeIdx1In.z() << " " << ccMazeIdx2In.x() << " " << ccMazeIdx2In.y()
-     << " " << ccMazeIdx2In.z() << "\n";
-  os << "ccBoxOut " << ccMazeIdx1Out.x() << " " << ccMazeIdx1Out.y() << " "
-     << ccMazeIdx1Out.z() << " " << ccMazeIdx2Out.x() << " "
-     << ccMazeIdx2Out.y() << " " << ccMazeIdx2Out.z() << "\n";
-  os << "dstBox " << dstMazeIdx1.x() << " " << dstMazeIdx1.y() << " "
-     << dstMazeIdx1.z() << " " << xCoords_[dstMazeIdx1.x()] << " "
-     << yCoords_[dstMazeIdx1.y()] << " " << getZHeight(dstMazeIdx1.z()) << " "
-     << dstMazeIdx2.x() << " " << dstMazeIdx2.y() << " "
-     << dstMazeIdx2.z() << " " << xCoords_[dstMazeIdx2.x()] << " "
-     << yCoords_[dstMazeIdx2.y()] << " " << getZHeight(dstMazeIdx2.z()) << "\n";
+    // v7: adds the expandedNodes and discardedNodes rows.
+    // v6: adds the exploredNodes row.
+    // v5: adds the finalCost row.
+    // v4: the third DBU coordinate on the dstBox/cc/src/dst/p rows is now the
+    // zHeight, so all three are in the same units. Through v3 it was the
+    // frLayerNum; that is still recoverable from the maze index on the same row
+    // through the zCoords(layerNum) array of the companion gg_iter*.txt dump.
+    // v3: connComps rows are now the seeds handed to search(). Through v2 the
+    // success-path dump printed the vector after traceBackPath() had appended
+    // the traced path to it.
+    os << "version 7\n";
+    os << "iter " << iter << "\n";
+    os << "routeBox " << rb.xMin() << " " << rb.yMin() << " " << rb.xMax()
+       << " " << rb.yMax() << "\n";
+    os << "searchId " << searchId << "\n";
+    os << "pin " << (nextPin != nullptr ? nextPin->getName() : "null") << "\n";
+    os << "runtimeMs " << runtimeMs << "\n";
+    os << "exploredNodes " << totalNodesExplored << "\n";
+    os << "expandedNodes " << expandedNodes << "\n";
+    os << "discardedNodes " << discardedNodes << "\n";
+    os << "success " << (success ? 1 : 0) << "\n";
+    os << "dim " << xDim << " " << yDim << " " << zDim << "\n";
+    // Remaining search() inputs: the A* tie-break center point (DBU), the
+    // jumper-routing flag, and the connected-component bounding box (maze
+    // indices, ll then ur) as passed in. ccBoxOut is the same box after
+    // traceBackPath() grew it over the new path; it differs from ccBoxIn only
+    // on success.
+    os << "centerPt " << centerPt.x() << " " << centerPt.y() << "\n";
+    os << "routeWithJumpers " << (routeWithJumpers ? 1 : 0) << "\n";
+    os << "ccBoxIn " << ccMazeIdx1In.x() << " " << ccMazeIdx1In.y() << " "
+       << ccMazeIdx1In.z() << " " << ccMazeIdx2In.x() << " " << ccMazeIdx2In.y()
+       << " " << ccMazeIdx2In.z() << "\n";
+    os << "ccBoxOut " << ccMazeIdx1Out.x() << " " << ccMazeIdx1Out.y() << " "
+       << ccMazeIdx1Out.z() << " " << ccMazeIdx2Out.x() << " "
+       << ccMazeIdx2Out.y() << " " << ccMazeIdx2Out.z() << "\n";
+    os << "dstBox " << dstMazeIdx1.x() << " " << dstMazeIdx1.y() << " "
+       << dstMazeIdx1.z() << " " << xCoords_[dstMazeIdx1.x()] << " "
+       << yCoords_[dstMazeIdx1.y()] << " " << getZHeight(dstMazeIdx1.z()) << " "
+       << dstMazeIdx2.x() << " " << dstMazeIdx2.y() << " " << dstMazeIdx2.z()
+       << " " << xCoords_[dstMazeIdx2.x()] << " " << yCoords_[dstMazeIdx2.y()]
+       << " " << getZHeight(dstMazeIdx2.z()) << "\n";
 
-  // Cost of the routed path: g is the accumulated true cost from the source
-  // component to the destination node the search stopped on -- the total the
-  // A* paid, since every edge it traversed was charged into pathCost by
-  // getNextPathCost(). f is that same node's priority, g + getEstCost(); it is
-  // not necessarily g, because dstMazeIdx1/2 bounds the *next pin's* access
-  // patterns and the node popped may belong to another pin still on dsts_.
-  // Both are 0 when a seed in connComps was already on a dst, since search()
-  // returns from that without expanding anything, and -1 when the search
-  // failed.  Spelled out rather than a ternary because frCost is unsigned,
-  // which would turn the -1 into 4294967295.
-  if (goalGrid != nullptr) {
-    os << "finalCost " << goalGrid->getPathCost() << " " << goalGrid->getCost()
-       << "\n";
-  } else if (success) {
-    os << "finalCost 0 0\n";
-  } else {
-    os << "finalCost -1 -1\n";
-  }
+    // Cost of the routed path: g is the accumulated true cost from the source
+    // component to the destination node the search stopped on -- the total the
+    // A* paid, since every edge it traversed was charged into pathCost by
+    // getNextPathCost(). f is that same node's priority, g + getEstCost(); it
+    // is not necessarily g, because dstMazeIdx1/2 bounds the *next pin's*
+    // access patterns and the node popped may belong to another pin still on
+    // dsts_. Both are 0 when a seed in connComps was already on a dst, since
+    // search() returns from that without expanding anything, and -1 when the
+    // search failed.  Spelled out rather than a ternary because frCost is
+    // unsigned, which would turn the -1 into 4294967295.
+    if (goalGrid != nullptr) {
+      os << "finalCost " << goalGrid->getPathCost() << " "
+         << goalGrid->getCost() << "\n";
+    } else if (success) {
+      os << "finalCost 0 0\n";
+    } else {
+      os << "finalCost -1 -1\n";
+    }
 
-  // Source component maze indices as handed to search() (the wavefront seeds).
-  os << "connComps " << connComps.size() << "\n";
-  for (const auto& mi : connComps) {
-    os << "cc " << mi.x() << " " << mi.y() << " " << mi.z() << " "
-       << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
-       << getZHeight(mi.z()) << "\n";
-  }
+    // Source component maze indices as handed to search() (the wavefront
+    // seeds).
+    os << "connComps " << connComps.size() << "\n";
+    for (const auto& mi : connComps) {
+      os << "cc " << mi.x() << " " << mi.y() << " " << mi.z() << " "
+         << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
+         << getZHeight(mi.z()) << "\n";
+    }
 
-  // All nodes flagged as source / destination in the live bitvectors. Each row
-  // carries both the maze index and all three DBU coords for path matching.
-  int srcCount = 0, dstCount = 0;
-  for (frMIdx z = 0; z < zDim; ++z) {
-    for (frMIdx y = 0; y < yDim; ++y) {
-      for (frMIdx x = 0; x < xDim; ++x) {
-        if (isSrc(x, y, z)) {
-          ++srcCount;
-        }
-        if (isDst(x, y, z)) {
-          ++dstCount;
+    // All nodes flagged as source / destination in the live bitvectors. Each
+    // row carries both the maze index and all three DBU coords for path
+    // matching.
+    int srcCount = 0, dstCount = 0;
+    for (frMIdx z = 0; z < zDim; ++z) {
+      for (frMIdx y = 0; y < yDim; ++y) {
+        for (frMIdx x = 0; x < xDim; ++x) {
+          if (isSrc(x, y, z)) {
+            ++srcCount;
+          }
+          if (isDst(x, y, z)) {
+            ++dstCount;
+          }
         }
       }
     }
-  }
-  os << "srcs " << srcCount << "\n";
-  for (frMIdx z = 0; z < zDim; ++z) {
-    for (frMIdx y = 0; y < yDim; ++y) {
-      for (frMIdx x = 0; x < xDim; ++x) {
-        if (isSrc(x, y, z)) {
-          os << "src " << x << " " << y << " " << z << " " << xCoords_[x] << " "
-             << yCoords_[y] << " " << getZHeight(z) << "\n";
+    os << "srcs " << srcCount << "\n";
+    for (frMIdx z = 0; z < zDim; ++z) {
+      for (frMIdx y = 0; y < yDim; ++y) {
+        for (frMIdx x = 0; x < xDim; ++x) {
+          if (isSrc(x, y, z)) {
+            os << "src " << x << " " << y << " " << z << " " << xCoords_[x]
+               << " " << yCoords_[y] << " " << getZHeight(z) << "\n";
+          }
         }
       }
     }
-  }
-  os << "dsts " << dstCount << "\n";
-  for (frMIdx z = 0; z < zDim; ++z) {
-    for (frMIdx y = 0; y < yDim; ++y) {
-      for (frMIdx x = 0; x < xDim; ++x) {
-        if (isDst(x, y, z)) {
-          os << "dst " << x << " " << y << " " << z << " " << xCoords_[x] << " "
-             << yCoords_[y] << " " << getZHeight(z) << "\n";
+    os << "dsts " << dstCount << "\n";
+    for (frMIdx z = 0; z < zDim; ++z) {
+      for (frMIdx y = 0; y < yDim; ++y) {
+        for (frMIdx x = 0; x < xDim; ++x) {
+          if (isDst(x, y, z)) {
+            os << "dst " << x << " " << y << " " << z << " " << xCoords_[x]
+               << " " << yCoords_[y] << " " << getZHeight(z) << "\n";
+          }
         }
       }
     }
-  }
 
-  // Traceback path (corner points, dst-first back toward src) produced by this
-  // search. Empty when no path was found or src == dst.
-  os << "path " << path.size() << "\n";
-  for (const auto& mi : path) {
-    os << "p " << mi.x() << " " << mi.y() << " " << mi.z() << " "
-       << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
-       << getZHeight(mi.z()) << "\n";
-  }
+    // Traceback path (corner points, dst-first back toward src) produced by
+    // this search. Empty when no path was found or src == dst.
+    os << "path " << path.size() << "\n";
+    for (const auto& mi : path) {
+      os << "p " << mi.x() << " " << mi.y() << " " << mi.z() << " "
+         << xCoords_[mi.x()] << " " << yCoords_[mi.y()] << " "
+         << getZHeight(mi.z()) << "\n";
+    }
 
-  // Planar wirelength of this search's path alone (vias excluded), as opposed
-  // to finalNetWirelengthDBU, which sums every pathSeg of the net once routed.
-  uint64_t searchWireLengthDBU = 0;
-  for (size_t i = 1; i < path.size(); ++i) {
-    searchWireLengthDBU
-        += std::abs(xCoords_[path[i].x()] - xCoords_[path[i - 1].x()])
-           + std::abs(yCoords_[path[i].y()] - yCoords_[path[i - 1].y()]);
+    // Planar wirelength of this search's path alone (vias excluded), as opposed
+    // to finalNetWirelengthDBU, which sums every pathSeg of the net once
+    // routed.
+    uint64_t searchWireLengthDBU = 0;
+    for (size_t i = 1; i < path.size(); ++i) {
+      searchWireLengthDBU
+          += std::abs(xCoords_[path[i].x()] - xCoords_[path[i - 1].x()])
+             + std::abs(yCoords_[path[i].y()] - yCoords_[path[i - 1].y()]);
+    }
+    os << "searchWirelengthDBU " << searchWireLengthDBU << "\n";
+    os.close();
   }
-  os << "searchWirelengthDBU " << searchWireLengthDBU << "\n";
-  os.close();
 }
 
 void FlexGridGraph::dumpFinalNetWirelength(const int searchId,
@@ -1697,17 +1704,26 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   const char* timingDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
   const bool measureBatchRuntime = timingDir != nullptr && timingDir[0] != '\0';
   runtimeMeasurement_ = measureBatchRuntime;
-  beginSearchDump();
+  // A* hardware trial searches export their own input/output and must leave
+  // the sampled dumps and the search counter exactly as a CPU-only run would.
+  const bool hwExport = !hwExportPrefix_.empty();
+  if (hwExport) {
+    dumpCurrentSearch_ = false;
+  } else {
+    beginSearchDump();
+  }
   if (debug_ && !runtimeMeasurement_) {
     dump_file_.open("expansions.dump");
   }
-  if (!runtimeMeasurement_) {
+  if (!runtimeMeasurement_ && !hwExport) {
     openExpansionDump();
     openCostDump();
   } else {
     runtimeMs = 0.0;
   }
-  const int searchId = runtimeMeasurement_ ? 0 : expSearchId_++;
+  lastPathCost_ = 0;
+  lastExploredNodes_ = 0;
+  const int searchId = (runtimeMeasurement_ || hwExport) ? 0 : expSearchId_++;
   if (dumpingExpansion()) {
     // One block per search() call in this grid graph. searchId matches the
     // _s<id> suffix of the dumpSearch() file for the same search.
@@ -1761,6 +1777,9 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   if (!runtimeMeasurement_) {
     dumpSearchGraph(searchId);
   }
+  if (hwExport) {
+    writeSearchGraph(hwExportPrefix_ + ".bin", searchId);
+  }
 
   wavefront_.cleanup();
   // init wavefront
@@ -1783,6 +1802,7 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   for (auto& idx : connComps) {
     if (isDst(idx.x(), idx.y(), idx.z())) {
       path.emplace_back(idx.x(), idx.y(), idx.z());
+      lastExploredNodes_ = totalNodesExplored;
       if (!runtimeMeasurement_) {
         dumpSearch(searchId,
                    connCompsIn,
@@ -1873,6 +1893,8 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     }
     if (isDst(currGrid.x(), currGrid.y(), currGrid.z())) {
       traceBackPath(currGrid, path, connComps, ccMazeIdx1, ccMazeIdx2);
+      lastPathCost_ = currGrid.getPathCost();
+      lastExploredNodes_ = totalNodesExplored;
       if (!runtimeMeasurement_) {
         dumpSearch(searchId,
                    connCompsIn,
@@ -1901,6 +1923,7 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
     expandWavefront(
         currGrid, dstMazeIdx1, dstMazeIdx2, centerPt, route_with_jumpers);
   }
+  lastExploredNodes_ = totalNodesExplored;
   if (!runtimeMeasurement_) {
     dumpSearch(searchId,
                connCompsIn,

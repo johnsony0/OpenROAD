@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdlib>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -16,6 +17,7 @@
 #include "db/infra/frPoint.h"
 #include "db/obj/frTrackPattern.h"
 #include "db/tech/frViaDef.h"
+#include "dr/AstarHwTrial.h"
 #include "dr/FlexDR.h"
 #include "frBaseTypes.h"
 #include "frDesign.h"
@@ -476,6 +478,12 @@ void FlexGridGraph::init(const frDesign* design,
       design, xMap, yMap, zMap, routeBBox, initDR);  // add edges and edgeCost
   ap_locs_.clear();
   const int iter = drWorker_->getDRIter();
+  if (astar_hw::trialEnabled(iter)) {
+    // Shared static half of every A* hardware trial job in this box.
+    const std::string dir = astar_hw::boxDir(iter, drWorker_->getRouteBox());
+    std::filesystem::create_directories(dir);
+    writeGridGraph(dir + "/gg.txt");
+  }
   if (!dumpIterAllowed(iter) || !boxDumpActive()) {
     return;
   }
@@ -507,9 +515,18 @@ void FlexGridGraph::dumpGridGraph() const
   }
   const odb::Rect& rb = drWorker_->getRouteBox();
   const int iter = drWorker_->getDRIter();
-  const std::string path = std::string(dir) + "/gg_iter" + std::to_string(iter)
-                           + "_x" + std::to_string(rb.xMin()) + "_y"
-                           + std::to_string(rb.yMin()) + ".txt";
+  writeGridGraph(std::string(dir) + "/gg_iter" + std::to_string(iter) + "_x"
+                 + std::to_string(rb.xMin()) + "_y" + std::to_string(rb.yMin())
+                 + ".txt");
+}
+
+void FlexGridGraph::writeGridGraph(const std::string& path) const
+{
+  if (xCoords_.empty() || yCoords_.empty() || zCoords_.empty()) {
+    return;
+  }
+  const odb::Rect& rb = drWorker_->getRouteBox();
+  const int iter = drWorker_->getDRIter();
   std::ofstream os(path.c_str());
   if (!os.is_open()) {
     logger_->warn(utl::DRT, 617, "Could not open grid-graph dump file {}", path);
@@ -645,6 +662,28 @@ void FlexGridGraph::initTracks(
     }
     layerNum2PreRouteDir[currLayerNum] = currPrefRouteDir;
   }
+}
+
+void FlexGridGraph::saveState(SavedState& state) const
+{
+  state.nodes = nodes_;
+  state.prevDirs = prevDirs_;
+  state.srcs = srcs_;
+  state.dsts = dsts_;
+  state.guides = guides_;
+  state.ndr = ndr_;
+  state.dstTaperBox = dstTaperBox_;
+}
+
+void FlexGridGraph::restoreState(const SavedState& state)
+{
+  nodes_ = state.nodes;
+  prevDirs_ = state.prevDirs;
+  srcs_ = state.srcs;
+  dsts_ = state.dsts;
+  guides_ = state.guides;
+  ndr_ = state.ndr;
+  dstTaperBox_ = state.dstTaperBox;
 }
 
 void FlexGridGraph::resetStatus()

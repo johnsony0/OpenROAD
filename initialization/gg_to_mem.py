@@ -523,6 +523,35 @@ def parse_gridgraph(path, ignore_ndr, want_nodes=True, check_ndr_fields=True):
     return header, nodes
 
 
+def parse_gridgraph_cached(path, ignore_ndr, want_nodes, check_ndr_fields,
+                           use_cache):
+    """parse_gridgraph() memoized in <path>.parsed.pkl when use_cache is set.
+
+    The A* hardware trial converts every search of a route box against the
+    same --gg file; the pickle is keyed on the parse options and rebuilt when
+    the text dump is newer.
+    """
+    if not use_cache:
+        return parse_gridgraph(path, ignore_ndr, want_nodes, check_ndr_fields)
+    import pickle
+    cache = path + ".parsed.pkl"
+    key = (ignore_ndr, want_nodes, check_ndr_fields)
+    try:
+        if os.path.getmtime(cache) >= os.path.getmtime(path):
+            with open(cache, "rb") as f:
+                cached_key, result = pickle.load(f)
+            if cached_key == key:
+                return result
+    except (OSError, EOFError, pickle.UnpicklingError, ValueError):
+        pass
+    result = parse_gridgraph(path, ignore_ndr, want_nodes, check_ndr_fields)
+    tmp = "{}.{}.tmp".format(cache, os.getpid())
+    with open(tmp, "wb") as f:
+        pickle.dump((key, result), f, protocol=pickle.HIGHEST_PROTOCOL)
+    os.replace(tmp, cache)
+    return result
+
+
 def check_ndr(dropped_ndr, ignore_ndr, path):
     if dropped_ndr and not ignore_ndr:
         die("{} has nonzero NDR cost fields ({}) which the node word does not "
@@ -1135,6 +1164,9 @@ def main():
                          "overrides --search and the --snapshot dst bits")
     ap.add_argument("--ignore-ndr", action="store_true",
                     help="drop nonzero NDR cost fields instead of stopping")
+    ap.add_argument("--gg-cache", action="store_true",
+                    help="reuse/write <gg>.parsed.pkl so repeated conversions "
+                    "of searches from one route box parse --gg only once")
     args = ap.parse_args()
 
     for p in (args.gg, args.forbidden, args.snapshot, args.search):
@@ -1150,9 +1182,9 @@ def main():
     if not os.path.isdir(args.outdir):
         os.makedirs(args.outdir)
 
-    header, nodes = parse_gridgraph(
+    header, nodes = parse_gridgraph_cached(
         args.gg, args.ignore_ndr, want_nodes=True,
-        check_ndr_fields=args.snapshot is None)
+        check_ndr_fields=args.snapshot is None, use_cache=args.gg_cache)
     snap = None
     if args.snapshot is not None:
         nodes, snap = parse_snapshot(args.snapshot, args.ignore_ndr, nodes)

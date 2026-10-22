@@ -33,6 +33,7 @@
 #include "db/tech/frTechObject.h"
 #include "db/tech/frViaDef.h"
 #include "dr/AbstractDRGraphics.h"
+#include "dr/AstarHwTrial.h"
 #include "dr/FlexGridGraph.h"
 #include "dr/FlexMazeTypes.h"
 #include "dr/FlexWavefront.h"
@@ -575,6 +576,19 @@ class FlexDRWorker
   FlexGridGraph gridGraph_;
   double astarRuntimeMs_{0.0};
   int astarSearchCount_{0};
+  // A* hardware trial state of the net being trial-routed.
+  struct HwTrialState
+  {
+    astar_hw::NetRow row;
+    std::string boxDir;
+    std::string ggPath;
+    std::string netTag;       // job directory prefix of this net
+    std::string unsupported;  // non-empty: skip the accelerator, CPU only
+  };
+  HwTrialState* hwTrial_{nullptr};
+  std::unique_ptr<astar_hw::NetRow> hwPendingNet_;
+  double hwTrialMs_{0.0};
+  bool hwKeptJobs_{false};
   std::vector<frMarker> markers_;
   std::vector<frMarker> bestMarkers_;
   FlexDRWorkerRegionQuery rq_;
@@ -947,6 +961,23 @@ class FlexDRWorker
   void mazeNetInit(drNet* net);
   void mazeNetEnd(drNet* net);
   bool routeNet(drNet* net, std::vector<FlexMazeIdx>& paths);
+  // A* hardware trial (FlexDR_hwtrial.cpp, see AstarHwTrial.h).
+  // Routes `net` with accelerator paths, measures it and undoes it, leaving
+  // the worker exactly as before the call. The result waits in
+  // hwPendingNet_ until the CPU route of the same net is measured.
+  void routeNet_hwTrial(drNet* net);
+  // Stand-in for gridGraph_.search() while hwTrial_ is set.
+  bool routeNet_hwSearch(std::vector<FlexMazeIdx>& connComps,
+                         drPin* nextPin,
+                         std::vector<FlexMazeIdx>& path,
+                         FlexMazeIdx& ccMazeIdx1,
+                         FlexMazeIdx& ccMazeIdx2,
+                         const odb::Point& centerPt,
+                         std::map<FlexMazeIdx, frBox3D*>& mazeIdx2TaperBox,
+                         bool route_with_jumpers);
+  // Called with the CPU route's gc markers in gcWorker_.
+  void hwTrialRecordCpuRoute(drNet* net);
+  void hwTrialEndWorker();
   void routeNet_prep(
       drNet* net,
       frOrderedIdSet<drPin*>& unConnPins,

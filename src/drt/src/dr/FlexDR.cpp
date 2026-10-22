@@ -8,10 +8,10 @@
 #include <algorithm>
 #include <atomic>
 #include <chrono>
-#include <cstdlib>
 #include <cmath>
 #include <cstdint>
 #include <cstdio>
+#include <cstdlib>
 #include <fstream>
 #include <iomanip>
 #include <ios>
@@ -42,6 +42,7 @@
 #include "distributed/drUpdate.h"
 #include "distributed/frArchive.h"
 #include "dr/AbstractDRGraphics.h"
+#include "dr/AstarHwTrial.h"
 #include "dr/FlexDR_conn.h"
 #include "drt/TritonRoute.h"
 #include "dst/BalancerJobDescription.h"
@@ -1442,6 +1443,7 @@ void FlexDR::searchRepair(const SearchRepairArgs& args)
   }
   // start timer for the current iteration
   IterationProgress iter_prog;
+  const auto hwIterStart = std::chrono::steady_clock::now();
 
   switch (flow_state) {
     case FlexDRFlow::State::GUIDES:
@@ -1485,6 +1487,14 @@ void FlexDR::searchRepair(const SearchRepairArgs& args)
   if (router_cfg_->VERBOSE > 0) {
     iter_prog.time.print(logger_);
     std::cout << std::flush;
+  }
+  if (astar_hw::iterEnabled(iter_)) {
+    astar_hw::endIteration(getDesign(),
+                           iter_,
+                           omp_get_max_threads(),
+                           std::chrono::duration<double, std::milli>(
+                               std::chrono::steady_clock::now() - hwIterStart)
+                               .count());
   }
   end();
 }

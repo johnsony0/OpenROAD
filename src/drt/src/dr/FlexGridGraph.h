@@ -61,6 +61,36 @@ class FlexGridGraph
     bool beginSearchDump();
   int getSearchCount() const { return expSearchId_; }
 
+  // A* hardware trial support (see AstarHwTrial.h).
+  // Copy of every piece of mutable grid-graph state a net route touches, so
+  // the trial can route a net with hardware paths, measure it, and put the
+  // graph back bit-for-bit before the CPU route runs. Defined after Node.
+  struct SavedState;
+  void saveState(SavedState& state) const;
+  void restoreState(const SavedState& state);
+  // When non-empty, search() writes <prefix>.bin (dumpSearchGraph format) and
+  // <prefix>.txt (dumpSearch format) for this call, and leaves the sampled
+  // dumps, expSearchId_ and the other search counters untouched.
+  void setHwExportPrefix(std::string prefix)
+  {
+    hwExportPrefix_ = std::move(prefix);
+  }
+  // Path cost and explored-node count of the most recent search().
+  frCost getLastPathCost() const { return lastPathCost_; }
+  int getLastExploredNodes() const { return lastExploredNodes_; }
+  bool isSrcNode(const FlexMazeIdx& mi) const
+  {
+    return isSrc(mi.x(), mi.y(), mi.z());
+  }
+  bool isDstNode(const FlexMazeIdx& mi) const
+  {
+    return isDst(mi.x(), mi.y(), mi.z());
+  }
+  // Unconditional writers behind dumpGridGraph()/dumpSearchGraph()/
+  // dumpSearch(); same formats, caller-chosen path.
+  void writeGridGraph(const std::string& path) const;
+  void writeSearchGraph(const std::string& path, int searchId) const;
+
   // unsafe access, no check
   bool isBlocked(frMIdx x, frMIdx y, frMIdx z, frDirEnum dir) const
   {
@@ -1177,6 +1207,20 @@ class FlexGridGraph
 #ifndef DEBUG_DRT_UNDERFLOW
   static_assert(sizeof(Node) == 16);
 #endif
+
+ public:
+  struct SavedState
+  {
+    frVector<Node> nodes;
+    std::vector<bool> prevDirs;
+    std::vector<bool> srcs;
+    std::vector<bool> dsts;
+    std::vector<bool> guides;
+    frNonDefaultRule* ndr = nullptr;
+    const frBox3D* dstTaperBox = nullptr;
+  };
+
+ private:
   frVector<Node> nodes_;
   std::vector<bool> prevDirs_;
   std::vector<bool> srcs_;
@@ -1220,6 +1264,9 @@ class FlexGridGraph
   // of the dumpSearch()/dumpSearchGraph() files, so a search block here pairs
   // with a search dump and its node snapshot.
   int expSearchId_{0};
+  std::string hwExportPrefix_;
+  frCost lastPathCost_{0};
+  int lastExploredNodes_{0};
 
   void openExpansionDump();
   // Deliberately derived from the stream rather than a separate flag: there is
@@ -1228,7 +1275,8 @@ class FlexGridGraph
   // expDumpAlways in FlexGridGraph_maze.cpp.
   bool dumpingExpansion() const
   {
-    return !runtimeMeasurement_ && exp_file_.is_open();
+    return !runtimeMeasurement_ && hwExportPrefix_.empty()
+           && exp_file_.is_open();
   }
 
 

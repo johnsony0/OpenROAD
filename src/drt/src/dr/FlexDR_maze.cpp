@@ -38,6 +38,7 @@
 #include "db/obj/frVia.h"
 #include "db/tech/frConstraint.h"
 #include "db/tech/frViaDef.h"
+#include "dr/AstarHwTrial.h"
 #include "dr/FlexDR.h"
 #include "dr/FlexMazeTypes.h"
 #include "frBaseTypes.h"
@@ -1765,6 +1766,7 @@ void FlexDRWorker::route_queue()
   astarRuntimeMs_ = 0.0;
   astarSearchCount_ = 0;
   route_queue_main(rerouteQueue);
+  hwTrialEndWorker();
   const char* dumpDir = std::getenv("DRT_DUMP_GG_SUMMARY_DIR");
   const char* timingDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
   const bool measureBatchRuntime = timingDir != nullptr && timingDir[0] != '\0';
@@ -1959,6 +1961,13 @@ void FlexDRWorker::route_queue_main(std::queue<RouteQueueEntry>& rerouteQueue)
       if (getDRIter() >= beginDebugIter) {
         logger_->info(DRT, 2002, "Routing net {}", net->getFrNet()->getName());
       }
+      if (astar_hw::trialEnabled(getDRIter())
+          && astar_hw::sampleNet(getDRIter(),
+                                 getRouteBox(),
+                                 net->getFrNet()->getName(),
+                                 net->getNumReroutes())) {
+        routeNet_hwTrial(net);
+      }
       // route
       mazeNetInit(net);
       std::vector<FlexMazeIdx> paths;
@@ -1999,6 +2008,7 @@ void FlexDRWorker::route_queue_main(std::queue<RouteQueueEntry>& rerouteQueue)
         gcWorker_->updateDRNet(net);
         gcWorker_->setEnableSurgicalFix(true);
         gcWorker_->main();
+        hwTrialRecordCpuRoute(net);
         modEolCosts_poly(gcWorker_->getTargetNet(), ModCostType::addRouteShape);
         // write back GC patches
         drNet* currNet = net;
@@ -3303,17 +3313,30 @@ bool FlexDRWorker::routeNet(drNet* net, std::vector<FlexMazeIdx>& paths)
     auto nextPin = routeNet_getNextDst(
         ccMazeIdx1, ccMazeIdx2, mazeIdx2unConnPins, pinTaperBoxes);
     path.clear();
-    if (gridGraph_.search(connComps,
-                          nextPin,
-                          path,
-                          ccMazeIdx1,
-                          ccMazeIdx2,
-                          centerPt,
-                          mazeIdx2TaperBox,
-                          route_with_jumpers,
-                          astarRuntimeMs)) {
-      astarRuntimeMs_ += astarRuntimeMs;
-      astarSearchCount_++;
+    // Hardware trial searches are not part of the CPU route's A* totals.
+    const bool found = hwTrial_ != nullptr
+                           ? routeNet_hwSearch(connComps,
+                                               nextPin,
+                                               path,
+                                               ccMazeIdx1,
+                                               ccMazeIdx2,
+                                               centerPt,
+                                               mazeIdx2TaperBox,
+                                               route_with_jumpers)
+                           : gridGraph_.search(connComps,
+                                               nextPin,
+                                               path,
+                                               ccMazeIdx1,
+                                               ccMazeIdx2,
+                                               centerPt,
+                                               mazeIdx2TaperBox,
+                                               route_with_jumpers,
+                                               astarRuntimeMs);
+    if (found) {
+      if (hwTrial_ == nullptr) {
+        astarRuntimeMs_ += astarRuntimeMs;
+        astarSearchCount_++;
+      }
       routeNet_postAstarUpdate(
           path, connComps, unConnPins, mazeIdx2unConnPins, isFirstConn);
       routeNet_postAstarWritePath(
@@ -3324,9 +3347,12 @@ bool FlexDRWorker::routeNet(drNet* net, std::vector<FlexMazeIdx>& paths)
       // Add current pin path point to drNet paths
       paths.insert(paths.end(), path.begin(), path.end());
     } else {
+      searchSuccess = false;
+      if (hwTrial_ != nullptr) {
+        break;
+      }
       astarRuntimeMs_ += astarRuntimeMs;
       astarSearchCount_++;
-      searchSuccess = false;
       logger_->report("Failed to find a path between pin " + nextPin->getName()
                       + " and source aps:");
       for (FlexMazeIdx& mi : connComps) {

@@ -33,6 +33,8 @@ add_library(drt_lib
   src/dr/FlexDRFlow.cpp
   src/db/drObj/drNet.cpp
   src/dr/FlexDR_maze.cpp
+  src/dr/FlexDR_hwtrial.cpp
+  src/dr/AstarHwTrial.cpp
   src/dr/FlexGridGraph_maze.cpp
   src/dr/FlexGridGraph.cpp
   src/dr/FlexDR_rq.cpp

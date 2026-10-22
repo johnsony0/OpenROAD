@@ -5,6 +5,7 @@
 #include <cassert>
 #include <climits>
 #include <cstdlib>
+#include <filesystem>
 #include <fstream>
 #include <memory>
 #include <string>
@@ -20,6 +21,7 @@
 #include "db/tech/frConstraint.h"
 #include "db/tech/frLayer.h"
 #include "db/tech/frViaDef.h"
+#include "dr/AstarHwTrial.h"
 #include "frBaseTypes.h"
 #include "frProfileTask.h"
 #include "gc/FlexGC.h"
@@ -74,11 +76,17 @@ void FlexRP::prep()
 // per-worker grid-graph dump.
 void FlexRP::dumpForbiddenTables()
 {
+  // The A* hardware trial converts every search with these tables, so it
+  // gets a copy in its own output directory.
+  std::string path;
   const char* dir = std::getenv("DRT_DUMP_GG_DIR");
-  if (dir == nullptr || dir[0] == '\0') {
+  if (dir != nullptr && dir[0] != '\0') {
+    path = std::string(dir) + "/forbidden_tables.txt";
+  } else if (astar_hw::config().enabled && !astar_hw::config().recordOnly) {
+    path = astar_hw::forbiddenTablesPath();
+  } else {
     return;
   }
-  const std::string path = std::string(dir) + "/forbidden_tables.txt";
   std::ofstream os(path.c_str());
   if (!os.is_open()) {
     logger_->warn(
@@ -175,6 +183,13 @@ void FlexRP::dumpForbiddenTables()
     }
   }
   os.close();
+  if (astar_hw::config().enabled && !astar_hw::config().recordOnly
+      && path != astar_hw::forbiddenTablesPath()) {
+    std::filesystem::copy_file(
+        path,
+        astar_hw::forbiddenTablesPath(),
+        std::filesystem::copy_options::overwrite_existing);
+  }
 }
 
 void FlexRP::prep_minStepViasCheck()

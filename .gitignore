@@ -91,4 +91,7 @@ initialization/*
 !initialization/analyze_runtime.py
 !initialization/runtime_data.csv
 !initialization/runtime_summary.csv
+!initialization/run_astar_hw_trial.sh
+!initialization/astar_hw_score.py
 top_level_term*
+astar_hw_results*
