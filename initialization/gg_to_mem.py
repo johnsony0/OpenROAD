@@ -6,6 +6,11 @@ FlexGridGraph::dumpSearchGraph() and FlexRP::dumpForbiddenTables() and emits
 one .mem file per BRAM, plus a .vh of the scalar constants (which stay as
 localparams -- they do not belong in a memory).
 
+The A* hardware trial no longer runs this per search: FlexGridGraph::
+writeHwMem() (src/drt/src/dr/FlexGridGraph_hwmem.cpp) writes the same images
+straight from the router, and DRT_ASTAR_HW_CONVERT=python|both brings this
+path back for cross-checking.  Keep the two layouts in step.
+
     python3 initialization/gg_to_mem.py \
         --gg        work/ggdump/gg_iter0_x0_y151200.txt \
         --forbidden work/ggdump/forbidden_tables.txt \

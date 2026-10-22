@@ -1706,7 +1706,7 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   runtimeMeasurement_ = measureBatchRuntime;
   // A* hardware trial searches export their own input/output and must leave
   // the sampled dumps and the search counter exactly as a CPU-only run would.
-  const bool hwExport = !hwExportPrefix_.empty();
+  const bool hwExport = !hwExportPrefix_.empty() || !hwMemDir_.empty();
   if (hwExport) {
     dumpCurrentSearch_ = false;
   } else {
@@ -1777,8 +1777,16 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   if (!runtimeMeasurement_) {
     dumpSearchGraph(searchId);
   }
-  if (hwExport) {
+  if (!hwExportPrefix_.empty()) {
     writeSearchGraph(hwExportPrefix_ + ".bin", searchId);
+  }
+  if (!hwMemDir_.empty()) {
+    const auto memStart = std::chrono::steady_clock::now();
+    lastHwMemError_
+        = writeHwMem(hwMemDir_, dstMazeIdx1, dstMazeIdx2, route_with_jumpers);
+    lastHwMemSeconds_ = std::chrono::duration<double>(
+                            std::chrono::steady_clock::now() - memStart)
+                            .count();
   }
 
   wavefront_.cleanup();

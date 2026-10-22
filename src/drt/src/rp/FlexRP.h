@@ -37,6 +37,9 @@ class FlexRP
   // immutable after prep(), so a single file per run accompanies the per-search
   // grid-graph dumps written by FlexGridGraph::dumpSearchGraph().
   void dumpForbiddenTables();
+  // Packs the same tables into the A* accelerator's memory images
+  // (astar_hw::setTechImages) when the hardware trial writes its own images.
+  void prepHwTechImages();
 
   // functions
   void prep_viaForbiddenThrough();

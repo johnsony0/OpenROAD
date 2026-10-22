@@ -185,6 +185,7 @@ cc_library(
         "src/dr/FlexDR_maze.cpp",
         "src/dr/FlexDR_rq.cpp",
         "src/dr/FlexGridGraph.cpp",
+        "src/dr/FlexGridGraph_hwmem.cpp",
         "src/dr/FlexGridGraph_maze.cpp",
         "src/frProfileTask.h",
         "src/frRTree.h",

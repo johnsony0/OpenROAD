@@ -478,7 +478,7 @@ void FlexGridGraph::init(const frDesign* design,
       design, xMap, yMap, zMap, routeBBox, initDR);  // add edges and edgeCost
   ap_locs_.clear();
   const int iter = drWorker_->getDRIter();
-  if (astar_hw::trialEnabled(iter)) {
+  if (astar_hw::trialEnabled(iter) && astar_hw::config().writeDumps) {
     // Shared static half of every A* hardware trial job in this box.
     const std::string dir = astar_hw::boxDir(iter, drWorker_->getRouteBox());
     std::filesystem::create_directories(dir);

@@ -172,14 +172,22 @@ bool FlexDRWorker::routeNet_hwSearch(
   const std::string prefix = jobDir + "/search";
 
   // CPU A* on exactly the input the accelerator gets. search() writes its
-  // outputs into connComps/ccMazeIdx*, so it runs on copies; it also writes
-  // the job's input files through the export prefix.
+  // outputs into connComps/ccMazeIdx*, so it runs on copies; before the A*
+  // starts it also writes the job's inputs (the accelerator's memory images
+  // and/or the dumps gg_to_mem.py converts, see DRT_ASTAR_HW_CONVERT).
   std::vector<FlexMazeIdx> cpuConnComps = connComps;
   FlexMazeIdx cpuCc1 = ccMazeIdx1;
   FlexMazeIdx cpuCc2 = ccMazeIdx2;
   std::vector<FlexMazeIdx> cpuPath;
   double cpuMs = 0.0;
-  gridGraph_.setHwExportPrefix(prefix);
+  const auto& cfg = astar_hw::config();
+  const bool writeMem = cfg.writeMem && trial.unsupported.empty();
+  if (cfg.writeDumps) {
+    gridGraph_.setHwExportPrefix(prefix);
+  }
+  if (writeMem) {
+    gridGraph_.setHwMemDir(astar_hw::memDir(jobDir));
+  }
   row.cpuOk = gridGraph_.search(cpuConnComps,
                                 nextPin,
                                 cpuPath,
@@ -190,6 +198,7 @@ bool FlexDRWorker::routeNet_hwSearch(
                                 route_with_jumpers,
                                 cpuMs);
   gridGraph_.setHwExportPrefix("");
+  gridGraph_.setHwMemDir("");
   row.cpuMs = cpuMs;
   row.cpuCost = row.cpuOk ? gridGraph_.getLastPathCost() : -1;
   row.cpuNodes = gridGraph_.getLastExploredNodes();
@@ -209,9 +218,15 @@ bool FlexDRWorker::routeNet_hwSearch(
 
   if (!trial.unsupported.empty()) {
     row.hw.status = trial.unsupported;
+  } else if (writeMem && !gridGraph_.getLastHwMemError().empty()) {
+    row.hw.status = "mem_" + gridGraph_.getLastHwMemError();
   } else {
     row.hw = astar_hw::runJob(
         jobDir, trial.ggPath, prefix + ".bin", prefix + ".txt");
+    if (writeMem) {
+      // The job skipped conversion; its input was written here instead.
+      row.hw.convertS = gridGraph_.getLastHwMemSeconds();
+    }
   }
 
   // Check the accelerator path the way traceBackPath() would have produced

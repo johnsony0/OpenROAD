@@ -75,6 +75,12 @@ class FlexGridGraph
   {
     hwExportPrefix_ = std::move(prefix);
   }
+  // When non-empty, search() writes the accelerator's inputs for this call
+  // into this directory (writeHwMem()); same counter handling as above.
+  void setHwMemDir(std::string dir) { hwMemDir_ = std::move(dir); }
+  // Outcome of the last writeHwMem(): "" on success, else why it gave up.
+  const std::string& getLastHwMemError() const { return lastHwMemError_; }
+  double getLastHwMemSeconds() const { return lastHwMemSeconds_; }
   // Path cost and explored-node count of the most recent search().
   frCost getLastPathCost() const { return lastPathCost_; }
   int getLastExploredNodes() const { return lastExploredNodes_; }
@@ -90,6 +96,14 @@ class FlexGridGraph
   // dumpSearch(); same formats, caller-chosen path.
   void writeGridGraph(const std::string& path) const;
   void writeSearchGraph(const std::string& path, int searchId) const;
+  // The A* accelerator's view of one search() call, in the files its
+  // simulation reads (what gg_to_mem.py + pack_gg_nodes.py make from the
+  // dumps above). Returns "" on success, else the reason nothing usable was
+  // written. See FlexGridGraph_hwmem.cpp.
+  std::string writeHwMem(const std::string& dir,
+                         const FlexMazeIdx& dstMazeIdx1,
+                         const FlexMazeIdx& dstMazeIdx2,
+                         bool routeWithJumpers) const;
 
   // unsafe access, no check
   bool isBlocked(frMIdx x, frMIdx y, frMIdx z, frDirEnum dir) const
@@ -1265,6 +1279,9 @@ class FlexGridGraph
   // with a search dump and its node snapshot.
   int expSearchId_{0};
   std::string hwExportPrefix_;
+  std::string hwMemDir_;
+  std::string lastHwMemError_;
+  double lastHwMemSeconds_{0};
   frCost lastPathCost_{0};
   int lastExploredNodes_{0};
 
@@ -1275,7 +1292,7 @@ class FlexGridGraph
   // expDumpAlways in FlexGridGraph_maze.cpp.
   bool dumpingExpansion() const
   {
-    return !runtimeMeasurement_ && hwExportPrefix_.empty()
+    return !runtimeMeasurement_ && hwExportPrefix_.empty() && hwMemDir_.empty()
            && exp_file_.is_open();
   }
 

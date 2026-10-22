@@ -36,6 +36,7 @@ add_library(drt_lib
   src/dr/FlexDR_hwtrial.cpp
   src/dr/AstarHwTrial.cpp
   src/dr/FlexGridGraph_maze.cpp
+  src/dr/FlexGridGraph_hwmem.cpp
   src/dr/FlexGridGraph.cpp
   src/dr/FlexDR_rq.cpp
   src/dr/FlexDR_end.cpp

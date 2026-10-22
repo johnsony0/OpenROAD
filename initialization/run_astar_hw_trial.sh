@@ -13,7 +13,8 @@
 #
 # Environment overrides: OPENROAD, ASTAR_ACCEL (a-star-accelerator checkout),
 # DRT_ASTAR_HW_NET_PROB, DRT_ASTAR_HW_MIN_ITER, DRT_ASTAR_HW_MAX_ITER,
-# DRT_ASTAR_HW_KEEP_JOBS, DRT_ASTAR_HW_CLK_MHZ, DRT_ASTAR_HW_SEED.
+# DRT_ASTAR_HW_KEEP_JOBS, DRT_ASTAR_HW_CLK_MHZ, DRT_ASTAR_HW_SEED,
+# DRT_ASTAR_HW_CONVERT (cpp | python | both, see src/drt/src/dr/AstarHwTrial.h).
 
 set -euo pipefail
 
@@ -36,7 +37,7 @@ while (($#)); do
     --out) out=$2; shift ;;
     --baseline) baseline=1 ;;
     --no-trial) trial=0 ;;
-    -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,17p' "$0"; exit 0 ;;
     *) echo "Unknown argument: $1" >&2; exit 2 ;;
   esac
   shift

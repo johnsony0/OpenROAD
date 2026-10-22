@@ -86,6 +86,9 @@ Config loadConfig()
     std::strftime(buf, sizeof(buf), "%Y%m%d_%H%M%S", std::localtime(&now));
     c.runId = buf;
   }
+  const std::string convert = envString("DRT_ASTAR_HW_CONVERT");
+  c.writeMem = convert != "python";
+  c.writeDumps = convert == "python" || convert == "both";
   std::filesystem::create_directories(c.recordOnly ? c.outDir
                                                    : c.outDir + "/jobs");
   return c;
@@ -111,6 +114,12 @@ std::string shellQuote(const std::string& s)
     }
   }
   return out + "'";
+}
+
+TechImages& techImagesStore()
+{
+  static TechImages images;
+  return images;
 }
 
 // ---------------------------------------------------------------------------
@@ -490,6 +499,52 @@ std::string forbiddenTablesPath()
   return config().outDir + "/forbidden_tables.txt";
 }
 
+std::string memDir(const std::string& jobDir)
+{
+  return jobDir + "/a-star-accelerator/tests/test";
+}
+
+void setTechImages(TechImages images)
+{
+  techImagesStore() = std::move(images);
+}
+
+const TechImages& techImages()
+{
+  return techImagesStore();
+}
+
+int nibbleAlign(int bits)
+{
+  return (bits + 3) / 4 * 4;
+}
+
+int signedBits(int64_t lo, int64_t hi)
+{
+  int n = 1;
+  while (lo < -(int64_t{1} << (n - 1)) || hi > (int64_t{1} << (n - 1)) - 1) {
+    ++n;
+  }
+  return n;
+}
+
+int unsignedBits(uint64_t hi)
+{
+  int n = 1;
+  while (n < 64 && (hi >> n) != 0) {
+    ++n;
+  }
+  return n;
+}
+
+void appendHex(std::string& out, uint64_t value, int bits)
+{
+  static constexpr char kDigits[] = "0123456789abcdef";
+  for (int shift = bits - 4; shift >= 0; shift -= 4) {
+    out += kDigits[(value >> shift) & 0xf];
+  }
+}
+
 bool sampleNet(int iter,
                const odb::Rect& routeBox,
                const std::string& netName,
@@ -523,12 +578,15 @@ HwResult runJob(const std::string& jobDir,
   }
   const std::string resultPath = jobDir + "/hw_result.txt";
   std::filesystem::remove(resultPath);
-  const std::string cmd = config().cmd + " --job " + shellQuote(jobDir)
-                          + " --gg " + shellQuote(ggPath) + " --snapshot "
-                          + shellQuote(snapshotPath) + " --search "
-                          + shellQuote(searchPath) + " --forbidden "
-                          + shellQuote(forbiddenTablesPath()) + " > "
-                          + shellQuote(jobDir + "/hw_job.log") + " 2>&1";
+  std::string cmd = config().cmd + " --job " + shellQuote(jobDir);
+  if (config().writeMem) {
+    cmd += " --prebuilt";
+  } else {
+    cmd += " --gg " + shellQuote(ggPath) + " --snapshot "
+           + shellQuote(snapshotPath) + " --search " + shellQuote(searchPath)
+           + " --forbidden " + shellQuote(forbiddenTablesPath());
+  }
+  cmd += " > " + shellQuote(jobDir + "/hw_job.log") + " 2>&1";
   if (std::system(cmd.c_str()) != 0) {
     res.status = "cmd_failed";
   }

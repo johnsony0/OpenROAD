@@ -51,6 +51,111 @@ void FlexRP::prep()
   }
   prep_minStepViasCheck();
   dumpForbiddenTables();
+  prepHwTechImages();
+}
+
+// gg_to_mem.py's packing of the forbidden tables, done here because the
+// tables are private to frTechObject and fixed after prep().
+//   via2via_forbidden_len.mem  addr z*4 + prevViaUp*2 + currViaUp; the isDirY
+//                              0 entry in the upper half, 1 in the lower
+//   via2via_prl_len.mem        same address and halves
+//   via_forbidden_turn_len.mem addr z*4 + viaUp*2 + isDirY
+// A forbidden entry is two {lo, hi} slots, slot 0 in the high bits; an unused
+// slot is lo all-ones, hi 0, which no length satisfies. As in gg_to_mem.py
+// only the first two ranges of an entry fit, though all of them size the
+// field.
+void FlexRP::prepHwTechImages()
+{
+  const auto& cfg = astar_hw::config();
+  if (!cfg.enabled || cfg.recordOnly || !cfg.writeMem) {
+    return;
+  }
+  constexpr int kSlots = 2;
+  astar_hw::TechImages images;
+  images.numLayers = tech_->via2ViaForbiddenLen_.size();
+  for (auto lNum = tech_->getBottomLayerNum(); lNum <= tech_->getTopLayerNum();
+       lNum++) {
+    if (tech_->getLayer(lNum)->getType() == dbTechLayerType::ROUTING) {
+      images.layerNums.push_back(lNum);
+    }
+  }
+
+  frCoord maxLo = 0;
+  frCoord maxHi = 0;
+  bool truncated = false;
+  auto scan = [&](const ForbiddenRanges& ranges) {
+    for (const auto& [lo, hi] : ranges) {
+      maxLo = std::max(maxLo, lo);
+      maxHi = std::max(maxHi, hi);
+    }
+    truncated |= ranges.size() > kSlots;
+  };
+  for (int z = 0; z < images.numLayers; z++) {
+    for (const auto& ranges : tech_->via2ViaForbiddenLen_[z]) {
+      scan(ranges);
+    }
+    for (const auto& ranges : tech_->viaForbiddenTurnLen_[z]) {
+      scan(ranges);
+    }
+  }
+  if (truncated) {
+    logger_->warn(utl::DRT,
+                  640,
+                  "A forbidden-length entry has more than {} ranges; the A* "
+                  "accelerator images keep only the first {}.",
+                  kSlots,
+                  kSlots);
+  }
+  // The empty sentinel is lo = all-ones, so a real lo must stay below it.
+  const int half = astar_hw::nibbleAlign(std::max(
+      astar_hw::unsignedBits(maxHi), astar_hw::unsignedBits(maxLo + 1)));
+  images.forbidHalf = half;
+  auto appendEntry = [half](std::string& out, const ForbiddenRanges& ranges) {
+    for (int slot = 0; slot < kSlots; slot++) {
+      if (slot < static_cast<int>(ranges.size())) {
+        astar_hw::appendHex(out, ranges[slot].first, half);
+        astar_hw::appendHex(out, ranges[slot].second, half);
+      } else {
+        astar_hw::appendHex(out, ~uint64_t{0}, half);
+        astar_hw::appendHex(out, 0, half);
+      }
+    }
+  };
+
+  frCoord maxPrl = 0;
+  for (int z = 0; z < images.numLayers; z++) {
+    for (const frCoord prl : tech_->via2ViaPrlLen_[z]) {
+      maxPrl = std::max(maxPrl, prl);
+    }
+  }
+  images.prlBits = astar_hw::nibbleAlign(astar_hw::unsignedBits(maxPrl));
+
+  for (int z = 0; z < images.numLayers; z++) {
+    for (int pair = 0; pair < 4; pair++) {
+      for (int isDirY = 0; isDirY < 2; isDirY++) {
+        appendEntry(images.via2viaForbidden,
+                    tech_->via2ViaForbiddenLen_[z][pair * 2 + isDirY]);
+        const frCoord prl = tech_->via2ViaPrlLen_[z][pair * 2 + isDirY];
+        if (prl < 0) {
+          logger_->error(utl::DRT,
+                         641,
+                         "via2ViaPrlLen z={} entry={} is negative ({}), which "
+                         "the A* accelerator's unsigned PRL field cannot hold.",
+                         z,
+                         pair * 2 + isDirY,
+                         prl);
+        }
+        astar_hw::appendHex(images.via2viaPrl, prl, images.prlBits);
+      }
+      images.via2viaForbidden += '\n';
+      images.via2viaPrl += '\n';
+      appendEntry(images.viaForbiddenTurn,
+                  tech_->viaForbiddenTurnLen_[z][pair]);
+      images.viaForbiddenTurn += '\n';
+    }
+  }
+  images.valid = true;
+  astar_hw::setTechImages(std::move(images));
 }
 
 // Dumps the forbidden-length LUTs consulted by the maze router to

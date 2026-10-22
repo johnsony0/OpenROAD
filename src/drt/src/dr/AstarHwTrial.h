@@ -29,10 +29,20 @@ class frMarker;
 //                           iters.csv timing/quality rows of a CPU-only run,
 //                           the baseline astar_hw_score.py --baseline reads
 //   DRT_ASTAR_HW_CMD        job command, called as
+//                             <cmd> --job D --prebuilt
+//                           (or, with DRT_ASTAR_HW_CONVERT=python,
 //                             <cmd> --job D --gg G --snapshot S --search T
-//                                   --forbidden F
+//                                   --forbidden F)
 //                           and expected to write D/hw_result.txt
 //                           (a-star-accelerator/tests/hw_job.py)
+//   DRT_ASTAR_HW_CONVERT    how a job gets its accelerator inputs:
+//                           "cpp" (default) FlexGridGraph::writeHwMem() writes
+//                           the $readmemh images, params.sv, search_cfg.txt
+//                           and src_dst_pins.txt straight into the job;
+//                           "python" writes the gg.txt / search dumps and the
+//                           job converts them with gg_to_mem.py;
+//                           "both" runs the job on the cpp images and also
+//                           writes the dumps, to check one against the other
 //   DRT_ASTAR_HW_CLK_MHZ    accelerator clock for hw_ms (default 100)
 //   DRT_ASTAR_HW_NET_PROB   fraction of routed nets trialed (default 1)
 //   DRT_ASTAR_HW_MIN_ITER / DRT_ASTAR_HW_MAX_ITER  iteration window
@@ -57,6 +67,8 @@ struct Config
   uint64_t seed = 1;
   int keepJobs = 0;
   std::string runId;
+  bool writeMem = true;     // cpp images, job runs --prebuilt
+  bool writeDumps = false;  // gg.txt / search.bin / search.txt
 };
 
 const Config& config();
@@ -91,11 +103,42 @@ struct HwResult
   std::vector<FlexMazeIdx> path;
 };
 
-// Runs one job synchronously and parses <jobDir>/hw_result.txt.
+// Runs one job synchronously and parses <jobDir>/hw_result.txt. With
+// config().writeMem the job's inputs are already in memDir(jobDir) and the
+// dump paths are unused.
 HwResult runJob(const std::string& jobDir,
                 const std::string& ggPath,
                 const std::string& snapshotPath,
                 const std::string& searchPath);
+// Where the simulator reads its inputs, relative to the job directory it runs
+// in (typedef.sv: a-star-accelerator/tests/<TESTBENCH_NAME>).
+std::string memDir(const std::string& jobDir);
+
+// The accelerator's forbidden-length tables, packed once per run by FlexRP
+// from the tech (the gg_to_mem.py layout; see writeHwMem()). Each image is the
+// .mem data, one hex word per line, numLayers * 4 words deep.
+struct TechImages
+{
+  bool valid = false;
+  int numLayers = 0;
+  std::vector<int> layerNums;    // frLayerNum of each z
+  int forbidHalf = 0;            // bits of one lo or hi bound
+  int prlBits = 0;               // bits of one via2ViaPrlLen threshold
+  std::string via2viaForbidden;  // 8 * forbidHalf bits per word
+  std::string via2viaPrl;        // 2 * prlBits
+  std::string viaForbiddenTurn;  // 4 * forbidHalf
+};
+void setTechImages(TechImages images);
+const TechImages& techImages();
+
+// $readmemh word helpers. Every field is a multiple of 4 bits, so a word is
+// its fields' hex digits side by side, MSB first.
+int nibbleAlign(int bits);
+// Narrowest two's-complement width holding every value in [lo, hi].
+int signedBits(int64_t lo, int64_t hi);
+int unsignedBits(uint64_t hi);
+// Appends the low `bits` bits of value as bits / 4 hex digits.
+void appendHex(std::string& out, uint64_t value, int bits);
 
 // ISPD18 contest scoring categories, measured on routed geometry. Lengths and
 // areas are DBU / DBU^2; astar_hw_score.py applies the contest weights.
