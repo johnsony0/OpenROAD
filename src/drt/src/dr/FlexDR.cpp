@@ -724,13 +724,34 @@ void FlexDR::processWorkersBatch(
   const char* dumpDir = std::getenv("DRT_DUMP_GG_TIMING_DIR");
   const bool measureBatchRuntime = dumpDir != nullptr && dumpDir[0] != '\0';
   const int configuredThreads = omp_get_max_threads();
+  // Per-thread accumulators for the A*-only estimates; padded to a cache line
+  // so threads do not false-share while adding.
+  struct alignas(64) ThreadTiming
+  {
+    double astarMs = 0.0;
+    double workerMs = 0.0;
+  };
+  std::vector<ThreadTiming> threadTimings(
+      measureBatchRuntime ? configuredThreads : 0);
   const auto batchStartTime = measureBatchRuntime
                                   ? std::chrono::steady_clock::now()
                                   : std::chrono::steady_clock::time_point{};
 #pragma omp parallel for schedule(dynamic)
   for (int i = 0; i < (int) workers_batch.size(); i++) {  // NOLINT
     try {
+      const auto workerStartTime
+          = measureBatchRuntime ? std::chrono::steady_clock::now()
+                                : std::chrono::steady_clock::time_point{};
       workers_batch[i]->main(getDesign());
+      if (measureBatchRuntime) {
+        const double workerMs
+            = std::chrono::duration<double, std::milli>(
+                  std::chrono::steady_clock::now() - workerStartTime)
+                  .count();
+        ThreadTiming& timing = threadTimings[omp_get_thread_num()];
+        timing.workerMs += workerMs;
+        timing.astarMs += workers_batch[i]->getAstarRuntimeMs();
+      }
       if (!measureBatchRuntime && router_cfg_->VERBOSE > 0) {
 #pragma omp critical
         {
@@ -762,6 +783,17 @@ void FlexDR::processWorkersBatch(
       summary << "configuredThreads " << configuredThreads << "\n";
       summary << "searchCount " << totalSearchCount << "\n";
       summary << "measuredBatchWallRuntimeMs " << runtimeMs << "\n";
+      double astarSumMs = 0.0;
+      double astarMaxThreadMs = 0.0;
+      double workerSumMs = 0.0;
+      for (const ThreadTiming& timing : threadTimings) {
+        astarSumMs += timing.astarMs;
+        astarMaxThreadMs = std::max(astarMaxThreadMs, timing.astarMs);
+        workerSumMs += timing.workerMs;
+      }
+      summary << "astarSumMs " << astarSumMs << "\n";
+      summary << "astarMaxThreadMs " << astarMaxThreadMs << "\n";
+      summary << "workerSumMs " << workerSumMs << "\n";
     }
   }
   exception.rethrow();

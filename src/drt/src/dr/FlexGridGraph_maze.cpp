@@ -6,7 +6,9 @@
 #include <chrono>
 #include <cmath>
 #include <cstdint>
+#include <cstdio>
 #include <cstdlib>
+#include <initializer_list>
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -49,6 +51,81 @@ static int envInt(const char* name, int def)
 
 static bool dumpIterAllowed(int iter);
 
+// Per-iteration random sampling plan for grid-graph dumps, read once from
+//   DRT_DUMP_SAMPLE_PLAN="<iter>:<boxProb>:<searchProb>:<maxSearches>;..."
+// (written by initialization/sample_plan.py). A route box is dumped when a
+// seeded hash of (iter, xMin, yMin) falls below boxProb; each of its searches
+// is dumped when a hash of (iter, xMin, yMin, searchIdx) falls below
+// searchProb, up to maxSearches. Hashing keeps the choice spread across the
+// die and independent of worker order and thread scheduling. Iterations not
+// in the plan (or no plan at all) keep the first-come behavior below.
+struct DumpSampleRule
+{
+  double boxProb = 1.0;
+  double searchProb = 1.0;
+  int maxSearches = std::numeric_limits<int>::max();
+};
+
+static std::map<int, DumpSampleRule> parseSamplePlan()
+{
+  std::map<int, DumpSampleRule> plan;
+  const char* v = std::getenv("DRT_DUMP_SAMPLE_PLAN");
+  if (v == nullptr || v[0] == '\0') {
+    return plan;
+  }
+  std::string text(v);
+  size_t pos = 0;
+  while (pos < text.size()) {
+    const size_t end = std::min(text.find(';', pos), text.size());
+    const std::string entry = text.substr(pos, end - pos);
+    int iter = 0;
+    int maxSearches = 0;
+    double boxProb = 0.0;
+    double searchProb = 0.0;
+    if (std::sscanf(entry.c_str(),
+                    "%d:%lf:%lf:%d",
+                    &iter,
+                    &boxProb,
+                    &searchProb,
+                    &maxSearches)
+        == 4) {
+      plan[iter] = {boxProb, searchProb, maxSearches};
+    }
+    pos = end + 1;
+  }
+  return plan;
+}
+
+static const DumpSampleRule* sampleRuleFor(const int iter)
+{
+  static const std::map<int, DumpSampleRule> plan = parseSamplePlan();
+  const auto it = plan.find(iter);
+  return it == plan.end() ? nullptr : &it->second;
+}
+
+// splitmix64 finalizer; mixes the seed and keys into a uniform [0, 1) value.
+static uint64_t mix64(uint64_t x)
+{
+  x += 0x9e3779b97f4a7c15ULL;
+  x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
+  x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
+  return x ^ (x >> 31);
+}
+
+static double hashUnit(std::initializer_list<int64_t> keys)
+{
+  static const uint64_t seed = std::strtoull(
+      std::getenv("DRT_DUMP_SEED") != nullptr ? std::getenv("DRT_DUMP_SEED")
+                                              : "1",
+      nullptr,
+      10);
+  uint64_t h = mix64(seed);
+  for (const int64_t key : keys) {
+    h = mix64(h ^ static_cast<uint64_t>(key));
+  }
+  return static_cast<double>(h >> 11) * 0x1.0p-53;
+}
+
 // Returns true if this routebox may dump in this iteration.
 static bool claimBoxForDump(const int iter)
 {
@@ -71,9 +148,16 @@ bool FlexGridGraph::boxDumpActive()
 {
   if (!boxDumpDecided_) {
     boxDumpDecided_ = true;
-    boxDumpActive_ = drWorker_ != nullptr
-                     && dumpIterAllowed(drWorker_->getDRIter())
-                     && claimBoxForDump(drWorker_->getDRIter());
+    boxDumpActive_ = false;
+    if (drWorker_ != nullptr && dumpIterAllowed(drWorker_->getDRIter())) {
+      const int iter = drWorker_->getDRIter();
+      const DumpSampleRule* rule = sampleRuleFor(iter);
+      const odb::Rect& rb = drWorker_->getRouteBox();
+      const bool sampled
+          = rule == nullptr
+            || hashUnit({iter, rb.xMin(), rb.yMin()}) < rule->boxProb;
+      boxDumpActive_ = sampled && claimBoxForDump(iter);
+    }
   }
   return boxDumpActive_;
 }
@@ -82,12 +166,22 @@ bool FlexGridGraph::beginSearchDump()
 {
   lastDumpedSearchId_ = expSearchId_;
   dumpCurrentSearch_ = false;
-  if (!runtimeMeasurement_ && boxDumpActive()
-      && dumpedSearches_
-             < envInt("DRT_DUMP_MAX_SEARCHES_PER_BOX",
-                      std::numeric_limits<int>::max())) {
-    dumpCurrentSearch_ = true;
-    ++dumpedSearches_;
+  if (!runtimeMeasurement_ && boxDumpActive()) {
+    const int iter = drWorker_->getDRIter();
+    const DumpSampleRule* rule = sampleRuleFor(iter);
+    const int maxSearches
+        = rule != nullptr ? rule->maxSearches
+                          : envInt("DRT_DUMP_MAX_SEARCHES_PER_BOX",
+                                   std::numeric_limits<int>::max());
+    const odb::Rect& rb = drWorker_->getRouteBox();
+    const bool sampled
+        = rule == nullptr
+          || hashUnit({iter, rb.xMin(), rb.yMin(), expSearchId_, 1})
+                 < rule->searchProb;
+    if (sampled && dumpedSearches_ < maxSearches) {
+      dumpCurrentSearch_ = true;
+      ++dumpedSearches_;
+    }
   }
   return dumpCurrentSearch_;
 }
@@ -1672,16 +1766,14 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
   // init wavefront
   odb::Point currPt;
 
-  const auto startTime = runtimeMeasurement_
-                             ? std::chrono::steady_clock::time_point{}
-                             : std::chrono::steady_clock::now();
+  // Timed in every mode: batch-timing runs (runtimeMeasurement_) skip all
+  // dumps/counters but still need per-search A* time for the threaded
+  // A*-only estimates written by FlexDR::processWorkersBatch.
+  const auto startTime = std::chrono::steady_clock::now();
   int totalNodesExplored = 0;
   int expandedNodes = 0;
   int discardedNodes = 0;
-  auto getRuntimeMs = [&startTime, &runtimeMs, this]() {
-    if (runtimeMeasurement_) {
-      return runtimeMs;
-    }
+  auto getRuntimeMs = [&startTime, &runtimeMs]() {
     const auto endTime = std::chrono::steady_clock::now();
     runtimeMs
         = std::chrono::duration<double, std::milli>(endTime - startTime).count();
@@ -1710,6 +1802,8 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                    expandedNodes,
                    discardedNodes,
                    getRuntimeMs());
+      } else {
+        getRuntimeMs();
       }
       return true;
     }
@@ -1798,6 +1892,8 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                    expandedNodes,
                    discardedNodes,
                    getRuntimeMs());
+      } else {
+        getRuntimeMs();
       }
       return true;
     }
@@ -1824,6 +1920,8 @@ bool FlexGridGraph::search(std::vector<FlexMazeIdx>& connComps,
                expandedNodes,
                discardedNodes,
                getRuntimeMs());
+  } else {
+    getRuntimeMs();
   }
   return false;
 }
