@@ -97,3 +97,10 @@ initialization/*
 !initialization/astar_hw_status.sh
 top_level_term*
 astar_hw_results*
+!astar_hw_results/
+astar_hw_results/**
+!astar_hw_results/**/
+astar_hw_results/**/simv_cache/
+astar_hw_results/**/jobs/
+!astar_hw_results/**/score.csv
+!astar_hw_results/**/iters.csv
