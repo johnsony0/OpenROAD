@@ -270,6 +270,13 @@ class FlexDRWorkerRegionQuery
   void init();
   void cleanup();
   bool isEmpty() const;
+  // A* hardware trial: keep a copy of the trees and later put it back.
+  // Removing a shape does not return an R-tree to its earlier layout, and
+  // callers depend on the order query() returns shapes in (e.g. history
+  // costs go to the first via of a net), so the copy is what makes the
+  // restore exact.
+  void saveSnapshot();
+  void restoreSnapshot();
 
  private:
   struct Impl;
@@ -977,6 +984,10 @@ class FlexDRWorker
                          bool route_with_jumpers);
   // Called with the CPU route's gc markers in gcWorker_.
   void hwTrialRecordCpuRoute(drNet* net);
+  // Debug (DRT_ASTAR_HW_CHECK_RESTORE): order-independent hashes of every
+  // worker structure a route can touch outside the grid graph, taken before
+  // the trial and after its restore to find state the restore misses.
+  std::map<std::string, uint64_t> hwTrialFingerprint();
   void hwTrialEndWorker();
   void routeNet_prep(
       drNet* net,

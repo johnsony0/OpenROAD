@@ -9,13 +9,17 @@
 #include <cstdint>
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <string>
 #include <vector>
 
 #include "db/drObj/drNet.h"
 #include "db/drObj/drPin.h"
+#include "db/drObj/drVia.h"
+#include "db/gcObj/gcNet.h"
 #include "db/obj/frNet.h"
 #include "dr/AstarHwTrial.h"
 #include "dr/FlexDR.h"
@@ -69,7 +73,182 @@ std::vector<FlexMazeIdx> expandPath(const std::vector<FlexMazeIdx>& corners)
   return nodes;
 }
 
+uint64_t mixHash(uint64_t h, uint64_t v)
+{
+  return h ^ (v + 0x9e3779b97f4a7c15ULL + (h << 6) + (h >> 2));
+}
+
+// Hash of a multiset: sort, then fold, so iteration order does not matter.
+uint64_t foldSorted(std::vector<uint64_t>& v)
+{
+  std::sort(v.begin(), v.end());
+  uint64_t h = v.size();
+  for (const uint64_t x : v) {
+    h = mixHash(h, x);
+  }
+  return h;
+}
+
+uint64_t rectHash(const odb::Rect& r)
+{
+  uint64_t h = 0;
+  for (const int c : {r.xMin(), r.yMin(), r.xMax(), r.yMax()}) {
+    h = mixHash(h, static_cast<uint32_t>(c));
+  }
+  return h;
+}
+
 }  // namespace
+
+std::map<std::string, uint64_t> FlexDRWorker::hwTrialFingerprint()
+{
+  std::map<std::string, uint64_t> fp;
+  std::vector<uint64_t> v;
+  const auto numLayers = getTech()->getLayers().size();
+
+  // Worker region query, every layer over the ext box.
+  for (frLayerNum l = 0; l < static_cast<frLayerNum>(numLayers); ++l) {
+    std::vector<drConnFig*> figs;
+    rq_.query(getExtBox(), l, figs);
+    for (const drConnFig* f : figs) {
+      v.push_back(mixHash(
+          mixHash(rectHash(f->getBBox()), static_cast<uint64_t>(f->typeId())),
+          mixHash(static_cast<uint64_t>(l),
+                  f->getNet() ? f->getNet()->getId() : ~0ULL)));
+    }
+  }
+  fp["region_query"] = foldSorted(v);
+  // Same shapes in query() order, which callers depend on.
+  uint64_t ordered = 0;
+  for (frLayerNum l = 0; l < static_cast<frLayerNum>(numLayers); ++l) {
+    std::vector<drConnFig*> figs;
+    rq_.query(getExtBox(), l, figs);
+    for (const drConnFig* f : figs) {
+      ordered = mixHash(ordered, mixHash(rectHash(f->getBBox()), l));
+    }
+  }
+  fp["region_query_order"] = ordered;
+
+  // gc worker: route and fixed rectangles of every gc net.
+  v.clear();
+  std::vector<uint64_t> fixedV;
+  for (const auto& gnet : gcWorker_->getNets()) {
+    const uint64_t id = gnet->getOwner() ? gnet->getOwner()->getId() : ~0ULL;
+    for (const bool fixed : {false, true}) {
+      const auto& byLayer = gnet->getRectangles(fixed);
+      for (size_t l = 0; l < byLayer.size(); ++l) {
+        for (const auto& r : byLayer[l]) {
+          (fixed ? fixedV : v)
+              .push_back(mixHash(
+                  mixHash(id, l),
+                  rectHash(odb::Rect(
+                      gtl::xl(r), gtl::yl(r), gtl::xh(r), gtl::yh(r)))));
+        }
+      }
+    }
+  }
+  fp["gc_route_rects"] = foldSorted(v);
+  fp["gc_fixed_rects"] = foldSorted(fixedV);
+
+  // Markers and history.
+  v.clear();
+  for (const auto& m : markers_) {
+    v.push_back(mixHash(rectHash(m.getBBox()), m.getLayerNum()));
+  }
+  fp["markers"] = foldSorted(v);
+  auto idxHash = [](const FlexMazeIdx& mi) {
+    return mixHash(mixHash(mi.x(), mi.y()), mi.z());
+  };
+  for (const auto& [name, set] :
+       {std::pair{"planar_history", &planarHistoryMarkers_},
+        std::pair{"via_history", &viaHistoryMarkers_}}) {
+    v.clear();
+    for (const auto& mi : *set) {
+      v.push_back(idxHash(mi));
+    }
+    fp[name] = foldSorted(v);
+  }
+  v.clear();
+  for (size_t z = 0; z < historyMarkers_.size(); ++z) {
+    for (const auto& mi : historyMarkers_[z]) {
+      v.push_back(mixHash(idxHash(mi), z));
+    }
+  }
+  fp["history_markers"] = foldSorted(v);
+  v.clear();
+  for (const auto& [mi, ap] : apSVia_) {
+    v.push_back(
+        mixHash(idxHash(mi),
+                std::hash<std::string>{}(ap->getAccessViaDef()
+                                             ? ap->getAccessViaDef()->getName()
+                                             : std::string())));
+  }
+  fp["ap_svia"] = foldSorted(v);
+  v.clear();
+  for (const auto& p : specialAccessAPs_) {
+    v.push_back(mixHash(mixHash(p.x(), p.y()), p.z()));
+  }
+  fp["special_access_aps"] = foldSorted(v);
+
+  // Every net: its routes, ext figs, counters and access patterns.
+  std::vector<uint64_t> routes, ext, counters, aps;
+  for (const auto& n : nets_) {
+    const uint64_t id = n->getId();
+    for (const auto& f : n->getRouteConnFigs()) {
+      routes.push_back(mixHash(
+          id,
+          mixHash(rectHash(f->getBBox()), static_cast<uint64_t>(f->typeId()))));
+    }
+    for (const auto& f : n->getExtConnFigs()) {
+      uint64_t h
+          = mixHash(rectHash(f->getBBox()), static_cast<uint64_t>(f->typeId()));
+      if (f->typeId() == drcVia) {
+        const auto* via = static_cast<const drVia*>(f.get());
+        h = mixHash(h, via->isBottomConnected() * 2 + via->isTopConnected());
+      }
+      ext.push_back(mixHash(id, h));
+    }
+    uint64_t c = mixHash(mixHash(n->getNumMarkers(), n->getNumReroutes()),
+                         mixHash(n->isModified(), n->hasExtFigUpdates()));
+    for (const uint64_t x : {static_cast<uint64_t>(n->getNumPinsIn()),
+                             static_cast<uint64_t>(n->getMarkerDist()),
+                             static_cast<uint64_t>(n->isRipup()),
+                             static_cast<uint64_t>(n->isInQueue()),
+                             static_cast<uint64_t>(n->isRouted()),
+                             static_cast<uint64_t>(n->getPriority()),
+                             static_cast<uint64_t>(n->getNRipupAvoids()),
+                             static_cast<uint64_t>(n->getMaxRipupAvoids())}) {
+      c = mixHash(c, x);
+    }
+    counters.push_back(mixHash(id, c));
+    for (const auto& f : n->getBestRouteConnFigs()) {
+      routes.push_back(mixHash(
+          ~id,
+          mixHash(rectHash(f->getBBox()), static_cast<uint64_t>(f->typeId()))));
+    }
+    for (const auto& pin : n->getPins()) {
+      for (const auto& ap : pin->getAccessPatterns()) {
+        uint64_t h
+            = mixHash(id, mixHash(ap->getPoint().x(), ap->getPoint().y()));
+        h = mixHash(h, ap->hasMazeIdx() ? idxHash(ap->getMazeIdx()) : 0);
+        for (const auto dir : frDirEnumAll) {
+          h = mixHash(h, ap->hasValidAccess(dir));
+        }
+        h = mixHash(h,
+                    std::hash<std::string>{}(
+                        ap->getAccessViaDef() ? ap->getAccessViaDef()->getName()
+                                              : std::string()));
+        aps.push_back(h);
+      }
+    }
+  }
+  fp["net_routes"] = foldSorted(routes);
+  fp["net_ext_figs"] = foldSorted(ext);
+  fp["net_counters"] = foldSorted(counters);
+  fp["access_patterns"] = foldSorted(aps);
+  fp["grid_graph"] = gridGraph_.stateHash();
+  return fp;
+}
 
 void FlexDRWorker::routeNet_hwTrial(drNet* net)
 {
@@ -92,8 +271,40 @@ void FlexDRWorker::routeNet_hwTrial(drNet* net)
 
   // The net was just ripped up and cleared by route_queue_main(). Route it
   // the normal way, with routeNet_hwSearch() standing in for the A*.
+  static const bool checkRestore = std::getenv("DRT_ASTAR_HW_CHECK_RESTORE");
+  // DRT_ASTAR_HW_FINGERPRINT_LOG: the same fingerprint at the start of every
+  // trialed net, to diff two runs and find the first structure to diverge.
+  static const bool logFingerprint
+      = std::getenv("DRT_ASTAR_HW_FINGERPRINT_LOG");
+  std::map<std::string, uint64_t> before;
+  if (checkRestore || logFingerprint) {
+    before = hwTrialFingerprint();
+  }
+  if (logFingerprint) {
+    static std::mutex fpMutex;
+    std::lock_guard<std::mutex> lock(fpMutex);
+    static std::ofstream fpLog(astar_hw::config().outDir + "/fingerprints.log");
+    fpLog << row.iter << " " << row.box.xMin() << " " << row.box.yMin() << " "
+          << row.net << " " << row.reroute;
+    for (const auto& [name, h] : before) {
+      fpLog << " " << name << "=" << h;
+    }
+    fpLog << "\n" << std::flush;
+  }
   FlexGridGraph::SavedState saved;
   gridGraph_.saveState(saved);
+  rq_.saveSnapshot();
+  // The trial routes and checks against its own gc worker, built like the
+  // worker's (init()), so the worker's never holds trial geometry. Its copy
+  // of this net is the route before the rip-up, which cannot be rebuilt
+  // from the cleared drNet, and later rip-up costs (modEolCosts_poly) read it.
+  auto trialGc
+      = std::make_unique<FlexGCWorker>(getTech(), logger_, router_cfg_, this);
+  trialGc->setExtBox(getExtBox());
+  trialGc->setDrcBox(getDrcBox());
+  trialGc->init(getDesign());
+  trialGc->setEnableSurgicalFix(true);
+  std::swap(gcWorker_, trialGc);
   hwTrial_ = &trial;
   mazeNetInit(net);
   std::vector<FlexMazeIdx> paths;
@@ -113,15 +324,31 @@ void FlexDRWorker::routeNet_hwTrial(drNet* net)
     }
     gcWorker_->clearPWires();
   }
+  std::swap(gcWorker_, trialGc);
 
-  // Undo: drop the trial geometry and put every grid-graph cost back. The
-  // CPU route's own updateDRNet() resyncs the gc worker.
-  auto& workerRegionQuery = getWorkerRegionQuery();
-  for (auto& connFig : net->getRouteConnFigs()) {
-    workerRegionQuery.remove(connFig.get());
-  }
+  // Undo: drop the trial geometry, put the worker region query back exactly
+  // (its trees hold no shape of this net: the rip-up removed them) and every
+  // grid-graph cost.
+  rq_.restoreSnapshot();
   net->clear();
   gridGraph_.restoreState(saved);
+  if (checkRestore) {
+    // One line per changed structure in restore_check.log (the logger
+    // caps a message id at 1000 lines).
+    static std::mutex checkMutex;
+    const auto after = hwTrialFingerprint();
+    std::lock_guard<std::mutex> lock(checkMutex);
+    static std::ofstream checkLog(astar_hw::config().outDir
+                                  + "/restore_check.log");
+    for (const auto& [name, h] : before) {
+      if (after.at(name) != h) {
+        checkLog << name << " iter " << row.iter << " box " << row.box.xMin()
+                 << " " << row.box.yMin() << " net " << row.net << " reroute "
+                 << row.reroute << "\n";
+      }
+    }
+    checkLog << std::flush;
+  }
 
   if (!trial.unsupported.empty()) {
     row.status = trial.unsupported;

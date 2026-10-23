@@ -30,6 +30,7 @@ struct FlexDRWorkerRegionQuery::Impl
 {
   FlexDRWorker* drWorker;
   std::vector<RTree<drConnFig*>> shapes;  // only for drXXX in dr worker
+  std::vector<RTree<drConnFig*>> snapshot;  // saveSnapshot()
 
   static void add(
       drConnFig* connFig,
@@ -238,6 +239,18 @@ void FlexDRWorkerRegionQuery::init()
 bool FlexDRWorkerRegionQuery::isEmpty() const
 {
   return impl_->shapes.empty();
+}
+
+void FlexDRWorkerRegionQuery::saveSnapshot()
+{
+  // rtree's copy clones node by node, so the copy keeps the layout.
+  impl_->snapshot = impl_->shapes;
+}
+
+void FlexDRWorkerRegionQuery::restoreSnapshot()
+{
+  impl_->shapes = std::move(impl_->snapshot);
+  impl_->snapshot.clear();
 }
 
 }  // namespace drt

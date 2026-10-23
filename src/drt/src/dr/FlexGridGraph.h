@@ -68,6 +68,8 @@ class FlexGridGraph
   struct SavedState;
   void saveState(SavedState& state) const;
   void restoreState(const SavedState& state);
+  // Debug: hash of every SavedState member (node bytes and bit vectors).
+  uint64_t stateHash() const;
   // When non-empty, search() writes <prefix>.bin (dumpSearchGraph format) and
   // <prefix>.txt (dumpSearch format) for this call, and leaves the sampled
   // dumps, expSearchId_ and the other search counters untouched.

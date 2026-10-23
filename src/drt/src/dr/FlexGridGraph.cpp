@@ -675,6 +675,27 @@ void FlexGridGraph::saveState(SavedState& state) const
   state.dstTaperBox = dstTaperBox_;
 }
 
+uint64_t FlexGridGraph::stateHash() const
+{
+  // FNV-1a over the raw node records (Node() zero-fills its padding) and the
+  // routing-time bit vectors.
+  uint64_t h = 1469598103934665603ULL;
+  auto mix = [&h](const unsigned char* p, size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+      h = (h ^ p[i]) * 1099511628211ULL;
+    }
+  };
+  mix(reinterpret_cast<const unsigned char*>(nodes_.data()),
+      nodes_.size() * sizeof(Node));
+  for (const auto* bits : {&prevDirs_, &srcs_, &dsts_, &guides_}) {
+    for (const bool b : *bits) {
+      const unsigned char c = b;
+      mix(&c, 1);
+    }
+  }
+  return h;
+}
+
 void FlexGridGraph::restoreState(const SavedState& state)
 {
   nodes_ = state.nodes;

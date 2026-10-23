@@ -55,6 +55,12 @@ class frMarker;
 //   DRT_ASTAR_HW_SEED       seed of the net sampling hash (default 1)
 //   DRT_ASTAR_HW_KEEP_JOBS  0 delete job dirs, 1 keep mismatching, 2 keep all
 //   DRT_ASTAR_HW_RUN_ID     run_id column (default: start timestamp)
+//   DRT_ASTAR_HW_CHECK_RESTORE  debug: fingerprint the worker state before
+//                           each trial and after its restore, listing every
+//                           structure that changed in restore_check.log
+//   DRT_ASTAR_HW_FINGERPRINT_LOG  debug: the same fingerprint at the start of
+//                           every trialed net in fingerprints.log, to diff
+//                           two runs
 //
 // Outputs in DRT_ASTAR_HW_OUT: searches.csv, nets.csv, iters.csv (one row per
 // DR iteration), forbidden_tables.txt and jobs/ (per-box scratch).
