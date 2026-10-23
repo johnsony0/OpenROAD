@@ -23,9 +23,18 @@ The hardware's effect on the design score is estimated as
   est_hw_design_score = design_score + (hw_net_score - cpu_net_score)
 because the trial never commits hardware routes.
 
+Open-list overflow.  A search the accelerator gives up on because a priority
+queue is completely full has hw status pq_full; its net is scored as the CPU
+route (the router sets hw_* = cpu_* for that net).  searches_pq_full,
+nets_pq_full and nets_hw_ok (every search of the net on the accelerator) count
+them, with searches_timeout for searches that ran out of cycles.
+
 Speed.  trial_cpu_ms and trial_hw_ms are the CPU A* and the accelerator
 (cycles / clk) on identical search inputs, so astar_speedup is a single-thread
-like-for-like number.  The iteration projection replaces the CPU route's A*
+like-for-like number.  Both cover only the searches whose hardware path was
+used: a pq_full, timeout or invalid-path search adds to neither, so the
+speedup is over the searches the accelerator completed (see the counts above
+for how many did not).  The iteration projection replaces the CPU route's A*
 time with the accelerator time at that speedup:
   hw_iter_ms = cpu_iter_ms - cpu_route_astar_ms + cpu_route_astar_ms / astar_speedup
 cpu_iter_ms and cpu_route_astar_ms come from --baseline (a CPU-only run with
@@ -54,6 +63,10 @@ WEIGHTS = {
     "minarea": 500.0,      # per violation
     "spacing": 500.0,      # per violation
 }
+
+# Outcome counters from iters.csv (absent in runs before they were added).
+FAIL_COUNTS = ["nets_hw_ok", "nets_pq_full", "searches_pq_full",
+               "searches_timeout"]
 
 QUALITY = ["wl_dbu", "vias", "offguide_wire_dbu", "offguide_vias",
            "offtrack_wire_dbu", "offtrack_vias", "wrongway_dbu", "patches",
@@ -112,7 +125,12 @@ def main():
     out_rows = []
     total = {"cpu_net": 0.0, "hw_net": 0.0, "trial_cpu_ms": 0.0,
              "trial_hw_ms": 0.0, "cpu_iter_ms": 0.0, "hw_iter_ms": 0.0,
+             "cpu_route_astar_ms": 0.0, "nets_trialed": 0,
              "searches": 0, "hw_used": 0, "path_match": 0, "cost_match": 0}
+    for prefix in ("cpu_", "hw_"):
+        for q in QUALITY:
+            total[prefix + q] = 0.0
+    sources = set()
     for r in iters:
         pitch = float(r["m2_pitch_dbu"]) or 1.0
         design_score = score(r, "design_", pitch)
@@ -135,6 +153,7 @@ def main():
             "nets_trialed": r["nets_trialed"], "searches": searches,
             "hw_used": r["hw_used"], "path_match": r["path_match"],
             "cost_match": r["cost_match"],
+            **{k: int(r.get(k, 0)) for k in FAIL_COUNTS},
             "path_match_rate": int(r["path_match"]) / searches if searches else 0,
             "design_score": round(design_score, 2),
             "cpu_net_score": round(cpu_net, 2),
@@ -160,20 +179,30 @@ def main():
         total["trial_cpu_ms"] += cpu_ms
         total["trial_hw_ms"] += hw_ms
         total["cpu_iter_ms"] += cpu_iter
+        total["cpu_route_astar_ms"] += astar
         if hw_ms > 0:
             total["hw_iter_ms"] += hw_iter
         else:
             total["hw_iter_ms"] += cpu_iter
-        for k in ("searches", "hw_used", "path_match", "cost_match"):
+        for k in ("nets_trialed", "searches", "hw_used", "path_match",
+                  "cost_match"):
             total[k] += int(r[k])
+        for k in FAIL_COUNTS:
+            total[k] = total.get(k, 0) + int(r.get(k, 0))
+        for prefix in ("cpu_", "hw_"):
+            for q in QUALITY:
+                total[prefix + q] += float(r[prefix + q])
+        sources.add(row["timing_source"])
 
     last = out_rows[-1]
     t_speed = (total["trial_cpu_ms"] / total["trial_hw_ms"]
                if total["trial_hw_ms"] > 0 else float("nan"))
-    out_rows.append({
+    total_row = {
         "run_id": run_id, "iter": "TOTAL", "threads": last["threads"],
+        "nets_trialed": total["nets_trialed"],
         "searches": total["searches"], "hw_used": total["hw_used"],
         "path_match": total["path_match"], "cost_match": total["cost_match"],
+        **{k: total.get(k, 0) for k in FAIL_COUNTS},
         "path_match_rate": (total["path_match"] / total["searches"]
                             if total["searches"] else 0),
         # The final design score is the last iteration's committed routing.
@@ -184,14 +213,29 @@ def main():
         "est_hw_design_score": round(last["design_score"]
                                      + total["hw_net"] - total["cpu_net"], 2),
         "design_drc": last["design_drc"],
+        "cpu_net_drc": int(total["cpu_drc"]),
+        "hw_net_drc": int(total["hw_drc"]),
         "trial_cpu_ms": round(total["trial_cpu_ms"], 3),
         "trial_hw_ms": round(total["trial_hw_ms"], 3),
         "astar_speedup": round(t_speed, 3),
+        "timing_source": sources.pop() if len(sources) == 1 else "mixed",
+        "cpu_route_astar_ms": round(total["cpu_route_astar_ms"], 3),
+        "astar_fraction": (round(total["cpu_route_astar_ms"]
+                                 / total["cpu_iter_ms"], 4)
+                           if total["cpu_iter_ms"] > 0 else 0),
         "cpu_iter_ms": round(total["cpu_iter_ms"], 3),
         "hw_iter_ms": round(total["hw_iter_ms"], 3),
         "iter_speedup": (round(total["cpu_iter_ms"] / total["hw_iter_ms"], 3)
                          if total["hw_iter_ms"] > 0 else float("nan")),
-    })
+    }
+    # design_* is the committed routing, so the last iteration's state is the
+    # final one; cpu_* / hw_* are per-iteration trial populations and add up.
+    for q in QUALITY:
+        total_row["design_" + q] = last["design_" + q]
+        for prefix in ("cpu_", "hw_"):
+            v = total[prefix + q]
+            total_row[prefix + q] = int(v) if v.is_integer() else round(v, 3)
+    out_rows.append(total_row)
 
     out = args.out or args.hw_out / "score.csv"
     fields = list(out_rows[0].keys())
@@ -199,7 +243,8 @@ def main():
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         w.writeheader()
         w.writerows(out_rows)
-    cols = ["iter", "searches", "path_match_rate", "design_score",
+    cols = ["iter", "searches", "nets_hw_ok", "nets_pq_full",
+            "path_match_rate", "design_score",
             "cpu_net_score", "hw_net_score", "est_hw_design_score",
             "astar_speedup", "astar_fraction", "iter_speedup"]
     print("  ".join("{:>14}".format(c) for c in cols))
