@@ -93,5 +93,7 @@ initialization/*
 !initialization/runtime_summary.csv
 !initialization/run_astar_hw_trial.sh
 !initialization/astar_hw_score.py
+!initialization/run_astar_hw_batch.sh
+!initialization/astar_hw_status.sh
 top_level_term*
 astar_hw_results*

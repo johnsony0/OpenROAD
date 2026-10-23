@@ -15,6 +15,7 @@ namespace drt {
 
 class drNet;
 class frDesign;
+class frNet;
 class frMarker;
 
 // A* hardware trial: every routed net is first routed with paths from the A*
@@ -45,6 +46,11 @@ class frMarker;
 //                           writes the dumps, to check one against the other
 //   DRT_ASTAR_HW_CLK_MHZ    accelerator clock for hw_ms (default 100)
 //   DRT_ASTAR_HW_NET_PROB   fraction of routed nets trialed (default 1)
+//   DRT_ASTAR_HW_NET_COUNT  trial exactly this many nets instead (every
+//                           routing of each, in every box and reroute); they
+//                           are picked once by a seeded hash of the net name
+//                           among nets the trial can route, and listed in
+//                           sampled_nets.txt. Overrides NET_PROB when > 0
 //   DRT_ASTAR_HW_MIN_ITER / DRT_ASTAR_HW_MAX_ITER  iteration window
 //   DRT_ASTAR_HW_SEED       seed of the net sampling hash (default 1)
 //   DRT_ASTAR_HW_KEEP_JOBS  0 delete job dirs, 1 keep mismatching, 2 keep all
@@ -62,6 +68,7 @@ struct Config
   std::string cmd;
   double clkMhz = 100.0;
   double netProb = 1.0;
+  int netCount = 0;
   int minIter = 0;
   int maxIter = std::numeric_limits<int>::max();
   uint64_t seed = 1;
@@ -79,9 +86,10 @@ bool trialEnabled(int iter);
 // Scratch directory of one route box, holding its gg.txt and search jobs.
 std::string boxDir(int iter, const odb::Rect& routeBox);
 std::string forbiddenTablesPath();
-bool sampleNet(int iter,
+bool sampleNet(const frDesign* design,
+               const frNet* net,
+               int iter,
                const odb::Rect& routeBox,
-               const std::string& netName,
                int numReroutes);
 
 struct HwResult
@@ -196,14 +204,19 @@ struct NetRow
   odb::Rect box;
   std::string net;
   int reroute = 0;
-  std::string status;  // ok / partial / unsupported_ndr / ...
+  std::string status;  // ok / partial / pq_full / unsupported_ndr / ...
   int searches = 0;
   int hwSearchesUsed = 0;
   int pathMatches = 0;
+  // Searches whose open list overflowed (hw status pq_full). Such a net is
+  // scored as its CPU route: hw quality is set to cpu quality.
+  int pqFullSearches = 0;
   bool hwRouted = false;
   Quality cpu;
   Quality hw;
-  double cpuAstarMs = 0;  // CPU A* on the hardware trial's inputs
+  // CPU A* and accelerator time over the searches whose hardware path was
+  // used, so the two compare like for like.
+  double cpuAstarMs = 0;
   double hwMs = 0;
   int64_t hwCycles = 0;
   double trialMs = 0;

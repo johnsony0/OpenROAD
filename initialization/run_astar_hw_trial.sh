@@ -12,13 +12,19 @@
 # (default astar_hw_results/<platform>/<design>); score.csv is the summary.
 #
 # Environment overrides: OPENROAD, ASTAR_ACCEL (a-star-accelerator checkout),
-# DRT_ASTAR_HW_NET_PROB, DRT_ASTAR_HW_MIN_ITER, DRT_ASTAR_HW_MAX_ITER,
+# DRT_ASTAR_HW_NET_PROB, DRT_ASTAR_HW_NET_COUNT, DRT_ASTAR_HW_MIN_ITER, DRT_ASTAR_HW_MAX_ITER,
 # DRT_ASTAR_HW_KEEP_JOBS, DRT_ASTAR_HW_CLK_MHZ, DRT_ASTAR_HW_SEED,
-# DRT_ASTAR_HW_CONVERT (cpp | python | both, see src/drt/src/dr/AstarHwTrial.h).
+# DRT_ASTAR_HW_CONVERT (cpp | python | both, see src/drt/src/dr/AstarHwTrial.h),
+# DRT_END_ITER (stop after that DR iteration), DRT_VERBOSE (default 1: the
+# router's "Completing N%" lines in openroad.log).
+#
+# Progress: <out>/trial/hw/progress.log gets a line per trialed net and per DR
+# iteration; initialization/astar_hw_status.sh summarizes every run.
 
 set -euo pipefail
 
-root_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+# ASTAR_ROOT lets run_astar_hw_batch.sh run a snapshot copy of this script.
+root_dir=${ASTAR_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}
 openroad=${OPENROAD:-"$root_dir/bazel-bin/openroad"}
 accel=${ASTAR_ACCEL:-"$root_dir/../a_star_testing/a-star-accelerator"}
 input_root="$root_dir/initialization/dump_sweep_inputs"
@@ -37,7 +43,7 @@ while (($#)); do
     --out) out=$2; shift ;;
     --baseline) baseline=1 ;;
     --no-trial) trial=0 ;;
-    -h|--help) sed -n '2,17p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,23p' "$0"; exit 0 ;;
     *) echo "Unknown argument: $1" >&2; exit 2 ;;
   esac
   shift
@@ -77,6 +83,7 @@ run_drt() {
     DRT_ASTAR_HW_RUN_ID="$label" \
     DRT_ASTAR_HW_CMD="python3 $accel/tests/hw_job.py --cache $out/simv_cache" \
     DRT_THREADS="$threads" \
+    DRT_VERBOSE="${DRT_VERBOSE:-1}" \
     DRT_TECH_LEF="$tech_lef" \
     DRT_CELL_LEF="$cell_lef" \
     DRT_INPUT_DEF="$input_dir/${design}_${platform}_preroute.def" \

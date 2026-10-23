@@ -15,6 +15,7 @@
 #include <map>
 #include <memory>
 #include <mutex>
+#include <set>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -36,6 +37,7 @@
 #include "frRegionQuery.h"
 #include "odb/dbTypes.h"
 #include "odb/geom.h"
+#include "utl/Logger.h"
 
 namespace drt::astar_hw {
 
@@ -71,6 +73,7 @@ Config loadConfig()
   c.cmd = envString("DRT_ASTAR_HW_CMD");
   c.clkMhz = envDouble("DRT_ASTAR_HW_CLK_MHZ", 100.0);
   c.netProb = envDouble("DRT_ASTAR_HW_NET_PROB", 1.0);
+  c.netCount = envInt("DRT_ASTAR_HW_NET_COUNT", 0);
   c.minIter = envInt("DRT_ASTAR_HW_MIN_ITER", 0);
   c.maxIter = envInt("DRT_ASTAR_HW_MAX_ITER", std::numeric_limits<int>::max());
   c.seed = std::strtoull(envString("DRT_ASTAR_HW_SEED").empty()
@@ -273,6 +276,10 @@ struct IterAgg
   int hwUsed = 0;
   int pathMatch = 0;
   int costMatch = 0;
+  int searchesPqFull = 0;
+  int searchesTimeout = 0;
+  int netsHwOk = 0;  // every search on the accelerator
+  int netsPqFull = 0;
   double trialCpuMs = 0;
   double trialHwMs = 0;
   int64_t trialHwCycles = 0;
@@ -361,8 +368,8 @@ class Recorder
        << r.cpuCost << "," << r.hw.cost << "," << r.cpuNodes << ","
        << r.hw.nodes << "," << r.cpuWlDbu << "," << r.hwWlDbu << ","
        << r.cpuVias << "," << r.hwVias << "," << r.cpuMs << "," << r.hw.cycles
-       << "," << hms << "," << (hms > 0 ? r.cpuMs / hms : 0.0) << ","
-       << r.hw.forwardCycles << "," << r.hw.evalCycles << ","
+       << "," << hms << "," << (r.hwUsed && hms > 0 ? r.cpuMs / hms : 0.0)
+       << "," << r.hw.forwardCycles << "," << r.hw.evalCycles << ","
        << r.hw.evalStallCycles << "," << r.hw.searchCycles << ","
        << r.hw.convertS << "," << r.hw.compileS << "," << r.hw.simS << ","
        << r.hw.jobS << "\n";
@@ -372,9 +379,15 @@ class Recorder
     a.hwUsed += r.hwUsed;
     a.pathMatch += r.pathMatch;
     a.costMatch += r.costMatch;
-    a.trialCpuMs += r.cpuMs;
-    a.trialHwMs += hms;
-    a.trialHwCycles += std::max<int64_t>(r.hw.cycles, 0);
+    a.searchesPqFull += r.hw.status == "pq_full";
+    a.searchesTimeout += r.hw.status == "timeout";
+    // The speedup is like-for-like over the searches the accelerator
+    // completed; the failed ones are counted above and left out of both.
+    if (r.hwUsed) {
+      a.trialCpuMs += r.cpuMs;
+      a.trialHwMs += hms;
+      a.trialHwCycles += std::max<int64_t>(r.hw.cycles, 0);
+    }
   }
 
   void net(const NetRow& r)
@@ -396,8 +409,23 @@ class Recorder
     IterAgg& a = iters_[r.iter];
     ++a.netsTrialed;
     a.netsHwRouted += r.hwRouted;
+    a.netsHwOk += r.status == "ok";
+    a.netsPqFull += r.status == "pq_full";
     a.cpu.add(r.cpu);
     a.hw.add(r.hw);
+    progress(fmt::format(
+        "iter {} net {} {} ({} searches, {:.1f} s) | iter so far: {} nets, {} "
+        "searches, {} nets hw_ok, {} pq_full searches, {} timeouts",
+        r.iter,
+        r.net,
+        r.status,
+        r.searches,
+        r.trialMs / 1000.0,
+        a.netsTrialed,
+        a.searches,
+        a.netsHwOk,
+        a.searchesPqFull,
+        a.searchesTimeout));
   }
 
   void worker(int iter, double astarMs, int searches, double trialMs)
@@ -420,7 +448,8 @@ class Recorder
         "iters.csv",
         "run_id,iter,threads,iter_wall_ms,trial_ms,cpu_route_astar_ms,"
         "cpu_route_searches,nets_trialed,nets_hw_routed,searches,hw_used,"
-        "path_match,cost_match,trial_cpu_ms,trial_hw_ms,trial_hw_cycles,"
+        "path_match,cost_match,searches_pq_full,searches_timeout,nets_hw_ok,"
+        "nets_pq_full,trial_cpu_ms,trial_hw_ms,trial_hw_cycles,"
         "clk_mhz,dbu_per_micron,m2_pitch_dbu"
             + qualityHeader("cpu_") + qualityHeader("hw_")
             + qualityHeader("design_"));
@@ -436,12 +465,25 @@ class Recorder
        << "," << a.trialMs << "," << a.cpuRouteAstarMs << ","
        << a.cpuRouteSearches << "," << a.netsTrialed << "," << a.netsHwRouted
        << "," << a.searches << "," << a.hwUsed << "," << a.pathMatch << ","
-       << a.costMatch << "," << a.trialCpuMs << "," << a.trialHwMs << ","
-       << a.trialHwCycles << "," << config().clkMhz << ","
+       << a.costMatch << "," << a.searchesPqFull << "," << a.searchesTimeout
+       << "," << a.netsHwOk << "," << a.netsPqFull << "," << a.trialCpuMs << ","
+       << a.trialHwMs << "," << a.trialHwCycles << "," << config().clkMhz << ","
        << design->getTopBlock()->getDBUPerUU() << "," << m2Pitch
        << qualityValues(a.cpu) << qualityValues(a.hw) << qualityValues(design_q)
        << "\n";
     os.flush();
+    progress(fmt::format(
+        "iter {} done in {:.1f} s: {} nets, {} searches ({} hw used), {} nets "
+        "hw_ok, {} nets pq_full, {} timeouts, design drc {}",
+        iter,
+        wallMs / 1000.0,
+        a.netsTrialed,
+        a.searches,
+        a.hwUsed,
+        a.netsHwOk,
+        a.netsPqFull,
+        a.searchesTimeout,
+        design_q.markers));
   }
 
  private:
@@ -461,7 +503,23 @@ class Recorder
     return os;
   }
 
+  // One timestamped line per event in progress.log, so a long run can be
+  // seen to move (initialization/astar_hw_status.sh reads the last line).
+  // Called with mutex_ held.
+  void progress(const std::string& line)
+  {
+    if (!progress_.is_open()) {
+      progress_.open(config().outDir + "/progress.log", std::ios::app);
+    }
+    char stamp[32];
+    const std::time_t now = std::time(nullptr);
+    std::strftime(
+        stamp, sizeof(stamp), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
+    progress_ << stamp << " " << line << std::endl;
+  }
+
   std::mutex mutex_;
+  std::ofstream progress_;
   std::ofstream searches_;
   std::ofstream nets_;
   std::ofstream iters_file_;
@@ -545,11 +603,47 @@ void appendHex(std::string& out, uint64_t value, int bits)
   }
 }
 
-bool sampleNet(int iter,
+// DRT_ASTAR_HW_NET_COUNT: the nets with the lowest seeded name hash among
+// those the trial can route (two or more terminals, not special, no NDR).
+const std::set<const frNet*>& countSampledNets(const frDesign* design)
+{
+  static std::once_flag once;
+  static std::set<const frNet*> chosen;
+  std::call_once(once, [design]() {
+    std::vector<std::pair<uint64_t, const frNet*>> ranked;
+    for (const auto& net : design->getTopBlock()->getNets()) {
+      if (net->isSpecial() || net->hasNDR()
+          || net->getInstTerms().size() + net->getBTerms().size() < 2) {
+        continue;
+      }
+      ranked.emplace_back(mix64(mix64(config().seed)
+                                ^ std::hash<std::string>{}(net->getName())),
+                          net.get());
+    }
+    std::sort(ranked.begin(), ranked.end(), [](const auto& a, const auto& b) {
+      return a.first != b.first ? a.first < b.first
+                                : a.second->getName() < b.second->getName();
+    });
+    ranked.resize(std::min<size_t>(ranked.size(), config().netCount));
+    std::ofstream os(config().outDir + "/sampled_nets.txt");
+    for (const auto& [hash, net] : ranked) {
+      chosen.insert(net);
+      os << net->getName() << "\n";
+    }
+  });
+  return chosen;
+}
+
+bool sampleNet(const frDesign* design,
+               const frNet* net,
+               int iter,
                const odb::Rect& routeBox,
-               const std::string& netName,
                int numReroutes)
 {
+  if (config().netCount > 0) {
+    return countSampledNets(design).count(net) != 0;
+  }
+  const std::string& netName = net->getName();
   const double p = config().netProb;
   if (p >= 1.0) {
     return true;

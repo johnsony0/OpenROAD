@@ -127,6 +127,8 @@ void FlexDRWorker::routeNet_hwTrial(drNet* net)
     row.status = trial.unsupported;
   } else if (row.searches == 0) {
     row.status = "no_search";
+  } else if (row.pqFullSearches > 0) {
+    row.status = "pq_full";
   } else if (!row.hwRouted) {
     row.status = "no_route";
   } else if (row.hwSearchesUsed == row.searches) {
@@ -285,11 +287,14 @@ bool FlexDRWorker::routeNet_hwSearch(
     ccMazeIdx1 = cpuCc1;
     ccMazeIdx2 = cpuCc2;
   }
-  netRow.cpuAstarMs += row.cpuMs;
-  if (row.hw.cycles > 0) {
-    netRow.hwCycles += row.hw.cycles;
-    netRow.hwMs += row.hw.cycles / (astar_hw::config().clkMhz * 1000.0);
+  if (valid) {
+    // Timed only over searches the accelerator completed, like iters.csv.
+    netRow.cpuAstarMs += row.cpuMs;
+    netRow.hwCycles += std::max<int64_t>(row.hw.cycles, 0);
+    netRow.hwMs += std::max<int64_t>(row.hw.cycles, 0)
+                   / (astar_hw::config().clkMhz * 1000.0);
   }
+  netRow.pqFullSearches += row.hw.status == "pq_full";
   astar_hw::recordSearch(row);
 
   const int keep = astar_hw::config().keepJobs;
@@ -311,6 +316,11 @@ void FlexDRWorker::hwTrialRecordCpuRoute(drNet* net)
   row.cpu = astar_hw::measureNet(getDesign(), net);
   for (const auto& marker : gcWorker_->getMarkers()) {
     row.cpu.addMarker(*marker);
+  }
+  if (row.pqFullSearches > 0) {
+    // An open-list overflow means the accelerator could not route the net;
+    // score it as the software route it falls back to.
+    row.hw = row.cpu;
   }
   astar_hw::recordNet(row);
   hwPendingNet_.reset();

@@ -1962,9 +1962,10 @@ void FlexDRWorker::route_queue_main(std::queue<RouteQueueEntry>& rerouteQueue)
         logger_->info(DRT, 2002, "Routing net {}", net->getFrNet()->getName());
       }
       if (astar_hw::trialEnabled(getDRIter())
-          && astar_hw::sampleNet(getDRIter(),
+          && astar_hw::sampleNet(getDesign(),
+                                 net->getFrNet(),
+                                 getDRIter(),
                                  getRouteBox(),
-                                 net->getFrNet()->getName(),
                                  net->getNumReroutes())) {
         routeNet_hwTrial(net);
       }
