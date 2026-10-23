@@ -3,12 +3,15 @@
 # on one prepared design, optionally next to a CPU-only baseline run.
 #
 #   initialization/run_astar_hw_trial.sh [--baseline] [--no-trial] \
-#       [--platform nangate45] [--design gcd] [--threads 1] [--out DIR]
+#       [--platform nangate45] [--design gcd] [--threads 1] \
+#       [--baseline-threads N] [--out DIR]
 #
 # --baseline also runs the same inputs CPU-only (DRT_ASTAR_HW_MODE=record),
 # checks that the two runs committed the same routing (output DEF and DRC
 # report), which is the guarantee the trial is built around, and scores the
-# trial with the baseline's clean CPU timing. Results land in --out
+# trial with the baseline's clean CPU timing. --baseline-threads (default
+# --threads) lets the trial run threaded while the baseline that supplies
+# the iteration timing stays single-threaded. Results land in --out
 # (default astar_hw_results/<platform>/<design>); score.csv is the summary.
 #
 # Environment overrides: OPENROAD, ASTAR_ACCEL (a-star-accelerator checkout),
@@ -32,6 +35,7 @@ input_root="$root_dir/initialization/dump_sweep_inputs"
 platform=nangate45
 design=gcd
 threads=1
+baseline_threads=""
 out=""
 baseline=0
 trial=1
@@ -40,10 +44,11 @@ while (($#)); do
     --platform) platform=$2; shift ;;
     --design) design=$2; shift ;;
     --threads) threads=$2; shift ;;
+    --baseline-threads) baseline_threads=$2; shift ;;
     --out) out=$2; shift ;;
     --baseline) baseline=1 ;;
     --no-trial) trial=0 ;;
-    -h|--help) sed -n '2,23p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,27p' "$0"; exit 0 ;;
     *) echo "Unknown argument: $1" >&2; exit 2 ;;
   esac
   shift
@@ -68,9 +73,10 @@ for f in "$input_dir/${design}_${platform}_preroute.def" \
   [[ -f "$f" ]] || { echo "Missing $f (run run_drt_dump_sweep.sh first)" >&2; exit 1; }
 done
 
-# One TritonRoute run. $1 = label, $2 = output dir, $3 = trial|record.
+# One TritonRoute run. $1 = label, $2 = output dir, $3 = trial|record,
+# $4 = thread count.
 run_drt() {
-  local label=$1 hw_out=$2 mode=$3
+  local label=$1 hw_out=$2 mode=$3 threads=$4
   local res="$out/$label"
   rm -rf "$res"
   mkdir -p "$res"
@@ -98,10 +104,10 @@ run_drt() {
 }
 
 if [[ $trial -eq 1 ]]; then
-  run_drt trial "$out/trial/hw" trial
+  run_drt trial "$out/trial/hw" trial "$threads"
 fi
 if [[ $baseline -eq 1 ]]; then
-  run_drt baseline "$out/baseline/hw" record
+  run_drt baseline "$out/baseline/hw" record "${baseline_threads:-$threads}"
 fi
 
 if [[ $trial -eq 1 && $baseline -eq 1 ]]; then
